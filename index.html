@@ -71,6 +71,8 @@ h1,h2,h3,p{margin:0}
 .pill.on b{color:var(--acc2)}
 .seg{display:flex;gap:6px;flex-wrap:wrap}
 .seg button{min-height:44px;min-width:52px;padding:0 14px;border-radius:12px;background:var(--card2);border:1px solid var(--line);font-weight:700;font-size:14px;color:var(--mut)}
+.seg.g3{display:grid;grid-template-columns:repeat(3,1fr)}
+.seg.g3 button{min-height:52px;font-size:16px}
 .seg button.on{background:var(--accsoft);border-color:var(--acc);color:var(--acc2)}
 
 /* nav */
@@ -150,6 +152,17 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
 .ringnum span{display:block;color:var(--mut);font-weight:700;letter-spacing:.14em;font-size:12px;margin-top:2px}
 
 /* sheet */
+.clockrow{display:flex;align-items:center;justify-content:center;gap:10px}
+.pausebtn{width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:16px;color:var(--acc2);touch-action:manipulation;flex:none}
+.pausebtn.on{background:var(--accsoft);border-color:rgba(255,106,26,.5)}
+.pausedov{position:fixed;inset:0;z-index:55;background:rgba(8,8,10,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;text-align:center}
+.pausedov .pi{font-size:54px;line-height:1}
+.pausedov h2{margin:0;font-size:30px;letter-spacing:.14em;font-weight:900}
+.pausedov .pc{font-size:44px;font-weight:800;font-variant-numeric:tabular-nums}
+.pausedov .btn{width:100%;max-width:320px}
+.chip.btnchip{touch-action:manipulation;cursor:pointer;color:var(--text)}
+.chip.btnchip:active{transform:scale(.96)}
+.moreblk{display:flex;width:100%;gap:10px;padding:9px 0;border-top:1px solid rgba(255,255,255,.06);font-size:14px;text-align:left;color:inherit;touch-action:manipulation;cursor:pointer;align-items:center}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:60;display:flex;justify-content:center;align-items:flex-end}
 .sheet{width:100%;max-width:430px;max-height:86vh;overflow-y:auto;background:var(--card);border-radius:26px 26px 0 0;border:1px solid var(--line);padding:10px 18px calc(env(safe-area-inset-bottom) + 20px)}
 .grab{width:42px;height:5px;border-radius:9px;background:var(--line);margin:0 auto 14px}
@@ -456,6 +469,12 @@ const fmt = sec => { sec = Math.max(0, Math.floor(sec)); const h = Math.floor(se
 const SPECIAL = { Failure: 'FAIL', Drop: 'DROP', Burnout: 'BURNOUT', Ladder: 'LADDER' };
 const repLabel = r => r === '' || r == null ? '—' : timedSecs(r) ? timedSecs(r) + 's' : (SPECIAL[r] || String(r).replace(/→/g, ' → ').replace(/\+/g, ' + '));
 const numeric = r => /^\d+$/.test(r);
+// reps prefill = the MAX of the target (10-12 -> 12, 15 -> 15, 20→8 -> 20). Failure/drop/timed/blank -> '' (no prefill)
+function repsMax(t) {
+  t = String(t == null ? '' : t); if (!/^\d/.test(t)) return '';
+  const nums = t.split(/[+→]/).flatMap(seg => { const m = seg.match(/^(\d+)(?:-(\d+))?$/); return m ? [+m[1], m[2] ? +m[2] : 0] : []; });
+  return nums.length ? Math.max(...nums) : '';
+}
 const repsTotal = r => /^\d+(?:[+→]\d+)+$/.test(r) ? r.split(/[+→]/).reduce((n, x) => n + +x, 0) : (numeric(r) ? +r : '');
 function tgtText(t) {
   if (t === '' || t == null) return 'as noted';
@@ -481,7 +500,7 @@ const unit = () => S.settings.unit;
 let view = S.session ? 'active' : 'home', modal = null, openDay = null, openHist = null, progWeek = null;
 let importText = '', importFile = '', importNote = null, parsed = null, importName = '';
 let lastSummaryEl = null;
-let wakeLock = null;
+let wakeLock = null, homeExpanded = false;
 function toast(msg) {
   const el = document.createElement('div'); el.className = 'toast'; el.textContent = msg;
   $('#toastHost').appendChild(el); setTimeout(() => el.remove(), 2400);
@@ -494,8 +513,26 @@ async function wake(on) {
 }
 
 /* ---------- Workout engine ---------- */
+const effNow = s => (s && s.pausedAt) || Date.now();
+const elapsedSec = s => Math.max(0, (effNow(s) - s.startedAt - (s.pausedMs || 0)) / 1000);
+function pauseWorkout() {
+  const s = S.session; if (!s || s.pausedAt) return;
+  saveDraft(); s.pausedAt = Date.now(); modal = null; save(); render();
+}
+function resumeWorkout() {
+  const s = S.session; if (!s || !s.pausedAt) return;
+  const d = Date.now() - s.pausedAt; s.pausedMs = (s.pausedMs || 0) + d;
+  if (s.restEnd) s.restEnd += d;
+  if (s.tmr) { s.tmr.start += d; s.tmr.end += d; }
+  s.pausedAt = 0; modal = null; save(); render();
+}
+function setRestLive(n) {
+  const s = S.session; S.settings.rest = n; modal = null; save();
+  if (s && s.phase === 'rest' && !s.pausedAt && n === 0) { toast('Rest off — skipped'); return endRest(); }
+  render(); toast(n ? 'Rest set to ' + n + 's' : 'Rest timer off');
+}
 function startSession(day, dayIdx) {
-  S.session = { dayIdx, weekIdx: S.selWeek, weekName: curWeek().name, day, steps: buildSteps(day), res: {}, cur: 0, phase: 'work', restEnd: 0, restTotal: 0, startedAt: Date.now(), tmr: null };
+  S.session = { dayIdx, weekIdx: S.selWeek, weekName: curWeek().name, day, steps: buildSteps(day), res: {}, cur: 0, phase: 'work', restEnd: 0, restTotal: 0, startedAt: Date.now(), pausedAt: 0, pausedMs: 0, tmr: null };
   view = 'active'; modal = null; save(); wake(true); render(window.scrollTo(0, 0));
 }
 function startWorkout() { startSession(clone(dayOf()), S.selDay); }
@@ -512,7 +549,7 @@ function autoStart() {
   if (secs && s.day.blocks[st.bi].kind === 'cardio') { const now = Date.now(); s.tmr = { i: s.cur, start: now + 3000, end: now + 3000 + secs * 1000 }; }
 }
 function startTimer() {
-  const s = S.session; if (!s || s.phase !== 'work') return;
+  const s = S.session; if (!s || s.pausedAt || s.phase !== 'work') return;
   const st = s.steps[s.cur], secs = timedSecs(stepEx(s, st).sets[st.si]); if (!secs) return;
   const now = Date.now(); s.tmr = { i: s.cur, start: now + 3000, end: now + 3000 + secs * 1000 }; save(); render();
 }
@@ -526,7 +563,7 @@ function prefillW(i) {
 function draft(i) {
   const s = S.session, st = s.steps[i], r = s.res[i] || {};
   const tgt = stepEx(s, st).sets[st.si];
-  return { w: r.w != null ? r.w : prefillW(i), r: r.r != null ? r.r : repsTotal(tgt), st: r.st };
+  return { w: r.w != null ? r.w : prefillW(i), r: r.r != null ? r.r : repsMax(tgt), st: r.st };
 }
 function readInputs() {
   const w = $('#inW'), r = $('#inR');
@@ -537,7 +574,7 @@ function saveDraft() {
   const v = readInputs(), old = s.res[s.cur] || {}; s.res[s.cur] = { ...old, w: v.w || '', r: v.r || '' }; save();
 }
 function completeSet() {
-  const s = S.session; if (!s) return; const i = s.cur, st = s.steps[i], ex = stepEx(s, st);
+  const s = S.session; if (!s || s.pausedAt) return; const i = s.cur, st = s.steps[i], ex = stepEx(s, st);
   const secs = timedSecs(ex.sets[st.si]);
   const v = secs ? { w: 0, r: secs } : readInputs();
   s.tmr = null;
@@ -572,7 +609,7 @@ function finish() {
     if (!exMap.has(ex.name)) exMap.set(ex.name, { name: ex.name, muscle: ex.muscle, sets: [] });
     exMap.get(ex.name).sets.push({ w: r.w || 0, r: r.r || 0, u: r.u || '' });
   });
-  const entry = { id: 'h' + end, date: end, dayName: s.day.name, week: s.weekName || '', focus: s.day.focus, program: S.program.name, durationSec: Math.round((end - s.startedAt) / 1000), setsDone: done, setsTotal: s.steps.length, volume: Math.round(vol), unit: unit(), exercises: [...exMap.values()] };
+  const entry = { id: 'h' + end, date: end, dayName: s.day.name, week: s.weekName || '', focus: s.day.focus, program: S.program.name, durationSec: Math.round(elapsedSec(s)), setsDone: done, setsTotal: s.steps.length, volume: Math.round(vol), unit: unit(), exercises: [...exMap.values()] };
   if (done > 0) {
     S.history.unshift(entry); S.lastSummaryId = entry.id; view = 'summary';
     if (s.dayIdx >= 0) {
@@ -617,9 +654,9 @@ function homeView() {
         <div class="stat"><b>~${estMin(day)}</b><span>MINUTES</span></div>
       </div>
       ${day.note ? `<div class="notice" style="margin-bottom:14px">${esc(day.note)}</div>` : ''}
-      ${resuming ? `<button class="btn pri block" data-act="resume">▶ RESUME WORKOUT</button><button class="btn block" style="color:var(--mut);min-height:44px;margin-top:6px" data-act="discard">Discard in-progress workout</button>`
+      ${resuming ? `<button class="btn pri block" data-act="resume">▶ RESUME WORKOUT${S.session && S.session.pausedAt ? ' (paused)' : ''}</button><button class="btn block" style="color:var(--mut);min-height:44px;margin-top:6px" data-act="discard">Discard in-progress workout</button>`
         : `<button class="btn pri block" data-act="start">▶ START WORKOUT</button>`}
-      <div style="margin-top:14px">${blocksPreview(day, 3)}${day.blocks.length > 3 ? `<div class="blk"><div class="n">+</div><div class="t mut">${day.blocks.length - 3} more block${day.blocks.length - 3 > 1 ? 's' : ''} (supersets &amp; circuits)</div></div>` : ''}</div>
+      <div style="margin-top:14px">${blocksPreview(day, homeExpanded ? 99 : 3)}${day.blocks.length > 3 ? `<button type="button" class="moreblk" data-act="toggleBlocks" aria-expanded="${homeExpanded}"><span class="n" style="width:26px;height:26px;border-radius:8px;background:var(--accsoft);color:var(--acc2);font-weight:800;font-size:12px;display:grid;place-items:center;flex:none">${homeExpanded ? '−' : '+'}</span><span class="t mut" style="flex:1">${homeExpanded ? 'Show fewer blocks' : `${day.blocks.length - 3} more block${day.blocks.length - 3 > 1 ? 's' : ''} (supersets &amp; circuits)`}</span><span class="mut">${homeExpanded ? '▴' : '▾'}</span></button>` : ''}</div>
     </div>
     <div><div class="label" style="margin-bottom:8px;color:var(--mut)">Choose ${multi ? 'week &amp; day' : 'day'}</div>
       ${multi ? weekBar(S.selWeek, 'wk') + '<div style="height:10px"></div>' : ''}
@@ -699,7 +736,7 @@ function historyView() {
   </div>${navHTML()}`;
 }
 function topBar(s) {
-  return `<div class="top"><button class="icon" data-act="exit" aria-label="Exit">✕</button><div class="mid"><div class="sub">${esc(s.day.name)} · ${esc(s.day.focus)}</div><div class="clock" id="tElapsed">${fmt((Date.now() - s.startedAt) / 1000)}</div></div><button class="icon" data-act="seq" aria-label="Sequence">☰</button></div>`;
+  return `<div class="top"><button class="icon" data-act="exit" aria-label="Exit">✕</button><div class="mid"><div class="sub">${esc(s.day.name)} · ${esc(s.day.focus)}</div><div class="clockrow"><div class="clock" id="tElapsed">${fmt(elapsedSec(s))}</div><button class="pausebtn ${s.pausedAt ? 'on' : ''}" data-act="${s.pausedAt ? 'resumeW' : 'pause'}" aria-label="${s.pausedAt ? 'Resume workout' : 'Pause workout'}">${s.pausedAt ? '<svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 1.5v11l9-5.5z" fill="currentColor"/></svg>' : '<svg width="14" height="14" viewBox="0 0 14 14"><rect x="2" y="1.5" width="3.6" height="11" rx="1" fill="currentColor"/><rect x="8.4" y="1.5" width="3.6" height="11" rx="1" fill="currentColor"/></svg>'}</button></div></div><button class="icon" data-act="seq" aria-label="Sequence">☰</button></div>`;
 }
 function progressHTML(s) {
   const done = s.steps.filter((x, i) => s.res[i] && (s.res[i].st === 'done' || s.res[i].st === 'skipped')).length;
@@ -707,7 +744,7 @@ function progressHTML(s) {
   return `<div class="progwrap"><div class="bar"><i style="width:${pct}%"></i></div><div class="progtxt"><span>Step ${s.cur + 1} of ${s.steps.length}</span><span>${pct}% · ${s.steps.filter((x, i) => s.res[i] && s.res[i].st === 'done').length} sets done</span></div></div>`;
 }
 function chipsHTML() {
-  return `<div class="row wrap" style="padding:0 18px"><span class="chip music" title="Not built yet">♫ Spotify — coming soon</span><span class="chip">⏱ Rest ${S.settings.rest ? S.settings.rest + 's' : 'off'}</span></div>`;
+  return `<div class="row wrap" style="padding:0 18px"><span class="chip music" title="Not built yet">♫ Spotify — coming soon</span><button class="chip btnchip" data-act="restSheet" aria-label="Change rest timer">⏱ Rest ${S.settings.rest ? S.settings.rest + 's' : 'off'} ▾</button></div>`;
 }
 function nextCard(s, idx, big) {
   const st = s.steps[idx];
@@ -726,7 +763,7 @@ function dotsFor(s, st) {
 }
 function timerHTML(secs, tm) {
   let big = secs, u = 'seconds', lbl = '';
-  const now = Date.now();
+  const now = effNow(S.session);
   if (tm) { if (now < tm.start) { big = Math.ceil((tm.start - now) / 1000); u = 'get ready'; } else { big = Math.max(0, Math.ceil((tm.end - now) / 1000)); u = 'seconds left — go!'; } }
   return `<div class="target"><span class="big" id="tmrNum">${big}</span><span class="u" id="tmrU">${u}</span></div>
   <div style="margin-top:12px">${tm ? '<button class="btn sec block" data-act="tstop">⏹ Stop timer</button>' : `<button class="btn ghost block" data-act="tstart">⏱ Start ${secs}s timer</button>`}</div>
@@ -736,7 +773,7 @@ function activeView() {
   const s = S.session; if (!s) return homeView();
   const st = s.steps[s.cur], ex = stepEx(s, st), b = s.day.blocks[st.bi];
   if (s.phase === 'rest') {
-    const rem = Math.max(0, Math.ceil((s.restEnd - Date.now()) / 1000));
+    const rem = Math.max(0, Math.ceil((s.restEnd - effNow(s)) / 1000));
     const C = 2 * Math.PI * 92;
     return `${topBar(s)}${progressHTML(s)}<div style="height:12px"></div>${chipsHTML()}
     <div class="screen" style="padding-top:14px">
@@ -770,7 +807,7 @@ function activeView() {
     </div>
     ${nextCard(s, nextIdx)}
   </div>
-  <div class="actions"><button class="btn sm" data-act="back" ${s.cur === 0 ? 'disabled' : ''}><i>‹</i>Back</button><button class="btn pri" data-act="complete">✓ COMPLETE SET</button><button class="btn sm" data-act="skip"><i>›</i>Skip</button></div>`;
+  <div class="actions"><button class="btn sm" data-act="back" ${s.cur === 0 ? 'disabled' : ''}><i>‹</i>Back</button><button class="btn pri" data-act="complete" ${s.pausedAt ? 'disabled' : ''}>${s.pausedAt ? 'PAUSED' : '✓ COMPLETE SET'}</button><button class="btn sm" data-act="skip"><i>›</i>Skip</button></div>`;
 }
 function summaryView() {
   const h = S.history.find(x => x.id === S.lastSummaryId) || S.history[0];
@@ -791,9 +828,20 @@ function summaryView() {
     <button class="btn sec block" data-act="nav" data-v="history">View history</button>
   </div>`;
 }
+function pausedHTML() {
+  const s = S.session; if (!s || !s.pausedAt) return '';
+  return `<div class="pausedov" id="pausedov"><div class="pi"><svg width="56" height="56" viewBox="0 0 14 14" style="color:var(--acc2)"><rect x="2" y="1.5" width="3.6" height="11" rx="1" fill="currentColor"/><rect x="8.4" y="1.5" width="3.6" height="11" rx="1" fill="currentColor"/></svg></div><h2>PAUSED</h2><div class="sub">Workout time</div><div class="pc" id="pcClock">${fmt(elapsedSec(s))}</div><div class="sub" style="font-size:13px;margin-bottom:10px">Clock, rest &amp; set timers are frozen</div>
+    <button class="btn pri" data-act="resumeW">▶ RESUME</button><button class="btn sec" data-act="exit">End workout</button></div>`;
+}
 function modalHTML() {
   if (!modal) return '';
   const s = S.session;
+  if (modal === 'rest') {
+    return `<div class="overlay" data-act="closeModal"><div class="sheet" id="restSheet" data-stop="1"><div class="grab"></div><div class="row" style="justify-content:space-between"><b style="font-size:20px">Rest timer</b><button class="icon" data-act="closeModal">✕</button></div>
+      <div class="sub" style="margin:6px 0 12px;font-size:13px">Applies to this workout from now on and is saved as your default. Circuit blocks keep their own rest.</div>
+      <div class="seg g3">${[0, 30, 45, 60, 90, 120].map(n => `<button class="${S.settings.rest === n ? 'on' : ''}" data-act="setRestW" data-n="${n}">${n ? n + 's' : 'Off'}</button>`).join('')}</div>
+      ${s && s.phase === 'rest' ? '<div class="note" style="margin-top:10px">Choosing Off will skip the rest that is running now.</div>' : ''}</div></div>`;
+  }
   if (modal === 'seq' && s) {
     return `<div class="overlay" data-act="closeModal"><div class="sheet" id="sheet" data-stop="1"><div class="grab"></div><div class="row" style="justify-content:space-between;position:sticky;top:0;background:var(--card);z-index:2;padding:4px 0 8px"><b style="font-size:18px">Workout sequence</b><button class="icon" data-act="closeModal">✕</button></div><div class="sub" style="margin:4px 0 6px;font-size:13px">Tap any step to jump to it. Supersets alternate A → B → A → B.</div>
       ${s.day.blocks.map((b, bi) => `<div class="seqblock"><span class="label">${blockName(b, bi)}</span>${s.steps.map((st, i) => st.bi === bi ? i : -1).filter(i => i >= 0).map(i => {
@@ -827,7 +875,7 @@ function render() {
   else if (view === 'import') html = importView();
   else if (view === 'history') html = historyView();
   else html = homeView();
-  app.innerHTML = html + modalHTML();
+  app.innerHTML = html + (view === 'active' && S.session ? pausedHTML() : '') + modalHTML();
   if (modal === 'seq') { const c = $('.seqrow.cur'); if (c) { const sh = $('#sheet'); sh.scrollTop = Math.max(0, c.offsetTop - sh.clientHeight / 2); } }
   const fi = $('#fileIn'); if (fi) fi.addEventListener('change', onFile);
   const ta = $('#importTA'); if (ta) ta.addEventListener('input', () => { importText = ta.value; });
@@ -854,7 +902,13 @@ document.addEventListener('click', e => {
 });
 function act(a, t) {
   const s = S.session, d = t.dataset;
+  if (s && s.pausedAt && ['complete', 'back', 'skip', 'jump', 'restAdd', 'tstart', 'tstop', 'wstep', 'rstep', 'seq', 'restSheet', 'setRestW'].includes(a)) return;
   switch (a) {
+    case 'pause': pauseWorkout(); break;
+    case 'resumeW': resumeWorkout(); break;
+    case 'restSheet': modal = 'rest'; render(); break;
+    case 'setRestW': setRestLive(+d.n); break;
+    case 'toggleBlocks': homeExpanded = !homeExpanded; render(); break;
     case 'nav': modal = null; view = d.v; if (view === 'import' && !importText && !parsed) { } render(window.scrollTo(0, 0)); break;
     case 'pickDay': S.selDay = +d.i; save(); render(); break;
     case 'wk': { const n = S.selWeek + +d.d; if (n >= 0 && n < S.program.weeks.length) { S.selWeek = n; S.selDay = 0; save(); render(); } break; }
@@ -913,7 +967,8 @@ function act(a, t) {
 // ticker: running clock + rest countdown (no full re-render so inputs keep focus)
 setInterval(() => {
   const s = S.session; if (!s || view !== 'active') return;
-  const el = $('#tElapsed'); if (el) el.textContent = fmt((Date.now() - s.startedAt) / 1000);
+  const el = $('#tElapsed'); if (el) el.textContent = fmt(elapsedSec(s));
+  if (s.pausedAt) return; // frozen: clock, rest and set timers do not advance while paused
   if (s.phase === 'rest') {
     const rem = Math.max(0, Math.ceil((s.restEnd - Date.now()) / 1000));
     const rn = $('#restNum'); if (rn) rn.textContent = rem;
@@ -929,7 +984,7 @@ setInterval(() => {
 document.addEventListener('visibilitychange', () => { if (!document.hidden && S.session && S.session.phase === 'work') wake(true); });
 render();
 // test hooks (harmless in production)
-window.__forge = { parseText, parseAny, buildSteps, getState: () => S, BUILTIN_PROGRAM, builtin, estSec };
+window.__forge = { parseText, parseAny, buildSteps, getState: () => S, BUILTIN_PROGRAM, builtin, estSec, repsMax };
 </script>
 </body>
 </html>
