@@ -217,6 +217,45 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
 .volstrip b i{font-style:normal;font-size:11px;font-weight:700;color:var(--mut);margin-left:2px}
 .volstrip em{display:block;font-style:normal;color:var(--mut);font-size:11.5px;margin-top:1px;font-variant-numeric:tabular-nums}
 .volcard{padding:16px}
+/* home: weight-lifted strip with milestone ring */
+.vs3{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.vs3 .tiles{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.6fr)}
+.vs3 .tiles>div{min-width:0;padding:12px 6px;text-align:center;border-left:1px solid var(--line)}
+.vs3 .tiles>div:first-child{border-left:0}
+.vs3 small{display:block;color:var(--mut);font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.vs3 b{display:block;font-size:22px;font-weight:900;line-height:1.2;margin-top:3px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.vs3 b i{font-style:normal;font-size:11px;font-weight:700;color:var(--mut);margin-left:3px}
+.vs3 em{display:block;font-style:normal;color:var(--mut);font-size:11.5px;margin-top:1px;font-variant-numeric:tabular-nums}
+.vs3 .tiles>.allt{padding:12px 6px 12px 4px}
+.vs3 b.sm{font-size:19px;margin-top:5px}
+.vs3 b.xs{font-size:13px;margin-top:8px}
+.vs3 b.xs i,.vs3 b.sm i{margin-left:1px}
+.vs3 .allt{display:flex;align-items:center;justify-content:center;gap:6px}
+.vs3 .allt .tx{min-width:0}
+.ring{width:40px;height:40px;flex:none;display:block}
+.ring .trk{fill:none;stroke:rgba(255,255,255,.1);stroke-width:4.5}
+.ring .arc{fill:none;stroke:var(--acc);stroke-width:4.5;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;filter:drop-shadow(0 0 3px rgba(255,106,26,.55))}
+.ring .arc.anim{animation:ringdraw .95s cubic-bezier(.22,.8,.3,1) .15s backwards}
+@keyframes ringdraw{from{stroke-dashoffset:var(--from)}}
+@media (prefers-reduced-motion:reduce){.ring .arc.anim{animation:none}}
+.vs3 .cap{padding:7px 10px 9px;border-top:1px solid var(--line);text-align:center;color:var(--mut);font-size:12px;font-variant-numeric:tabular-nums}
+.vs3 .cap b{display:inline;font-size:12px;font-weight:800;margin:0;color:var(--acc2)}
+.daypill{min-height:36px;padding:7px 12px;touch-action:manipulation;cursor:pointer;font-family:inherit}
+.daypill:active{transform:scale(.96)}
+.daypill .dd{font-size:11px;margin-left:1px}
+.sublink{display:block;margin:6px auto 0;padding:10px 14px;min-height:40px;color:var(--mut);font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px;touch-action:manipulation}
+.proglink{display:block;margin:0 auto;padding:10px 14px;color:var(--mut);font-size:12px;text-align:center;touch-action:manipulation}
+.proglink u{text-underline-offset:3px}
+/* program library / detail */
+.libc.on{padding:0}
+.libopen{display:flex;align-items:center;gap:10px;width:100%;padding:14px 14px 14px 16px;text-align:left;border-radius:var(--r);touch-action:manipulation}
+.libopen .chev{color:var(--acc2);font-size:26px;line-height:1;font-weight:300;flex:none}
+.backbtn{display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:0 14px 0 8px;border-radius:14px;font-weight:700;font-size:15px;color:var(--acc2)}
+.backbtn span{font-size:26px;line-height:1;font-weight:300;margin-top:-3px}
+.nxt{display:inline-block;padding:1px 7px;border-radius:7px;background:var(--accsoft);border:1px solid rgba(255,106,26,.4);color:var(--acc2)!important;font-size:10px!important;font-weight:800;letter-spacing:.08em;margin-left:6px;vertical-align:middle}
+.erase{margin-top:30px;padding-top:18px;border-top:1px solid var(--line)}
+.erase .go{width:100%;min-height:44px;border-radius:14px;color:var(--bad);font-weight:700;font-size:14px;border:1px solid rgba(255,90,90,.3)}
+.erasebox{border:1px solid rgba(255,90,90,.45);background:rgba(255,90,90,.08);border-radius:16px;padding:14px}
 .volcard .volstrip{background:transparent;border:0;margin-top:8px;padding:0}
 .volcard .volstrip b{font-size:26px;color:var(--acc2)}
 .wkbars{display:flex;align-items:flex-end;gap:6px;height:56px;margin-top:14px}
@@ -276,7 +315,7 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
    FORGE — single-file workout tracker prototype
    State lives in localStorage ("forge.v1"). No build step.
    ========================================================= */
-const BUILD = '2026.10.15-6'; // bump on every deploy; the in-app update banner compares this against the live file
+const BUILD = '2026.10.15-8'; // bump on every deploy; the in-app update banner compares this against the live file
 const LS = 'forge.v1';
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -765,7 +804,7 @@ function detectPRs(prevHistory, entry) {
 }
 const dShort = ts => new Date(ts).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 const userName = () => String((S.settings && S.settings.name) || '').trim();
-let view = S.session ? 'active' : 'home', modal = null, openDay = null, openHist = null, progWeek = null;
+let view = S.session ? 'active' : 'home', modal = null, openDay = null, openHist = null, progWeek = null, progDetail = false, cdWeek = 0, eraseStep = 0;
 let importText = '', importFile = '', importNote = null, importBlocked = null, parsed = null;
 let fbDraft = { type: 'Idea', text: '', contact: '', id: null, file: null, status: '' }, fbBack = null;
 let lastSummaryEl = null;
@@ -919,15 +958,42 @@ function weightCardHTML() {
   return `<div class="card volcard" id="weightCard"><span class="label">🏋️ Weight lifted</span>${volStripHTML(true)}
     <div class="wkbars" id="wkBars" aria-label="Weekly weight lifted, last 8 weeks">${bars}</div><div class="wkcap"><span>8 weeks ago</span><span>Weekly total · this week</span></div></div>`;
 }
+// milestones in lb-equivalent: 1k, 5k, 10k, 25k, 50k, 100k, 250k, 500k, 1M, 2.5M, 5M, ...
+function nextMilestoneLb(lb) {
+  for (const m of [1e3, 5e3]) if (lb < m) return m;
+  for (let d = 1e4; ; d *= 10) for (const k of [1, 2.5, 5]) if (lb < d * k) return d * k;
+}
+function fmtMile(v) { // v already in display unit
+  if (v >= 1e6) return (Math.round(v / 1e4) / 100).toString().replace(/\.0+$/, '') + 'M';
+  return Math.round(v).toLocaleString('en-US');
+}
+function milestoneInfo(kg, u) {
+  const lb = Math.round((kg || 0) / LB_KG * 1e6) / 1e6, next = nextMilestoneLb(lb), p = Math.min(1, Math.max(0, lb / next));
+  const pct = p > 0 && p < 0.01 ? 0 : Math.floor(p * 100);
+  return { lb, nextLb: next, p, pct, label: p > 0 && p < 0.01 ? '<1%' : pct + '%', target: fmtMile(fromKg(next * LB_KG, u)) };
+}
+const RING_R = 18, RING_C = 2 * Math.PI * RING_R; let ringShown = 0, ringTimer = 0;
+function ringSVG(p) {
+  const off = RING_C * (1 - (p > 0 ? Math.max(p, 0.015) : 0)), from = RING_C * (1 - Math.max(ringShown > 0 ? Math.max(ringShown, 0.015) : 0, 0)), anim = Math.abs(ringShown - p) > 1e-9;
+  if (anim) { clearTimeout(ringTimer); ringTimer = setTimeout(() => { ringShown = p; }, 1300); }
+  return `<svg class="ring" id="ring" viewBox="0 0 46 46" role="img" aria-label="${Math.floor(p * 100)}% of the way to the next milestone" data-p="${p.toFixed(4)}"><circle class="trk" cx="23" cy="23" r="${RING_R}"/>${p > 0 ? `<circle class="arc ${anim ? 'anim' : ''}" id="ringArc" cx="23" cy="23" r="${RING_R}" stroke-dasharray="${RING_C.toFixed(3)}" stroke-dashoffset="${off.toFixed(3)}" style="--from:${from.toFixed(3)}"/>` : ''}</svg>`;
+}
+function liftStripHTML() {
+  const u = unit(), v = volumeTotals(S.history), m = milestoneInfo(v.all.volKg, u);
+  const num = k => { const f = fmtVol(v[k].volKg, u); return `<b${f.length >= 7 ? ' class="xs"' : f.length >= 6 ? ' class="sm"' : ''}${k === 'all' ? ' id="allTimeNum"' : ''}>${f}<i>${u}</i></b>`; };
+  const tile = (k, l) => `<div><small>${l}</small>${num(k)}<em>${fmtReps(v[k].reps)} reps</em></div>`;
+  return `<div class="vs3" id="liftStrip"><div class="tiles" id="volStrip">${tile('today', 'Today')}${tile('week', 'This week')}<div class="allt" id="allTile"><div class="tx"><small>All-time</small>${num('all')}<em>${fmtReps(v.all.reps)} reps</em></div>${ringSVG(m.p)}</div></div>
+    <div class="cap" id="ringCap"><b>${m.label}</b> to ${m.target} ${u}</div></div>`;
+}
 function homeView() {
-  const p = S.program, days = curDays(), day = dayOf(), multi = p.weeks.length > 1;
-  const tot = S.history.length;
+  const p = S.program, day = dayOf(), multi = p.weeks.length > 1;
   const resuming = !!S.session;
   return `<div class="screen">
     <div class="hdr"><div class="brand">FOR<b>GE</b></div><button class="icon" data-act="settings" aria-label="Settings">⚙️</button></div>
-    <div><div class="greet">${userName() ? 'Hey ' + esc(userName()) + ' 👋' : 'Hey there 👋'}</div>${userName() ? '' : '<button class="namelink" data-act="editName">Add your name</button>'}${tot ? volStripHTML() : '<div class="sub">Ready when you are. Let\'s get the first one logged.</div>'}</div>
-    <div class="hero">
-      <div class="row wrap"><span class="label">Today's workout</span><span class="chip acc">${multi ? esc(curWeek().name) + ' · ' : ''}${esc(day.name)}${day.dow ? ' · ' + esc(day.dow) : ''}</span></div>
+    <div><div class="greet">${userName() ? 'Hey ' + esc(userName()) + ' 👋' : 'Hey there 👋'}</div>${userName() ? '' : '<button class="namelink" data-act="editName">Add your name</button>'}</div>
+    ${liftStripHTML()}
+    <div class="hero" id="todayCard">
+      <div class="row wrap"><span class="label">Today's workout</span>${(() => { const t = (multi ? esc(curWeek().name) + ' · ' : '') + esc(day.name) + (day.dow ? ' · ' + esc(day.dow) : ''); return resuming ? `<span class="chip acc" id="dayChip">${t}</span>` : `<button type="button" class="chip acc daypill" id="changeDay" data-act="changeDay" aria-haspopup="dialog" aria-label="Change workout day: ${t}">${t}<span class="dd" aria-hidden="true">▾</span></button>`; })()}</div>
       <h2>${esc(day.focus)}</h2>
       <div class="stats3">
         <div class="stat"><b>${exCount(day)}</b><span>EXERCISES</span></div>
@@ -939,12 +1005,7 @@ function homeView() {
         : `<button class="btn pri block" data-act="start">▶ START WORKOUT</button>`}
       <div style="margin-top:14px">${blocksPreview(day, homeExpanded ? 99 : 3)}${day.blocks.length > 3 ? `<button type="button" class="moreblk" data-act="toggleBlocks" aria-expanded="${homeExpanded}"><span class="n" style="width:26px;height:26px;border-radius:8px;background:var(--accsoft);color:var(--acc2);font-weight:800;font-size:12px;display:grid;place-items:center;flex:none">${homeExpanded ? '−' : '+'}</span><span class="t mut" style="flex:1">${homeExpanded ? 'Show fewer blocks' : `${day.blocks.length - 3} more block${day.blocks.length - 3 > 1 ? 's' : ''} (supersets &amp; circuits)`}</span><span class="mut">${homeExpanded ? '▴' : '▾'}</span></button>` : ''}</div>
     </div>
-    <div><div class="label" style="margin-bottom:8px;color:var(--mut)">Choose ${multi ? 'week &amp; day' : 'day'}</div>
-      ${multi ? weekBar(S.selWeek, 'wk') + '<div style="height:10px"></div>' : ''}
-      <div class="pills">${days.map((d, i) => `<button class="pill ${i === S.selDay ? 'on' : ''}" data-act="pickDay" data-i="${i}"><b>${esc(d.name)}${d.dow ? ' · ' + esc(d.dow) : ''}</b><span>${esc(d.focus)}</span></button>`).join('')}</div></div>
-    <div class="card"><div class="row" style="justify-content:space-between"><div><div style="font-weight:700">Rest timer</div><div class="sub" style="font-size:12.5px">${S.settings.restMode === 'round' ? 'After each full superset round (circuits use their own rest)' : 'After every set (circuits use their own rest)'}</div></div></div>
-      <div class="seg" style="margin-top:10px">${[0, 30, 45, 60, 90, 120].map(n => `<button class="${S.settings.rest === n ? 'on' : ''}" data-act="setRest" data-n="${n}">${n ? n + 's' : 'Off'}</button>`).join('')}</div></div>
-    <div class="sub" style="text-align:center;font-size:12px">Program: ${esc(p.name)} · ${p.weeks.length} week${p.weeks.length > 1 ? 's' : ''} · ${allDays(p).length} days</div>
+    <button type="button" class="proglink" id="progLink" data-act="nav" data-v="program">Program: <u>${esc(p.name)}</u> · ${p.weeks.length} week${p.weeks.length > 1 ? 's' : ''} · ${allDays(p).length} days ›</button>
   </div>${navHTML()}`;
 }
 
@@ -1104,36 +1165,43 @@ async function shareProgram() {
   downloadBlob(blob, f.name); toast('Program file saved - send it to a friend to import');
 }
 function libraryHTML() {
-  const one = S.library.length < 2;
   const card = e => {
     const act = e.id === S.activeId, ds = allDays(e.program), wk = e.program.weeks.length;
-    return `<div class="card libc ${act ? 'on' : ''}" data-lib="${esc(e.id)}"><div class="row" style="gap:10px;align-items:center"><div style="flex:1;min-width:0"><b class="libn">${esc(e.name)}</b><div class="sub" style="font-size:12.5px">${wk} week${wk > 1 ? 's' : ''} × ${wk ? e.program.weeks[0].days.length : 0} days · ${ds.length} sessions</div></div>
-      ${act ? '<span class="chip acc libact">Active</span>' : `<button class="btn sec" style="min-height:40px;padding:0 14px;font-size:13px" data-act="libSwitch" data-id="${esc(e.id)}">Switch</button>`}
-      <button class="icon" data-act="libDel" data-id="${esc(e.id)}" aria-label="Delete ${esc(e.name)}" ${act && one ? 'disabled style="opacity:.3"' : ''}>✕</button></div>
-      ${act ? '<button class="btn sec block" id="shareProg" style="min-height:40px;font-size:13.5px;margin-top:10px" data-act="shareProg">↗ Share program</button>' : ''}</div>`;
+    const meta = `${wk} week${wk > 1 ? 's' : ''} × ${wk ? e.program.weeks[0].days.length : 0} days · ${ds.length} sessions`;
+    if (act) return `<div class="card libc on" data-lib="${esc(e.id)}"><button class="libopen" id="openProg" data-act="progOpen" aria-label="Open ${esc(e.name)} details"><div style="flex:1;min-width:0"><b class="libn">${esc(e.name)}</b><div class="sub" style="font-size:12.5px">${meta}</div></div><span class="chip acc libact">Active</span><span class="chev" aria-hidden="true">›</span></button></div>`;
+    return `<div class="card libc" data-lib="${esc(e.id)}"><div class="row" style="gap:10px;align-items:center"><div style="flex:1;min-width:0"><b class="libn">${esc(e.name)}</b><div class="sub" style="font-size:12.5px">${meta}</div></div>
+      <button class="btn sec" style="min-height:40px;padding:0 14px;font-size:13px" data-act="libSwitch" data-id="${esc(e.id)}">Switch</button>
+      <button class="icon" data-act="libDel" data-id="${esc(e.id)}" aria-label="Delete ${esc(e.name)}">✕</button></div></div>`;
   };
   return `<div><div class="label">My workouts</div><div style="display:grid;gap:8px;grid-template-columns:minmax(0,1fr)">${S.library.map(card).join('')}</div>
     <button class="btn sec block" style="margin-top:8px" data-act="nav" data-v="import">+ Add workout</button>
     <div class="note" style="text-align:center;margin-top:8px;color:var(--mut)">Workouts shared by friends will show up here.</div></div>`;
 }
 function programView() {
-  const p = S.program; if (progWeek == null) progWeek = S.selWeek;
-  progWeek = Math.min(progWeek, p.weeks.length - 1);
-  const w = p.weeks[progWeek], multi = p.weeks.length > 1;
+  if (progDetail) return programDetailView();
   return `<div class="screen">
     <div class="hdr"><div class="brand">FOR<b>GE</b></div></div>
     ${libraryHTML()}
-    <div><div class="greet">${esc(p.name)}</div><div class="sub">${p.weeks.length} week${multi ? 's' : ''} · ${allDays(p).length} days · ${allDays(p).reduce((n, d) => n + exCount(d), 0)} exercises. Tap a day to see its supersets.</div></div>
-    ${p.guide && p.guide.length ? `<details class="card guide"><summary style="font-weight:700">📖 How this program works</summary>${p.guide.map(g => `<p><b>${esc(g.t)}.</b> ${esc(g.x)}</p>`).join('')}</details>` : ''}
+  </div>${navHTML()}`;
+}
+function programDetailView() {
+  const p = S.program; if (progWeek == null) progWeek = S.selWeek;
+  progWeek = Math.min(progWeek, p.weeks.length - 1);
+  const w = p.weeks[progWeek], multi = p.weeks.length > 1, one = S.library.length < 2;
+  return `<div class="screen" id="progDetail">
+    <div class="hdr" style="gap:8px"><button class="backbtn" id="progBack" data-act="progBack" aria-label="Back to My workouts"><span>‹</span>My workouts</button><button class="btn sec" id="shareProg" style="min-height:40px;padding:0 14px;font-size:13.5px" data-act="shareProg">↗ Share program</button></div>
+    <div><div class="greet">${esc(p.name)}</div><div class="sub">${p.weeks.length} week${multi ? 's' : ''} · ${allDays(p).length} days · ${allDays(p).reduce((n, d) => n + exCount(d), 0)} exercises. Tap a day to see its supersets or set it as your next workout.</div></div>
     ${multi ? weekBar(progWeek, 'pwk') : ''}
-    ${w.days.map((d, i) => `<div class="card ${openDay === i ? 'open' : ''}">
-      <button class="dayhead" data-act="openDay" data-i="${i}"><div class="dn">${i + 1}</div><div class="tx"><b>${esc(d.name)} — ${esc(d.focus)}</b><span>${exCount(d)} exercises · ${setCount(d)} sets · ~${estMin(d)} min</span></div><span class="caret">▶</span></button>
+    ${w.days.map((d, i) => { const isNext = progWeek === S.selWeek && i === S.selDay; return `<div class="card ${openDay === i ? 'open' : ''}">
+      <button class="dayhead" data-act="openDay" data-i="${i}"><div class="dn">${i + 1}</div><div class="tx"><b>${esc(d.name)} — ${esc(d.focus)}${isNext ? '<span class="nxt">NEXT</span>' : ''}</b><span>${exCount(d)} exercises · ${setCount(d)} sets · ~${estMin(d)} min</span></div><span class="caret">▶</span></button>
       ${openDay === i ? `<div style="margin-top:10px">${d.note ? `<div class="notice" style="margin-bottom:8px">${esc(d.note)}</div>` : ''}${blocksPreview(d)}
         ${d.blocks.some(b => b.exercises.some(e => e.note)) ? '<div class="note" style="margin:6px 0 10px">Tip: notes like "increase weight every set" or how to do a drop-set show on the workout screen.</div>' : ''}
-        <button class="btn pri block" data-act="doDay" data-i="${i}" style="margin-top:8px">Set as today's workout</button></div>` : ''}
-    </div>`).join('')}
+        <button class="btn pri block" data-act="doDay" data-i="${i}" style="margin-top:8px">${isNext ? '✓ This is your next workout' : 'Set as next workout'}</button></div>` : ''}
+    </div>`; }).join('')}
+    ${p.guide && p.guide.length ? `<details class="card guide"><summary style="font-weight:700">📖 How this program works</summary>${p.guide.map(g => `<p><b>${esc(g.t)}.</b> ${esc(g.x)}</p>`).join('')}</details>` : ''}
     ${p.abs && p.abs.length ? `<details class="card"><summary style="font-weight:700">🔥 Ab circuit library (${p.abs.length})</summary><div class="sub" style="font-size:12.5px;margin:6px 0">Do abs at least 3×/week after training. Tap one to run it as a quick workout.</div>
       ${p.abs.map((a, i) => `<div class="blk" style="align-items:center"><div class="n">${i + 1}</div><div class="t"><div>${esc(a.blocks[0].exercises.map(e => e.name).join(', '))}</div><small>20 reps each · 3 rounds</small></div><button class="btn sec" style="min-height:40px;padding:0 14px;font-size:13px" data-act="startAbs" data-i="${i}">Start</button></div>`).join('')}</details>` : ''}
+    <button class="sublink" id="delActive" data-act="libDel" data-id="${esc(S.activeId)}" ${one ? 'disabled style="opacity:.35"' : ''}>Delete this workout</button>
   </div>${navHTML()}`;
 }
 function previewHTML(pr) {
@@ -1329,6 +1397,13 @@ function modalHTML() {
       ${d.status ? `<div class="fbstat" role="status">${esc(d.status)}</div>` : ''}
       </div></div>`;
   }
+  if (modal === 'pickday') {
+    const w = S.program.weeks[Math.min(cdWeek, S.program.weeks.length - 1)], multi = S.program.weeks.length > 1;
+    return `<div class="overlay" data-act="closeModal"><div class="sheet" id="pickSheet" data-stop="1"><div class="grab"></div><div class="row" style="justify-content:space-between"><b style="font-size:20px">Change day</b><button class="icon" data-act="closeModal" aria-label="Close">✕</button></div>
+      <div class="sub" style="margin:6px 0 12px;font-size:13px">Pick the workout you want to do next. Home will show it.</div>
+      ${multi ? weekBar(cdWeek, 'cdwk') + '<div style="height:8px"></div>' : ''}
+      ${w.days.map((d, i) => { const isNext = cdWeek === S.selWeek && i === S.selDay; return `<button class="seqrow ${isNext ? 'cur' : ''}" data-act="cdPick" data-i="${i}"><span class="ix">${i + 1}</span><span class="nm">${esc(d.name)}${d.dow ? ' · ' + esc(d.dow) : ''} — ${esc(d.focus)}<small>${exCount(d)} exercises · ${setCount(d)} sets · ~${estMin(d)} min</small></span><span class="stt" style="width:auto">${isNext ? '<span class="nxt" style="margin:0">NEXT</span>' : ''}</span></button>`; }).join('')}</div></div>`;
+  }
   if (modal === 'settings') {
     const st = S.settings;
     return `<div class="overlay" data-act="closeModal"><div class="sheet" data-stop="1"><div class="grab"></div><div class="row" style="justify-content:space-between"><b style="font-size:20px">Settings</b><button class="icon" data-act="closeModal">✕</button></div>
@@ -1337,9 +1412,13 @@ function modalHTML() {
       <div style="margin-top:14px"><div class="sub" style="margin-bottom:6px">Rest happens…</div><div class="seg"><button class="${st.restMode === 'set' ? 'on' : ''}" data-act="setMode" data-m="set">After every set</button><button class="${st.restMode === 'round' ? 'on' : ''}" data-act="setMode" data-m="round">After each superset round</button></div></div>
       <div style="margin-top:14px"><div class="sub" style="margin-bottom:6px">Units</div><div class="seg"><button class="${st.unit === 'lb' ? 'on' : ''}" data-act="setUnit" data-u="lb">lb</button><button class="${st.unit === 'kg' ? 'on' : ''}" data-act="setUnit" data-u="kg">kg</button></div></div>
       <div class="sw" style="margin-top:14px"><span>Keep screen awake during workouts</span><div class="seg"><button class="${st.wake ? 'on' : ''}" data-act="toggleWake">${st.wake ? 'On' : 'Off'}</button></div></div>
+      <div class="sub" id="wakeHelp" style="font-size:12.5px;margin-top:2px">Stops your phone from dimming or locking while a workout is running.</div>
       <div style="margin-top:18px"><div class="sub" style="margin-bottom:6px">Feedback</div><button class="btn sec block" data-act="feedback" data-from="settings">💬 Send feedback</button>${fbListHTML()}</div>
-      <button class="btn danger block" style="margin-top:18px" data-act="resetAll">Reset all data</button>
-      <div class="sub" id="buildLbl" style="text-align:center;margin-top:14px;font-size:12px">FORGE build ${esc(BUILD)}${updNew ? ' · <b style="color:var(--acc2)">update available</b>' : ''}</div></div></div>`;
+      <div class="sub" id="buildLbl" style="text-align:center;margin-top:18px;font-size:12px">FORGE build ${esc(BUILD)}${updNew ? ' · <b style="color:var(--acc2)">update available</b>' : ''}</div>
+      <div class="erase" id="eraseSec">${eraseStep ? `<div class="erasebox" id="eraseBox" role="alertdialog" aria-label="Confirm erase"><b style="font-size:16px">Erase everything on this device?</b>
+        <div class="sub" style="font-size:13px;margin:6px 0 12px">This deletes your workout history, PRs, name, settings and saved workouts (My workouts). It can't be undone.</div>
+        <div style="display:grid;gap:8px"><button class="btn sec" id="eraseCancel" data-act="eraseCancel">Cancel, keep my data</button><button class="btn danger" id="eraseConfirm" data-act="eraseConfirm">Yes, erase everything</button></div></div>`
+        : `<button class="go" id="eraseBtn" data-act="eraseAsk">Erase all data on this device</button>`}</div></div></div>`;
   }
   return '';
 }
@@ -1352,7 +1431,7 @@ function fbListHTML() {
 
 /* ---------- Render ---------- */
 function render() {
-  const app = $('#app'); const sy = window.scrollY;
+  const app = $('#app'); const sy = window.scrollY; const oldSheet = $('.sheet'), sheetTop = oldSheet ? oldSheet.scrollTop : 0, sheetKey = oldSheet && app.dataset.modal;
   let html;
   if (view === 'active' && S.session) html = activeView();
   else if (view === 'summary') html = summaryView();
@@ -1362,6 +1441,9 @@ function render() {
   else if (view === 'stats') html = statsView();
   else html = homeView();
   app.innerHTML = html + (view === 'active' && S.session ? pausedHTML() : '') + modalHTML();
+  app.dataset.modal = modal || '';
+  if (modal && modal === sheetKey && modal !== 'seq') { const sh = $('.sheet'); if (sh) sh.scrollTop = sheetTop; }
+  if (modal === 'settings' && eraseStep) { const eb = $('#eraseBox'); if (eb) eb.scrollIntoView({ block: 'nearest' }); }
   if (modal === 'seq') { const c = $('.seqrow.cur'); if (c) { const sh = $('#sheet'); sh.scrollTop = Math.max(0, c.offsetTop - sh.clientHeight / 2); } }
   const fi = $('#fileIn'); if (fi) fi.addEventListener('change', onFile);
   bindDrop();
@@ -1506,9 +1588,12 @@ function act(a, t) {
     case 'restSheet': modal = 'rest'; render(); break;
     case 'setRestW': setRestLive(+d.n); break;
     case 'toggleBlocks': homeExpanded = !homeExpanded; render(); break;
-    case 'nav': modal = null; view = d.v; render(window.scrollTo(0, 0)); break;
-    case 'pickDay': S.selDay = +d.i; save(); render(); break;
-    case 'wk': { const n = S.selWeek + +d.d; if (n >= 0 && n < S.program.weeks.length) { S.selWeek = n; S.selDay = 0; save(); render(); } break; }
+    case 'nav': modal = null; eraseStep = 0; view = d.v; if (d.v === 'program') { progDetail = false; openDay = null; } render(window.scrollTo(0, 0)); break;
+    case 'changeDay': cdWeek = Math.min(S.selWeek, S.program.weeks.length - 1); modal = 'pickday'; render(); break;
+    case 'cdwk': { const n = cdWeek + +d.d; if (n >= 0 && n < S.program.weeks.length) { cdWeek = n; render(); } break; }
+    case 'cdPick': S.selWeek = cdWeek; S.selDay = +d.i; libSyncActive(); save(); modal = null; render(); toast('Next workout: ' + (S.program.weeks.length > 1 ? curWeek().name + ' · ' : '') + dayOf().name); break;
+    case 'progOpen': progDetail = true; progWeek = null; openDay = null; render(window.scrollTo(0, 0)); break;
+    case 'progBack': progDetail = false; openDay = null; render(window.scrollTo(0, 0)); break;
     case 'pwk': { const n = progWeek + +d.d; if (n >= 0 && n < S.program.weeks.length) { progWeek = n; openDay = null; render(); } break; }
     case 'tstart': startTimer(); break;
     case 'tstop': stopTimer(); break;
@@ -1522,7 +1607,7 @@ function act(a, t) {
     case 'skip': skipStep(); break;
     case 'exit': modal = 'exit'; render(); break;
     case 'seq': modal = 'seq'; render(); break;
-    case 'closeModal': if (modal === 'feedback') { if (fbDraft.id) fbReset(); modal = fbBack; fbBack = null; } else modal = null; render(); break;
+    case 'closeModal': eraseStep = 0; if (modal === 'feedback') { if (fbDraft.id) fbReset(); modal = fbBack; fbBack = null; } else modal = null; render(); break;
     case 'feedback': openFeedback(d.from); break;
     case 'fbType': fbDraft.type = d.t; render(); break;
     case 'fbSend': fbSend(); break;
@@ -1537,7 +1622,7 @@ function act(a, t) {
       let v = (parseFloat(el.value) || 0) + parseFloat(d.d); if (v < 0) v = 0;
       el.value = Math.round(v * 100) / 100 || ''; saveDraft(); break;
     }
-    case 'settings': modal = 'settings'; render(); break;
+    case 'settings': modal = 'settings'; eraseStep = 0; render(); break;
     case 'editName': modal = 'settings'; render(); { const ni = $('#nameIn'); if (ni) { ni.focus(); ni.select(); } } break;
     case 'shareOpen': shareSt = { tpl: d.t === 'workout' ? 'workout' : 'stats', id: d.id || null }; modal = 'share'; render(); break;
     case 'shareTpl': if (d.t === 'workout' && !S.history.length) break; shareSt.tpl = d.t; if (d.t === 'workout' && !shareSt.id) shareSt.id = S.history[0].id; render(); break;
@@ -1551,9 +1636,11 @@ function act(a, t) {
     case 'setMode': S.settings.restMode = d.m; save(); render(); break;
     case 'setUnit': S.settings.unit = d.u; save(); render(); break;
     case 'toggleWake': S.settings.wake = !S.settings.wake; save(); render(); break;
-    case 'resetAll': if (confirm('Erase all programs, history and settings on this device?')) { localStorage.removeItem(LS); S = freshState(); progWeek = null; view = 'home'; modal = null; parsed = null; importText = ''; render(); toast('Reset'); } break;
+    case 'eraseAsk': eraseStep = 1; render(); break;
+    case 'eraseCancel': eraseStep = 0; render(); break;
+    case 'eraseConfirm': if (eraseStep !== 1) break; eraseStep = 0; localStorage.removeItem(LS); S = freshState(); progWeek = null; openDay = null; progDetail = false; homeExpanded = false; view = 'home'; modal = null; parsed = null; importText = ''; render(window.scrollTo(0, 0)); toast('All data erased'); break;
     case 'openDay': openDay = openDay === +d.i ? null : +d.i; render(); break;
-    case 'doDay': S.selWeek = progWeek == null ? S.selWeek : progWeek; S.selDay = +d.i; save(); view = 'home'; render(window.scrollTo(0, 0)); toast(curWeek().name + ' · ' + dayOf().name + ' set as today'); break;
+    case 'doDay': S.selWeek = progWeek == null ? S.selWeek : progWeek; S.selDay = +d.i; libSyncActive(); save(); view = 'home'; progDetail = false; openDay = null; render(window.scrollTo(0, 0)); toast('Next workout: ' + (S.program.weeks.length > 1 ? curWeek().name + ' · ' : '') + dayOf().name); break;
     case 'histToggle': openHist = openHist === d.id ? null : d.id; render(); break;
     case 'doneSummary': view = 'home'; render(window.scrollTo(0, 0)); break;
     case 'parse': { const ta = $('#importTA'); if (ta) importText = ta.value; parsed = parseAny(importText); importNote = null; importBlocked = null; blockedFile = null; render(); break; }
@@ -1579,7 +1666,7 @@ function act(a, t) {
       const e = S.library.find(x => x.id === d.id); if (!e || S.library.length < 2) break;
       if (e.id === S.activeId && S.session) { toast('Finish or end the current workout before deleting it.'); break; }
       if (!confirm('Delete "' + e.name + '" from My workouts? Your history stays.')) break;
-      if (e.id === S.activeId) { libActivate(S.library.find(x => x.id !== e.id)); }
+      if (e.id === S.activeId) { libActivate(S.library.find(x => x.id !== e.id)); progDetail = false; }
       S.library = S.library.filter(x => x.id !== e.id); save(); render(); toast('Deleted'); break;
     }
   }
@@ -1627,7 +1714,7 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) chec
 setTimeout(() => checkUpdate(true), 800);
 render();
 // test hooks (harmless in production)
-window.__forge = { BUILD, entryTotals, volumeTotals, weeklyVolume, fmtVol, programFile, shareProgram, shareText, canonicalLift, streakCalc, dayIdx, weekOf, liftStats, liftSetList, gainOf, detectPRs, streakInfo, checkUpdate, drawCard, cardSpec, parseText, parseAny, buildSteps, getState: () => S, BUILTIN_PROGRAM, builtin, estSec, repsMax };
+window.__forge = { BUILD, nextMilestoneLb, milestoneInfo, entryTotals, volumeTotals, weeklyVolume, fmtVol, programFile, shareProgram, shareText, canonicalLift, streakCalc, dayIdx, weekOf, liftStats, liftSetList, gainOf, detectPRs, streakInfo, checkUpdate, drawCard, cardSpec, parseText, parseAny, buildSteps, getState: () => S, BUILTIN_PROGRAM, builtin, estSec, repsMax };
 </script>
 </body>
 </html>
