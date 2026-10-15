@@ -259,7 +259,7 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
    FORGE — single-file workout tracker prototype
    State lives in localStorage ("forge.v1"). No build step.
    ========================================================= */
-const BUILD = '2026.10.15-3'; // bump on every deploy; the in-app update banner compares this against the live file
+const BUILD = '2026.10.15-4'; // bump on every deploy; the in-app update banner compares this against the live file
 const LS = 'forge.v1';
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -863,7 +863,6 @@ function statsView() {
       <div class="note" style="margin-top:10px">1 rest day per Mon–Sun week keeps your streak alive.</div></div>
     <div class="label" style="color:var(--mut)">Big three</div>
     ${LIFTS.map(liftCard).join('')}
-    <div class="note" style="text-align:center">e1RM = Epley estimate from sets of 1–10 reps (rounded to ${u === 'lb' ? '5 lb' : '2.5 kg'}). 30d = best e1RM in the last 30 days vs. before. Variants (incline, smith, box, RDL…) don't count.</div>
   </div>${navHTML()}`;
 }
 
@@ -1173,14 +1172,13 @@ function modalHTML() {
   if (modal === 'feedback') {
     const d = fbDraft;
     return `<div class="overlay" data-act="closeModal"><div class="sheet" data-stop="1"><div class="grab"></div><div class="row" style="justify-content:space-between"><b style="font-size:20px">Send feedback</b><button class="icon" data-act="closeModal" aria-label="Close">✕</button></div>
-      <div class="fbhint" style="margin-top:6px">There's no server behind this app. <b>Opens a GitHub issue, or share it with Phillip.</b> Either way a copy is saved on this device. GitHub issues are public, so leave out anything private.</div>
+      <div class="fbhint" style="margin-top:6px">Opens a GitHub issue. A copy is saved on this device. GitHub issues are public, so leave out anything private.</div>
       <div class="seg" style="margin-top:12px" role="group" aria-label="Type">${['Bug', 'Idea', 'Other'].map(t => `<button class="${d.type === t ? 'on' : ''}" data-act="fbType" data-t="${t}">${t === 'Bug' ? '🐞 ' : t === 'Idea' ? '💡 ' : '💬 '}${t}</button>`).join('')}</div>
       <textarea class="fbta" id="fbText" maxlength="2000" style="margin-top:12px" placeholder="${d.type === 'Bug' ? 'What went wrong? What did you tap, and what did you expect?' : d.type === 'Idea' ? 'What would make FORGE better for you?' : 'Anything else…'}">${esc(d.text)}</textarea>
       <input class="txt fb" id="fbContact" type="text" maxlength="80" autocomplete="off" autocapitalize="off" enterkeyhint="done" style="margin-top:10px" placeholder="Name or email (optional)" value="${esc(d.contact)}">
       <div class="fbhint" style="margin-top:6px">Contact is optional. If you send via GitHub it will be visible on the public issue. The message also includes the app build (${esc(BUILD)}) and your browser's user agent to help debug.</div>
-      ${d.file ? `<div class="fbhint" style="margin-top:8px">📎 ${esc(d.file.name)} (${fmtSize(d.file.size)}) — a link can't carry files. After GitHub opens, drag the file into the issue, or use Share${navigator.share ? '' : ' (not available in this browser)'}, which includes it when your device allows.</div>` : ''}
+      ${d.file ? `<div class="fbhint" style="margin-top:8px">📎 ${esc(d.file.name)} (${fmtSize(d.file.size)}) — a link can't carry files. After GitHub opens, drag the file into the issue.</div>` : ''}
       <button class="btn pri block" style="margin-top:14px" data-act="fbSend">↗ Send via GitHub issue</button>
-      <div class="row" style="margin-top:8px"><button class="btn sec" style="flex:1" data-act="fbCopy">📋 Copy text</button>${navigator.share ? '<button class="btn sec" style="flex:1" data-act="fbShare">📤 Share…</button>' : ''}</div>
       ${d.status ? `<div class="fbstat" role="status">${esc(d.status)}</div>` : ''}
       </div></div>`;
   }
@@ -1200,7 +1198,7 @@ function modalHTML() {
 }
 
 function fbListHTML() {
-  const L = S.feedback || []; if (!L.length) return '<div class="fbhint" style="margin-top:8px">Your feedback is saved here on this device. Opens a GitHub issue, or share it with Phillip.</div>';
+  const L = S.feedback || []; if (!L.length) return '<div class="fbhint" style="margin-top:8px">Your feedback is saved here on this device. Opens a GitHub issue. A copy is saved on this device. GitHub issues are public, so leave out anything private.</div>';
   const vl = { github: 'GitHub issue opened', copied: 'copied', shared: 'shared' };
   return `<div class="sub" style="margin:14px 0 2px">Your feedback</div>` + L.slice(0, 20).map(f => `<div class="fbitem"><div class="fbm"><small>${esc(new Date(f.ts).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }))} · ${esc(f.type)}${f.via && f.via.length ? ' · ' + esc(f.via.map(v => vl[v] || v).join(', ')) : ' · saved only'}</small><div>${esc(f.text)}</div></div><button class="icon" data-act="fbDel" data-id="${esc(f.id)}" aria-label="Delete this feedback entry">✕</button></div>`).join('');
 }
@@ -1342,19 +1340,7 @@ async function fbSend() {
   if (!fbSave('github')) return;
   const url = fbIssueURL(); let w = null;
   try { w = window.open(url, '_blank', 'noopener,noreferrer'); } catch (e) {}
-  fbDraft.status = 'Saved on this device. A GitHub issue is opening in a new tab — nothing is sent until you press "Submit new issue" there. No GitHub account (or the tab didn\'t open)? Use Copy text or Share below.';
-  render();
-}
-async function fbCopy() {
-  if (!fbSave('copied')) return;
-  const ok = await copyText(fbText()); fbDraft.status = ok ? 'Saved on this device and copied — paste it into a text to Phillip.' : 'Saved on this device, but this browser blocked copying. Select the text in the box and copy it by hand.'; render(); toast(ok ? 'Copied' : 'Could not copy');
-}
-async function fbShare() {
-  if (!fbSave('shared')) return;
-  const data = { title: 'FORGE feedback', text: fbText() };
-  try { if (fbDraft.file && navigator.canShare && navigator.canShare({ files: [fbDraft.file] })) data.files = [fbDraft.file]; } catch (e) {}
-  try { await navigator.share(data); fbDraft.status = 'Saved on this device and shared.'; }
-  catch (e) { fbDraft.status = e && e.name === 'AbortError' ? 'Saved on this device. Share was cancelled.' : 'Saved on this device, but sharing failed. Try Copy text.'; }
+  fbDraft.status = 'Saved on this device. A GitHub issue is opening in a new tab — nothing is sent until you press "Submit new issue" there.';
   render();
 }
 
@@ -1398,8 +1384,6 @@ function act(a, t) {
     case 'feedback': openFeedback(d.from); break;
     case 'fbType': fbDraft.type = d.t; render(); break;
     case 'fbSend': fbSend(); break;
-    case 'fbCopy': fbCopy(); break;
-    case 'fbShare': fbShare(); break;
     case 'fbDel': S.feedback = (S.feedback || []).filter(x => x.id !== d.id); save(); render(); break;
     case 'copyPrompt': copyText(FORGE_PROMPT).then(ok => toast(ok ? 'Prompt copied — paste it into ChatGPT or Claude' : 'Could not copy')); break;
     case 'sendFile': { const b = importBlocked || {}; openFeedback('import', { type: 'Other', text: `I tried to import "${b.name || 'a file'}" (${b.kind || 'file'}) and FORGE can't read it yet. Here is my program so you can add support for it.`, file: blockedFile }); break; }
