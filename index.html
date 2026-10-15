@@ -34,6 +34,8 @@ h1,h2,h3,p{margin:0}
 .sub{color:var(--mut);font-size:14px}
 .icon{width:44px;height:44px;border-radius:14px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:18px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.libc.on{border-color:rgba(255,106,26,.5)}
+.libn{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .label{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--acc);text-transform:uppercase}
 .mut{color:var(--mut)}
 .chip{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:var(--card2);border:1px solid var(--line);font-size:12.5px;font-weight:600;color:var(--mut);white-space:nowrap}
@@ -259,7 +261,7 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
    FORGE — single-file workout tracker prototype
    State lives in localStorage ("forge.v1"). No build step.
    ========================================================= */
-const BUILD = '2026.10.15-4'; // bump on every deploy; the in-app update banner compares this against the live file
+const BUILD = '2026.10.15-5'; // bump on every deploy; the in-app update banner compares this against the live file
 const LS = 'forge.v1';
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -468,7 +470,7 @@ function parseJSONProgram(text) {
 }
 function parseAny(text) {
   const t = text.trim();
-  if (!t) return { program: { name: '', days: [] }, warnings: ['Nothing to parse - paste some text first.'] };
+  if (!t) return { program: { name: '', days: [] }, warnings: ['Nothing to create yet - paste some text or upload a file first.'] };
   if (/^[\[{]/.test(t)) return parseJSONProgram(t);
   const first = t.split(/\r?\n/)[0];
   if (/(,|\t)/.test(first) && /exercise/i.test(first)) return parseCSV(t);
@@ -477,17 +479,40 @@ function parseAny(text) {
 
 /* ---------- State ---------- */
 const builtin = () => parseJSONProgram(JSON.stringify(BUILTIN_PROGRAM)).program;
+const newLibId = () => 'w' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const hashStr = t => { let h = 5381; for (let i = 0; i < t.length; i++) h = ((h << 5) + h + t.charCodeAt(i)) | 0; return (h >>> 0).toString(36); };
+const progHash = p => hashStr((p.name || '') + '|' + JSON.stringify(p.weeks || []));
+const libEntry = (p, source, selWeek, selDay) => ({ id: newLibId(), name: p.name, program: p, addedAt: Date.now(), source, selWeek: selWeek || 0, selDay: selDay || 0 });
 function freshState() {
-  const p = builtin(), d = p.defaults || {};
-  return { program: p, selWeek: 0, selDay: 0, settings: { rest: d.rest != null ? d.rest : 45, restMode: d.restMode || 'round', unit: 'lb', wake: true, name: '' }, last: {}, history: [], session: null, lastSummaryId: null, feedback: [] };
+  const p = builtin(), d = p.defaults || {}, e = libEntry(p, 'built-in');
+  return { program: p, library: [e], activeId: e.id, selWeek: 0, selDay: 0, settings: { rest: d.rest != null ? d.rest : 45, restMode: d.restMode || 'round', unit: 'lb', wake: true, name: '' }, last: {}, history: [], session: null, lastSummaryId: null, feedback: [] };
 }
 function load() {
   try {
     const o = JSON.parse(localStorage.getItem(LS));
-    if (o && o.program && (o.program.weeks || o.program.days)) {
-      if (!o.program.weeks) { o.program.weeks = [{ n: 1, phase: 1, name: 'Week 1', days: o.program.days }]; delete o.program.days; }
-      if (o.program.source === 'sample' && o.program.ver !== BUILTIN_PROGRAM.ver) { o.program = builtin(); o.selDay = 0; o.selWeek = 0; }
+    const okProg = p => p && (p.weeks || p.days);
+    const normProg = p => { if (!p.weeks) { p.weeks = [{ n: 1, phase: 1, name: 'Week 1', days: p.days }]; delete p.days; } return p; };
+    if (o && (okProg(o.program) || (Array.isArray(o.library) && o.library.some(e => e && okProg(e.program))))) {
+      // library: older saves have none, so wrap the current program as the first entry
+      let lib = Array.isArray(o.library) ? o.library.filter(e => e && e.id && okProg(e.program)) : [];
+      if (okProg(o.program)) {
+        normProg(o.program);
+        if (o.program.source === 'sample' && o.program.ver !== BUILTIN_PROGRAM.ver) { o.program = builtin(); o.selDay = 0; o.selWeek = 0; }
+      }
+      if (!lib.length) { lib = [libEntry(o.program, o.program.source === 'sample' ? 'built-in' : 'imported', o.selWeek, o.selDay)]; o.activeId = lib[0].id; }
+      lib.forEach(e => {
+        normProg(e.program); e.name = e.name || e.program.name || 'Workout'; e.addedAt = e.addedAt || Date.now(); e.source = e.source || 'imported';
+        if (e.program.source === 'sample' && e.program.ver !== BUILTIN_PROGRAM.ver) { e.program = builtin(); e.name = e.program.name; e.selWeek = 0; e.selDay = 0; }
+      });
+      o.library = lib;
+      let act = lib.find(e => e.id === o.activeId);
+      if (!act) { act = lib[0]; o.activeId = act.id; o.selWeek = act.selWeek || 0; o.selDay = act.selDay || 0; }
+      // S.program is authoritative for the active entry; keep them the same object
+      if (okProg(o.program) && progHash(o.program) !== progHash(act.program)) { act.program = o.program; act.name = o.program.name || act.name; }
+      o.program = act.program;
       o.selWeek = Math.min(o.selWeek || 0, o.program.weeks.length - 1); o.selDay = o.selDay || 0;
+      act.selWeek = o.selWeek; act.selDay = o.selDay;
+      lib.forEach(e => { e.selWeek = Math.min(e.selWeek || 0, e.program.weeks.length - 1); e.selDay = e.selDay || 0; });
       if (!Array.isArray(o.feedback)) o.feedback = [];
       return o;
     }
@@ -496,6 +521,23 @@ function load() {
 }
 let S = load();
 const save = () => { try { localStorage.setItem(LS, JSON.stringify(S)); } catch (e) {} };
+
+/* ---------- Program library (S.library = saved workouts; S.program is the active one) ---------- */
+const libActive = () => S.library.find(e => e.id === S.activeId) || null;
+function libSyncActive() { const e = libActive(); if (e) { e.program = S.program; e.selWeek = S.selWeek; e.selDay = S.selDay; } }
+function libActivate(e) {
+  libSyncActive(); S.activeId = e.id; S.program = e.program;
+  S.selWeek = Math.min(e.selWeek || 0, e.program.weeks.length - 1); S.selDay = e.selDay || 0;
+  progWeek = null; openDay = null;
+}
+// add (or find the existing copy of) a program; never wipes the library. Returns { entry, added }
+function libAdd(p, source) {
+  libSyncActive();
+  const h = progHash(p);
+  let e = source === 'built-in' ? S.library.find(x => x.source === 'built-in') : S.library.find(x => x.name === p.name && progHash(x.program) === h);
+  if (e) return { entry: e, added: false };
+  e = libEntry(p, source); S.library.push(e); return { entry: e, added: true };
+}
 
 /* ---------- Helpers ---------- */
 const exCount = d => d.blocks.reduce((n, b) => n + b.exercises.length, 0);
@@ -666,7 +708,7 @@ function detectPRs(prevHistory, entry) {
 const dShort = ts => new Date(ts).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 const userName = () => String((S.settings && S.settings.name) || '').trim();
 let view = S.session ? 'active' : 'home', modal = null, openDay = null, openHist = null, progWeek = null;
-let importText = '', importFile = '', importNote = null, importBlocked = null, parsed = null, importName = '';
+let importText = '', importFile = '', importNote = null, importBlocked = null, parsed = null;
 let fbDraft = { type: 'Idea', text: '', contact: '', id: null, file: null, status: '' }, fbBack = null;
 let lastSummaryEl = null;
 let wakeLock = null, homeExpanded = false;
@@ -971,12 +1013,25 @@ async function shareGo() {
   } catch (e) { if (e && e.name === 'AbortError') return; }
   downloadBlob(blob, name); const ok = await copyText(text); toast(ok ? 'Image saved · summary copied' : 'Image saved');
 }
+function libraryHTML() {
+  const one = S.library.length < 2;
+  const card = e => {
+    const act = e.id === S.activeId, ds = allDays(e.program), wk = e.program.weeks.length;
+    return `<div class="card libc ${act ? 'on' : ''}" data-lib="${esc(e.id)}"><div class="row" style="gap:10px;align-items:center"><div style="flex:1;min-width:0"><b class="libn">${esc(e.name)}</b><div class="sub" style="font-size:12.5px">${wk} week${wk > 1 ? 's' : ''} × ${wk ? e.program.weeks[0].days.length : 0} days · ${ds.length} sessions</div></div>
+      ${act ? '<span class="chip acc libact">Active</span>' : `<button class="btn sec" style="min-height:40px;padding:0 14px;font-size:13px" data-act="libSwitch" data-id="${esc(e.id)}">Switch</button>`}
+      <button class="icon" data-act="libDel" data-id="${esc(e.id)}" aria-label="Delete ${esc(e.name)}" ${act && one ? 'disabled style="opacity:.3"' : ''}>✕</button></div></div>`;
+  };
+  return `<div><div class="label">My workouts</div><div style="display:grid;gap:8px;grid-template-columns:minmax(0,1fr)">${S.library.map(card).join('')}</div>
+    <button class="btn sec block" style="margin-top:8px" data-act="nav" data-v="import">+ Add workout</button>
+    <div class="note" style="text-align:center;margin-top:8px;color:var(--mut)">Workouts shared by friends will show up here.</div></div>`;
+}
 function programView() {
   const p = S.program; if (progWeek == null) progWeek = S.selWeek;
   progWeek = Math.min(progWeek, p.weeks.length - 1);
   const w = p.weeks[progWeek], multi = p.weeks.length > 1;
   return `<div class="screen">
-    <div class="hdr"><div class="brand">FOR<b>GE</b></div><button class="btn sec" style="min-height:44px;font-size:14px" data-act="nav" data-v="import">⬆️ Import</button></div>
+    <div class="hdr"><div class="brand">FOR<b>GE</b></div></div>
+    ${libraryHTML()}
     <div><div class="greet">${esc(p.name)}</div><div class="sub">${p.weeks.length} week${multi ? 's' : ''} · ${allDays(p).length} days · ${allDays(p).reduce((n, d) => n + exCount(d), 0)} exercises. Tap a day to see its supersets.</div></div>
     ${p.guide && p.guide.length ? `<details class="card guide"><summary style="font-weight:700">📖 How this program works</summary>${p.guide.map(g => `<p><b>${esc(g.t)}.</b> ${esc(g.x)}</p>`).join('')}</details>` : ''}
     ${multi ? weekBar(progWeek, 'pwk') : ''}
@@ -992,14 +1047,14 @@ function programView() {
 }
 function previewHTML(pr) {
   if (!pr) return '';
-  const { program, warnings } = pr, ds = allDays(program), multi = program.weeks.length > 1;
+  const { program, warnings } = pr, ds = allDays(program), multi = (program.weeks || []).length > 1;
   let h = '';
   if (warnings.length) h += `<div class="notice">${warnings.slice(0, 8).map(w => '• ' + esc(w)).join('<br>')}${warnings.length > 8 ? `<br>…and ${warnings.length - 8} more` : ''}</div>`;
   if (!ds.length) return h + `<div class="notice err">Couldn't find any workout days. Try the format hints above, or load the built-in program.</div>`;
-  h += `<div class="notice ok">Parsed ${multi ? `<b>${program.weeks.length} weeks</b> · ` : ''}<b>${ds.length} day${ds.length > 1 ? 's' : ''}</b> · ${ds.reduce((n, d) => n + exCount(d), 0)} exercises · ${ds.reduce((n, d) => n + setCount(d), 0)} sets. Review, then save.</div>`;
+  h += `<div class="notice ok">Created ${multi ? `<b>${program.weeks.length} weeks</b> · ` : ''}<b>${ds.length} day${ds.length > 1 ? 's' : ''}</b> · ${ds.reduce((n, d) => n + exCount(d), 0)} exercises · ${ds.reduce((n, d) => n + setCount(d), 0)} sets. Review, then save.</div>`;
   const dayCard = d => `<div class="card"><div class="row" style="justify-content:space-between"><b>${esc(d.name)} — ${esc(d.focus)}</b><span class="chip">${setCount(d)} sets</span></div>${blocksPreview(d)}</div>`;
   h += multi ? program.weeks.slice(0, 12).map(w => `<details class="card"><summary style="font-weight:700">${esc(w.name)} · ${w.days.length} days</summary><div style="display:grid;gap:10px;margin-top:10px">${w.days.map(dayCard).join('')}</div></details>`).join('') : ds.map(dayCard).join('');
-  h += `<input class="txt" id="progName" placeholder="Program name" value="${esc(importName || program.name)}"><button class="btn pri block" data-act="useParsed">Use this program</button>`;
+  h += `<input class="txt" id="progName" placeholder="Program name" value="${esc(program.name)}"><button class="btn pri block" data-act="useParsed">Use this program</button>`;
   return h;
 }
 function importView() {
@@ -1022,8 +1077,7 @@ function importView() {
       • Name and reps can also sit on separate lines, with "Superset" on its own line between exercises.<br>
       • CSV columns: <b>day, focus, group, exercise, sets, reps</b> (same group = superset; reps like 10;8;6).<br>
       • JSON: <b>{"weeks":[{"name":"Week 1","days":[{"name","focus","blocks":[{"exercises":[{"name","sets":["10","10+10","20s","Failure"]}]}]}]}]}</b> — circuits: add <b>"kind":"cardio"</b> and <b>"rest":60</b> to a block. Flat <b>{"days":[…]}</b> also works.</div></details>
-    <div class="row"><button class="btn pri" style="flex:1" data-act="parse">Parse workout</button><button class="btn sec" data-act="clearImport">Clear</button></div>
-    <button class="btn sec block" data-act="exportJSON">⬇️ Export current program as JSON</button>
+    <button class="btn pri block" data-act="parse">Create workout</button>
     ${previewHTML(parsed)}
   </div>${navHTML()}`;
 }
@@ -1274,7 +1328,7 @@ function handleFile(f) {
     render(); return;
   }
   const rd = new FileReader();
-  rd.onload = () => { importText = String(rd.result || ''); parsed = parseAny(importText); render(); toast('File loaded & parsed'); };
+  rd.onload = () => { importText = String(rd.result || ''); parsed = parseAny(importText); render(); toast('File loaded'); };
   rd.onerror = () => { importNote = 'Could not read that file.'; render(); };
   rd.readAsText(f);
 }
@@ -1359,18 +1413,13 @@ function act(a, t) {
     case 'restSheet': modal = 'rest'; render(); break;
     case 'setRestW': setRestLive(+d.n); break;
     case 'toggleBlocks': homeExpanded = !homeExpanded; render(); break;
-    case 'nav': modal = null; view = d.v; if (view === 'import' && !importText && !parsed) { } render(window.scrollTo(0, 0)); break;
+    case 'nav': modal = null; view = d.v; render(window.scrollTo(0, 0)); break;
     case 'pickDay': S.selDay = +d.i; save(); render(); break;
     case 'wk': { const n = S.selWeek + +d.d; if (n >= 0 && n < S.program.weeks.length) { S.selWeek = n; S.selDay = 0; save(); render(); } break; }
     case 'pwk': { const n = progWeek + +d.d; if (n >= 0 && n < S.program.weeks.length) { progWeek = n; openDay = null; render(); } break; }
     case 'tstart': startTimer(); break;
     case 'tstop': stopTimer(); break;
     case 'startAbs': startAbs(+d.i); break;
-    case 'exportJSON': {
-      const blob = new Blob([JSON.stringify(S.program, null, 1)], { type: 'application/json' }), a = document.createElement('a');
-      a.href = URL.createObjectURL(blob); a.download = (S.program.name || 'program').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.json';
-      document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); toast('Program JSON exported'); break;
-    }
     case 'start': startWorkout(); break;
     case 'resume': view = 'active'; wake(true); render(window.scrollTo(0, 0)); break;
     case 'homeKeep': modal = null; view = 'home'; render(window.scrollTo(0, 0)); break;
@@ -1413,18 +1462,31 @@ function act(a, t) {
     case 'doDay': S.selWeek = progWeek == null ? S.selWeek : progWeek; S.selDay = +d.i; save(); view = 'home'; render(window.scrollTo(0, 0)); toast(curWeek().name + ' · ' + dayOf().name + ' set as today'); break;
     case 'histToggle': openHist = openHist === d.id ? null : d.id; render(); break;
     case 'doneSummary': view = 'home'; render(window.scrollTo(0, 0)); break;
-    case 'parse': { const ta = $('#importTA'); if (ta) importText = ta.value; parsed = parseAny(importText); importNote = null; importBlocked = null; blockedFile = null; render(); setTimeout(() => { const c = $('.notice.ok, .notice.err'); }, 0); break; }
-    case 'clearImport': importText = ''; importFile = ''; importNote = null; importBlocked = null; blockedFile = null; parsed = null; importName = ''; render(); break;
+    case 'parse': { const ta = $('#importTA'); if (ta) importText = ta.value; parsed = parseAny(importText); importNote = null; importBlocked = null; blockedFile = null; render(); break; }
     case 'loadSample': {
-      const p = builtin(), d = p.defaults || {};
-      S.program = p; S.selWeek = 0; S.selDay = 0; S.session = null; progWeek = null; openDay = null;
-      if (d.rest != null) S.settings.rest = d.rest; if (d.restMode) S.settings.restMode = d.restMode;
-      save(); view = 'home'; render(window.scrollTo(0, 0)); toast(p.name + ' loaded'); break;
+      const p = builtin(), d = p.defaults || {}, r = libAdd(p, 'built-in');
+      if (S.session) { save(); view = 'program'; render(window.scrollTo(0, 0)); toast(r.added ? 'Saved to My workouts. Finish or end the current workout to switch.' : 'Finish or end the current workout first.'); break; }
+      if (r.added && d.rest != null) S.settings.rest = d.rest; if (r.added && d.restMode) S.settings.restMode = d.restMode;
+      libActivate(r.entry); save(); view = 'home'; render(window.scrollTo(0, 0)); toast(r.entry.name + (r.added ? ' loaded' : ' selected')); break;
     }
     case 'useParsed': {
       if (!parsed || !allDays(parsed.program).length) break;
       const nm = ($('#progName') || {}).value; const p = parsed.program; p.name = (nm || p.name || 'My program').trim(); p.source = 'import';
-      S.program = p; S.selWeek = 0; S.selDay = 0; S.session = null; progWeek = null; openDay = null; save(); view = 'home'; parsed = null; render(window.scrollTo(0, 0)); toast('Program saved'); break;
+      const r = libAdd(p, 'imported'); parsed = null;
+      if (S.session) { save(); view = 'program'; render(window.scrollTo(0, 0)); toast('Saved to My workouts. Finish or end the current workout to switch.'); break; }
+      libActivate(r.entry); save(); view = 'home'; render(window.scrollTo(0, 0)); toast(r.added ? 'Program saved' : 'Already in My workouts - selected'); break;
+    }
+    case 'libSwitch': {
+      const e = S.library.find(x => x.id === d.id); if (!e || e.id === S.activeId) break;
+      if (S.session) { toast('Finish or end the current workout before switching.'); break; }
+      libActivate(e); save(); render(); toast('Switched to ' + e.name); break;
+    }
+    case 'libDel': {
+      const e = S.library.find(x => x.id === d.id); if (!e || S.library.length < 2) break;
+      if (e.id === S.activeId && S.session) { toast('Finish or end the current workout before deleting it.'); break; }
+      if (!confirm('Delete "' + e.name + '" from My workouts? Your history stays.')) break;
+      if (e.id === S.activeId) { libActivate(S.library.find(x => x.id !== e.id)); }
+      S.library = S.library.filter(x => x.id !== e.id); save(); render(); toast('Deleted'); break;
     }
   }
 }
