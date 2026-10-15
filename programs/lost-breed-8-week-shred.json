@@ -1,0 +1,6957 @@
+{
+ "name": "The Lost Breed - 8 Week Shred",
+ "ver": 2,
+ "source": "sample",
+ "author": "The Lost Breed (thelostbreed.com)",
+ "description": "Transcribed from \"New Shred Program.pdf\": 8 weeks / 4 phases, 6 training days per week with supersets, progression & drop sets and post-workout cardio circuits.",
+ "defaults": {
+  "rest": 45,
+  "restMode": "round"
+ },
+ "guide": [
+  {
+   "t": "The plan",
+   "x": "8 weeks, 4 phases of 2 weeks. Mon Shoulders, Tue Arms, Wed Legs, Thu Chest, Fri Back, Sat Abs & Cardio, Sun rest. Every strength day ends with a post-workout cardio circuit. Intensity rises each phase."
+  },
+  {
+   "t": "Supersets",
+   "x": "Exercises in one group alternate A → B (→ C) → A → B… Rest when the whole round is finished; push yourself not to rest during the superset."
+  },
+  {
+   "t": "Rest",
+   "x": "Keep rest just long enough to recover for the target reps: 30-45 seconds. Cardio circuits: 1 minute after each A-B-C set."
+  },
+  {
+   "t": "Progression sets",
+   "x": "Reps go down as weight goes up: aim to add 5-10 lb every set. If you miss the reps, rest the weight a few seconds and finish the set. Some sets keep the same reps but still ask for more weight each set."
+  },
+  {
+   "t": "Drop-sets",
+   "x": "After heavy sets, drop the weight about 10-15 lb and go to failure. \"Double drop-set\" = repeat that twice back to back. A \"→\" in the reps (e.g. 20→8) means one set made of two weights."
+  },
+  {
+   "t": "Reps notation",
+   "x": "\"10+10\" = two parts back to back in one set (e.g. wide grip then close grip). \"20 s\" = timed set. FAIL = to failure. Pick weights that let you fail at the suggested rep range, never sacrifice form."
+  },
+  {
+   "t": "HIIT days",
+   "x": "The PDF names Tuesday and Thursday as HIIT days but only lists the post-workout cardio circuits - no separate HIIT workout - so none is scheduled here."
+  },
+  {
+   "t": "Abs",
+   "x": "Do abs at least 3 times a week after training. Day 6 is a full abs circuit; the Program tab also has the PDF's 10 ab circuits to tack on."
+  },
+  {
+   "t": "Session length",
+   "x": "Each workout should take at least 1 - 1.5 hours."
+  }
+ ],
+ "abs": [
+  {
+   "name": "Ab circuit 1",
+   "blocks": [
+    {
+     "exercises": [
+      {
+       "name": "Sit Ups",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": "20 reps each, 3 total rounds."
+      },
+      {
+       "name": "Leg Raises",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Reverse Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      }
+     ],
+     "kind": "abs"
+    }
+   ]
+  },
+  {
+   "name": "Ab circuit 2",
+   "blocks": [
+    {
+     "exercises": [
+      {
+       "name": "Bicycle Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": "20 reps each, 3 total rounds."
+      },
+      {
+       "name": "Cross Crunch",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Elbow to Knee Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Side Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      }
+     ],
+     "kind": "abs"
+    }
+   ]
+  },
+  {
+   "name": "Ab circuit 3",
+   "blocks": [
+    {
+     "exercises": [
+      {
+       "name": "Leg Tucks",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": "20 reps each, 3 total rounds."
+      },
+      {
+       "name": "Side Twists",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Alternating Ankle Touches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Flutter Kicks",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      }
+     ],
+     "kind": "abs"
+    }
+   ]
+  },
+  {
+   "name": "Ab circuit 4",
+   "blocks": [
+    {
+     "exercises": [
+      {
+       "name": "Reverse Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": "20 reps each, 3 total rounds."
+      },
+      {
+       "name": "Leg Raises",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Jackknife Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Straight Leg Hip Raises",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      }
+     ],
+     "kind": "abs"
+    }
+   ]
+  },
+  {
+   "name": "Ab circuit 5",
+   "blocks": [
+    {
+     "exercises": [
+      {
+       "name": "Leg Raises",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": "20 reps each, 3 total rounds."
+      },
+      {
+       "name": "Toe Touches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Side Twists",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Raised Knee Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      }
+     ],
+     "kind": "abs"
+    }
+   ]
+  },
+  {
+   "name": "Ab circuit 6",
+   "blocks": [
+    {
+     "exercises": [
+      {
+       "name": "Cross Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": "20 reps each, 3 total rounds."
+      },
+      {
+       "name": "Leg Raises",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Straight Leg Hip Raises",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      }
+     ],
+     "kind": "abs"
+    }
+   ]
+  },
+  {
+   "name": "Ab circuit 7",
+   "blocks": [
+    {
+     "exercises": [
+      {
+       "name": "Bicycle Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": "20 reps each, 3 total rounds."
+      },
+      {
+       "name": "Alternating Ankle Touches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Bottoms Up",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Leg Tucks",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      }
+     ],
+     "kind": "abs"
+    }
+   ]
+  },
+  {
+   "name": "Ab circuit 8",
+   "blocks": [
+    {
+     "exercises": [
+      {
+       "name": "Spider Crawl",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": "20 reps each, 3 total rounds."
+      },
+      {
+       "name": "Alternating Air Grabs",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Reverse Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Side Twists",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      }
+     ],
+     "kind": "abs"
+    }
+   ]
+  },
+  {
+   "name": "Ab circuit 9",
+   "blocks": [
+    {
+     "exercises": [
+      {
+       "name": "Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": "20 reps each, 3 total rounds."
+      },
+      {
+       "name": "Raised Knee Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Frog Sit Ups",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Full Sit Ups",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      }
+     ],
+     "kind": "abs"
+    }
+   ]
+  },
+  {
+   "name": "Ab circuit 10",
+   "blocks": [
+    {
+     "exercises": [
+      {
+       "name": "Alternating Plank",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": "20 reps each, 3 total rounds."
+      },
+      {
+       "name": "Scissor Kicks",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Reverse Crunches",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      },
+      {
+       "name": "Mountain Climbers",
+       "sets": [
+        "20",
+        "20",
+        "20"
+       ],
+       "note": ""
+      }
+     ],
+     "kind": "abs"
+    }
+   ]
+  }
+ ],
+ "weeks": [
+  {
+   "n": 1,
+   "phase": 1,
+   "name": "Week 1",
+   "days": [
+    {
+     "name": "Day 1",
+     "focus": "Shoulders",
+     "dow": "Mon",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Seated Dumbbell Press",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Dumbbell Lateral Raises",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Front Plate Raises",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Reverse Pec Deck",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Shoulder Press Machine",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Machine Lateral Raise",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Shrugs",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 2",
+     "focus": "Arms",
+     "dow": "Tue",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Barbell Curls",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Skull Crushers",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Curls",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Tricep Pushdowns",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Preacher Curls",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Over-head Tricep Extension",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Hammer Curls",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Rope Pushdowns",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Bench Step-Ups",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 3",
+     "focus": "Legs",
+     "dow": "Wed",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Leg Extensions",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Lying Hamstring Curls",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Leg Press",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Dumbbell Lunges",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": "20 steps total for lunges"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Hack Squat",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Single Leg Hamstring Curls",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": "Each leg"
+        },
+        {
+         "name": "Seated Hamstring Curls",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squats",
+         "sets": [
+          "10",
+          "10",
+          "10",
+          "10",
+          "10"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 4",
+     "focus": "Chest",
+     "dow": "Thu",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Bench Press",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Pec Deck",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Incline Dumbbell Press",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Decline Chest Press Machine",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Cable Crossovers",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Incline Bench Press",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Bench Step-Ups",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Chest Press Machine",
+         "sets": [
+          "30",
+          "30",
+          "30",
+          "30"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 5",
+     "focus": "Back",
+     "dow": "Fri",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Wide Grip Pull-Ups",
+         "sets": [
+          "Failure",
+          "Failure",
+          "Failure",
+          "Failure"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Bent Over Rows",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Reverse Grip Lat Pull Downs",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Seated Row Machine",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Wide Grip Lat Pull Downs",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Close Grip Cable Row",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Deadlifts",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Bodyweight Inverted Rows",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 6",
+     "focus": "Abs & Cardio",
+     "dow": "Sat",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Reverse Crunches",
+         "sets": [
+          "15",
+          "15",
+          "15"
+         ],
+         "note": "Ab circuit: do each in order, then repeat. 3 total rounds."
+        },
+        {
+         "name": "Lying Leg Raises",
+         "sets": [
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Crunches",
+         "sets": [
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "abs"
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "phase": 1,
+   "name": "Week 2",
+   "days": [
+    {
+     "name": "Day 1",
+     "focus": "Shoulders",
+     "dow": "Mon",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Barbell Military Press",
+         "sets": [
+          "10",
+          "10",
+          "10",
+          "10"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Dumbbell Front Raise",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Lateral Raise",
+         "sets": [
+          "30",
+          "30",
+          "30",
+          "30"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Barbell Shrugs",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Rear Dumbbell Flies",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Seated Alternating Dumbbell Press",
+         "sets": [
+          "20+10",
+          "20+10",
+          "20+10"
+         ],
+         "note": "20 reps alternating arms, then 10 reps with both arms = 1 set. 3 total sets."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 2",
+     "focus": "Arms",
+     "dow": "Tue",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Tricep Rope Extension",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Overhead Tricep Extension",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Skull Crushers",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Bench Step-Ups",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Straight Bar Push Downs",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Dumbbell Kickbacks",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Reverse EZ Bar Curls",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "EZ Bar Curls",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Incline Dumbbell Curls",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Hammer Curls",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Machine Preacher Curls",
+         "sets": [
+          "8",
+          "8",
+          "8",
+          "8"
+         ],
+         "note": "Negatives: count 4 seconds on the way down, explode up from full extension."
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 3",
+     "focus": "Legs",
+     "dow": "Wed",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Lying Hamstring Curls",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Seated Hamstring Curls",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Leg Extensions",
+         "sets": [
+          "40",
+          "35",
+          "30",
+          "25",
+          "20"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Stiff Leg Deadlifts",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Dumbbell Lunges",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Leg Press",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 4",
+     "focus": "Chest",
+     "dow": "Thu",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Incline Bench Press",
+         "sets": [
+          "10",
+          "10",
+          "10",
+          "10",
+          "10"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Incline Dumbbell Press",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Close Grip Dumbbell Press",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Bench Step-Ups",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Flat Dumbbell Press",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Incline Dumbbell Flies",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Push-Ups",
+         "sets": [
+          "Failure",
+          "Failure",
+          "Failure",
+          "Failure"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Decline Bench Press",
+         "sets": [
+          "10",
+          "10",
+          "10",
+          "10",
+          "10"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 5",
+     "focus": "Back",
+     "dow": "Fri",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Pull Ups",
+         "sets": [
+          "Failure",
+          "Failure",
+          "Failure",
+          "Failure",
+          "Failure"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Bent Over Rows",
+         "sets": [
+          "10+10+10",
+          "10+10+10",
+          "10+10+10",
+          "10+10+10"
+         ],
+         "note": "Wide grip 10, normal grip 10, reverse grip 10 = 1 set. 4 total sets."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "T-Bar Row",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Row",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Back Extensions",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Close Grip Lat Pull Downs",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Wide Grip Cable Row",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 6",
+     "focus": "Abs & Cardio",
+     "dow": "Sat",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Lying Leg Raises",
+         "sets": [
+          "15",
+          "15",
+          "15"
+         ],
+         "note": "Ab circuit: do each in order, then repeat. 3 total rounds."
+        },
+        {
+         "name": "Flutter Kicks",
+         "sets": [
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Leg Tucks",
+         "sets": [
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "abs"
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "20s",
+          "20s",
+          "20s",
+          "20s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "phase": 2,
+   "name": "Week 3",
+   "days": [
+    {
+     "name": "Day 1",
+     "focus": "Shoulders",
+     "dow": "Mon",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Standing Barbell Military Press",
+         "sets": [
+          "10+10",
+          "10+10",
+          "10+10",
+          "10+10"
+         ],
+         "note": "10 normal reps, then 10 reps behind the neck = 1 set. 4 total sets."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Lateral Raise + Front Raise Ladder",
+         "sets": [
+          "Ladder",
+          "Ladder",
+          "Ladder"
+         ],
+         "note": "1 rep lateral raise, 1 rep front raise, 2 lateral, 2 front... continue up to 5 reps each = 1 set. 3 total sets."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Shoulder Press Machine",
+         "sets": [
+          "10",
+          "10",
+          "10",
+          "10"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Rear Delt Flies",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Barbell Shrugs",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Burpees",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Medicine Ball Slams",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 2",
+     "focus": "Arms",
+     "dow": "Tue",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Tricep Rope Extension",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Rope Curls",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Medicine Ball Slams",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": "As hard as you can"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Straight Bar Tricep Extensions",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Lying Cable Curls",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Lunge Jumps",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Skull Crushers",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Alternating Dumbbell Curls",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": "Each arm"
+        },
+        {
+         "name": "High Knees",
+         "sets": [
+          "25s",
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Overhead Dumbbell Extension",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "EZ Bar Curls",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Bench Step-Ups",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Burpees",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Medicine Ball Slams",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 3",
+     "focus": "Legs",
+     "dow": "Wed",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Leg Extensions",
+         "sets": [
+          "25",
+          "25",
+          "25",
+          "25"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Seated Hamstring Curls",
+         "sets": [
+          "25",
+          "25",
+          "25",
+          "25"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squats",
+         "sets": [
+          "10",
+          "10",
+          "12",
+          "8",
+          "6",
+          "8"
+         ],
+         "note": "Pause reps. Increase weight each set until your last set of 8."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Leg Press",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Lying Hamstring Curls",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Glute Machine",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": "Each leg"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Seated Calf Raise",
+         "sets": [
+          "40",
+          "40",
+          "40",
+          "40"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Burpees",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Medicine Ball Slams",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 4",
+     "focus": "Chest",
+     "dow": "Thu",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Flat Dumbbell Press",
+         "sets": [
+          "20",
+          "15",
+          "12",
+          "10"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Medicine Ball Slams",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Incline Dumbbell Press",
+         "sets": [
+          "20",
+          "15",
+          "12",
+          "10"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Incline Dumbbell Flies",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Lunge Jumps",
+         "sets": [
+          "10",
+          "10",
+          "10",
+          "10"
+         ],
+         "note": "Each leg"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Decline Chest Press Machine",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Push-Ups",
+         "sets": [
+          "Failure",
+          "Failure",
+          "Failure",
+          "Failure"
+         ],
+         "note": ""
+        },
+        {
+         "name": "High Knees",
+         "sets": [
+          "25s",
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Cable Flies",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Bench Step-Ups",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Burpees",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Medicine Ball Slams",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 5",
+     "focus": "Back",
+     "dow": "Fri",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Wide Grip Cable Row w/ Lat Pull Down Bar",
+         "sets": [
+          "10+10+10",
+          "10+10+10",
+          "10+10+10",
+          "10+10+10"
+         ],
+         "note": "10 reps wide grip, 10 normal, 10 close = 1 set. 4 total sets."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Close Grip Lat Pull Down",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Wide Grip Lat Pull Down",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Seated Row Machine",
+         "sets": [
+          "10+10",
+          "10+10",
+          "10+10",
+          "10+10"
+         ],
+         "note": "10 reps close grip, 10 reps wide grip = 1 set. 4 total sets."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Seal Rows",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Wide Grip Pull-Ups",
+         "sets": [
+          "Failure",
+          "Failure",
+          "Failure",
+          "Failure"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Burpees",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Medicine Ball Slams",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 6",
+     "focus": "Abs & Cardio",
+     "dow": "Sat",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Bottoms Up",
+         "sets": [
+          "20",
+          "20",
+          "20"
+         ],
+         "note": "Ab circuit: do each in order, then repeat. 3 total rounds."
+        },
+        {
+         "name": "Lying Leg Raises",
+         "sets": [
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "6 Inch Holds",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "abs"
+      },
+      {
+       "exercises": [
+        {
+         "name": "Burpees",
+         "sets": [
+          "25s",
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Medicine Ball Slams",
+         "sets": [
+          "25s",
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "25s",
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "phase": 2,
+   "name": "Week 4",
+   "days": [
+    {
+     "name": "Day 1",
+     "focus": "Shoulders",
+     "dow": "Mon",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Arnold Press",
+         "sets": [
+          "15",
+          "8",
+          "15",
+          "8",
+          "15"
+         ],
+         "note": "Increase the weight when you get to 8 reps."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Straight Bar Cable Front Raise",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Cable Lateral Raises",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": "Each arm"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Barbell Upright Row",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "15"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Bent Over Rear Delt Cable Flies",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Shrugs",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Alternating Foot Taps",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 2",
+     "focus": "Arms",
+     "dow": "Tue",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Barbell Curl",
+         "sets": [
+          "15",
+          "8",
+          "15",
+          "8",
+          "15"
+         ],
+         "note": "Increase the weight when you get to 8 reps."
+        },
+        {
+         "name": "V-Bar Tricep Pushdowns",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "25s",
+          "25s",
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Hammer Curls",
+         "sets": [
+          "40",
+          "40",
+          "40"
+         ],
+         "note": "5 reps on one arm, switch arms for 5 more; repeat 4 times = 40 reps = 1 set. 3 total sets."
+        },
+        {
+         "name": "Alternating Foot Taps",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Single Arm Dumbbell Tricep Extension",
+         "sets": [
+          "20+20",
+          "20+20",
+          "20+20"
+         ],
+         "note": "20 normal reps, then 20 reps going outwards = 1 set. 3 total sets."
+        },
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "EZ Bar Curl",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Reverse Grip EZ Bar Curl",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Lunge Jumps",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Straight Bar Cable Tricep Extension",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Reverse Grip Straight Bar Cable Tricep Extension",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Alternating Foot Taps",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 3",
+     "focus": "Legs",
+     "dow": "Wed",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Lying Hamstring Curls",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Seated Hamstring Curls",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Leg Extensions",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Single Leg Press",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Box Squats",
+         "sets": [
+          "10",
+          "10",
+          "8",
+          "8",
+          "15"
+         ],
+         "note": "Increase weight each set until your last set. Use a bench/box at 90 degrees, pause 2 seconds at the bottom of each rep, then explode up."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Stiff Leg Deadlifts",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Standing Calf Raise Machine",
+         "sets": [
+          "25",
+          "25",
+          "25",
+          "25",
+          "25"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Alternating Foot Taps",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 4",
+     "focus": "Chest",
+     "dow": "Thu",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Incline Dumbbell Press",
+         "sets": [
+          "8",
+          "10",
+          "12",
+          "15",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "25s",
+          "25s",
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Incline Chest Press Machine",
+         "sets": [
+          "20",
+          "10",
+          "20",
+          "10"
+         ],
+         "note": "Increase the weight when you get to 10 reps."
+        },
+        {
+         "name": "Alternating Foot Taps",
+         "sets": [
+          "25s",
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Flat Bench Press",
+         "sets": [
+          "8",
+          "10",
+          "12",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "25s",
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Pec Deck",
+         "sets": [
+          "25",
+          "25",
+          "25",
+          "25"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Cable Flies",
+         "sets": [
+          "25",
+          "25",
+          "25",
+          "25"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Lunge Jumps",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Chest Press Machine",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Alternating Foot Taps",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 5",
+     "focus": "Back",
+     "dow": "Fri",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "V-Bar Pull Downs",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8",
+          "8"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Alternating Pull Ups w/ V-Bar",
+         "sets": [
+          "Failure",
+          "Failure",
+          "Failure",
+          "Failure"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Wide Grip Seated Cable Row",
+         "sets": [
+          "15",
+          "8",
+          "15",
+          "8",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Close Grip Seated Cable Row",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Single Arm Dumbbell Row",
+         "sets": [
+          "10",
+          "10",
+          "10"
+         ],
+         "note": "10 reps on one arm, switch immediately to the other arm for 10, no breaks, switch back for 10... Repeat for 3 total sets."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Kneeling Straight Arm Pull Down",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Alternating Foot Taps",
+         "sets": [
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 6",
+     "focus": "Abs & Cardio",
+     "dow": "Sat",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Reverse Crunches",
+         "sets": [
+          "20",
+          "20",
+          "20"
+         ],
+         "note": "Ab circuit: do each in order, then repeat. 3 total rounds."
+        },
+        {
+         "name": "Lying Leg Raises",
+         "sets": [
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Crunches",
+         "sets": [
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "abs"
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "25s",
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "25s",
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Alternating Foot Taps",
+         "sets": [
+          "25s",
+          "25s",
+          "25s",
+          "25s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "phase": 3,
+   "name": "Week 5",
+   "days": [
+    {
+     "name": "Day 1",
+     "focus": "Shoulders",
+     "dow": "Mon",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Clean and Jerks",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Straight Raises w/ Chest on Incline Bench",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Dumbbell Lateral Raises (Full Extension)",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": "Start with dumbbells at your sides, lateral raise as normal but keep going all the way over your head."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Alternating Dumbbell Military Press",
+         "sets": [
+          "10",
+          "10",
+          "10",
+          "10"
+         ],
+         "note": "1 rep on one arm, switch, 1 rep on the other... until 10 reps on each arm (20 total)."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Rear Delt Cable Flies",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Barbell Shrugs",
+         "sets": [
+          "10→10→10",
+          "10→10→10",
+          "10→10→10"
+         ],
+         "note": "Drop-set: start heavy for 10, drop weight for 10, drop again for 10 = 1 set. 3 total sets."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Treadmill Sprints",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Sprint hard on the treadmill."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 2",
+     "focus": "Arms",
+     "dow": "Tue",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Incline Dumbbell Curls",
+         "sets": [
+          "20→8",
+          "20→8",
+          "20→8",
+          "20→8"
+         ],
+         "note": "Drop-set: 20 reps moderate weight, drop weight, 8 more reps = 1 set. 4 total sets."
+        },
+        {
+         "name": "Incline Hammer Curls",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Spider Curls",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "15"
+         ],
+         "note": "Increase weight each set until your last set."
+        },
+        {
+         "name": "Machine Bicep Curls",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Overhead Tricep Rope Extension",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Tricep Rope Extension",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "30s",
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "EZ Bar Skull Crushers",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Overhead Dumbbell Press",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Bench Step-Ups",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Treadmill Sprints",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Sprint hard on the treadmill."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 3",
+     "focus": "Legs",
+     "dow": "Wed",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Leg Extensions",
+         "sets": [
+          "20→10",
+          "20→10",
+          "20→10",
+          "20→10"
+         ],
+         "note": "Drop-set: 20 reps moderate weight, drop weight, 10 more reps = 1 set. 4 total sets."
+        },
+        {
+         "name": "Seated Hamstring Curls",
+         "sets": [
+          "20→10",
+          "20→10",
+          "20→10",
+          "20→10"
+         ],
+         "note": "Same drop-set format as above (the PDF lists one reps cell for both)."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squats",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Lunges",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": "Each leg"
+        },
+        {
+         "name": "Lying Hamstring Curls",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Seated Calf Raise Machine",
+         "sets": [
+          "10+10+10",
+          "10+10+10",
+          "10+10+10"
+         ],
+         "note": "10 reps feet pointed out, 10 pointed in, 10 normal = 1 set. 3 total sets."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Treadmill Sprints",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Sprint hard on the treadmill."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 4",
+     "focus": "Chest",
+     "dow": "Thu",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Incline Bench Press",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8",
+          "6"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Flat Bench Press",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8",
+          "6"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Incline Chest Press",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Decline Chest Press",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "30s",
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Incline Bench Cable Flies",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Incline Close Grip Dumbbell Press",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Bench Step-Ups",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Treadmill Sprints",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Sprint hard on the treadmill."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 5",
+     "focus": "Back",
+     "dow": "Fri",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Bent Over Barbell Row",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8",
+          "8"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Wide Grip Lat Pull Down",
+         "sets": [
+          "8→15",
+          "8→15",
+          "8→15",
+          "8→15"
+         ],
+         "note": "Drop-set: heavy weight for 8 reps, drop weight, 15 reps = 1 set. 4 total sets."
+        },
+        {
+         "name": "Seated Low Row Machine",
+         "sets": [
+          "8→15",
+          "8→15",
+          "8→15",
+          "8→15"
+         ],
+         "note": "Same drop-set format as above (the PDF lists one reps cell for both)."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Seated Cable Rows w/ Rope",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Incline Barbell Row w/ Chest on Bench",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Seated Close Grip Cable Row",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Treadmill Sprints",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Sprint hard on the treadmill."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 6",
+     "focus": "Abs & Cardio",
+     "dow": "Sat",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Plate Twists",
+         "sets": [
+          "25",
+          "25",
+          "25"
+         ],
+         "note": "Ab circuit: do each in order, then repeat. 3 total rounds."
+        },
+        {
+         "name": "Straight Leg Hip Raises",
+         "sets": [
+          "25",
+          "25",
+          "25"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Sit-Ups",
+         "sets": [
+          "25",
+          "25",
+          "25"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "abs"
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "30s",
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Treadmill Sprints",
+         "sets": [
+          "30s",
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Sprint hard on the treadmill."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "30s",
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "phase": 3,
+   "name": "Week 6",
+   "days": [
+    {
+     "name": "Day 1",
+     "focus": "Shoulders",
+     "dow": "Mon",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Barbell Shrugs",
+         "sets": [
+          "30",
+          "30",
+          "30",
+          "30"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Rear Delt Flies on Incline Bench",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Seated Lateral Raise",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Front Plate Raise",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Car Drivers",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Seated Dumbbell Military Press",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Behind the Neck Shoulder Press",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8"
+         ],
+         "note": "Same format as above: increase weight every set."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 2",
+     "focus": "Arms",
+     "dow": "Tue",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Skull Crushers",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "30s",
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Incline Straight Bar Cable Tricep Extensions",
+         "sets": [
+          "15-20",
+          "15-20",
+          "15-20",
+          "15-20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Tricep Rope Extensions",
+         "sets": [
+          "15-20",
+          "15-20",
+          "15-20",
+          "15-20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Cable Straight Bar Tricep Pushdowns",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "30s",
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "EZ Bar Preacher Curl",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": "Each arm"
+        },
+        {
+         "name": "Dumbbell Bicep Curl",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Bench Step-Ups",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "EZ Bar Curls",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Close Grip EZ Bar Curls",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "30s",
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "PDF says \"4 x 30\" (no unit) - treated as 30 seconds."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 3",
+     "focus": "Legs",
+     "dow": "Wed",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Leg Extensions",
+         "sets": [
+          "25",
+          "25",
+          "25",
+          "25"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Stiff Leg Deadlifts",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Leg Press",
+         "sets": [
+          "10+10+10",
+          "10+10+10",
+          "10+10+10"
+         ],
+         "note": "10 reps close stance, 10 normal, 10 wide = 1 set. 3 total sets."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squats",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8",
+          "6"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Lying Hamstring Curls",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Seated Hamstring Curls",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Calf Raise on Leg Press",
+         "sets": [
+          "25",
+          "25",
+          "25",
+          "25"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 4",
+     "focus": "Chest",
+     "dow": "Thu",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Flat Bench Press",
+         "sets": [
+          "12",
+          "8",
+          "6",
+          "4",
+          "2",
+          "Burnout"
+         ],
+         "note": "Increase weight each set until your last set. Burnout set: half reps to failure; on your last set do not let the bar touch your chest - lower slow and controlled, then explode up."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "30s",
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Incline Bench Press",
+         "sets": [
+          "12",
+          "10",
+          "8",
+          "6",
+          "Burnout"
+         ],
+         "note": "Increase weight each set until your last set. Burnout set to failure: bring the bar down slow and controlled, then explode up."
+        },
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Incline Cable Flies",
+         "sets": [
+          "7+7+7",
+          "7+7+7",
+          "7+7+7",
+          "7+7+7"
+         ],
+         "note": "7 full reps, 7 half reps, 7 contracted reps (focus on the squeeze) = 1 set. 4 total sets."
+        },
+        {
+         "name": "Incline Chest Press Machine",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "30s",
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Smith Machine Bench Press",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "30s",
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 5",
+     "focus": "Back",
+     "dow": "Fri",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Seated Row Machine",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "10",
+          "Drop"
+         ],
+         "note": "Increase weight each set until your last set. Then a final drop-set until failure."
+        },
+        {
+         "name": "Wide Grip Pull-Ups",
+         "sets": [
+          "Failure",
+          "Failure",
+          "Failure",
+          "Failure",
+          "Failure"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Seal Rows",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "High Row Machine",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Wide Grip Seated Cable Row",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Kneeling Cable Lat Pull Down",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 6",
+     "focus": "Abs & Cardio",
+     "dow": "Sat",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Reverse Crunches",
+         "sets": [
+          "25",
+          "25",
+          "25"
+         ],
+         "note": "Ab circuit: do each in order, then repeat. 3 total rounds."
+        },
+        {
+         "name": "Leg Raises",
+         "sets": [
+          "25",
+          "25",
+          "25"
+         ],
+         "note": ""
+        },
+        {
+         "name": "6 Inch Holds",
+         "sets": [
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "abs"
+      },
+      {
+       "exercises": [
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "30s",
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "30s",
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "30s",
+          "30s",
+          "30s",
+          "30s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "phase": 4,
+   "name": "Week 7",
+   "days": [
+    {
+     "name": "Day 1",
+     "focus": "Shoulders",
+     "dow": "Mon",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Seated Dumbbell Military Press",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8",
+          "Drop"
+         ],
+         "note": "Increase weight each set until your last set. Then a final drop-set until failure."
+        },
+        {
+         "name": "Dumbbell Shrugs",
+         "sets": [
+          "15→15",
+          "15→15",
+          "15→15",
+          "15→15",
+          "15→15"
+         ],
+         "note": "Drop-set: 15 reps heavy, drop weight, 15 more reps = 1 set. 5 total sets."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Straight Bar Front Raises w/ Chest on Incline Bench",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Rear Dumbbell Flies w/ Chest on Incline Bench",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Smith Machine Military Press",
+         "sets": [
+          "10-12",
+          "10-12",
+          "10-12",
+          "10-12"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Seated Dumbbell Lateral Raises",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 2",
+     "focus": "Arms",
+     "dow": "Tue",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Barbell Curl",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "EZ Bar Skull Crushers",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Single Arm Preacher Curls",
+         "sets": [
+          "10→10",
+          "10→10",
+          "10→10",
+          "10→10"
+         ],
+         "note": "Drop-set: 10 reps, drop weight, 10 more reps = 1 set. 4 total sets."
+        },
+        {
+         "name": "Single Arm Tricep Extensions",
+         "sets": [
+          "10→10",
+          "10→10",
+          "10→10",
+          "10→10"
+         ],
+         "note": "Drop-set: 10 reps, drop weight, 10 more reps = 1 set. 4 total sets."
+        },
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "EZ Bar Cable Curls",
+         "sets": [
+          "40",
+          "40",
+          "40"
+         ],
+         "note": ""
+        },
+        {
+         "name": "V-Bar Tricep Pushdowns",
+         "sets": [
+          "40",
+          "40",
+          "40"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Curls",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Overhead Dumbbell Press",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 3",
+     "focus": "Legs",
+     "dow": "Wed",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Leg Extensions",
+         "sets": [
+          "30",
+          "30",
+          "30",
+          "30"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squats",
+         "sets": [
+          "10+10",
+          "10+10",
+          "10+10",
+          "10+10",
+          "10+10"
+         ],
+         "note": "10 reps normal stance, 10 reps close stance = 1 set. 5 total sets."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Stiff Leg Deadlifts",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Lying Hamstring Curls",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Smith Machine (Tap n Go) Squats",
+         "sets": [
+          "12",
+          "12",
+          "12",
+          "12"
+         ],
+         "note": "Place a bench or box at 90 degrees underneath you, tap it, and explode back up."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Seated Hamstring Curl",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Calf Raise",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 4",
+     "focus": "Chest",
+     "dow": "Thu",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Incline Dumbbell Press",
+         "sets": [
+          "12",
+          "10",
+          "8",
+          "6",
+          "15"
+         ],
+         "note": "Increase weight each set until your last set"
+        },
+        {
+         "name": "Flat Dumbbell Press",
+         "sets": [
+          "12",
+          "10",
+          "8",
+          "6",
+          "15"
+         ],
+         "note": "Same format as above: increase weight each set until your last set."
+        },
+        {
+         "name": "Run in Place",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Decline Bench Press",
+         "sets": [
+          "12",
+          "10",
+          "8",
+          "6",
+          "15"
+         ],
+         "note": "Increase weight each set until your last set"
+        },
+        {
+         "name": "Jumping Jacks",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Pec Deck",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Incline Chest Press Machine",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Cable Flies",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 5",
+     "focus": "Back",
+     "dow": "Fri",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Deadlifts",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8",
+          "20"
+         ],
+         "note": "Increase weight each set until your last set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Single Arm Dumbbell Row",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Wide Grip Pull-Ups",
+         "sets": [
+          "Failure",
+          "Failure",
+          "Failure",
+          "Failure"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "T-Bar Row",
+         "sets": [
+          "10→10→10",
+          "10→10→10",
+          "10→10→10"
+         ],
+         "note": "Drop-set: 10 heavy reps, drop weight for 10 moderate, drop again for 10 light = 1 set. 3 total sets."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "V-Bar Lat Pull Down",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Behind the Neck Lat Pull Down",
+         "sets": [
+          "12-15",
+          "12-15",
+          "12-15",
+          "12-15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 6",
+     "focus": "Abs & Cardio",
+     "dow": "Sat",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Flutter Kicks",
+         "sets": [
+          "30",
+          "30",
+          "30"
+         ],
+         "note": "Ab circuit: do each in order, then repeat. 3 total rounds."
+        },
+        {
+         "name": "Reverse Crunches",
+         "sets": [
+          "30",
+          "30",
+          "30"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Leg Tucks",
+         "sets": [
+          "30",
+          "30",
+          "30"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "abs"
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squat Jumps",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "phase": 4,
+   "name": "Week 8",
+   "days": [
+    {
+     "name": "Day 1",
+     "focus": "Shoulders",
+     "dow": "Mon",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Barbell Military Press",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Barbell Upright Row",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Lateral Raises",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Face Pulls",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Barbell Shrugs",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Shoulder Press Machine",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8",
+          "Drop"
+         ],
+         "note": "Increase weight each set until your last set. Then a final drop-set until failure."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Burpees",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Treadmill Sprints",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Sprint hard on the treadmill."
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 2",
+     "focus": "Arms",
+     "dow": "Tue",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Hammer Curls",
+         "sets": [
+          "10→10",
+          "10→10",
+          "10→10",
+          "10→10"
+         ],
+         "note": "Drop-set: 10 reps heavy, go lighter for 10 more = 1 set. 4 total sets."
+        },
+        {
+         "name": "Incline Bench Cable EZ Bar Skull Crushers",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Incline Dumbbell Curls",
+         "sets": [
+          "25",
+          "25",
+          "25",
+          "25"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Dumbbell Skull Crushers",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Straight Bar Cable Curls",
+         "sets": [
+          "20→10",
+          "20→10",
+          "20→10",
+          "20→10"
+         ],
+         "note": "Drop-set: 20 reps moderate weight, go lighter for 10 more = 1 set. 4 total sets."
+        },
+        {
+         "name": "Overhead Rope Tricep Extension",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Tricep Rope Extension",
+         "sets": [
+          "20→10",
+          "20→10",
+          "20→10",
+          "20→10"
+         ],
+         "note": "Drop-set: 20 reps moderate weight, go lighter for 10 more = 1 set. 4 total sets."
+        },
+        {
+         "name": "High Pulley Cable Curls",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "PDF says \"4x35\" (no unit) - treated as 35 seconds."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Burpees",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Treadmill Sprints",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Sprint hard on the treadmill."
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 3",
+     "focus": "Legs",
+     "dow": "Wed",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Leg Press",
+         "sets": [
+          "15+15+15",
+          "15+15+15",
+          "15+15+15"
+         ],
+         "note": "15 reps normal stance, 15 wide, 15 close = 1 set. 3 total sets."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Smith Machine Vertical Leg Press",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Squats",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8",
+          "10",
+          "12",
+          "15"
+         ],
+         "note": "Increase weight each set until you reach 8 reps. Make sure you get to 90 degrees or lower."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Leg Extension",
+         "sets": [
+          "20+20",
+          "20+20",
+          "20+20",
+          "20+20"
+         ],
+         "note": "20 reps normal, 20 reps close = 1 set. 4 total sets."
+        },
+        {
+         "name": "Standing Single Leg Hamstring Curl",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Lying Hamstring Curl",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Burpees",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Treadmill Sprints",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Sprint hard on the treadmill."
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 4",
+     "focus": "Chest",
+     "dow": "Thu",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Flat Bench",
+         "sets": [
+          "12→6",
+          "12→6",
+          "12→6",
+          "12→6"
+         ],
+         "note": "Get 12 reps, then go heavier and get 6 reps = 1 set. 4 total sets."
+        },
+        {
+         "name": "Burpees",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Flat Dumbbell Bench",
+         "sets": [
+          "10→10→10",
+          "10→10→10",
+          "10→10→10"
+         ],
+         "note": "Drop-set: 10 heavy reps, drop to moderate for 10, drop to lighter for 10 = 1 set. 3 total sets."
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Incline Dumbbell Bench",
+         "sets": [
+          "20",
+          "20",
+          "20",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Mountain Climbers",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Incline Barbell",
+         "sets": [
+          "8",
+          "8",
+          "8",
+          "8",
+          "8",
+          "8"
+         ],
+         "note": "Pause reps."
+        },
+        {
+         "name": "Jump Rope",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Cable Flies",
+         "sets": [
+          "7",
+          "7",
+          "7",
+          "7",
+          "7"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Decline Hammer Strength",
+         "sets": [
+          "15",
+          "12",
+          "10",
+          "8",
+          "6"
+         ],
+         "note": "Increase weight every set"
+        },
+        {
+         "name": "Alternating Foot Taps",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Burpees",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Treadmill Sprints",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Sprint hard on the treadmill."
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 5",
+     "focus": "Back",
+     "dow": "Fri",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Lat Pull Down",
+         "sets": [
+          "12",
+          "10",
+          "8",
+          "6",
+          "Drop",
+          "Drop",
+          "Drop"
+         ],
+         "note": "Right after your set of 6, perform 3 drop sets to failure (7 sets in total)."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "T Bar Row",
+         "sets": [
+          "12",
+          "12",
+          "8",
+          "8",
+          "6"
+         ],
+         "note": "Increase weight every set"
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Dumbbell Row",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Single Arm Front Pull Down",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": "Each arm. Focus on the squeeze; let your arm extend all the way to the top."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Cable Row",
+         "sets": [
+          "20",
+          "8",
+          "20",
+          "8",
+          "20"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Seated Rope Pull",
+         "sets": [
+          "15",
+          "15",
+          "15",
+          "15",
+          "15"
+         ],
+         "note": "Sit on the floor with the rope attachment and squeeze your back on each rep."
+        }
+       ]
+      },
+      {
+       "exercises": [
+        {
+         "name": "Burpees",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Treadmill Sprints",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Sprint hard on the treadmill."
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    },
+    {
+     "name": "Day 6",
+     "focus": "Abs & Cardio",
+     "dow": "Sat",
+     "blocks": [
+      {
+       "exercises": [
+        {
+         "name": "Sit-Ups",
+         "sets": [
+          "30",
+          "30",
+          "30"
+         ],
+         "note": "Ab circuit: do each in order, then repeat. 3 total rounds."
+        },
+        {
+         "name": "Side Twists",
+         "sets": [
+          "30",
+          "30",
+          "30"
+         ],
+         "note": ""
+        },
+        {
+         "name": "Leg Raises",
+         "sets": [
+          "30",
+          "30",
+          "30"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "abs"
+      },
+      {
+       "exercises": [
+        {
+         "name": "Burpees",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."
+        },
+        {
+         "name": "Treadmill Sprints",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": "Sprint hard on the treadmill."
+        },
+        {
+         "name": "Jumps in Place",
+         "sets": [
+          "35s",
+          "35s",
+          "35s",
+          "35s"
+         ],
+         "note": ""
+        }
+       ],
+       "kind": "cardio",
+       "rest": 60
+      }
+     ],
+     "note": ""
+    }
+   ]
+  }
+ ]
+}
