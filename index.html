@@ -88,6 +88,23 @@ input.txt{width:100%;min-height:48px;background:var(--bg2);border:1px solid var(
 .drop{display:flex;flex-direction:column;align-items:center;gap:6px;padding:20px;border:1.5px dashed rgba(255,106,26,.5);border-radius:18px;background:var(--accsoft);text-align:center;cursor:pointer}
 .drop b{font-size:15px}
 .drop small{color:var(--mut)}
+.drop{position:relative;transition:background .12s,border-color .12s,transform .12s}
+.drop input[type=file]{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
+.drop:focus-within{border-color:var(--acc2)}
+.drop.drag{background:rgba(255,106,26,.22);border-color:var(--acc2);border-style:solid;transform:scale(1.015)}
+.drop.drag *{pointer-events:none}
+.notice .nact{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.notice .nact .btn{min-height:46px;height:auto;font-size:14px;line-height:1.25;padding:10px 14px;flex:1 1 100%;text-align:center}
+.notice a.flink,.notice button.flink{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px;touch-action:manipulation;padding:6px 0;display:inline-block}
+.fbhint{font-size:12.5px;line-height:1.45;color:var(--mut)}
+textarea.fbta{min-height:130px;font-family:inherit;font-size:16px;line-height:1.4}
+input.txt.fb{font-size:16px}
+.fbitem{padding:10px 0;border-top:1px solid rgba(255,255,255,.06);display:flex;gap:10px;align-items:flex-start}
+.fbitem .fbm{flex:1;min-width:0}
+.fbitem .fbm small{display:block;color:var(--dim);font-size:11.5px}
+.fbitem .fbm div{font-size:13.5px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:break-word}
+.fbstat{border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.45;background:rgba(61,220,132,.08);border:1px solid rgba(61,220,132,.35);color:#a8f0c6;margin-top:12px}
+
 .notice{border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.45;background:rgba(255,204,77,.08);border:1px solid rgba(255,204,77,.35);color:#ffe3a0}
 .notice.err{background:rgba(255,90,90,.08);border-color:rgba(255,90,90,.4);color:#ffb3b3}
 .notice.ok{background:rgba(61,220,132,.08);border-color:rgba(61,220,132,.35);color:#a8f0c6}
@@ -242,7 +259,7 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
    FORGE — single-file workout tracker prototype
    State lives in localStorage ("forge.v1"). No build step.
    ========================================================= */
-const BUILD = '2026.10.15-2'; // bump on every deploy; the in-app update banner compares this against the live file
+const BUILD = '2026.10.15-3'; // bump on every deploy; the in-app update banner compares this against the live file
 const LS = 'forge.v1';
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -462,7 +479,7 @@ function parseAny(text) {
 const builtin = () => parseJSONProgram(JSON.stringify(BUILTIN_PROGRAM)).program;
 function freshState() {
   const p = builtin(), d = p.defaults || {};
-  return { program: p, selWeek: 0, selDay: 0, settings: { rest: d.rest != null ? d.rest : 45, restMode: d.restMode || 'round', unit: 'lb', wake: true, name: '' }, last: {}, history: [], session: null, lastSummaryId: null };
+  return { program: p, selWeek: 0, selDay: 0, settings: { rest: d.rest != null ? d.rest : 45, restMode: d.restMode || 'round', unit: 'lb', wake: true, name: '' }, last: {}, history: [], session: null, lastSummaryId: null, feedback: [] };
 }
 function load() {
   try {
@@ -471,6 +488,7 @@ function load() {
       if (!o.program.weeks) { o.program.weeks = [{ n: 1, phase: 1, name: 'Week 1', days: o.program.days }]; delete o.program.days; }
       if (o.program.source === 'sample' && o.program.ver !== BUILTIN_PROGRAM.ver) { o.program = builtin(); o.selDay = 0; o.selWeek = 0; }
       o.selWeek = Math.min(o.selWeek || 0, o.program.weeks.length - 1); o.selDay = o.selDay || 0;
+      if (!Array.isArray(o.feedback)) o.feedback = [];
       return o;
     }
   } catch (e) {}
@@ -648,7 +666,8 @@ function detectPRs(prevHistory, entry) {
 const dShort = ts => new Date(ts).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 const userName = () => String((S.settings && S.settings.name) || '').trim();
 let view = S.session ? 'active' : 'home', modal = null, openDay = null, openHist = null, progWeek = null;
-let importText = '', importFile = '', importNote = null, parsed = null, importName = '';
+let importText = '', importFile = '', importNote = null, importBlocked = null, parsed = null, importName = '';
+let fbDraft = { type: 'Idea', text: '', contact: '', id: null, file: null, status: '' }, fbBack = null;
 let lastSummaryEl = null;
 let wakeLock = null, homeExpanded = false;
 function toast(msg) {
@@ -989,9 +1008,10 @@ function importView() {
   return `<div class="screen">
     <div class="hdr"><div class="brand">FOR<b>GE</b></div></div>
     <div><div class="greet">Import a workout</div><div class="sub">Turn a plan into daily workouts with superset sequencing.</div></div>
-    <div class="notice"><b>Heads up:</b> this app runs entirely on your device, so it can't read arbitrary PDFs or photos of programs yet — that step will use AI later. Today you can paste text or upload a .txt / .csv / .json file. <b>${esc(bp.name)}</b> (the PDF you shared) is already transcribed and built in — load it below.</div>
+    <div class="notice"><b>Heads up:</b> this app runs entirely on your device, so PDFs and photos of programs aren't readable yet — AI import is coming. Today you can paste text or upload a .txt / .csv / .json file. <b>${esc(bp.name)}</b> (the PDF you shared) is already transcribed and built in — load it below. <button class="flink" data-act="feedback" data-from="import">Send feedback</button></div>
     <button class="btn pri block" data-act="loadSample">⚡ Load ${esc(bp.name)}</button>
-    <label class="drop"><input type="file" id="fileIn" accept=".txt,.csv,.json,.md,.tsv,.pdf,image/*,text/*" hidden><span style="font-size:28px">📄</span><b>Upload a file</b><small>${importFile ? 'Selected: ' + esc(importFile) : 'txt · csv · json (pdf/photo: AI import coming later)'}</small></label>
+    <label class="drop" id="dropZone"><input type="file" id="fileIn" accept=".txt,.csv,.json,.md,.tsv,.pdf,.png,.jpg,.jpeg,.heic,.heif,.webp,.gif,application/pdf,application/json,text/*,image/*"><span style="font-size:28px">📄</span><b>Upload or drop a file</b><small>${importFile ? 'Selected: ' + esc(importFile) : 'Works with txt · csv · json. PDFs &amp; photos: not readable yet.'}</small></label>
+    ${importBlocked ? blockedHTML() : ''}
     ${importNote ? `<div class="notice err">${esc(importNote)}</div>` : ''}
     <div class="label" style="color:var(--mut)">…or paste text</div>
     <textarea id="importTA" placeholder="Week 1&#10;Day 1 - Chest &amp; Back&#10;Flat Bench Press superset Wide Grip Pull-Ups : 10,8,6,4 / 5x15&#10;Mountain Climbers : 4 x 20 seconds&#10;&#10;Day 2 - Legs&#10;Squats : 5x5">${esc(importText)}</textarea>
@@ -1150,6 +1170,20 @@ function modalHTML() {
       ${userName() ? '' : '<div style="text-align:center"><button class="namelink" data-act="editName">Add your name to the card</button></div>'}
       <div style="display:grid;gap:8px;margin-top:12px"><button class="btn pri block" data-act="shareGo">↗ Share</button><div class="row"><button class="btn sec" style="flex:1" data-act="shareSave">⬇ Save PNG</button><button class="btn sec" style="flex:1" data-act="shareCopy">📋 Copy text</button></div></div></div></div>`;
   }
+  if (modal === 'feedback') {
+    const d = fbDraft;
+    return `<div class="overlay" data-act="closeModal"><div class="sheet" data-stop="1"><div class="grab"></div><div class="row" style="justify-content:space-between"><b style="font-size:20px">Send feedback</b><button class="icon" data-act="closeModal" aria-label="Close">✕</button></div>
+      <div class="fbhint" style="margin-top:6px">There's no server behind this app. <b>Opens a GitHub issue, or share it with Phillip.</b> Either way a copy is saved on this device. GitHub issues are public, so leave out anything private.</div>
+      <div class="seg" style="margin-top:12px" role="group" aria-label="Type">${['Bug', 'Idea', 'Other'].map(t => `<button class="${d.type === t ? 'on' : ''}" data-act="fbType" data-t="${t}">${t === 'Bug' ? '🐞 ' : t === 'Idea' ? '💡 ' : '💬 '}${t}</button>`).join('')}</div>
+      <textarea class="fbta" id="fbText" maxlength="2000" style="margin-top:12px" placeholder="${d.type === 'Bug' ? 'What went wrong? What did you tap, and what did you expect?' : d.type === 'Idea' ? 'What would make FORGE better for you?' : 'Anything else…'}">${esc(d.text)}</textarea>
+      <input class="txt fb" id="fbContact" type="text" maxlength="80" autocomplete="off" autocapitalize="off" enterkeyhint="done" style="margin-top:10px" placeholder="Name or email (optional)" value="${esc(d.contact)}">
+      <div class="fbhint" style="margin-top:6px">Contact is optional. If you send via GitHub it will be visible on the public issue. The message also includes the app build (${esc(BUILD)}) and your browser's user agent to help debug.</div>
+      ${d.file ? `<div class="fbhint" style="margin-top:8px">📎 ${esc(d.file.name)} (${fmtSize(d.file.size)}) — a link can't carry files. After GitHub opens, drag the file into the issue, or use Share${navigator.share ? '' : ' (not available in this browser)'}, which includes it when your device allows.</div>` : ''}
+      <button class="btn pri block" style="margin-top:14px" data-act="fbSend">↗ Send via GitHub issue</button>
+      <div class="row" style="margin-top:8px"><button class="btn sec" style="flex:1" data-act="fbCopy">📋 Copy text</button>${navigator.share ? '<button class="btn sec" style="flex:1" data-act="fbShare">📤 Share…</button>' : ''}</div>
+      ${d.status ? `<div class="fbstat" role="status">${esc(d.status)}</div>` : ''}
+      </div></div>`;
+  }
   if (modal === 'settings') {
     const st = S.settings;
     return `<div class="overlay" data-act="closeModal"><div class="sheet" data-stop="1"><div class="grab"></div><div class="row" style="justify-content:space-between"><b style="font-size:20px">Settings</b><button class="icon" data-act="closeModal">✕</button></div>
@@ -1158,10 +1192,17 @@ function modalHTML() {
       <div style="margin-top:14px"><div class="sub" style="margin-bottom:6px">Rest happens…</div><div class="seg"><button class="${st.restMode === 'set' ? 'on' : ''}" data-act="setMode" data-m="set">After every set</button><button class="${st.restMode === 'round' ? 'on' : ''}" data-act="setMode" data-m="round">After each superset round</button></div></div>
       <div style="margin-top:14px"><div class="sub" style="margin-bottom:6px">Units</div><div class="seg"><button class="${st.unit === 'lb' ? 'on' : ''}" data-act="setUnit" data-u="lb">lb</button><button class="${st.unit === 'kg' ? 'on' : ''}" data-act="setUnit" data-u="kg">kg</button></div></div>
       <div class="sw" style="margin-top:14px"><span>Keep screen awake during workouts</span><div class="seg"><button class="${st.wake ? 'on' : ''}" data-act="toggleWake">${st.wake ? 'On' : 'Off'}</button></div></div>
+      <div style="margin-top:18px"><div class="sub" style="margin-bottom:6px">Feedback</div><button class="btn sec block" data-act="feedback" data-from="settings">💬 Send feedback</button>${fbListHTML()}</div>
       <button class="btn danger block" style="margin-top:18px" data-act="resetAll">Reset all data</button>
       <div class="sub" id="buildLbl" style="text-align:center;margin-top:14px;font-size:12px">FORGE build ${esc(BUILD)}${updNew ? ' · <b style="color:var(--acc2)">update available</b>' : ''}</div></div></div>`;
   }
   return '';
+}
+
+function fbListHTML() {
+  const L = S.feedback || []; if (!L.length) return '<div class="fbhint" style="margin-top:8px">Your feedback is saved here on this device. Opens a GitHub issue, or share it with Phillip.</div>';
+  const vl = { github: 'GitHub issue opened', copied: 'copied', shared: 'shared' };
+  return `<div class="sub" style="margin:14px 0 2px">Your feedback</div>` + L.slice(0, 20).map(f => `<div class="fbitem"><div class="fbm"><small>${esc(new Date(f.ts).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }))} · ${esc(f.type)}${f.via && f.via.length ? ' · ' + esc(f.via.map(v => vl[v] || v).join(', ')) : ' · saved only'}</small><div>${esc(f.text)}</div></div><button class="icon" data-act="fbDel" data-id="${esc(f.id)}" aria-label="Delete this feedback entry">✕</button></div>`).join('');
 }
 
 /* ---------- Render ---------- */
@@ -1178,23 +1219,143 @@ function render() {
   app.innerHTML = html + (view === 'active' && S.session ? pausedHTML() : '') + modalHTML();
   if (modal === 'seq') { const c = $('.seqrow.cur'); if (c) { const sh = $('#sheet'); sh.scrollTop = Math.max(0, c.offsetTop - sh.clientHeight / 2); } }
   const fi = $('#fileIn'); if (fi) fi.addEventListener('change', onFile);
+  bindDrop();
+  const ft = $('#fbText'); if (ft) ft.addEventListener('input', () => { fbDraft.text = ft.value; });
+  const fc = $('#fbContact'); if (fc) fc.addEventListener('input', () => { fbDraft.contact = fc.value; });
   const ni = $('#nameIn'); if (ni) ni.addEventListener('input', () => { S.settings.name = ni.value.trim().slice(0, 24); save(); });
   if (modal === 'share') paintShare();
   syncBanner();
   const ta = $('#importTA'); if (ta) ta.addEventListener('input', () => { importText = ta.value; });
   ['inW', 'inR'].forEach(id => { const el = $('#' + id); if (el) el.addEventListener('input', saveDraft); });
 }
-function onFile(e) {
-  const f = e.target.files[0]; if (!f) return;
-  importFile = f.name; importNote = null; parsed = null;
-  if (/\.(pdf)$/i.test(f.name) || f.type === 'application/pdf' || f.type.startsWith('image/')) {
-    importNote = `"${f.name}" is a ${f.type.startsWith('image/') ? 'photo/image' : 'PDF'}. Reading arbitrary PDFs and photos on-device isn't possible yet — AI-powered import is a later step. For now, paste the text into the box below, or load the built-in ${BUILTIN_PROGRAM.name} (already transcribed from your PDF).`;
+const FORGE_PROMPT = [
+  'Convert the workout program I am attaching/pasting (PDF, photo, or text) into FORGE program JSON.',
+  'Reply with ONE valid JSON object only (no commentary), inside a single code block.',
+  '',
+  'FORMAT',
+  '- Top level: {"name", "description" (optional), "defaults": {"rest": 45, "restMode": "round"}, "weeks": [...]}.',
+  '  defaults.rest = rest seconds; restMode "round" = rest after each superset round, "set" = after every set.',
+  '- weeks[] = {"name": "Week 1", "days": [...]}. If the plan repeats every week, still write each week out (or at least Week 1).',
+  '- days[] = {"name": "Day 1", "focus": "Shoulders", "dow": "Mon" (optional), "note": "" (optional), "blocks": [...]}. Rest days can be left out.',
+  '- blocks[] = {"exercises": [ ... ]}. ONE exercise in a block = a straight exercise. TWO or THREE exercises in one block = a SUPERSET/circuit (they alternate A, B, C, A, B, C...). Keep the order of the original plan.',
+  '- exercises[] = {"name": "Seated Dumbbell Press", "sets": ["20","20","20","20"], "note": "Increase weight every set"}.',
+  '  "sets" has one string per set. Write every set out (5x15 -> five "15" strings). All exercises in a superset block should have the same number of sets.',
+  '- Rep strings: "15", "10-12" (range), "20s" (timed, seconds), "Failure" (to failure/AMRAP), "Drop" (drop set), "10+10" (two parts back to back in one set), "20→8" (one set done at two weights), "Burnout", "Ladder".',
+  '- Cardio/HIIT circuits or timed finishers: put them in their own block with "kind": "cardio" and "rest": 60 (rest seconds after each round). Ab circuits can use "kind": "abs".',
+  '- Put tips (tempo, "add weight every set", how to do a drop set) in the exercise "note". Do not invent exercises or numbers that are not in the source; if something is unclear, add a note instead of guessing.',
+  '',
+  'EXAMPLE (shortened)',
+  '{"name":"Example 8 Week Shred","defaults":{"rest":45,"restMode":"round"},"weeks":[{"name":"Week 1","days":[{"name":"Day 1","focus":"Shoulders","dow":"Mon","blocks":[',
+  '{"exercises":[{"name":"Seated Dumbbell Press","sets":["20","20","20","20"],"note":""},{"name":"Dumbbell Lateral Raises","sets":["10-12","10-12","10-12","10-12"],"note":"Increase weight every set"}]},',
+  '{"exercises":[{"name":"Dumbbell Shrugs","sets":["20","20","20","20"],"note":""}]},',
+  '{"exercises":[{"name":"Jumping Jacks","sets":["20s","20s","20s"],"note":"Circuit: A → B → C = 1 set"},{"name":"Jump Rope","sets":["20s","20s","20s"],"note":""},{"name":"Burpees","sets":["20s","20s","20s"],"note":""}],"kind":"cardio","rest":60}',
+  ']}]}]}',
+  '',
+  'Now convert my program:'
+].join('\n');
+const PDF_RE = /\.pdf$/i, IMG_RE = /\.(png|jpe?g|gif|webp|heic|heif|bmp|tiff?|avif)$/i, TXT_RE = /\.(txt|csv|json|md|tsv|text)$/i;
+const fmtSize = n => n >= 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB';
+let blockedFile = null; // in-memory only: the last PDF/photo the user tried, so "Send us this file" can offer it to the share sheet
+function blockedHTML() {
+  const b = importBlocked;
+  return `<div class="notice" id="blockedNote"><b>${b.kind === 'PDF' ? '📕' : '🖼️'} "${esc(b.name)}" can't be read yet.</b><br>
+    PDFs and photos of programs aren't readable in FORGE yet, regardless of size. AI import is coming. Until then you can have ChatGPT or Claude do the conversion: copy the prompt below, paste it into the chat together with your ${b.kind === 'PDF' ? 'PDF' : 'photo'}, then paste the JSON it replies with into the box underneath (or save it as a .json file and upload it here).
+    <div class="nact"><button class="btn sec" data-act="copyPrompt">📋 Copy a prompt for ChatGPT/Claude</button><button class="btn ghost" data-act="sendFile">📨 Send us this file</button></div></div>`;
+}
+function handleFile(f) {
+  if (!f) return;
+  importFile = f.name; importNote = null; importBlocked = null; blockedFile = null; parsed = null;
+  const type = f.type || '';
+  const isPdf = PDF_RE.test(f.name) || type === 'application/pdf', isImg = type.startsWith('image/') || IMG_RE.test(f.name);
+  if (isPdf || isImg) {
+    importBlocked = { name: f.name, kind: isPdf ? 'PDF' : 'photo', size: f.size, type }; blockedFile = f;
+    render(); return;
+  }
+  if (!(TXT_RE.test(f.name) || type.startsWith('text/') || /json|csv/.test(type) || (!/\.[a-z0-9]{1,5}$/i.test(f.name) && !type))) {
+    importNote = `"${f.name}" isn't a file type FORGE can read. Use a .txt, .csv or .json file, or paste the text into the box below.`;
     render(); return;
   }
   const rd = new FileReader();
   rd.onload = () => { importText = String(rd.result || ''); parsed = parseAny(importText); render(); toast('File loaded & parsed'); };
   rd.onerror = () => { importNote = 'Could not read that file.'; render(); };
   rd.readAsText(f);
+}
+function onFile(e) { const f = e.target.files[0]; handleFile(f); try { e.target.value = ''; } catch (x) {} }
+
+/* ---------- Drag & drop (dropzone + window-level safety net so a miss never navigates away) ---------- */
+const hasFiles = e => { const t = e.dataTransfer && e.dataTransfer.types; return !!t && Array.prototype.indexOf.call(t, 'Files') >= 0; };
+function bindDrop() {
+  const z = $('#dropZone'); if (!z) return;
+  const on = e => { if (!hasFiles(e)) return; e.preventDefault(); e.stopPropagation(); z.classList.add('drag'); try { e.dataTransfer.dropEffect = 'copy'; } catch (x) {} };
+  z.addEventListener('dragenter', on);
+  z.addEventListener('dragover', on);
+  z.addEventListener('dragleave', e => { e.preventDefault(); e.stopPropagation(); if (!z.contains(e.relatedTarget)) z.classList.remove('drag'); });
+  z.addEventListener('drop', e => {
+    e.preventDefault(); e.stopPropagation(); z.classList.remove('drag');
+    const fl = e.dataTransfer && e.dataTransfer.files; if (!fl || !fl.length) return;
+    handleFile(fl[0]); if (fl.length > 1) toast('Using the first file only');
+  });
+}
+window.addEventListener('dragover', e => { if (!hasFiles(e)) return; e.preventDefault(); if (!(e.target.closest && e.target.closest('#dropZone'))) { try { e.dataTransfer.dropEffect = 'none'; } catch (x) {} } });
+window.addEventListener('drop', e => {
+  if (!hasFiles(e)) return; e.preventDefault();
+  const z = $('#dropZone'); if (z) z.classList.remove('drag');
+  toast(view === 'import' ? 'Drop files on the upload box' : 'To import a file, open the Import tab');
+});
+window.addEventListener('dragleave', e => { if (!e.relatedTarget) { const z = $('#dropZone'); if (z) z.classList.remove('drag'); } });
+
+/* ---------- Feedback (no backend: saved locally + prefilled GitHub issue + copy/share) ---------- */
+const FB_REPO = 'https://github.com/pb3oh/forge-workout/issues/new';
+const FB_LABEL = { Bug: 'bug', Idea: 'enhancement', Other: 'feedback' };
+function fbText(withMeta = true) {
+  const d = fbDraft; let t = d.text.trim();
+  if (withMeta) t += `\n\n---\nType: ${d.type}\nContact: ${d.contact.trim() || '(none given)'}\nApp: FORGE build ${BUILD}\nDevice: ${navigator.userAgent}\nDate: ${new Date().toISOString()}` + (d.file ? `\nFile I tried to import: ${d.file.name} (${d.file.type || 'unknown type'}, ${fmtSize(d.file.size)}) - not attached` : '');
+  return 'FORGE feedback - ' + d.type + '\n\n' + t;
+}
+function fbIssueURL() {
+  const d = fbDraft, first = d.text.trim().split(/\r?\n/)[0];
+  const title = `[${d.type}] ${first.length > 70 ? first.slice(0, 67) + '...' : first}`;
+  const mk = txt => `${txt}\n\n---\n**Type:** ${d.type}\n**Contact:** ${d.contact.trim() || '(none given)'}\n**App:** FORGE build ${BUILD}\n**Device:** ${navigator.userAgent}` + (d.file ? `\n**File I tried to import:** ${d.file.name} (${d.file.type || 'unknown type'}, ${fmtSize(d.file.size)}) - drag it into this issue to attach it` : '');
+  let txt = d.text.trim(), url;
+  const build = tx => `${FB_REPO}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(mk(tx))}&labels=${encodeURIComponent(FB_LABEL[d.type] || 'feedback')}`;
+  url = build(txt);
+  while (url.length > 7500 && txt.length > 100) { txt = txt.slice(0, Math.floor(txt.length * 0.8)); url = build(txt + ' ...(shortened - full text was copied/saved in the app)'); }
+  return url;
+}
+function fbSave(via) {
+  const d = fbDraft; if (!d.text.trim()) { toast('Write a few words first'); return false; }
+  S.feedback = S.feedback || [];
+  let e = d.id && S.feedback.find(x => x.id === d.id);
+  if (!e) { e = { id: 'fb' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), ts: Date.now(), type: d.type, text: d.text.trim(), contact: d.contact.trim(), build: BUILD, ua: navigator.userAgent, via: [] }; S.feedback.unshift(e); S.feedback = S.feedback.slice(0, 50); d.id = e.id; }
+  if (via && !e.via.includes(via)) e.via.push(via);
+  save(); return true;
+}
+function fbReset() { fbDraft = { type: 'Idea', text: '', contact: '', id: null, file: null, status: '' }; }
+function openFeedback(from, preset) {
+  fbBack = from === 'settings' ? 'settings' : null;
+  if (preset) { fbDraft = Object.assign({ type: 'Idea', text: '', contact: '', id: null, file: null, status: '' }, preset); }
+  else if (fbDraft.id) fbReset();
+  modal = 'feedback'; render();
+  setTimeout(() => { const t = $('#fbText'); if (t && !preset) t.focus(); }, 60);
+}
+async function fbSend() {
+  if (!fbSave('github')) return;
+  const url = fbIssueURL(); let w = null;
+  try { w = window.open(url, '_blank', 'noopener,noreferrer'); } catch (e) {}
+  fbDraft.status = 'Saved on this device. A GitHub issue is opening in a new tab — nothing is sent until you press "Submit new issue" there. No GitHub account (or the tab didn\'t open)? Use Copy text or Share below.';
+  render();
+}
+async function fbCopy() {
+  if (!fbSave('copied')) return;
+  const ok = await copyText(fbText()); fbDraft.status = ok ? 'Saved on this device and copied — paste it into a text to Phillip.' : 'Saved on this device, but this browser blocked copying. Select the text in the box and copy it by hand.'; render(); toast(ok ? 'Copied' : 'Could not copy');
+}
+async function fbShare() {
+  if (!fbSave('shared')) return;
+  const data = { title: 'FORGE feedback', text: fbText() };
+  try { if (fbDraft.file && navigator.canShare && navigator.canShare({ files: [fbDraft.file] })) data.files = [fbDraft.file]; } catch (e) {}
+  try { await navigator.share(data); fbDraft.status = 'Saved on this device and shared.'; }
+  catch (e) { fbDraft.status = e && e.name === 'AbortError' ? 'Saved on this device. Share was cancelled.' : 'Saved on this device, but sharing failed. Try Copy text.'; }
+  render();
 }
 
 /* ---------- Events ---------- */
@@ -1233,7 +1394,15 @@ function act(a, t) {
     case 'skip': skipStep(); break;
     case 'exit': modal = 'exit'; render(); break;
     case 'seq': modal = 'seq'; render(); break;
-    case 'closeModal': modal = null; render(); break;
+    case 'closeModal': if (modal === 'feedback') { if (fbDraft.id) fbReset(); modal = fbBack; fbBack = null; } else modal = null; render(); break;
+    case 'feedback': openFeedback(d.from); break;
+    case 'fbType': fbDraft.type = d.t; render(); break;
+    case 'fbSend': fbSend(); break;
+    case 'fbCopy': fbCopy(); break;
+    case 'fbShare': fbShare(); break;
+    case 'fbDel': S.feedback = (S.feedback || []).filter(x => x.id !== d.id); save(); render(); break;
+    case 'copyPrompt': copyText(FORGE_PROMPT).then(ok => toast(ok ? 'Prompt copied — paste it into ChatGPT or Claude' : 'Could not copy')); break;
+    case 'sendFile': { const b = importBlocked || {}; openFeedback('import', { type: 'Other', text: `I tried to import "${b.name || 'a file'}" (${b.kind || 'file'}) and FORGE can't read it yet. Here is my program so you can add support for it.`, file: blockedFile }); break; }
     case 'jump': jumpTo(+d.i); break;
     case 'finishNow': finish(); break;
     case 'restAdd': if (s && s.phase === 'rest') { s.restEnd += +d.n * 1000; s.restTotal = Math.max(s.restTotal, Math.ceil((s.restEnd - Date.now()) / 1000)); if (s.restEnd <= Date.now()) endRest(); else { save(); render(); } } break;
@@ -1260,8 +1429,8 @@ function act(a, t) {
     case 'doDay': S.selWeek = progWeek == null ? S.selWeek : progWeek; S.selDay = +d.i; save(); view = 'home'; render(window.scrollTo(0, 0)); toast(curWeek().name + ' · ' + dayOf().name + ' set as today'); break;
     case 'histToggle': openHist = openHist === d.id ? null : d.id; render(); break;
     case 'doneSummary': view = 'home'; render(window.scrollTo(0, 0)); break;
-    case 'parse': { const ta = $('#importTA'); if (ta) importText = ta.value; parsed = parseAny(importText); importNote = null; render(); setTimeout(() => { const c = $('.notice.ok, .notice.err'); }, 0); break; }
-    case 'clearImport': importText = ''; importFile = ''; importNote = null; parsed = null; importName = ''; render(); break;
+    case 'parse': { const ta = $('#importTA'); if (ta) importText = ta.value; parsed = parseAny(importText); importNote = null; importBlocked = null; blockedFile = null; render(); setTimeout(() => { const c = $('.notice.ok, .notice.err'); }, 0); break; }
+    case 'clearImport': importText = ''; importFile = ''; importNote = null; importBlocked = null; blockedFile = null; parsed = null; importName = ''; render(); break;
     case 'loadSample': {
       const p = builtin(), d = p.defaults || {};
       S.program = p; S.selWeek = 0; S.selDay = 0; S.session = null; progWeek = null; openDay = null;
