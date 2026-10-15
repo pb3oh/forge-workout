@@ -208,6 +208,21 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
 .exrow div{color:var(--mut);font-size:12.5px;margin-top:2px;line-height:1.5}
 .sw{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px}
 
+/* volume strip / weight lifted card */
+.volstrip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 4px;margin-top:10px}
+.volstrip>div{text-align:center;min-width:0;padding:0 4px;border-left:1px solid var(--line)}
+.volstrip>div:first-child{border-left:0}
+.volstrip small{display:block;color:var(--mut);font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.volstrip b{display:block;font-size:22px;font-weight:900;line-height:1.2;margin-top:3px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.volstrip b i{font-style:normal;font-size:11px;font-weight:700;color:var(--mut);margin-left:2px}
+.volstrip em{display:block;font-style:normal;color:var(--mut);font-size:11.5px;margin-top:1px;font-variant-numeric:tabular-nums}
+.volcard{padding:16px}
+.volcard .volstrip{background:transparent;border:0;margin-top:8px;padding:0}
+.volcard .volstrip b{font-size:26px;color:var(--acc2)}
+.wkbars{display:flex;align-items:flex-end;gap:6px;height:56px;margin-top:14px}
+.wkbars i{flex:1;background:var(--card2);border-radius:4px 4px 2px 2px;min-height:3px}
+.wkbars i.cur{background:linear-gradient(180deg,var(--acc2),var(--acc))}
+.wkcap{display:flex;justify-content:space-between;color:var(--mut);font-size:11px;margin-top:4px}
 /* stats / share / update banner */
 .nav button{min-width:0}
 .prb{display:inline-flex;align-items:center;padding:2px 7px;border-radius:7px;background:linear-gradient(180deg,var(--acc2),var(--acc));color:#1a0a00;font-size:10.5px;font-weight:900;letter-spacing:.08em;vertical-align:middle;margin-left:6px;line-height:1.4}
@@ -261,7 +276,7 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
    FORGE — single-file workout tracker prototype
    State lives in localStorage ("forge.v1"). No build step.
    ========================================================= */
-const BUILD = '2026.10.15-5'; // bump on every deploy; the in-app update banner compares this against the live file
+const BUILD = '2026.10.15-6'; // bump on every deploy; the in-app update banner compares this against the live file
 const LS = 'forge.v1';
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -695,6 +710,49 @@ function streakInfo(history, now) {
   const set = new Set((history || []).filter(h => h.setsDone > 0).map(h => dayIdx(h.date))), today = dayIdx(now || Date.now());
   return { ...streakCalc(set, today), dots: weekDots(set, today), todayDone: set.has(today) };
 }
+/* ---------- Volume (P0): pure functions over history; always recomputed from sets, never from the stored h.volume ---------- */
+// volume = sum of weight x reps over done sets, in kg. Bodyweight sets (w = 0) add reps only; timed sets (u 's') count toward neither;
+// sets with w > 454 kg or r > 100 are skipped (same guards as the PR code).
+function entryTotals(h) {
+  let volKg = 0, reps = 0; const hu = h && h.unit === 'kg' ? 'kg' : 'lb';
+  for (const ex of (h && h.exercises) || []) for (const st of ex.sets || []) {
+    if (!st || st.u === 's') continue;
+    const w = +st.w || 0, r = +st.r || 0, wKg = toKg(w, hu);
+    if (w < 0 || r < 0 || r > 100 || wKg > 454) continue;
+    reps += r; if (w > 0) volKg += wKg * r;
+  }
+  return { volKg, reps };
+}
+const idxDate = i => { const d = new Date(i * 864e5); return new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()); }; // local midnight of a day index
+const weekStartIdx = i => i - ((i + 3) % 7); // Monday of the Mon-Sun week containing local day index i
+function volumeTotals(history, now) {
+  const today = dayIdx(now || Date.now()), mon = weekStartIdx(today), out = { today: { volKg: 0, reps: 0 }, week: { volKg: 0, reps: 0 }, all: { volKg: 0, reps: 0 } };
+  for (const h of history || []) {
+    const t = entryTotals(h), di = dayIdx(h.date);
+    out.all.volKg += t.volKg; out.all.reps += t.reps;
+    if (di >= mon && di <= mon + 6) { out.week.volKg += t.volKg; out.week.reps += t.reps; }
+    if (di === today) { out.today.volKg += t.volKg; out.today.reps += t.reps; }
+  }
+  return out;
+}
+// last n Mon-Sun weeks (oldest first, last = current week): [{ start: epoch-day index of Monday, volKg, reps }]
+function weeklyVolume(history, now, n) {
+  n = n || 8; const mon = weekStartIdx(dayIdx(now || Date.now())), out = [];
+  for (let k = n - 1; k >= 0; k--) out.push({ start: mon - 7 * k, volKg: 0, reps: 0 });
+  for (const h of history || []) {
+    const k = Math.floor((weekStartIdx(dayIdx(h.date)) - out[0].start) / 7); if (k < 0 || k >= n) continue;
+    const t = entryTotals(h); out[k].volKg += t.volKg; out[k].reps += t.reps;
+  }
+  return out;
+}
+// 12,340 / 123.4k (from 100k) / 1.23M (from 1M); converted from kg at display time
+function fmtVol(kg, u) {
+  const v = fromKg(kg || 0, u || unit()), r = Math.round(v);
+  if (r < 100000) return r.toLocaleString('en-US');
+  if (v < 999950) return (v / 1000).toFixed(1) + 'k';
+  return (v / 1e6).toFixed(2) + 'M';
+}
+const fmtReps = n => Math.round(n).toLocaleString('en-US');
 // New PR = a set today beat the previous best e1RM for a major lift (needs an earlier best to beat)
 function detectPRs(prevHistory, entry) {
   const prev = liftStats(prevHistory, entry.date), sets = liftSetList([entry]), out = [];
@@ -813,14 +871,15 @@ function backStep() {
 function jumpTo(i) { const s = S.session; saveDraft(); s.cur = i; s.phase = 'work'; s.tmr = null; modal = null; save(); render(); }
 function finish() {
   const s = S.session; if (!s) return;
-  const end = Date.now(); let done = 0, vol = 0; const exMap = new Map();
+  const end = Date.now(); let done = 0; const exMap = new Map();
   s.steps.forEach((st, i) => {
     const r = s.res[i]; if (!r || r.st !== 'done') return; done++;
-    const ex = stepEx(s, st); if (r.w > 0 && r.r > 0) vol += r.w * r.r;
+    const ex = stepEx(s, st);
     if (!exMap.has(ex.name)) exMap.set(ex.name, { name: ex.name, muscle: ex.muscle, sets: [] });
     exMap.get(ex.name).sets.push({ w: r.w || 0, r: r.r || 0, u: r.u || '' });
   });
-  const entry = { id: 'h' + end, date: end, dayName: s.day.name, week: s.weekName || '', focus: s.day.focus, program: S.program.name, durationSec: Math.round(elapsedSec(s)), setsDone: done, setsTotal: s.steps.length, volume: Math.round(vol), unit: unit(), exercises: [...exMap.values()] };
+  const entry = { id: 'h' + end, date: end, dayName: s.day.name, week: s.weekName || '', focus: s.day.focus, program: S.program.name, durationSec: Math.round(elapsedSec(s)), setsDone: done, setsTotal: s.steps.length, volume: 0, unit: unit(), exercises: [...exMap.values()] };
+  entry.volume = Math.round(fromKg(entryTotals(entry).volKg, entry.unit)); // informational only: totals are always recomputed from the sets
   if (done > 0) {
     const prs = detectPRs(S.history, entry); if (prs.length) entry.prs = prs;
     S.history.unshift(entry); S.lastSummaryId = entry.id; view = 'summary';
@@ -849,14 +908,24 @@ function summarizeReps(sets) {
 }
 const weekBar = (idx, act) => { const w = S.program.weeks[idx], n = S.program.weeks.length;
   return `<div class="weekbar"><button class="icon" data-act="${act}" data-d="-1" aria-label="Previous week" ${idx === 0 ? 'disabled style="opacity:.35"' : ''}>‹</button><div class="wkt"><b>${esc(w.name)} of ${n}</b><span>Phase ${w.phase || 1} of ${phaseCount(S.program)}</span></div><button class="icon" data-act="${act}" data-d="1" aria-label="Next week" ${idx === n - 1 ? 'disabled style="opacity:.35"' : ''}>›</button></div>`; };
+function volStripHTML(card) {
+  const u = unit(), v = volumeTotals(S.history);
+  const tile = (k, l) => `<div><small>${l}</small><b>${fmtVol(v[k].volKg, u)}<i>${u}</i></b><em>${fmtReps(v[k].reps)} reps</em></div>`;
+  return `<div class="volstrip" id="${card ? 'volTiles' : 'volStrip'}">${tile('today', 'Today')}${tile('week', 'This week')}${tile('all', 'All-time')}</div>`;
+}
+function weightCardHTML() {
+  const u = unit(), wv = weeklyVolume(S.history, Date.now(), 8), mx = Math.max(...wv.map(x => x.volKg), 1);
+  const bars = wv.map((x, i) => `<i class="${i === wv.length - 1 ? 'cur' : ''}" style="height:${Math.max(3, Math.round(x.volKg / mx * 56))}px" title="Week of ${dShort(idxDate(x.start))}: ${fmtVol(x.volKg, u)} ${u}"></i>`).join('');
+  return `<div class="card volcard" id="weightCard"><span class="label">🏋️ Weight lifted</span>${volStripHTML(true)}
+    <div class="wkbars" id="wkBars" aria-label="Weekly weight lifted, last 8 weeks">${bars}</div><div class="wkcap"><span>8 weeks ago</span><span>Weekly total · this week</span></div></div>`;
+}
 function homeView() {
   const p = S.program, days = curDays(), day = dayOf(), multi = p.weeks.length > 1;
-  const wk = Date.now() - 7 * 864e5, wkCount = S.history.filter(h => h.date > wk).length;
   const tot = S.history.length;
   const resuming = !!S.session;
   return `<div class="screen">
     <div class="hdr"><div class="brand">FOR<b>GE</b></div><button class="icon" data-act="settings" aria-label="Settings">⚙️</button></div>
-    <div><div class="greet">${userName() ? 'Hey ' + esc(userName()) + ' 👋' : 'Hey there 👋'}</div>${userName() ? '' : '<button class="namelink" data-act="editName">Add your name</button>'}<div class="sub">${tot ? `${wkCount} workout${wkCount === 1 ? '' : 's'} in the last 7 days — keep it rolling.` : 'Ready when you are. Let\'s get the first one logged.'}</div></div>
+    <div><div class="greet">${userName() ? 'Hey ' + esc(userName()) + ' 👋' : 'Hey there 👋'}</div>${userName() ? '' : '<button class="namelink" data-act="editName">Add your name</button>'}${tot ? volStripHTML() : '<div class="sub">Ready when you are. Let\'s get the first one logged.</div>'}</div>
     <div class="hero">
       <div class="row wrap"><span class="label">Today's workout</span><span class="chip acc">${multi ? esc(curWeek().name) + ' · ' : ''}${esc(day.name)}${day.dow ? ' · ' + esc(day.dow) : ''}</span></div>
       <h2>${esc(day.focus)}</h2>
@@ -898,6 +967,7 @@ function statsView() {
       <div class="rms">${REP_BESTS.map(n => `<div><b>${o.reps[n] ? dispW(o.reps[n], u) : '—'}</b><span>${n}+ rep${n > 1 ? 's' : ''}</span></div>`).join('')}</div></div>`;
   };
   return `<div class="screen">${head}
+    ${weightCardHTML()}
     <div class="streakhero"><span class="label">🔥 Current streak</span>
       <div class="bigstreak"><b>${st.current}</b><span>DAY${st.current === 1 ? '' : 'S'}${st.todayDone ? ' · TODAY ✓' : ''}</span></div>
       <div class="wkdots">${dots}</div>
@@ -914,17 +984,18 @@ const FONT = '-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Robot
 function cardEntry() { return S.history.find(x => x.id === shareSt.id) || S.history[0] || null; }
 function cardSpec() {
   const u = unit(), name = userName() || 'Lifter';
+  const vtot = volumeTotals(S.history);
   if (shareSt.tpl === 'workout' && cardEntry()) {
-    const h = cardEntry();
-    return { tpl: 'workout', name, u, h, date: new Date(h.date).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }), prs: (h.prs || []).map(p => ({ label: p.label, w: p.w, r: p.r, u: p.u, e: Math.round(fromKg(p.e, u)), gain: Math.round(fromKg(p.e - p.prev, u)) })) };
+    const h = cardEntry(), et = entryTotals(h);
+    return { tpl: 'workout', name, u, h, volKg: et.volKg, weekKg: vtot.week.volKg, weekReps: vtot.week.reps, date: new Date(h.date).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }), prs: (h.prs || []).map(p => ({ label: p.label, w: p.w, r: p.r, u: p.u, e: Math.round(fromKg(p.e, u)), gain: Math.round(fromKg(p.e - p.prev, u)) })) };
   }
   const st = streakInfo(S.history), ls = liftStats(S.history);
-  return { tpl: 'stats', name, u, st, date: new Date().toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' }), lifts: LIFTS.map(([k, label]) => ({ label, e: ls[k].best ? roundDisp(ls[k].best.e, u) : null, g: gainTxt(gainOf(ls[k], u), u), gk: gainOf(ls[k], u).kind })) };
+  return { tpl: 'stats', name, u, st, weekKg: vtot.week.volKg, weekReps: vtot.week.reps, allKg: vtot.all.volKg, allReps: vtot.all.reps, date: new Date().toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' }), lifts: LIFTS.map(([k, label]) => ({ label, e: ls[k].best ? roundDisp(ls[k].best.e, u) : null, g: gainTxt(gainOf(ls[k], u), u), gk: gainOf(ls[k], u).kind })) };
 }
 function shareText(sp) {
   sp = sp || cardSpec();
-  if (sp.tpl === 'workout') { const h = sp.h; return `FORGE · ${sp.name}\n${h.dayName} — ${h.focus}\n${fmt(h.durationSec)} · ${h.setsDone}/${h.setsTotal} sets${h.volume ? ' · ' + h.volume.toLocaleString() + ' ' + h.unit + ' volume' : ''}${sp.prs.length ? '\n' + sp.prs.map(p => `NEW PR ${p.label}: ${fmtNum(p.w)}×${p.r} (e1RM ${p.e} ${sp.u}, +${p.gain})`).join('\n') : ''}`; }
-  return `FORGE · ${sp.name}\n🔥 ${sp.st.current}-day streak (longest ${sp.st.best}) · ${sp.st.total} workout days\n${sp.lifts.map(l => `${l.label}: ${l.e != null ? l.e + ' ' + sp.u + ' e1RM' : '—'}${l.gk === 'gain' || l.gk === 'new' ? ' (' + (l.gk === 'new' ? 'new' : l.g + ' 30d') + ')' : ''}`).join('\n')}`;
+  if (sp.tpl === 'workout') { const h = sp.h; return `FORGE · ${sp.name}\n${h.dayName} — ${h.focus}\n${fmt(h.durationSec)} · ${h.setsDone}/${h.setsTotal} sets${sp.volKg ? ' · ' + fmtVol(sp.volKg, sp.u) + ' ' + sp.u + ' lifted' : ''}\nThis week: ${fmtVol(sp.weekKg, sp.u)} ${sp.u} · ${fmtReps(sp.weekReps)} reps${sp.prs.length ? '\n' + sp.prs.map(p => `NEW PR ${p.label}: ${fmtNum(p.w)}×${p.r} (e1RM ${p.e} ${sp.u}, +${p.gain})`).join('\n') : ''}`; }
+  return `FORGE · ${sp.name}\n🔥 ${sp.st.current}-day streak (longest ${sp.st.best}) · ${sp.st.total} workout days\nLifted: ${fmtVol(sp.weekKg, sp.u)} ${sp.u} this week · ${fmtVol(sp.allKg, sp.u)} ${sp.u} all-time\n${sp.lifts.map(l => `${l.label}: ${l.e != null ? l.e + ' ' + sp.u + ' e1RM' : '—'}${l.gk === 'gain' || l.gk === 'new' ? ' (' + (l.gk === 'new' ? 'new' : l.g + ' 30d') + ')' : ''}`).join('\n')}`;
 }
 function cRR(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
 function cT(c, s, x, y, size, wt, col, al, maxW) {
@@ -952,30 +1023,36 @@ function drawCard(cv, sp) {
   if (sp.tpl === 'stats') {
     cT(c, sp.name, 80, 260, 104, 900, '#f5f5f6', 'left', W - 160);
     cT(c, 'STRENGTH SNAPSHOT', 80, 316, 28, 800, '#ff6a1a');
-    panel(80, 370, 920, 270, true);
-    cFlame(c, 170, 500, 54);
-    const nw = cT(c, String(sp.st.current), 250, 560, 190, 900, '#ff8f45');
-    cT(c, 'DAY STREAK', 250 + nw + 24, 560, 36, 800, '#9a9aa5');
-    cT(c, 'LONGEST ' + sp.st.best + ' · ' + sp.st.total + ' WORKOUT DAYS', 250, 612, 28, 700, '#9a9aa5', 'left', 700);
+    panel(80, 350, 920, 170, true);
+    [['THIS WEEK', sp.weekKg, sp.weekReps, 124], ['ALL-TIME', sp.allKg, sp.allReps, 560]].forEach(([lb, kg, rp, x]) => {
+      cT(c, lb, x, 398, 24, 800, '#9a9aa5');
+      const t = fmtVol(kg, sp.u), nw = cT(c, t, x, 464, 70, 900, '#ff8f45', 'left', 290); cT(c, sp.u, x + nw + 10, 464, 30, 800, '#9a9aa5');
+      cT(c, fmtReps(rp) + ' reps', x, 500, 22, 700, '#6c6c76');
+    });
+    panel(80, 536, 920, 210, true);
+    cFlame(c, 165, 630, 44);
+    const nw = cT(c, String(sp.st.current), 230, 670, 140, 900, '#ff8f45');
+    cT(c, 'DAY STREAK', 230 + nw + 24, 670, 34, 800, '#9a9aa5');
+    cT(c, 'LONGEST ' + sp.st.best + ' · ' + sp.st.total + ' WORKOUT DAYS', 230, 720, 26, 700, '#9a9aa5', 'left', 740);
     sp.lifts.forEach((l, i) => {
-      const y = 680 + i * 196; panel(80, y, 920, 172, false);
-      cT(c, l.label.toUpperCase(), 124, y + 66, 36, 900, '#f5f5f6', 'left', 380);
-      cT(c, 'EST. 1RM', 124, y + 116, 26, 700, '#6c6c76');
-      if (l.e == null) { cT(c, '—', 956, y + 112, 90, 900, '#3a3a42', 'right'); return; }
-      const uw = cT(c, sp.u, 956, y + 112, 38, 800, '#9a9aa5', 'right');
-      cT(c, fmtNum(l.e), 956 - uw - 12, y + 118, 100, 900, '#ff8f45', 'right', 330);
+      const y = 764 + i * 166; panel(80, y, 920, 150, false);
+      cT(c, l.label.toUpperCase(), 124, y + 60, 34, 900, '#f5f5f6', 'left', 380);
+      cT(c, 'EST. 1RM', 124, y + 106, 24, 700, '#6c6c76');
+      if (l.e == null) { cT(c, '—', 956, y + 106, 86, 900, '#3a3a42', 'right'); return; }
+      const uw = cT(c, sp.u, 956, y + 102, 36, 800, '#9a9aa5', 'right');
+      cT(c, fmtNum(l.e), 956 - uw - 12, y + 108, 96, 900, '#ff8f45', 'right', 330);
       if (l.gk === 'gain' || l.gk === 'new') {
         const t = l.gk === 'new' ? 'NEW' : l.g + ' · 30D', tw = Math.max(110, t.length * 17 + 40);
-        cRR(c, 470 - tw / 2 + 60, y + 42, tw, 46, 23); c.fillStyle = l.gk === 'new' ? 'rgba(255,106,26,.18)' : 'rgba(61,220,132,.14)'; c.fill();
-        cT(c, t, 470 + 60, y + 74, 26, 800, l.gk === 'new' ? '#ff8f45' : '#7be8ab', 'center');
+        cRR(c, 470 - tw / 2 + 60, y + 36, tw, 44, 22); c.fillStyle = l.gk === 'new' ? 'rgba(255,106,26,.18)' : 'rgba(61,220,132,.14)'; c.fill();
+        cT(c, t, 470 + 60, y + 67, 26, 800, l.gk === 'new' ? '#ff8f45' : '#7be8ab', 'center');
       }
     });
   } else {
     const h = sp.h;
     cT(c, h.focus || h.dayName, 80, 270, 92, 900, '#f5f5f6', 'left', W - 160);
     cT(c, (h.week ? h.week + ' · ' : '') + h.dayName + ' · ' + sp.name, 80, 328, 32, 700, '#ff6a1a', 'left', W - 160);
-    const tiles = [[fmt(h.durationSec), 'TOTAL TIME'], [h.setsDone + '/' + h.setsTotal, 'SETS'], [h.volume ? h.volume.toLocaleString() : '—', 'VOLUME (' + h.unit.toUpperCase() + ')'], [String(h.exercises.length), 'EXERCISES']];
-    tiles.forEach((t, i) => { const x = 80 + (i % 2) * 470, y = 390 + Math.floor(i / 2) * 210; panel(x, y, 450, 190, false); cT(c, t[0], x + 40, y + 108, 84, 900, '#ff8f45', 'left', 370); cT(c, t[1], x + 40, y + 154, 26, 800, '#9a9aa5'); });
+    const tiles = [[fmt(h.durationSec), 'TOTAL TIME'], [h.setsDone + '/' + h.setsTotal, 'SETS'], [sp.volKg ? fmtVol(sp.volKg, sp.u) : '—', 'VOLUME (' + sp.u.toUpperCase() + ')'], [String(h.exercises.length), 'EXERCISES']];
+    tiles.forEach((t, i) => { const x = 80 + (i % 2) * 470, y = 390 + Math.floor(i / 2) * 210; panel(x, y, 450, 190, false); cT(c, t[0], x + 40, y + 98, 84, 900, '#ff8f45', 'left', 370); cT(c, t[1], x + 40, y + 142, 26, 800, '#9a9aa5'); if (i === 2) cT(c, 'Week: ' + fmtVol(sp.weekKg, sp.u) + ' ' + sp.u, x + 40, y + 174, 24, 700, '#6c6c76', 'left', 370); });
     if (sp.prs.length) {
       const ph = 120 + sp.prs.length * 110; panel(80, 830, 920, ph, true);
       cRR(c, 124, 870, 120, 50, 14); c.fillStyle = '#ff8f45'; c.fill(); cT(c, 'NEW PR', 184, 905, 28, 900, '#1a0a00', 'center');
@@ -986,11 +1063,11 @@ function drawCard(cv, sp) {
       });
     } else {
       panel(80, 830, 920, 400, false); cT(c, 'TOP SETS', 124, 890, 26, 800, '#ff6a1a');
-      h.exercises.filter(e => e.sets.some(x => x.w > 0)).slice(0, 4).forEach((e, i) => {
-        const best = e.sets.reduce((a, b) => (b.w > a.w ? b : a)), y = 960 + i * 74;
+      h.exercises.filter(e => e.sets.some(x => x.w > 0 && x.u !== 's')).slice(0, 4).forEach((e, i) => {
+        const best = e.sets.filter(x => x.u !== 's').reduce((a, b) => (b.w > a.w ? b : a)), y = 960 + i * 74;
         cT(c, e.name, 124, y, 36, 800, '#f5f5f6', 'left', 540); cT(c, fmtNum(best.w) + ' ' + h.unit + ' × ' + best.r, 956, y, 36, 800, '#ff8f45', 'right', 300);
       });
-      if (!h.exercises.some(e => e.sets.some(x => x.w > 0))) cT(c, 'Workout logged. Consistency wins.', 124, 990, 38, 700, '#9a9aa5', 'left', 800);
+      if (!h.exercises.some(e => e.sets.some(x => x.w > 0 && x.u !== 's'))) cT(c, 'Workout logged. Consistency wins.', 124, 990, 38, 700, '#9a9aa5', 'left', 800);
     }
   }
   cT(c, sp.tpl === 'stats' ? 'Est. 1RM (Epley) · best of sets of 1–10 reps' : 'Logged with FORGE', 80, 1292, 26, 700, '#6c6c76', 'left', 700);
@@ -1013,13 +1090,27 @@ async function shareGo() {
   } catch (e) { if (e && e.name === 'AbortError') return; }
   downloadBlob(blob, name); const ok = await copyText(text); toast(ok ? 'Image saved · summary copied' : 'Image saved');
 }
+// "Share program": the active program as a .json file (normalized; no source/ver so the receiver's built-in upgrade check can't swap it). Friends import it on the Import tab.
+function programFile() {
+  const p = clone(S.program); delete p.source; delete p.ver;
+  const slug = String(p.name || 'program').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'program';
+  return { name: 'forge-program-' + slug + '.json', json: JSON.stringify(p) };
+}
+async function shareProgram() {
+  const f = programFile(), blob = new Blob([f.json], { type: 'application/json' }), file = new File([blob], f.name, { type: 'application/json' });
+  try {
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: S.program.name, text: 'FORGE program: ' + S.program.name + '. Import it on the Import tab.' }); return; }
+  } catch (e) { if (e && e.name === 'AbortError') return; }
+  downloadBlob(blob, f.name); toast('Program file saved - send it to a friend to import');
+}
 function libraryHTML() {
   const one = S.library.length < 2;
   const card = e => {
     const act = e.id === S.activeId, ds = allDays(e.program), wk = e.program.weeks.length;
     return `<div class="card libc ${act ? 'on' : ''}" data-lib="${esc(e.id)}"><div class="row" style="gap:10px;align-items:center"><div style="flex:1;min-width:0"><b class="libn">${esc(e.name)}</b><div class="sub" style="font-size:12.5px">${wk} week${wk > 1 ? 's' : ''} × ${wk ? e.program.weeks[0].days.length : 0} days · ${ds.length} sessions</div></div>
       ${act ? '<span class="chip acc libact">Active</span>' : `<button class="btn sec" style="min-height:40px;padding:0 14px;font-size:13px" data-act="libSwitch" data-id="${esc(e.id)}">Switch</button>`}
-      <button class="icon" data-act="libDel" data-id="${esc(e.id)}" aria-label="Delete ${esc(e.name)}" ${act && one ? 'disabled style="opacity:.3"' : ''}>✕</button></div></div>`;
+      <button class="icon" data-act="libDel" data-id="${esc(e.id)}" aria-label="Delete ${esc(e.name)}" ${act && one ? 'disabled style="opacity:.3"' : ''}>✕</button></div>
+      ${act ? '<button class="btn sec block" id="shareProg" style="min-height:40px;font-size:13.5px;margin-top:10px" data-act="shareProg">↗ Share program</button>' : ''}</div>`;
   };
   return `<div><div class="label">My workouts</div><div style="display:grid;gap:8px;grid-template-columns:minmax(0,1fr)">${S.library.map(card).join('')}</div>
     <button class="btn sec block" style="margin-top:8px" data-act="nav" data-v="import">+ Add workout</button>
@@ -1084,15 +1175,15 @@ function importView() {
 const setStr = s => s.u === 's' ? `${s.r}s` : s.w ? `${s.w}×${s.r || '?'}` : `${s.r || '✓'}`;
 function historyView() {
   const h = S.history;
-  const totalVol = h.reduce((n, x) => n + (x.volume || 0), 0), totalSets = h.reduce((n, x) => n + x.setsDone, 0);
+  const vt = volumeTotals(h).all, totalSets = h.reduce((n, x) => n + x.setsDone, 0), u = unit();
   return `<div class="screen">
     <div class="hdr"><div class="brand">FOR<b>GE</b></div></div>
     <div><div class="greet">History</div><div class="sub">Saved on this device.</div></div>
     ${h.length ? `<div class="tiles"><div class="tile"><b>${h.length}</b><span>Workouts</span></div><div class="tile"><b>${totalSets}</b><span>Sets done</span></div></div>` : ''}
-    ${h.length ? h.map(x => `<div class="card ${openHist === x.id ? 'open' : ''}"><button class="dayhead" data-act="histToggle" data-id="${x.id}"><div class="dn">✓</div><div class="tx"><b>${esc(x.dayName)} — ${esc(x.focus)}</b><span>${x.week ? esc(x.week) + ' · ' : ''}${new Date(x.date).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })} · ${fmt(x.durationSec)} · ${x.setsDone}/${x.setsTotal} sets${x.volume ? ' · ' + x.volume.toLocaleString() + ' ' + x.unit : ''}</span></div><span class="caret">▶</span></button>
+    ${h.length ? h.map(x => `<div class="card ${openHist === x.id ? 'open' : ''}"><button class="dayhead" data-act="histToggle" data-id="${x.id}"><div class="dn">✓</div><div class="tx"><b>${esc(x.dayName)} — ${esc(x.focus)}</b><span>${x.week ? esc(x.week) + ' · ' : ''}${new Date(x.date).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })} · ${fmt(x.durationSec)} · ${x.setsDone}/${x.setsTotal} sets${entryTotals(x).volKg ? ' · ' + fmtVol(entryTotals(x).volKg, u) + ' ' + u : ''}</span></div><span class="caret">▶</span></button>
       ${openHist === x.id ? `<div style="margin-top:10px">${x.exercises.map(e => `<div class="exrow"><b>${esc(e.name)}</b><div>${e.sets.map(setStr).join(' · ')}</div></div>`).join('')}</div>` : ''}</div>`).join('')
       : `<div class="empty"><div style="font-size:44px">🏋️</div><p style="margin-top:8px">No workouts yet.<br>Finish one and it'll show up here.</p></div>`}
-    ${h.length && totalVol ? `<div class="sub" style="text-align:center">Lifetime volume: ${totalVol.toLocaleString()} ${h[0].unit}</div>` : ''}
+    ${h.length && vt.volKg ? `<div class="sub" id="lifeVol" style="text-align:center">Lifetime volume: ${fmtVol(vt.volKg, u)} ${u} · ${fmtReps(vt.reps)} reps</div>` : ''}
   </div>${navHTML()}`;
 }
 function topBar(s) {
@@ -1172,16 +1263,18 @@ function activeView() {
 function summaryView() {
   const h = S.history.find(x => x.id === S.lastSummaryId) || S.history[0];
   if (!h) return homeView();
+  const et = entryTotals(h), wt = volumeTotals(S.history).week;
   return `<div class="screen">
     <div class="trophy">🏆</div>
     <div style="text-align:center"><div class="greet">Workout complete!</div><div class="sub">${h.week ? esc(h.week) + ' · ' : ''}${esc(h.dayName)} — ${esc(h.focus)}</div></div>
     <div class="tiles">
       <div class="tile"><b>${fmt(h.durationSec)}</b><span>Total time</span></div>
       <div class="tile"><b>${h.setsDone}<small style="font-size:16px;color:var(--mut)">/${h.setsTotal}</small></b><span>Sets completed</span></div>
-      <div class="tile"><b>${h.volume ? h.volume.toLocaleString() : '—'}</b><span>Volume (${h.unit})</span></div>
+      <div class="tile"><b>${et.volKg ? fmtVol(et.volKg, unit()) : '—'}</b><span>Volume (${unit()})</span></div>
       <div class="tile"><b>${h.exercises.length}</b><span>Exercises</span></div>
     </div>
-    ${!h.volume ? '<div class="note" style="text-align:center">Log weights during sets to see total volume.</div>' : ''}
+    ${!et.volKg ? '<div class="note" style="text-align:center">Log weights during sets to see total volume.</div>' : ''}
+    <div class="note" id="sumWeek" style="text-align:center;margin-top:-2px">This week: ${fmtVol(wt.volKg, unit())} ${unit()} · ${fmtReps(wt.reps)} reps</div>
     ${h.prs && h.prs.length ? `<div class="card prcard" id="prCard"><div class="label"><span class="prb" style="margin:0 8px 0 0">PR</span>New personal record${h.prs.length > 1 ? 's' : ''}</div>${h.prs.map(p => `<div class="prline"><b>${esc(p.label)}</b><span>${fmtNum(p.w)} ${p.u} × ${p.r}</span><em>e1RM ${Math.round(fromKg(p.e, unit()))} ${unit()}<i>+${Math.round(fromKg(p.e - p.prev, unit()))}</i></em></div>`).join('')}</div>` : ''}
     <div class="card"><div class="label" style="margin-bottom:6px">Sets logged</div>${h.exercises.map(e => `<div class="exrow"><b>${esc(e.name)}</b>${h.prs && h.prs.some(p => p.lift === canonicalLift(e.name)) ? '<span class="prb">PR</span>' : ''}<div>${e.sets.map(setStr).join(' · ')}</div></div>`).join('')}</div>
     <div class="note" style="text-align:center">Saved to history. Next up: ${S.program.weeks.length > 1 ? esc(curWeek().name) + ' · ' : ''}${esc(dayOf().name)} — ${esc(dayOf().focus)}</div>
@@ -1449,6 +1542,7 @@ function act(a, t) {
     case 'shareOpen': shareSt = { tpl: d.t === 'workout' ? 'workout' : 'stats', id: d.id || null }; modal = 'share'; render(); break;
     case 'shareTpl': if (d.t === 'workout' && !S.history.length) break; shareSt.tpl = d.t; if (d.t === 'workout' && !shareSt.id) shareSt.id = S.history[0].id; render(); break;
     case 'shareGo': shareGo(); break;
+    case 'shareProg': shareProgram(); break;
     case 'shareSave': cardBlob().then(b => { if (b) { downloadBlob(b, shareFile()); toast('Image saved'); } }); break;
     case 'shareCopy': copyText(shareText()).then(ok => toast(ok ? 'Summary copied' : 'Could not copy')); break;
     case 'reloadApp': location.reload(); break;
@@ -1533,7 +1627,7 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) chec
 setTimeout(() => checkUpdate(true), 800);
 render();
 // test hooks (harmless in production)
-window.__forge = { BUILD, canonicalLift, streakCalc, dayIdx, weekOf, liftStats, liftSetList, gainOf, detectPRs, streakInfo, checkUpdate, drawCard, cardSpec, parseText, parseAny, buildSteps, getState: () => S, BUILTIN_PROGRAM, builtin, estSec, repsMax };
+window.__forge = { BUILD, entryTotals, volumeTotals, weeklyVolume, fmtVol, programFile, shareProgram, shareText, canonicalLift, streakCalc, dayIdx, weekOf, liftStats, liftSetList, gainOf, detectPRs, streakInfo, checkUpdate, drawCard, cardSpec, parseText, parseAny, buildSteps, getState: () => S, BUILTIN_PROGRAM, builtin, estSec, repsMax };
 </script>
 </body>
 </html>
