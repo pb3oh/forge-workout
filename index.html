@@ -35,7 +35,7 @@ h1,h2,h3,p{margin:0}
 .icon{width:44px;height:44px;border-radius:14px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:18px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
 .libc.on{border-color:rgba(255,106,26,.5)}
-.libn{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.libn{display:block;overflow-wrap:anywhere}
 .label{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--acc);text-transform:uppercase}
 .mut{color:var(--mut)}
 .chip{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;background:var(--card2);border:1px solid var(--line);font-size:12.5px;font-weight:600;color:var(--mut);white-space:nowrap}
@@ -62,7 +62,7 @@ h1,h2,h3,p{margin:0}
 .blk{display:flex;gap:10px;padding:9px 0;border-top:1px solid rgba(255,255,255,.06);font-size:14px}
 .blk .n{width:26px;height:26px;border-radius:8px;background:var(--accsoft);color:var(--acc2);font-weight:800;font-size:12px;display:grid;place-items:center;flex:none}
 .blk .t{flex:1;min-width:0}
-.blk .t div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.blk .t div{overflow-wrap:anywhere}
 .blk .t small{color:var(--dim);font-size:12px}
 .pills{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:none;margin:0 -18px;padding-left:18px;padding-right:18px}
 .pills::-webkit-scrollbar{display:none}
@@ -126,7 +126,7 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:44px;di
 .dayhead .tx{flex:1;min-width:0}
 .dayhead .tx b{display:block;font-size:16px}
 .dayhead .tx span{color:var(--mut);font-size:12.5px}
-.caret{color:var(--dim);transition:transform .2s}
+.caret{color:var(--dim);transition:transform .2s;display:inline-block;flex:none;width:18px;height:18px;line-height:18px;text-align:center;font-size:12px}
 .open .caret{transform:rotate(90deg)}
 .empty{text-align:center;color:var(--mut);padding:40px 10px}
 
@@ -155,20 +155,23 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:44px;di
 .guide p{margin:8px 0 0;font-size:13px;line-height:1.5;color:var(--mut)}.guide b{color:var(--text)}
 .target .u{color:var(--mut);font-weight:700}
 .note{font-size:12.5px;color:var(--dim);margin-top:2px}
-.inputs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.field{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:8px 4px 10px;text-align:center}
-.field small{display:block;font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--mut);margin-bottom:2px}
-.field .st{display:flex;align-items:center;justify-content:space-between;gap:2px}
-.field .st button{flex:none;width:44px;min-width:44px;height:48px;border-radius:12px;background:var(--card2);font-size:22px;font-weight:700}
-.field input{width:100%;min-width:0;min-height:44px;background:none;border:0;text-align:center;font-size:30px;font-weight:800;outline:none;font-variant-numeric:tabular-nums}
+.inputs{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin-top:14px}
+/* Steppers (weight / reps): ONE full-width row each, so both cards are always the same width. Layout is [48px -] [label + value, flexible middle] [48px +].
+   The middle column never drops below 112px (room for 6-7 characters such as 1000.5 or 225.5 at 30px/800) and the value is auto-shrunk by fitNum() if someone types even more. */
+.field{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:6px;text-align:center;min-width:0}
+.field .st{display:grid;grid-template-columns:48px minmax(112px,1fr) 48px;align-items:center;gap:6px;min-width:0}
+.field .st button{width:48px;min-width:48px;height:48px;border-radius:12px;background:var(--card2);font-size:24px;font-weight:700;padding:0}
+.field .mid{min-width:0;height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.field small{display:block;position:relative;max-width:100%;font-size:11px;line-height:11px;margin-bottom:-7px;font-weight:800;letter-spacing:.1em;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:clip}
+.field input{display:block;width:100%;transform:translateY(3px);min-width:0;height:44px;min-height:44px;margin:0;padding:0;-webkit-appearance:none;appearance:none;border-radius:0;background:none;border:0;text-align:center;text-indent:0;letter-spacing:0;font-size:30px;line-height:44px;font-weight:800;outline:none;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:clip}
 .field input::placeholder{color:var(--dim)}
 .next{display:flex;gap:12px;align-items:center;background:var(--card);border-radius:18px}
 .next .n{width:42px;height:42px;border-radius:12px;background:var(--card2);display:grid;place-items:center;font-weight:900;color:var(--acc2);flex:none}
 .next b{display:block;font-size:15px}
 .next span{color:var(--mut);font-size:12.5px}
-.actions{position:sticky;bottom:0;z-index:20;background:linear-gradient(180deg,transparent,var(--bg) 28%);padding:18px 18px calc(env(safe-area-inset-bottom) + 14px);display:grid;grid-template-columns:64px 1fr 64px;gap:8px;margin-top:auto}
+.actions{position:sticky;bottom:0;z-index:20;background:linear-gradient(180deg,transparent,var(--bg) 28%);padding:18px 18px calc(env(safe-area-inset-bottom) + 14px);display:grid;grid-template-columns:minmax(52px,64px) minmax(0,1fr) minmax(52px,64px);gap:8px;margin-top:auto}
 .actions .btn{min-height:64px}
-.actions .btn.pri{font-size:17px;white-space:nowrap;padding:0 8px}
+.actions .btn.pri{font-size:clamp(14.5px,4.7vw,17px);white-space:nowrap;padding:0 6px}
 .actions .sm{font-size:13px;flex-direction:column;gap:2px;font-weight:700;color:var(--mut)}
 .actions .sm i{font-style:normal;font-size:18px}
 .ringwrap{display:grid;place-items:center;position:relative;margin:6px 0 4px}
@@ -187,7 +190,6 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:44px;di
 .pausedov .pc{font-size:44px;font-weight:800;font-variant-numeric:tabular-nums}
 .pausedov .btn{width:100%;max-width:320px}
 .chip.btnchip{touch-action:manipulation;cursor:pointer;color:var(--text);min-height:44px;display:inline-flex;align-items:center}
-@media (max-width:370px){.field .st{flex-wrap:wrap;justify-content:center;gap:4px}.field .st input{order:-1;flex:1 0 100%}.field .st button{flex:1 1 44px}}
 .chip.btnchip:active{transform:scale(.96)}
 
 /* Music (Phase 0: Spotify links only, no login / no API) */
@@ -198,8 +200,8 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:44px;di
 .musicrow .mi{width:40px;height:40px;border-radius:12px;background:var(--accsoft);border:1px solid rgba(255,106,26,.4);display:grid;place-items:center;color:var(--acc2);font-size:17px;flex:none}
 .musicrow .mt{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}
 .musicrow .mt small{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--mut)}
-.musicrow .mt b{font-size:16px;display:flex;align-items:center;gap:7px;min-width:0;white-space:nowrap}
-.musicrow .mt b .nm{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.musicrow .mt b{font-size:16px;display:flex;flex-wrap:wrap;align-items:center;gap:0 7px;min-width:0}
+.musicrow .mt b .nm{min-width:0;overflow-wrap:anywhere}
 .musicrow .mt b .sp{color:var(--mut);font-weight:600;flex:none}
 .musicrow .go{color:var(--mut);font-size:22px;flex:none}
 .musicrow.empty{border:1px dashed rgba(255,106,26,.6);background:rgba(255,106,26,.05)}
@@ -253,10 +255,10 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:44px;di
 
 /* volume strip / weight lifted card */
 .volstrip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 4px;margin-top:10px}
-.volstrip>div{text-align:center;min-width:0;padding:0 4px;border-left:1px solid var(--line)}
+.volstrip>div{text-align:center;min-width:0;padding:0 2px;border-left:1px solid var(--line)}
 .volstrip>div:first-child{border-left:0}
 .volstrip small{display:block;color:var(--mut);font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
-.volstrip b{display:block;font-size:22px;font-weight:900;line-height:1.2;margin-top:3px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.volstrip b{display:block;font-size:clamp(17px,5.4vw,22px);font-weight:900;line-height:1.2;margin-top:3px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .volstrip b i{font-style:normal;font-size:11px;font-weight:700;color:var(--mut);margin-left:2px}
 .volstrip em{display:block;font-style:normal;color:var(--mut);font-size:11.5px;margin-top:1px;font-variant-numeric:tabular-nums}
 .volcard{padding:16px}
@@ -296,6 +298,7 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:44px;di
 .yw3 b i{font-style:normal;font-size:11px;color:var(--mut);font-weight:700;margin-left:3px}
 .yw3 b.sm{font-size:17px}.yw3 b.xs{font-size:14px}.yw3 b.xs i{margin-left:2px}
 .yw3 em{display:block;font-style:normal;margin-top:2px;font-size:11.5px;font-weight:700;color:var(--mut);font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:340px){.yweek{padding:12px 10px}.yw3{gap:5px}.yw3>div{padding:9px 5px 8px}.yw3 small{letter-spacing:.04em}.yw3 b.sm{font-size:15px}.yw3 b.xs{font-size:13px}.yw3 em{font-size:10.5px}}
 .yw3 em.up{color:var(--ok)}.yw3 em.dn{color:var(--dim)}
 .srow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 14px;border-radius:18px;background:var(--card);border:1px solid var(--line);touch-action:manipulation}
 .srow .fl{font-size:24px;line-height:1}
@@ -345,7 +348,7 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:44px;di
 .rstbox{border-color:rgba(255,106,26,.5);background:rgba(255,106,26,.08)}
 .erasebox{border:1px solid rgba(255,90,90,.45);background:rgba(255,90,90,.08);border-radius:16px;padding:14px}
 .volcard .volstrip{background:transparent;border:0;margin-top:8px;padding:0}
-.volcard .volstrip b{font-size:26px;color:var(--acc2)}
+.volcard .volstrip b{font-size:clamp(17px,6vw,26px);color:var(--acc2)}
 .wkbars{display:flex;align-items:flex-end;gap:6px;height:56px;margin-top:14px}
 .wkbars i{flex:1;background:var(--card2);border-radius:4px 4px 2px 2px;min-height:3px}
 .wkbars i.cur{background:linear-gradient(180deg,var(--acc2),var(--acc))}
@@ -427,6 +430,7 @@ html{overscroll-behavior-y:contain}
 .mr .nm{display:flex;align-items:baseline;gap:6px;min-width:0;flex:0 1 auto}
 .mr .nn{overflow:hidden;text-overflow:ellipsis;min-width:0}
 .mr .rp{color:var(--dim);font-size:10.5px;font-weight:600;flex:none}
+@media (max-width:340px){.mr{gap:7px;padding:6px 6px}.gpill .gi{display:none}.gpill{padding-left:12px}}
 .mr .l1 .v{font-weight:800;font-variant-numeric:tabular-nums;font-size:13.5px;flex:none}
 .mr .l1 .v small{color:var(--mut);font-size:11px;font-weight:700;margin-left:4px}
 .mr.zero .v{color:var(--dim)}
@@ -510,7 +514,7 @@ html{overscroll-behavior-y:contain}
    The app was renamed FORGE -> BETA FIT; the storage keys 'forge.v1' / 'forge.sync.v1', the API host (forge-api) and the repo URL
    keep the old name on purpose: renaming them would orphan every existing install's data and links.
    ========================================================= */
-const BUILD = '2026.10.15-15'; // bump on every deploy; the in-app update banner compares this against the live file
+const BUILD = '2026.10.15-16'; // bump on every deploy; the in-app update banner compares this against the live file
 const LS = 'forge.v1';
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1445,6 +1449,12 @@ function readField(el, max, label, unitTxt) {
   }
   el.setAttribute('aria-invalid', err ? 'true' : 'false');
   return { v, err };
+}
+// keep a stepper value fully visible: 30px by default; if the text is still wider than the box (7+ characters), step the font down to fit (never clipped, never below 14px)
+function fitNum(el) {
+  if (!el) return; el.style.fontSize = '';
+  let fs = parseFloat(getComputedStyle(el).fontSize) || 30;
+  while (el.scrollWidth > el.clientWidth && fs > 14) { fs -= 2; el.style.fontSize = fs + 'px'; }
 }
 function readInputs() {
   const w = readField($('#inW'), maxW(), 'Weight', ' ' + unit()), r = readField($('#inR'), MAX_REPS, 'Reps', '');
@@ -2819,8 +2829,8 @@ function activeView() {
       ${secs ? timerHTML(secs, tm) : `<div class="target"><span class="big ${repLabel(tgt).length > 9 ? 'sm' : repLabel(tgt).length > 5 ? 'md' : ''}">${esc(repLabel(tgt))}</span><span class="u">${tgt === 'Failure' ? 'go to failure' : tgt === 'Drop' ? 'drop weight, go to failure' : numeric(tgt) ? 'reps target' : /[+→]/.test(tgt) ? 'reps (one set)' : tgt ? 'target' : 'see note'}</span></div>`}
       ${ex.note ? `<div class="note">${esc(ex.note)}</div>` : ''}
       ${secs ? '' : `<div class="inputs" ${cardio ? 'style="grid-template-columns:1fr"' : ''}>
-        ${cardio ? '' : `<div class="field"><small>WEIGHT (${unit().toUpperCase()})</small><div class="st"><button data-act="wstep" data-d="-${unit() === 'kg' ? 2.5 : 5}">−</button><input id="inW" type="text" inputmode="decimal" placeholder="0" value="${esc(d.w)}"><button data-act="wstep" data-d="${unit() === 'kg' ? 2.5 : 5}">+</button></div></div>`}
-        <div class="field"><small>REPS DONE</small><div class="st"><button data-act="rstep" data-d="-1">−</button><input id="inR" type="text" inputmode="numeric" placeholder="reps" value="${esc(d.r)}"><button data-act="rstep" data-d="1">+</button></div></div>
+        ${cardio ? '' : `<div class="field"><div class="st"><button data-act="wstep" data-d="-${unit() === 'kg' ? 2.5 : 5}" aria-label="Weight down">−</button><div class="mid"><small>WEIGHT (${unit().toUpperCase()})</small><input id="inW" type="text" inputmode="decimal" placeholder="0" aria-label="Weight (${unit()})" value="${esc(d.w)}"></div><button data-act="wstep" data-d="${unit() === 'kg' ? 2.5 : 5}" aria-label="Weight up">+</button></div></div>`}
+        <div class="field"><div class="st"><button data-act="rstep" data-d="-1" aria-label="Reps down">−</button><div class="mid"><small>REPS DONE</small><input id="inR" type="text" inputmode="numeric" placeholder="reps" aria-label="Reps done" value="${esc(d.r)}"></div><button data-act="rstep" data-d="1" aria-label="Reps up">+</button></div></div>
       </div>`}
       ${d.st === 'done' ? '<div class="note" style="color:var(--ok);margin-top:10px">✓ Already logged — completing again updates it.</div>' : ''}
     </div>
@@ -3012,7 +3022,7 @@ function renderInner() {
   if (modal === 'share') paintShare();
   syncBanner(); autoFetches();
   const ta = $('#importTA'); if (ta) ta.addEventListener('input', () => { importText = ta.value; });
-  ['inW', 'inR'].forEach(id => { const el = $('#' + id); if (el) el.addEventListener('input', saveDraft); });
+  ['inW', 'inR'].forEach(id => { const el = $('#' + id); if (el) { el.addEventListener('input', () => { fitNum(el); saveDraft(); }); fitNum(el); } });
 }
 // Escape closes the open sheet; Tab stays inside it
 document.addEventListener('keydown', e => {
@@ -3264,7 +3274,7 @@ function act(a, t) {
       const el = $(a === 'wstep' ? '#inW' : '#inR'); if (!el) break;
       const cur = NUM_RE.test(String(el.value).trim()) ? parseFloat(el.value) : 0, mx = a === 'wstep' ? maxW() : MAX_REPS;
       let v = cur + parseFloat(d.d); if (v < 0) v = 0; if (v > mx) v = mx;
-      el.value = Math.round(v * 100) / 100 || ''; saveDraft(); break;
+      el.value = Math.round(v * 100) / 100 || ''; fitNum(el); saveDraft(); break;
     }
     case 'settings': modal = 'settings'; eraseStep = 0; resetStep = 0; resetErr = ''; render(); break;
     case 'editName': modal = 'settings'; render(); { const ni = $('#nameIn'); if (ni) { ni.focus(); ni.select(); } } break;
