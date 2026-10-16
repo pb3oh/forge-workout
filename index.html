@@ -7,11 +7,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="FORGE">
+<meta name="apple-mobile-web-app-title" content="BETA FIT">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%23ff6a1a%27/%3E%3C/svg%3E">
-<title>FORGE — Workout Tracker</title>
+<title>BETA FIT — Workout Tracker</title>
 <style>
 :root{
   --bg:#0b0b0d; --bg2:#111114; --card:#17171b; --card2:#202026; --line:#2a2a31;
@@ -187,6 +187,41 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
 .pausedov .btn{width:100%;max-width:320px}
 .chip.btnchip{touch-action:manipulation;cursor:pointer;color:var(--text)}
 .chip.btnchip:active{transform:scale(.96)}
+
+/* Music (Phase 0: Spotify links only, no login / no API) */
+.chip.music.on{border-style:solid;border-color:rgba(30,215,96,.45);background:rgba(30,215,96,.08);color:var(--text);opacity:1;max-width:100%}
+.chip.music .nm{overflow:hidden;text-overflow:ellipsis;max-width:170px}
+.musicrow{display:flex;align-items:center;gap:12px;width:100%;min-height:60px;padding:10px 14px;margin:0 0 12px;border-radius:16px;background:rgba(0,0,0,.28);border:1px solid var(--line);text-align:left;touch-action:manipulation}
+.musicrow:active{transform:scale(.99)}
+.musicrow .mi{width:40px;height:40px;border-radius:12px;background:var(--accsoft);border:1px solid rgba(255,106,26,.4);display:grid;place-items:center;color:var(--acc2);font-size:17px;flex:none}
+.musicrow .mt{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}
+.musicrow .mt small{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--mut)}
+.musicrow .mt b{font-size:16px;display:flex;align-items:center;gap:7px;min-width:0;white-space:nowrap}
+.musicrow .mt b .nm{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.musicrow .mt b .sp{color:var(--mut);font-weight:600;flex:none}
+.musicrow .go{color:var(--mut);font-size:22px;flex:none}
+.musicrow.empty{border:1px dashed rgba(255,106,26,.6);background:rgba(255,106,26,.05)}
+.musicrow.empty .mt b{color:var(--acc2)}
+.splogo{flex:none;display:block}
+.mudet{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:14px;color:#7ee8a6;min-height:24px}
+.mudet.bad{color:#ffb3b3;align-items:flex-start;line-height:1.4}
+.aslrow{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:10px 14px;margin-bottom:8px;border-radius:14px;background:var(--bg2);border:1px solid var(--line);text-align:left}
+.aslrow.on{background:var(--accsoft);border-color:rgba(255,106,26,.55)}
+.aslrow .rad{width:20px;height:20px;border-radius:50%;border:2px solid var(--dim);flex:none;display:grid;place-items:center}
+.aslrow.on .rad{border-color:var(--acc)}
+.aslrow.on .rad::after{content:'';width:10px;height:10px;border-radius:50%;background:var(--acc)}
+.aslrow .nm{flex:1;min-width:0;font-weight:700;font-size:15px;display:flex;flex-direction:column;gap:2px}
+.aslrow .nm small{font-weight:500;font-size:12.5px;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.aslrow .alink{font-size:12.5px;font-weight:700;color:var(--acc2);max-width:38%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right}
+.aslrow .alink.none{color:var(--dim);font-weight:600}
+.tgl{width:52px;height:30px;border-radius:999px;background:var(--card2);border:1px solid var(--line);position:relative;flex:none;transition:background .15s}
+.tgl::after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--mut);transition:left .15s}
+.tgl.on{background:var(--acc);border-color:var(--acc)}
+.tgl.on::after{left:25px;background:#1a0a00}
+.murow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0 14px;min-height:48px}
+.murow .t{display:flex;flex-direction:column;gap:2px;font-weight:700;font-size:15px}
+.murow .t small{font-weight:500;font-size:12.5px;color:var(--mut)}
+#muBtns{display:grid;gap:8px}
 .moreblk{display:flex;width:100%;gap:10px;padding:9px 0;border-top:1px solid rgba(255,255,255,.06);font-size:14px;text-align:left;color:inherit;touch-action:manipulation;cursor:pointer;align-items:center}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:60;display:flex;justify-content:center;align-items:flex-end}
 .sheet{width:100%;max-width:430px;max-height:86vh;overflow-y:auto;background:var(--card);border-radius:26px 26px 0 0;border:1px solid var(--line);padding:10px 18px calc(env(safe-area-inset-bottom) + 20px)}
@@ -418,6 +453,29 @@ html{overscroll-behavior-y:contain}
 .mem:first-child{border-top:0}
 .mem .mt{flex:1;min-width:0}.mem .mt b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mem .mt small{color:var(--mut);font-size:12px}
 .spc{display:flex;align-items:center;gap:10px}
+.reqcard{display:flex;flex-wrap:wrap;align-items:center;gap:10px;border-color:rgba(255,106,26,.45)}.reqcard .pi{font-size:22px}.reqcard .mt{flex:1;min-width:0}.reqcard .mt b{display:block}.reqcard .mt small{display:block;color:var(--mut);font-size:12.5px;margin-top:2px;overflow-wrap:anywhere}
+.reqbtns{display:flex;gap:8px;width:100%}.reqbtns .btn,.reqcard>.btn{min-height:44px;padding:0 14px;font-size:14px;flex:1}.reqcard.declined{border-color:var(--line)}
+.rqcard{display:block}.rqlist{display:grid;gap:8px;margin-top:10px}.rqrow{display:flex;align-items:center;gap:8px}.rqrow .mt{flex:1;min-width:0}.rqrow .mt b{display:block;overflow-wrap:anywhere}.rqrow .mt small{color:var(--mut);font-size:12px}.rqrow .btn{min-height:44px;padding:0 12px;font-size:14px}
+.rqcard .mt b,.rqcard .mt small{display:block}.rqcard .mt small{color:var(--mut);font-size:12.5px;margin-top:2px}.scoperow>.gpill{flex-shrink:0}
+.rqbadge{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;margin-left:6px;border-radius:99px;background:var(--acc);color:#111;font-size:11px;font-weight:900;line-height:1}
+.avstack{position:relative}.avstack .rqbadge{position:absolute;top:2px;right:-6px;margin:0}
+#rcBtn{background:none;border:0;color:var(--mut);font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer;min-height:44px}
+.rmbtn{min-height:44px;padding:0 10px;color:var(--mut);font-size:13px;font-weight:700;background:none;border:0;cursor:pointer}.rmbox{margin:6px 0 10px}
+.pincard{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:10px;border-color:rgba(255,106,26,.5);background:linear-gradient(170deg,rgba(255,106,26,.14),var(--card) 70%)}
+.pincard .pi,.pinbox .pi{width:40px;height:40px;border-radius:12px;background:var(--accsoft);border:1px solid rgba(255,106,26,.4);display:grid;place-items:center;font-size:18px;flex:none}
+.pincard .mt,.pinbox .mt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding-right:34px}
+.pinbox .mt{padding-right:0}
+.pincard .mt b,.pinbox .mt b{font-size:15.5px;overflow-wrap:anywhere}.pincard .mt small,.pinbox .mt small{color:var(--mut);font-size:12.5px;line-height:1.35;overflow-wrap:anywhere}
+.pincard>.btn{flex:1 0 100%;min-height:46px;font-size:14px}
+.pincard .pindx{position:absolute;top:8px;right:8px;width:36px;height:36px;border-radius:12px;font-size:14px}
+.pinbox{border-color:rgba(255,106,26,.45)}
+.starterrow{display:flex;align-items:center;gap:12px;padding:12px 14px}
+.starterrow .mt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.starterrow small{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--mut)}.starterrow b{font-size:14.5px;overflow-wrap:anywhere}
+.starterrow .btn{min-height:44px;padding:0 20px;font-size:14px}
+.starter{display:flex;flex-wrap:wrap;align-items:center;gap:10px;border:1.5px dashed rgba(255,106,26,.5);background:rgba(255,106,26,.05)}
+.starter .pi{width:40px;height:40px;border-radius:12px;background:var(--accsoft);border:1px solid rgba(255,106,26,.4);display:grid;place-items:center;font-size:18px;flex:none}
+.starter .mt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.starter .mt small{color:var(--mut);font-size:12.5px;line-height:1.35}
+.starter>.btn{flex:1 0 100%;min-height:46px;font-size:14px}
 .spc .mt{flex:1;min-width:0}.spc .mt b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.spc .mt small{color:var(--mut);font-size:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
 .gselrow{display:flex;align-items:center;gap:8px}
 .gselrow .seqrow{flex:1;min-width:0}
@@ -435,10 +493,12 @@ html{overscroll-behavior-y:contain}
 <script>
 'use strict';
 /* =========================================================
-   FORGE — single-file workout tracker prototype
+   BETA FIT — single-file workout tracker prototype
    State lives in localStorage ("forge.v1"). No build step.
+   The app was renamed FORGE -> BETA FIT; the storage keys 'forge.v1' / 'forge.sync.v1', the API host (forge-api) and the repo URL
+   keep the old name on purpose: renaming them would orphan every existing install's data and links.
    ========================================================= */
-const BUILD = '2026.10.15-10'; // bump on every deploy; the in-app update banner compares this against the live file
+const BUILD = '2026.10.15-12'; // bump on every deploy; the in-app update banner compares this against the live file
 const LS = 'forge.v1';
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -654,6 +714,165 @@ function parseAny(text) {
   return parseText(t);
 }
 
+/* ---------- Music (Spotify links only: no login, no API, no network calls) ----------
+   S.music = { v:1, link: <link|null> }  - ONE playlist link for the whole app/program (no per-day links, no auto-open).
+   link = { provider:'spotify', kind:'playlist|album|track|artist|link', id, url (canonical https, tracking params stripped), name }
+   Default: a built-in "BETA FIT starter playlist" (DEFAULT_MUSIC) is linked out of the box, on a fresh install, after Erase-all,
+   and for older saves that never linked anything. link:null means the user removed it on purpose ("Reset to default" brings it back).
+   Older saves (-11 and earlier) had { byProgramDay:{pid:{dayKey:link}}, default:{pid:link}, openOnStart }: collapsed into the single link on load.
+   Phase 1 (later) can add per-provider tokens elsewhere (like SY) and extend link without touching this shape. */
+const SP_KINDS = ['playlist', 'album', 'track', 'artist'], SP_FALLBACK_MS = 1200;
+const spBad = (msg, err) => ({ ok: false, err: err || 'invalid', msg });
+function parseSpotify(raw) {
+  let t = String(raw == null ? '' : raw).trim();
+  if (!t) return spBad('Paste a Spotify link', 'empty');
+  const NOT = spBad("That doesn't look like a Spotify link. In Spotify tap Share, then Copy link.", 'notspotify');
+  if (/\s/.test(t)) { // pasted share text ("Check this out https://...")
+    const m = t.match(/spotify:\S+|https?:\/\/\S+|(?:open\.spotify\.com|spotify\.link)\/\S+/i);
+    if (!m) return NOT; t = m[0];
+  }
+  t = t.replace(/^[<("'\u201c]+/, '').replace(/[>)"'\u201d.,;!]+$/, '');
+  const mk = (kind, id) => ({ ok: true, kind, id, short: false, url: `https://open.spotify.com/${kind}/${id}`, uri: `spotify:${kind}:${id}` });
+  const chk = (kind, id) => {
+    kind = String(kind).toLowerCase();
+    if (!SP_KINDS.includes(kind)) return spBad('Only playlist, album, track and artist links work here.', 'kind');
+    if (!/^[A-Za-z0-9]{22}$/.test(id)) return spBad('That Spotify link looks cut off or mistyped. Copy it again from Spotify.', 'id');
+    return mk(kind, id);
+  };
+  let m = t.match(/^spotify:(?:user:[^:\s]+:)?([A-Za-z]+):([A-Za-z0-9]+)(?:[?#]\S*)?$/i);
+  if (m) return chk(m[1], m[2]);
+  if (/^spotify:/i.test(t)) return NOT;
+  if (/^(?:open\.spotify\.com|spotify\.link)(?:[/?#]|$)/i.test(t)) t = 'https://' + t;
+  if (!/^https?:\/\//i.test(t)) return NOT;
+  let u; try { u = new URL(t); } catch (e) { return NOT; }
+  const host = u.hostname.toLowerCase();
+  if (u.username || u.password || u.port) return NOT;
+  if (host === 'spotify.link') {
+    const seg = u.pathname.split('/').filter(Boolean);
+    if (seg.length !== 1 || !/^[A-Za-z0-9_-]{3,64}$/.test(seg[0])) return NOT;
+    return { ok: true, kind: 'link', id: '', short: true, url: 'https://spotify.link/' + seg[0], uri: '' };
+  }
+  if (host !== 'open.spotify.com') return NOT;
+  let seg = u.pathname.split('/').filter(Boolean);
+  if (seg[0] && /^intl-[a-z]{2}(?:-[a-z]{2,4})?$/i.test(seg[0])) seg.shift();
+  if (seg[0] && seg[0].toLowerCase() === 'embed') seg.shift();
+  if (seg[0] && seg[0].toLowerCase() === 'user' && seg.length === 4) seg = seg.slice(2); // legacy /user/<name>/playlist/<id>
+  if (seg.length !== 2) return spBad('Paste a link to a Spotify playlist, album, track or artist.', 'shape');
+  return chk(seg[0], seg[1]);
+}
+const spDefName = kind => kind === 'playlist' || kind === 'link' || !kind ? 'Spotify playlist' : 'Spotify ' + kind;
+const spKindWord = p => p.short ? 'link' : p.kind;
+function cleanMusicName(n, kind) { return String(n == null ? '' : n).replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 40).trim() || spDefName(kind); }
+const spLogo = z => `<svg class="splogo" width="${z}" height="${z}" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1ed760"/><g fill="none" stroke="#06140b" stroke-linecap="round"><path d="M5.6 9c4.3-1.2 9-.8 12.8 1.4" stroke-width="2.1"/><path d="M6.4 12.5c3.6-1 7.3-.6 10.4 1.2" stroke-width="1.8"/><path d="M7.2 15.7c2.8-.8 5.6-.5 8 .9" stroke-width="1.5"/></g></svg>`;
+const hasOwn = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+const okKey = k => k !== '__proto__' && k !== 'constructor' && k !== 'prototype';
+const DEFAULT_MUSIC = { provider: 'spotify', kind: 'playlist', id: '3Y9Jj5HZgV3CGPImhB3ZS4', url: 'https://open.spotify.com/playlist/3Y9Jj5HZgV3CGPImhB3ZS4', name: 'BETA FIT starter playlist' };
+const defMusic = () => Object.assign({}, DEFAULT_MUSIC);
+const isDefMusic = l => !!l && l.url === DEFAULT_MUSIC.url && l.name === DEFAULT_MUSIC.name;
+// normalize (and migrate) saved music state; activeId only decides which old link wins when several were saved
+function normMusic(m, activeId) {
+  const out = { v: 1, link: defMusic() };
+  if (!m || typeof m !== 'object' || Array.isArray(m)) return out;
+  const isObj = o => o && typeof o === 'object' && !Array.isArray(o);
+  const ent = e => { if (!isObj(e)) return null; const p = parseSpotify(e.url); return p.ok ? { provider: 'spotify', kind: p.kind, id: p.id, url: p.url, name: cleanMusicName(e.name, p.kind) } : null; };
+  if (hasOwn(m, 'link')) { if (m.link === null) { out.link = null; return out; } const e = ent(m.link); if (e) out.link = e; return out; } // new shape (a damaged link falls back to the default)
+  // old shape: pick one link. Program-wide link of the active program, then any program-wide link, then a day link of the active program, then any day link
+  const defs = isObj(m.default) ? Object.keys(m.default).filter(okKey) : [], days = isObj(m.byProgramDay) ? Object.keys(m.byProgramDay).filter(okKey) : [];
+  const firstDay = pid => { const d = m.byProgramDay[pid]; if (!isObj(d)) return null; for (const k of Object.keys(d).sort()) { const e = okKey(k) && ent(d[k]); if (e) return e; } return null; };
+  let e = null;
+  if (activeId && defs.includes(activeId)) e = ent(m.default[activeId]);
+  for (let i = 0; !e && i < defs.length; i++) e = ent(m.default[defs[i]]);
+  if (!e && activeId && days.includes(activeId)) e = firstDay(activeId);
+  for (let i = 0; !e && i < days.length; i++) e = firstDay(days[i]);
+  if (e) out.link = e;
+  return out;
+}
+const mus = () => S.music || (S.music = normMusic(null));
+const musicFor = () => mus().link || null;
+const musicReset = () => { mus().link = defMusic(); };
+/* Open: try the spotify: URI (hidden iframe, so no error page if the app is missing), then fall back to the https link in a new tab
+   if the page is still in front shortly after. Must be called from a tap handler (user gesture). Never throws. */
+let muPreferHttps = false;
+function spOpenWeb(url) {
+  let w = null; try { w = window.open(url, '_blank'); } catch (e) {}
+  if (w) { try { w.opener = null; } catch (e) {} muPreferHttps = false; return true; }
+  muPreferHttps = true; toast('Your browser blocked the new tab. Tap again to open Spotify.'); return false;
+}
+function spOpenLink(link) {
+  try {
+    const p = parseSpotify(link && link.url); if (!p.ok) return false;
+    if (!p.uri || muPreferHttps) return spOpenWeb(p.url);
+    let left = false; const mark = () => { left = true; };
+    const evs = [['pagehide', window], ['blur', window], ['visibilitychange', document]];
+    evs.forEach(([n, o]) => o.addEventListener(n, mark));
+    const f = document.createElement('iframe'); f.style.display = 'none'; f.setAttribute('aria-hidden', 'true'); f.tabIndex = -1; f.src = p.uri;
+    document.body.appendChild(f);
+    setTimeout(() => {
+      evs.forEach(([n, o]) => o.removeEventListener(n, mark)); f.remove();
+      if (!left && document.visibilityState === 'visible') spOpenWeb(p.url);
+    }, SP_FALLBACK_MS);
+    return true;
+  } catch (e) { return false; }
+}
+let mu = { url: '', name: '' };
+function musicOpenSheet() {
+  const l = musicFor();
+  mu = { url: l ? l.url : '', name: l ? l.name : '' };
+  modal = 'music'; render();
+}
+function musicDirty(p, link) { return !link || link.url !== p.url || cleanMusicName(mu.name, p.kind) !== link.name; }
+function musicTidy() { // after paste/blur: replace a messy pasted link with the clean canonical one
+  const el = $('#muUrl'); if (!el) return; const p = parseSpotify(el.value);
+  if (p.ok && el.value !== p.url) { el.value = p.url; mu.url = p.url; }
+  musicRefresh();
+}
+function musicDetHTML() {
+  if (!mu.url.trim()) return '';
+  const p = parseSpotify(mu.url);
+  return p.ok ? `<div class="mudet" id="muDet" role="status">${spLogo(20)}<span>Spotify ${spKindWord(p)} detected</span></div>` : `<div class="mudet bad" id="muDet" role="alert">${esc(p.msg)}</div>`;
+}
+function musicBtnsHTML() {
+  const p = parseSpotify(mu.url), link = musicFor(), ok = p.ok, dirty = ok && musicDirty(p, link);
+  return `${dirty ? '<button type="button" class="btn pri block" id="muSave" data-act="muSave">Save playlist</button>' : ''}
+    <button type="button" class="btn ${dirty ? 'ghost' : 'pri'} block" id="muOpen" data-act="muOpen" ${ok ? '' : 'disabled'}>Open in Spotify ↗</button>
+    ${link ? '<button type="button" class="btn sec block" id="muRemove" data-act="muRemove">Remove playlist</button>' : ''}
+    ${isDefMusic(link) ? '' : '<button type="button" class="btn sec block" id="muReset" data-act="muReset">Reset to default</button>'}`;
+}
+function musicRefresh() {
+  const b = $('#muBtns'), box = $('#muDetBox');
+  // only touch the DOM when something changed: re-rendering the buttons between touchstart and touchend (blur fires 'change' on a tap) would swallow the tap
+  const put = (el, h) => { if (el && el.dataset.h !== h) { el.innerHTML = h; el.dataset.h = h; } };
+  put(box, musicDetHTML()); put(b, musicBtnsHTML());
+}
+function musicSave() {
+  const p = parseSpotify(mu.url); if (!p.ok) { toast(p.msg); return; }
+  const e = { provider: 'spotify', kind: p.kind, id: p.id, url: p.url, name: cleanMusicName(mu.name, p.kind) };
+  mus().link = e;
+  save(); modal = null; render(); toast('Saved · ' + e.name);
+}
+function musicRemove() {
+  if (!musicFor()) return;
+  mus().link = null; save(); modal = null; render(); toast('Playlist removed');
+}
+function musicResetAct() { musicReset(); save(); modal = null; render(); toast('Reset to the ' + DEFAULT_MUSIC.name); }
+function musicRowHTML() {
+  const l = musicFor();
+  return l ? `<button type="button" class="musicrow" id="musicRow" data-act="musicSheet" aria-haspopup="dialog" aria-label="Music: ${esc(l.name)} on Spotify. Tap to change"><span class="mi">♫</span><span class="mt"><small>MUSIC</small><b>${spLogo(18)}<span class="nm">${esc(l.name)}</span><span class="sp">· Spotify</span></b></span><span class="go">›</span></button>`
+    : `<button type="button" class="musicrow empty" id="musicRow" data-act="musicSheet" aria-haspopup="dialog" aria-label="Add a Spotify playlist"><span class="mi">♫</span><span class="mt"><small>MUSIC</small><b>+ Add playlist</b></span><span class="go">›</span></button>`;
+}
+function musicSheetHTML() {
+  return `<div class="overlay" data-act="closeModal"><div class="sheet" id="musicSheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="muTitle"><div class="grab"></div>
+    <div class="row" style="justify-content:space-between"><b id="muTitle" style="font-size:22px">Music</b><button class="icon" data-act="closeModal" aria-label="Close">✕</button></div>
+    <div class="sub" style="margin:6px 0 0;font-size:14px;line-height:1.4">One Spotify playlist for your workouts. Tap the Music chip to open it in the Spotify app. Paste your own link below, or keep the BETA FIT starter playlist.</div>
+    <div class="label" style="margin:16px 0 8px"><label for="muUrl">Playlist link</label></div>
+    <input class="txt fb" id="muUrl" type="text" inputmode="url" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="Paste a Spotify link" value="${esc(mu.url)}">
+    <div id="muDetBox" data-h="${esc(musicDetHTML())}">${musicDetHTML()}</div>
+    <div class="label" style="margin:16px 0 8px"><label for="muName">Name</label></div>
+    <input class="txt fb" id="muName" type="text" maxlength="40" autocomplete="off" placeholder="Spotify playlist" value="${esc(mu.name)}">
+    <div id="muBtns" style="margin-top:16px;display:grid;gap:8px" data-h="${esc(musicBtnsHTML())}">${musicBtnsHTML()}</div>
+    <div class="note" style="text-align:center;margin-top:12px">Works with free and Premium Spotify accounts.</div></div></div>`;
+}
+
 /* ---------- State ---------- */
 const builtin = () => parseJSONProgram(JSON.stringify(BUILTIN_PROGRAM)).program;
 const newLibId = () => 'w' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
@@ -662,7 +881,7 @@ const progHash = p => hashStr((p.name || '') + '|' + JSON.stringify(p.weeks || [
 const libEntry = (p, source, selWeek, selDay) => ({ id: newLibId(), name: p.name, program: p, addedAt: Date.now(), source, selWeek: selWeek || 0, selDay: selDay || 0 });
 function freshState() {
   const p = builtin(), d = p.defaults || {}, e = libEntry(p, 'built-in');
-  return { program: p, library: [e], activeId: e.id, selWeek: 0, selDay: 0, settings: { rest: d.rest != null ? d.rest : 45, restMode: d.restMode || 'round', unit: 'lb', wake: true, name: '' }, last: {}, history: [], session: null, lastSummaryId: null, feedback: [] };
+  return { program: p, library: [e], activeId: e.id, selWeek: 0, selDay: 0, settings: { rest: d.rest != null ? d.rest : 45, restMode: d.restMode || 'round', unit: 'lb', wake: true, name: '' }, last: {}, history: [], session: null, lastSummaryId: null, feedback: [], music: normMusic(null) };
 }
 function load() {
   try {
@@ -691,6 +910,7 @@ function load() {
       act.selWeek = o.selWeek; act.selDay = o.selDay;
       lib.forEach(e => { e.selWeek = Math.min(e.selWeek || 0, e.program.weeks.length - 1); e.selDay = e.selDay || 0; });
       if (!Array.isArray(o.feedback)) o.feedback = [];
+      o.music = normMusic(o.music, o.activeId); // older saves: collapse per-day/per-program links into the single link (none saved = default)
       return o;
     }
   } catch (e) {}
@@ -1177,8 +1397,8 @@ function streakRowHTML() {
    Identity (deviceToken, userId) lives ONLY under localStorage 'forge.sync.v1' (SY), never inside S / 'forge.v1', so it can't reach
    feedback issues, share cards or program files. All weights are sent in kg; display converts at render time. */
 const API_BASE = 'https://forge-api.philnb331.workers.dev/v1', SYNC_LS = 'forge.sync.v1';
-const freshSync = () => ({ token: '', userId: '', name: '', groups: [], sel: 'me', sent: {}, lb: {}, progIds: {}, rejected: 0, lastSync: 0 });
-function loadSync() { try { const o = JSON.parse(localStorage.getItem(SYNC_LS)); if (o && typeof o === 'object' && !Array.isArray(o)) { const f = Object.assign(freshSync(), o); if (!Array.isArray(f.groups)) f.groups = []; return f; } } catch (e) {} return freshSync(); }
+const freshSync = () => ({ token: '', userId: '', name: '', groups: [], sel: 'me', sent: {}, lb: {}, progIds: {}, pinDismiss: {}, requests: [], rejected: 0, lastSync: 0 });
+function loadSync() { try { const o = JSON.parse(localStorage.getItem(SYNC_LS)); if (o && typeof o === 'object' && !Array.isArray(o)) { const f = Object.assign(freshSync(), o); if (!Array.isArray(f.groups)) f.groups = []; if (!Array.isArray(f.requests)) f.requests = []; if (!f.pinDismiss || typeof f.pinDismiss !== 'object' || Array.isArray(f.pinDismiss)) f.pinDismiss = {}; return f; } } catch (e) {} return freshSync(); }
 let SY = loadSync();
 const saveSync = () => { try { localStorage.setItem(SYNC_LS, JSON.stringify(SY)); } catch (e) {} };
 const curGroup = () => SY.token && SY.sel !== 'me' ? SY.groups.find(g => g.id === SY.sel) || null : null;
@@ -1198,8 +1418,8 @@ async function api(method, path, body) {
   return { ok: false, status: r.status, code: er.code || 'error', message: er.message || '', retryAfter: +r.headers.get('Retry-After') || 0 };
 }
 function apiMsg(r) {
-  if (r.net) return "Can't reach FORGE groups. Check your connection and try again.";
-  return ({ invalid_code: "That code doesn't match a group. Check it and try again.", group_full: 'That group is full (25 members).', group_limit: "You're already in the maximum number of groups (20).", rate_limited: 'Too many tries. Wait a minute and try again.', validation_failed: r.message || 'Please check what you entered.', not_a_member: "You're not in that group anymore.", program_limit: "You've reached the limit of shared workouts (50).", program_too_large: 'That workout is too big to share.', program_not_found: 'That shared workout is no longer available.', unauthorized: 'Your group sign-in expired. Set up groups again.' })[r.code] || 'Something went wrong. Please try again.';
+  if (r.net) return "Can't reach BETA FIT groups. Check your connection and try again.";
+  return ({ invalid_code: "That code doesn't match a group. Check it and try again.", group_full: 'That group is full (25 members).', group_limit: "You're already in the maximum number of groups (20).", rate_limited: 'Too many tries. Wait a minute and try again.', validation_failed: r.message || 'Please check what you entered.', not_a_member: "You're not in that group anymore.", not_creator: 'Only the group creator can do that.', request_limit: 'You already have 5 requests waiting. Cancel one first.', requests_full: 'This group has too many open requests right now. Ask the creator to clear them.', request_not_found: 'That request is gone already.', member_not_found: 'That person is no longer in the group.', cannot_remove_self: "You can't remove yourself.", program_not_shared: 'Share that workout to the group first, then pin it.', program_limit: "You've reached the limit of shared workouts (50).", program_too_large: 'That workout is too big to share.', program_not_found: 'That shared workout is no longer available.', unauthorized: 'Your group sign-in expired. Set up groups again.' })[r.code] || 'Something went wrong. Please try again.';
 }
 function authLost() { SY = Object.assign(freshSync(), { sent: {} }); saveSync(); lbMem = {}; gdMem = {}; spMem = {}; toast('Group sign-in expired. Create or join a group to reconnect.'); }
 // register once per device, on the first group action
@@ -1217,9 +1437,23 @@ function upsertGroup(g) { if (!g || !g.id) return; const i = SY.groups.findIndex
 async function refreshGroups() {
   if (!SY.token) return false;
   const r = await api('GET', '/groups'); if (!r.ok) return false;
+  const oldG = new Set(SY.groups.map(g => g.id)), oldR = new Set((SY.requests || []).map(x => x.id));
   SY.groups = Array.isArray(r.data.groups) ? r.data.groups : [];
+  SY.requests = Array.isArray(r.data.requests) ? r.data.requests : [];
   if (SY.sel !== 'me' && !SY.groups.some(g => g.id === SY.sel)) SY.sel = 'me';
-  saveSync(); softRender(); return true;
+  const approved = SY.groups.filter(g => !oldG.has(g.id) && oldR.has(g.id)); // a request I had open turned into a membership
+  if (approved.length) { SY.sel = approved[0].id; lbMem = {}; }
+  saveSync(); softRender();
+  if (approved.length) onApproved(approved[0]);
+  return true;
+}
+// the creator approved me: select the group, backfill my history, and offer the group's pinned program once
+async function onApproved(g) {
+  toast(`You're in ${g.name}`); syncSoon();
+  gdMem[g.id] = {}; await fetchGD(g.id, true); spAuto([g.id]);
+  const pn = pinNeeded(g.id);
+  if (pn && !modal && !S.session) { jc = { gid: g.id, pid: pn.id }; modal = 'joined'; }
+  view = view === 'group' ? 'group' : 'home'; render();
 }
 let dirtyRender = false;
 // re-render after async work without stealing focus from an open sheet and without losing scroll position
@@ -1308,7 +1542,7 @@ function lbAuto(force) {
   const age = Date.now() - (m.tried || 0);
   if (force || !m.tried || (m.stale && age > 1500) || age > 45000) fetchLB(g.id, dashPeriod, force);
 }
-function lbRefresh() { const g = curGroup(); if (!g) return; fetchLB(g.id, dashPeriod, true); refreshGroups(); syncNow().catch(() => {}); }
+function lbRefresh() { const g = curGroup(); if (!g) { refreshGroups().then(() => creatorGroups().forEach(x => pendingOfG(x) && rqAuto(x.id, true))); return; } creatorGroups().forEach(x => pendingOfG(x) && rqAuto(x.id, true)); fetchLB(g.id, dashPeriod, true); fetchGD(g.id, true); fetchSP(g.id); refreshGroups(); syncNow().catch(() => {}); }
 
 /* ---- shared programs ---- */
 async function fetchSP(gid) {
@@ -1320,9 +1554,9 @@ async function fetchSP(gid) {
   softRender();
 }
 function spAuto(gids) { (gids || SY.groups.map(g => g.id)).forEach(gid => { const m = spMem[gid] = spMem[gid] || {}; if (!m.loading && (!m.tried || Date.now() - m.tried > 45000)) fetchSP(gid); }); }
-async function fetchGD(gid) {
+async function fetchGD(gid, quiet) {
   const m = gdMem[gid] = gdMem[gid] || {}; if (m.loading) return; m.loading = true; m.tried = Date.now(); m.err = null;
-  if (!m.data) softRender();
+  if (!m.data && !quiet) softRender();
   const r = await api('GET', `/groups/${encodeURIComponent(gid)}?tzOffsetMinutes=${-new Date().getTimezoneOffset()}`);
   m.loading = false;
   if (r.ok) { m.data = r.data; if (r.data.group) upsertGroup(r.data.group); } else { m.err = r; if (r.code === 'not_a_member') refreshGroups(); }
@@ -1338,9 +1572,12 @@ function sharedPrograms(gids) {
 const spLoading = gids => gids.some(g => spMem[g] && spMem[g].loading && !spMem[g].list);
 const spError = gids => gids.some(g => spMem[g] && spMem[g].err && !spMem[g].list);
 const hasShared = id => S.library.some(e => e.sharedId === id);
-function sharedListHTML(gids, emptyMsg) {
+// Program tab ("newOnly"): only what a groupmate shared that is not in My workouts yet (not mine, not added by id, not already saved under the same name); nothing at all otherwise
+const sharedNew = gids => { const have = new Set(S.library.map(e => String(e.name || '').trim().toLowerCase())); return sharedPrograms(gids).filter(p => !(p.owner && p.owner.isYou) && !hasShared(p.id) && !have.has(String(p.name || '').trim().toLowerCase())); };
+function sharedListHTML(gids, emptyMsg, newOnly) {
   if (!gids.length) return '';
-  const list = sharedPrograms(gids);
+  const list = newOnly ? sharedNew(gids) : sharedPrograms(gids);
+  if (newOnly && !list.length) return '';
   if (!list.length) {
     if (spLoading(gids) || gids.some(g => !spMem[g] || !spMem[g].tried)) return `<div class="card sk rw" id="spSkel" aria-busy="true" aria-label="Loading shared workouts" style="height:64px"></div>`;
     if (spError(gids)) return `<div class="notice err" id="spErr" role="alert">Couldn't load shared workouts.<div class="nact"><button class="btn sec" data-act="spRetry">Try again</button></div></div>`;
@@ -1379,10 +1616,115 @@ async function shareToGroup(gid) {
   sg.done[gid] = true; sg.msg = ''; spMem[gid] = Object.assign(spMem[gid] || {}, { tried: 0 }); fetchSP(gid); render(); toast('Shared to ' + g.name);
 }
 
+/* ---- locked groups: join requests (mine) and creator moderation ---- */
+// only people the creator approves become members; entering a code just files a request
+const myReq = gid => (SY.requests || []).find(x => x.id === gid) || null;
+function upsertReq(x) { SY.requests = (SY.requests || []).filter(y => y.id !== x.id).concat([x]); saveSync(); }
+const rqMem = {}, rqBusy = new Set();
+const creatorGroups = () => SY.groups.filter(g => g.isCreator);
+const pendingOfG = g => (g && g.pendingCount) || 0;
+async function fetchRQ(gid) {
+  const m = rqMem[gid] = rqMem[gid] || {}; if (m.loading) return; m.loading = true; m.tried = Date.now(); m.err = null;
+  const r = await api('GET', `/groups/${encodeURIComponent(gid)}/requests`);
+  m.loading = false;
+  if (r.ok) { m.list = r.data.requests || []; const g = SY.groups.find(x => x.id === gid); if (g) { g.pendingCount = m.list.length; saveSync(); } } else m.err = r;
+  softRender();
+}
+function rqAuto(gid, force) { const m = rqMem[gid] = rqMem[gid] || {}; if (!m.loading && (force || !m.tried || Date.now() - m.tried > 20000)) fetchRQ(gid); }
+async function rqAct(gid, uid, kind) {
+  const key = gid + '|' + uid; if (rqBusy.has(key)) return; rqBusy.add(key); render();
+  const r = await api('POST', `/groups/${encodeURIComponent(gid)}/requests/${encodeURIComponent(uid)}/${kind}`); rqBusy.delete(key);
+  const m = rqMem[gid] = rqMem[gid] || {}, who = ((m.list || []).find(x => x.userId === uid) || {}).displayName || 'them';
+  if (!r.ok && r.code !== 'request_not_found') { toast(apiMsg(r)); render(); return; }
+  m.list = (m.list || []).filter(x => x.userId !== uid); const g = SY.groups.find(x => x.id === gid);
+  if (g) { g.pendingCount = m.list.length; if (kind === 'approve' && r.ok && r.data.memberCount) g.memberCount = r.data.memberCount; saveSync(); }
+  if (kind === 'approve') { gdMem[gid] = Object.assign(gdMem[gid] || {}, { tried: 0 }); lbMem = {}; fetchGD(gid, true); }
+  render(); toast(kind === 'approve' ? `Approved ${who}` : `Declined ${who}`);
+}
+async function reqCancel(gid) {
+  const r = await api('POST', `/groups/${encodeURIComponent(gid)}/requests/cancel`);
+  if (!r.ok && r.code !== 'request_not_found') { toast(apiMsg(r)); return; }
+  SY.requests = (SY.requests || []).filter(x => x.id !== gid); saveSync(); render(); toast('Request cancelled');
+}
+function rqRowsHTML(g) {
+  const m = rqMem[g.id] || {}, n = pendingOfG(g);
+  if (!m.list) return m.err ? `<div class="note" style="color:var(--bad)">Couldn't load requests. <button class="flink" data-act="rqRetry" data-gid="${esc(g.id)}" style="color:inherit;text-decoration:underline;padding:6px 4px">Try again</button></div>` : `<div class="sk rw" aria-busy="true" style="height:${Math.max(1, n) * 52}px"></div>`;
+  return m.list.map(x => { const busy = rqBusy.has(g.id + '|' + x.userId);
+    return `<div class="rqrow" data-uid="${esc(x.userId)}">${avHTML(x.userId, x.displayName)}<div class="mt"><b>${esc(x.displayName)}</b><small>wants to join</small></div>
+      <button type="button" class="btn sec" data-act="rqDecline" data-gid="${esc(g.id)}" data-uid="${esc(x.userId)}" ${busy ? 'disabled' : ''}>Decline</button><button type="button" class="btn pri" data-act="rqApprove" data-gid="${esc(g.id)}" data-uid="${esc(x.userId)}" ${busy ? 'disabled' : ''}>Approve</button></div>`; }).join('');
+}
+// Home: one card per group I created that has people waiting
+function rqHomeHTML() {
+  return creatorGroups().filter(g => pendingOfG(g) > 0).map(g => `<div class="card rqcard" id="rqCard-${esc(g.id)}" data-gid="${esc(g.id)}"><div class="row" style="gap:10px;align-items:center"><span class="pi" aria-hidden="true">👋</span><div class="mt" style="flex:1;min-width:0"><b>${pendingOfG(g)} ${pendingOfG(g) === 1 ? 'person wants' : 'people want'} to join</b><small>${esc(g.name)} · only people you approve can join</small></div></div><div class="rqlist">${rqRowsHTML(g)}</div></div>`).join('');
+}
+// my own open requests (waiting / not approved)
+function reqPendingHTML() {
+  return (SY.requests || []).map(x => x.status === 'declined'
+    ? `<div class="card reqcard declined" id="reqDeclined-${esc(x.id)}"><span class="pi" aria-hidden="true">✋</span><div class="mt"><b>Request not approved</b><small>${esc(x.name)} · the creator didn't approve this request</small></div><button type="button" class="btn sec" data-act="reqCancel" data-gid="${esc(x.id)}">Dismiss</button></div>`
+    : `<div class="card reqcard" id="reqPending-${esc(x.id)}" role="status"><span class="pi" aria-hidden="true">⏳</span><div class="mt"><b>Request sent — waiting for approval</b><small>${esc(x.name)} · you'll get in as soon as the creator approves</small></div><div class="reqbtns"><button type="button" class="btn sec" data-act="reqCheck" data-gid="${esc(x.id)}">Check now</button><button type="button" class="btn sec" data-act="reqCancel" data-gid="${esc(x.id)}">Cancel request</button></div></div>`).join('');
+}
+const rqBadge = n => n > 0 ? `<span class="rqbadge" aria-label="${n} waiting">${n}</span>` : '';
+let rmConfirm = '', rcConfirm = false, rcBusy = false;
+async function removeMemberAct(gid, uid) {
+  const r = await api('POST', `/groups/${encodeURIComponent(gid)}/members/${encodeURIComponent(uid)}/remove`); rmConfirm = '';
+  if (!r.ok && r.code !== 'member_not_found') { toast(apiMsg(r)); render(); return; }
+  const m = gdMem[gid]; const who = m && m.data ? ((m.data.members || []).find(x => x.userId === uid) || {}).displayName : '';
+  if (m && m.data) { m.data.members = (m.data.members || []).filter(x => x.userId !== uid); }
+  const g = SY.groups.find(x => x.id === gid); if (g) { g.memberCount = Math.max(1, (g.memberCount || 2) - 1); saveSync(); }
+  lbMem = {}; spMem[gid] = Object.assign(spMem[gid] || {}, { tried: 0 }); gdMem[gid] = Object.assign(gdMem[gid] || {}, { tried: 0 }); fetchGD(gid, true); fetchSP(gid);
+  render(); toast('Removed ' + (who || 'member'));
+}
+async function rotateCodeAct(gid) {
+  if (rcBusy) return; rcBusy = true; render();
+  const r = await api('POST', `/groups/${encodeURIComponent(gid)}/rotate-code`); rcBusy = false; rcConfirm = false;
+  if (!r.ok) { toast(apiMsg(r)); render(); return; }
+  upsertGroup(r.data.group); render(); toast('New invite code');
+}
+
+/* ---- pinned group program: the creator pins one shared workout; members add a copy with the same path as "Add to my workouts" ---- */
+const pinOf = gid => { const m = gdMem[gid]; return m && m.data && m.data.pinnedProgram ? m.data.pinnedProgram : null; };
+function isCreatorOf(gid) { const m = gdMem[gid], g = SY.groups.find(x => x.id === gid), gg = m && m.data && m.data.group ? m.data.group : g; return !!(gg && gg.isCreator); }
+function pinOwnerIsMe(gid, pid) { const m = spMem[gid], p = m && m.list && m.list.find(x => x.id === pid); return p ? !!(p.owner && p.owner.isYou) : null; }
+// the pinned program this user could still add (null when none pinned, already added, or it is their own workout)
+function pinNeeded(gid) {
+  const p = pinOf(gid); if (!p || hasShared(p.id)) return null;
+  const own = pinOwnerIsMe(gid, p.id); if (own === true || (own === null && isCreatorOf(gid))) return null;
+  return p;
+}
+function pinCardHTML(gid, ctx) {
+  const p = pinNeeded(gid); if (!p) return '';
+  if (ctx === 'home' && SY.pinDismiss[gid] === p.id) return '';
+  const g = SY.groups.find(x => x.id === gid), busy = spBusy.has(p.id);
+  return `<div class="card pincard" id="${ctx === 'home' ? 'pinCardHome' : 'pinCardDetail'}" data-pin="${esc(p.id)}"><span class="pi" aria-hidden="true">📌</span><div class="mt"><b>Add the group's program</b><small>${esc(p.name)}${g ? ' · ' + esc(g.name) : ''}</small></div>
+    ${ctx === 'home' ? `<button type="button" class="icon sm pindx" data-act="pinDismiss" data-gid="${esc(gid)}" aria-label="Dismiss">✕</button>` : ''}
+    <button type="button" class="btn pri" data-act="pinAdd" data-id="${esc(p.id)}" data-gid="${esc(gid)}" ${busy ? 'disabled' : ''}>${busy ? 'Adding…' : 'Add to my workouts'}</button></div>`;
+}
+function pinSectionHTML(g) {
+  const gid = g.id, p = pinOf(gid), creator = isCreatorOf(gid);
+  let h = '';
+  if (creator) h += `<div class="card pinbox" id="pinCreator"><div class="row" style="gap:10px;align-items:center"><span class="pi" aria-hidden="true">📌</span><div class="mt" style="flex:1;min-width:0"><b>${p ? esc(p.name) : 'Group program'}</b><small>${p ? 'Pinned for everyone in this group' : 'Pin one shared workout so every member can add it in a tap.'}</small></div></div>
+    <div class="row" style="margin-top:12px"><button type="button" class="btn ${p ? 'sec' : 'pri'}" style="flex:1;min-height:46px;font-size:14px" id="pinPickBtn" data-act="pinPick" data-id="${esc(gid)}">${p ? 'Change program' : 'Pin a program'}</button>${p ? `<button type="button" class="btn sec" style="min-height:46px;font-size:14px" id="pinUnpinBtn" data-act="pinUnpin" data-id="${esc(gid)}">Unpin</button>` : ''}</div></div>`;
+  const need = pinCardHTML(gid, 'detail');
+  h += need;
+  if (!creator && p && !need) h += `<div class="card spc" id="pinInfo"><div class="mt"><b>📌 ${esc(p.name)}</b><small>Group program</small></div><span class="chip acc" data-added="1">✓ Added</span></div>`;
+  return h;
+}
+let pk = { busy: '', msg: '' };
+async function pinSet(gid, pid) {
+  if (pk.busy) return; pk.busy = pid || 'unpin'; pk.msg = ''; render();
+  const r = await api('POST', `/groups/${encodeURIComponent(gid)}/pin`, { programId: pid || null });
+  pk.busy = '';
+  if (!r.ok) { pk.msg = apiMsg(r); render(); return; }
+  const m = gdMem[gid] = gdMem[gid] || {}; if (m.data) m.data.pinnedProgram = r.data.pinnedProgram || null; else m.tried = 0;
+  modal = null; render(); toast(pid ? 'Pinned ' + (r.data.pinnedProgram ? r.data.pinnedProgram.name : '') : 'Unpinned');
+}
+async function pinAdd(pid) { await spAdd(pid); if (hasShared(pid) && (modal === 'joined')) modal = null; render(); }
+function pinAuto(gid) { const m = gdMem[gid] = gdMem[gid] || {}; if (!m.loading && (!m.tried || Date.now() - m.tried > 45000)) fetchGD(gid, true); spAuto([gid]); }
+
 /* ---- group sheets: create / join / deep link / invite ---- */
-let gm = { step: '', name: '', code: '', dn: '', err: '', busy: false, group: null }, gdId = null, gdLeave = 0, gdErr = '', pendingJoin = null, eraseSyncOpt = true;
+let rs = { gid: '', status: '' }, jc = { gid: '', pid: '' }, gm = { step: '', name: '', code: '', dn: '', err: '', busy: false, group: null }, gdId = null, gdLeave = 0, gdErr = '', pendingJoin = null, eraseSyncOpt = true;
 const shareLink = () => location.origin + location.pathname.replace(/index\.html$/, '');
-const inviteText = code => 'Join my FORGE group: ' + shareLink() + '?join=' + code;
+const inviteText = code => 'Join my BETA FIT group: ' + shareLink() + '?join=' + code;
 function openGm(step, extra) { gm = Object.assign({ step, name: '', code: '', dn: userName(), err: '', busy: false, group: null }, extra || {}); modal = 'grp'; render(); const el = $('#gmName') || $('#gmCode'); if (el && step !== 'deeplink') el.focus(); }
 function cleanJoinUrl() { try { const u = new URL(location.href); if (u.searchParams.has('join')) { u.searchParams.delete('join'); history.replaceState(null, '', u.pathname + (u.search || '') + u.hash); } } catch (e) {} }
 async function gmSubmit() {
@@ -1397,15 +1739,25 @@ async function gmSubmit() {
   const r = step === 'create' ? await api('POST', '/groups', { name: gm.name.trim().slice(0, 40) }) : await api('POST', '/groups/join', { code });
   gm.busy = false;
   if (!r.ok) { gm.err = apiMsg(r); return render(); }
-  const g = r.data.group; upsertGroup(g); SY.sel = g.id; saveSync(); lbMem = {};
+  const g = r.data.group;
+  if (step !== 'create' && r.data.status && r.data.status !== 'member') { // locked group: a request was filed (or already exists); nothing is joined yet
+    upsertReq({ id: g.id, name: g.name, status: r.data.status, memberCount: g.memberCount, requestedAt: new Date().toISOString() });
+    if (step === 'deeplink') cleanJoinUrl(); view = 'home'; modal = 'reqsent'; rs = { gid: g.id, status: r.data.status };
+    render(window.scrollTo(0, 0)); refreshGroups(); return;
+  }
+  upsertGroup(g); SY.sel = g.id; saveSync(); lbMem = {};
   if (step === 'create') { gm.step = 'invite'; gm.group = g; }
-  else { modal = null; if (step === 'deeplink') cleanJoinUrl(); view = 'home'; toast(r.data.alreadyMember ? `You're already in ${g.name}` : `Joined ${g.name}`); }
+  else {
+    modal = null; if (step === 'deeplink') cleanJoinUrl(); view = 'home';
+    if (!r.data.alreadyMember) { gdMem[g.id] = {}; await fetchGD(g.id, true); const pn = pinNeeded(g.id); if (pn) { jc = { gid: g.id, pid: pn.id }; modal = 'joined'; } }
+    toast(r.data.alreadyMember ? `You're already in ${g.name}` : `Joined ${g.name}`);
+  }
   render(window.scrollTo(0, 0)); syncSoon(); refreshGroups();
 }
 async function gmShare(copyOnly, gid) {
   const g = (gid && SY.groups.find(x => x.id === gid)) || gm.group || curGroup() || SY.groups.find(x => x.id === gdId); if (!g) return;
   const text = inviteText(g.inviteCode);
-  if (!copyOnly && navigator.share) { try { await navigator.share({ title: 'FORGE group', text }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+  if (!copyOnly && navigator.share) { try { await navigator.share({ title: 'BETA FIT group', text }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
   const ok = await copyText(text); toast(ok ? (copyOnly ? 'Invite copied' : 'Invite copied - paste it in a message') : 'Could not copy - select the code instead');
 }
 function privHTML() { return '<div class="fbhint priv" id="gPriv">Group members see your name and your lifting totals.</div>'; }
@@ -1414,19 +1766,40 @@ function gmSheet(title, inner) { return `<div class="overlay" data-act="closeMod
 function groupModalHTML() {
   if (modal === 'grp') {
     const b = gm.busy, err = gm.err ? `<div class="sherr" id="gErrMsg" role="alert">${esc(gm.err)}</div>` : '';
-    if (gm.step === 'create') return gmSheet('Create a group', `<div class="sub" style="margin:6px 0 0;font-size:13px">Start a group, then invite friends with a code. Everyone's lifting adds up to one shared total.</div>
+    if (gm.step === 'create') return gmSheet('Create a group', `<div class="sub" style="margin:6px 0 0;font-size:13px">Start a group, then invite friends with a code. Everyone's lifting adds up to one shared total. Only people you approve can join.</div>
       <label class="sheetlbl" for="gmName">Group name</label><input class="txt fb" id="gmName" type="text" maxlength="40" autocomplete="off" enterkeyhint="go" placeholder="e.g. Iron Crew" value="${esc(gm.name)}">${identHTML()}${privHTML()}${err}
       <button class="btn pri block" id="gGo" style="margin-top:14px" data-act="gSubmit" ${b ? 'disabled' : ''}>${b ? 'Creating…' : 'Create group'}</button>`);
-    if (gm.step === 'join') return gmSheet('Join a group', `<div class="sub" style="margin:6px 0 0;font-size:13px">Type the invite code a friend shared with you.</div>
+    if (gm.step === 'join') return gmSheet('Join a group', `<div class="sub" style="margin:6px 0 0;font-size:13px">Type the invite code a friend shared with you. The group's creator has to approve you before you get in.</div>
       <label class="sheetlbl" for="gmCode">Invite code</label><input class="txt fb" id="gmCode" type="text" maxlength="12" autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="go" placeholder="K7MQ4XD" style="letter-spacing:.14em;font-weight:800;text-transform:uppercase" value="${esc(gm.code)}">${identHTML()}${privHTML()}${err}
       <button class="btn pri block" id="gGo" style="margin-top:14px" data-act="gSubmit" ${b ? 'disabled' : ''}>${b ? 'Joining…' : 'Join group'}</button>`);
-    if (gm.step === 'deeplink') return gmSheet('Join this group?', `<div class="sub" style="margin:6px 0 0;font-size:13px">You were invited to a FORGE group with code <b id="gDlCode" style="color:var(--text);letter-spacing:.1em">${esc(normCode(gm.code))}</b>.</div>${identHTML()}${privHTML()}${err}
+    if (gm.step === 'deeplink') return gmSheet('Join this group?', `<div class="sub" style="margin:6px 0 0;font-size:13px">You were invited to a BETA FIT group with code <b id="gDlCode" style="color:var(--text);letter-spacing:.1em">${esc(normCode(gm.code))}</b>. The creator has to approve you before you get in.</div>${identHTML()}${privHTML()}${err}
       <div style="display:grid;gap:8px;margin-top:14px"><button class="btn pri block" id="gGo" data-act="gSubmit" ${b ? 'disabled' : ''}>${b ? 'Joining…' : 'Join group'}</button><button class="btn sec block" data-act="closeModal">Not now</button></div>`);
-    if (gm.step === 'invite' && gm.group) return gmSheet('Invite friends', `<div class="sub" style="margin:6px 0 0;font-size:13px"><b style="color:var(--text)">${esc(gm.group.name)}</b> is ready. Share this code so friends can join.</div>
+    if (gm.step === 'invite' && gm.group) return gmSheet('Invite friends', `<div class="sub" style="margin:6px 0 0;font-size:13px"><b style="color:var(--text)">${esc(gm.group.name)}</b> is ready. Share this code so friends can ask to join. Only people you approve can join.</div>
       <div class="card invcard" style="margin-top:12px;text-align:center"><span class="label">Invite code</span><span class="invcode" id="inviteCode">${esc(fmtCode(gm.group.inviteCode))}</span><div class="fbhint" id="inviteLink" style="overflow-wrap:anywhere">${esc(inviteText(gm.group.inviteCode))}</div></div>
       <div class="row" style="margin-top:12px"><button class="btn sec" style="flex:1" id="gCopy" data-act="gCopy">📋 Copy</button><button class="btn pri" style="flex:1" id="gShare" data-act="gShare">↗ Share</button></div>
       <button class="btn sec block" style="margin-top:8px" data-act="closeModal">Done</button>`);
     return '';
+  }
+  if (modal === 'reqsent') {
+    const x = myReq(rs.gid), nm = x ? x.name : 'the group', dec = rs.status === 'declined' || (x && x.status === 'declined');
+    return gmSheet(dec ? 'Request not approved' : 'Request sent', `<div class="card reqcard" id="reqSentCard" style="margin-top:12px"><span class="pi" aria-hidden="true">${dec ? '✋' : '⏳'}</span><div class="mt"><b>${dec ? "The creator didn't approve this request" : 'Request sent — waiting for approval'}</b><small>${esc(nm)}</small></div></div>
+      <div class="sub" style="margin:10px 0 0;font-size:13px">${dec ? 'You can dismiss it from Home.' : "The creator has to approve you before you can see the group. Only people they approve can join. We'll check again whenever you open the app, and you can pull down on Home to check now."}</div>
+      <button class="btn pri block" id="reqSentDone" style="margin-top:14px" data-act="closeModal">Done</button>`);
+  }
+  if (modal === 'joined') {
+    const g = SY.groups.find(x => x.id === jc.gid), p = g && pinOf(g.id); if (!g || !p) return '';
+    return gmSheet('Welcome to ' + esc(g.name), `<div class="card pincard" id="pinCardJoined" data-pin="${esc(p.id)}" style="margin-top:12px"><span class="pi" aria-hidden="true">📌</span><div class="mt"><b>Add the group's program</b><small>${esc(p.name)}</small></div></div>
+      <div class="sub" style="margin:10px 0 0;font-size:13px">This group has a program pinned. Add a copy to My workouts if you want it. Nothing else changes: your active workout stays as it is.</div>
+      <div style="display:grid;gap:8px;margin-top:14px"><button class="btn pri block" id="joinedAdd" data-act="pinAdd" data-id="${esc(p.id)}" data-gid="${esc(g.id)}" ${spBusy.has(p.id) ? 'disabled' : ''}>${spBusy.has(p.id) ? 'Adding…' : 'Add to my workouts'}</button><button class="btn sec block" id="joinedSkip" data-act="closeModal">Not now</button></div>`);
+  }
+  if (modal === 'pinpick') {
+    const g = SY.groups.find(x => x.id === gdId); if (!g) return '';
+    const list = sharedPrograms([g.id]), cur = pinOf(g.id), loading = spLoading([g.id]) || !spMem[g.id] || (!spMem[g.id].list && !spMem[g.id].err);
+    const rows = list.map(p => `<button class="seqrow ${cur && cur.id === p.id ? 'cur' : ''}" data-act="pinSet" data-gid="${esc(g.id)}" data-id="${esc(p.id)}" ${pk.busy ? 'disabled' : ''}><span class="ix" style="width:auto;font-size:18px">📌</span><span class="nm">${esc(p.name)}<small>${p.owner && p.owner.isYou ? 'Shared by you' : 'by ' + esc((p.owner && p.owner.displayName) || 'a friend')}</small></span><span class="stt" style="width:auto;font-size:12.5px;font-weight:800;color:var(--acc2)">${pk.busy === p.id ? 'Pinning…' : cur && cur.id === p.id ? '✓ Pinned' : 'Pin'}</span></button>`).join('');
+    return gmSheet('Pin a program', `<div class="sub" style="margin:6px 0 12px;font-size:13px">Pick one of the workouts shared to <b style="color:var(--text)">${esc(g.name)}</b>. Members will see a card to add it to their workouts.</div>
+      ${list.length ? `<div style="display:grid;gap:8px" id="pinList">${rows}</div>` : loading ? '<div class="sk rw" aria-busy="true" style="height:56px"></div>' : `<div class="note" id="pinNone" style="color:var(--mut);font-size:13px;line-height:1.45">Nothing is shared to this group yet. Open one of your workouts in the Program tab, tap Share to group, then come back to pin it.</div>`}
+      ${cur ? `<button class="btn sec block" style="margin-top:10px" id="pinUnpinSheet" data-act="pinUnpin" data-id="${esc(g.id)}" ${pk.busy ? 'disabled' : ''}>Unpin current program</button>` : ''}
+      ${pk.msg ? `<div class="sherr" role="alert">${esc(pk.msg)}</div>` : ''}`);
   }
   if (modal === 'gsel') {
     const row = (id, ico, nm, sub, sel) => `<div class="gselrow"><button class="seqrow ${sel ? 'cur' : ''}" data-act="gpick" data-id="${esc(id)}" aria-pressed="${sel}"><span class="ix" style="width:auto;font-size:18px">${ico}</span><span class="nm">${esc(nm)}<small>${esc(sub)}</small></span><span class="stt" style="width:auto">${sel ? '✓' : ''}</span></button>${id !== 'me' ? `<button class="dt" data-act="gdetail" data-id="${esc(id)}" aria-label="Details for ${esc(nm)}">Details</button>` : ''}</div>`;
@@ -1453,10 +1826,10 @@ const pctTxt = (cur, prev) => prev > 0 ? Math.round((cur - prev) / prev * 100) :
 function avHTML(uid, name, big) { return `<span class="av${big ? ' lg' : ''}" style="background:${avColor(uid)}" aria-hidden="true">${esc(initial(name))}</span>`; }
 function scopeRowHTML(g, d) {
   if (!g) return `<div class="scoperow"><div class="scl"><div class="greet">${userName() ? 'Hey ' + esc(userName()) + ' 👋' : 'Hey there 👋'}</div>${userName() ? '' : '<button class="namelink" data-act="editName">Add your name</button>'}</div>
-    <button type="button" class="gpill" id="gSel" data-act="gsel" aria-haspopup="dialog" aria-label="Showing just you. Change group"><span class="gi" aria-hidden="true">👤</span><span class="gn">Me</span><u aria-hidden="true">▾</u></button></div>`;
+    <button type="button" class="gpill" id="gSel" data-act="gsel" aria-haspopup="dialog" aria-label="Showing just you. Change group"><span class="gi" aria-hidden="true">👤</span><span class="gn">Me</span>${rqBadge(creatorGroups().reduce((a, x) => a + pendingOfG(x), 0))}<u aria-hidden="true">▾</u></button></div>`;
   const mem = d && d.members ? d.members.slice(0, 3) : [], n = (d && d.total && d.total.members) || g.memberCount || 1;
-  return `<div class="scoperow" id="scopeRow"><div class="scl"><button type="button" class="gpill" id="gSel" data-act="gsel" aria-haspopup="dialog" aria-label="Group: ${esc(g.name)}, ${n} member${n === 1 ? '' : 's'}. Change group"><span class="gi" aria-hidden="true">🏋</span><span class="gn">${esc(g.name)}</span><small>· ${n}</small><u aria-hidden="true">▾</u></button></div>
-    <div class="gr2"><button type="button" class="avstack" id="gAvs" data-act="gdetail" data-id="${esc(g.id)}" aria-label="Group details and members">${mem.map(m => avHTML(m.userId, m.displayName)).join('')}</button><button type="button" class="icon sm" id="lbRefresh" data-act="lbRefresh" aria-label="Refresh leaderboard">↻</button></div></div>
+  return `<div class="scoperow" id="scopeRow"><div class="scl"><button type="button" class="gpill" id="gSel" data-act="gsel" aria-haspopup="dialog" aria-label="Group: ${esc(g.name)}, ${n} member${n === 1 ? '' : 's'}. Change group"><span class="gi" aria-hidden="true">🏋</span><span class="gn">${esc(g.name)}</span><small>· ${n}</small>${rqBadge(creatorGroups().filter(x => x.id !== g.id).reduce((a, x) => a + pendingOfG(x), 0))}<u aria-hidden="true">▾</u></button></div>
+    <div class="gr2"><button type="button" class="avstack" id="gAvs" data-act="gdetail" data-id="${esc(g.id)}" aria-label="Group details and members${g.isCreator && pendingOfG(g) ? ', ' + pendingOfG(g) + ' waiting to join' : ''}">${mem.map(m => avHTML(m.userId, m.displayName)).join('')}${g.isCreator ? rqBadge(pendingOfG(g)) : ''}</button><button type="button" class="icon sm" id="lbRefresh" data-act="lbRefresh" aria-label="Refresh leaderboard">↻</button></div></div>
   <div class="syncln" id="syncLn">${syncStatHTML()}${d && d.now ? `<span id="lbUpd">· Updated ${esc(new Date(d.now).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }))}</span>` : ''}</div>`;
 }
 function groupHeroHTML(d, u) {
@@ -1496,7 +1869,7 @@ function groupContribHTML(d, u) {
     <div class="g"><div><small>Lifted</small><b id="gcLifted">${fmtVol(me.volumeKg, u)}<i>${u}</i></b></div><div><small>% of group</small><b id="gcShare">${Math.round((me.share || 0) * 100)}%</b></div><div><small>Rank</small><b id="gcRank">#${me.rank}<i>of ${n}</i></b></div><div><small>${l4}</small><b class="${c4}" id="gc4">${v4}</b></div></div></div>`;
 }
 function inviteCardHTML(g) {
-  return `<div class="card invcard" id="gInvite"><div class="label">Invite friends</div><b style="display:block;font-size:17px;margin-top:6px">It's just you here so far</b><div class="sub" style="font-size:13px;margin-top:2px">Share the code. When friends lift, their weight adds to the group total.</div>
+  return `<div class="card invcard" id="gInvite"><div class="label">Invite friends</div><b style="display:block;font-size:17px;margin-top:6px">It's just you here so far</b><div class="sub" style="font-size:13px;margin-top:2px">Share the code. Only people you approve can join. When friends lift, their weight adds to the group total.</div>
     <span class="invcode" id="gCode">${esc(fmtCode(g.inviteCode))}</span><div class="row"><button class="btn sec" style="flex:1" data-act="gCopy" data-id="${esc(g.id)}">📋 Copy</button><button class="btn pri" style="flex:1" data-act="gShare" data-id="${esc(g.id)}">↗ Share</button></div></div>`;
 }
 function groupBodyHTML(g, m, u) {
@@ -1513,9 +1886,10 @@ function groupHomeHTML(g) {
   const u = unit(), P = dashPeriod, m = lbGet(g.id, P), resuming = !!S.session;
   const seg = [['today', 'Today'], ['week', 'This week'], ['all', 'All-time']].map(([k, l]) => `<button type="button" class="${P === k ? 'on' : ''}" data-act="dashP" data-p="${k}" aria-pressed="${P === k}">${l}</button>`).join('');
   return `<div class="screen" id="homeScreen" data-mode="group" data-gid="${esc(g.id)}">
-    <div class="hdr"><div class="brand">FOR<b>GE</b></div><button class="icon" data-act="settings" aria-label="Settings">⚙️</button></div>
+    <div class="hdr"><div class="brand">BETA <b>FIT</b></div><button class="icon" data-act="settings" aria-label="Settings">⚙️</button></div>
     ${scopeRowHTML(g, m.data)}
     ${resuming ? `<button type="button" class="resumebar" id="resumeBar" data-act="resume"><span class="pl">▶</span><span><b>Workout in progress</b><span>Tap to resume${S.session.pausedAt ? ' (paused)' : ''}</span></span></button>` : ''}
+    ${reqPendingHTML()}${rqHomeHTML()}${pinCardHTML(g.id, 'home')}
     <div class="dsel" id="dashSel" role="group" aria-label="Period">${seg}</div>
     ${groupBodyHTML(g, m, u)}
   </div>${navHTML()}`;
@@ -1528,16 +1902,20 @@ function groupCardHTML() {
 function groupDetailView() {
   const g = SY.groups.find(x => x.id === gdId); if (!g) { view = 'home'; return homeView(); }
   const m = gdMem[g.id] || {}, d = m.data, mem = d && d.members ? d.members : [], n = (d && d.group && d.group.memberCount) || g.memberCount || mem.length || 1;
-  const memHTML = mem.length ? mem.map(x => `<div class="mem" data-uid="${esc(x.userId)}">${avHTML(x.userId, x.displayName, true)}<div class="mt"><b>${esc(x.displayName)}${x.isYou ? ' <span class="you">YOU</span>' : ''}</b><small>Joined ${esc(new Date(x.joinedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }))}</small></div></div>`).join('')
+  const memHTML = mem.length ? mem.map(x => `<div class="mem" data-uid="${esc(x.userId)}">${avHTML(x.userId, x.displayName, true)}<div class="mt"><b>${esc(x.displayName)}${x.isYou ? ' <span class="you">YOU</span>' : ''}</b><small>Joined ${esc(new Date(x.joinedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }))}</small></div>${g.isCreator && !x.isYou && rmConfirm !== x.userId ? `<button type="button" class="rmbtn" data-act="rmAsk" data-uid="${esc(x.userId)}" aria-label="Remove ${esc(x.displayName)}">Remove</button>` : ''}</div>${rmConfirm === x.userId ? `<div class="erasebox rmbox" id="rmBox" role="alertdialog" aria-label="Confirm remove member"><b style="font-size:16px">Remove ${esc(x.displayName)}?</b><div class="sub" style="font-size:13px;margin:6px 0 12px">They leave the group and its leaderboard, and their shared workouts are withdrawn. They can only come back by asking again and getting approved.</div><div style="display:grid;gap:8px"><button class="btn sec" id="rmCancel" data-act="rmCancel">Cancel</button><button class="btn danger" id="rmYes" data-act="rmYes" data-uid="${esc(x.userId)}">Yes, remove</button></div></div>` : ''}`).join('')
     : m.err ? `<div class="notice err" role="alert">Couldn't load members.<div class="nact"><button class="btn sec" data-act="gdRetry">Try again</button></div></div>` : '<div class="sk rw" aria-busy="true" style="height:56px"></div>';
-  const leave = gdLeave ? `<div class="erasebox" id="leaveBox" role="alertdialog" aria-label="Confirm leave group"><b style="font-size:16px">Leave ${esc(g.name)}?</b><div class="sub" style="font-size:13px;margin:6px 0 12px">You'll stop seeing this group's leaderboard and shared workouts. Your own workouts stay yours${n <= 1 ? ', and since you are the only member the group will be deleted' : ''}.</div>${gdErr ? `<div class="sherr" role="alert" style="margin:0 0 10px">${esc(gdErr)}</div>` : ''}
+  const leave = gdLeave ? `<div class="erasebox" id="leaveBox" role="alertdialog" aria-label="Confirm leave group"><b style="font-size:16px">Leave ${esc(g.name)}?</b><div class="sub" style="font-size:13px;margin:6px 0 12px">You'll stop seeing this group's leaderboard and shared workouts. Your own workouts stay yours${n <= 1 ? ', and since you are the only member the group will be deleted' : ''}${g.isCreator && n > 1 ? '. As the creator, leaving hands the group to the member who has been in it longest' : ''}.</div>${gdErr ? `<div class="sherr" role="alert" style="margin:0 0 10px">${esc(gdErr)}</div>` : ''}
       <div style="display:grid;gap:8px"><button class="btn sec" id="leaveCancel" data-act="gLeaveCancel">Cancel, stay in the group</button><button class="btn danger" id="leaveConfirm" data-act="gLeaveConfirm">Yes, leave group</button></div></div>`
     : `<button class="go" id="leaveBtn" data-act="gLeaveAsk">Leave group</button>`;
   return `<div class="screen" id="groupDetail" data-gid="${esc(g.id)}">
     <div class="hdr" style="gap:8px"><button class="backbtn" id="gdBack" data-act="gBack" aria-label="Back to Home"><span>‹</span>Home</button></div>
     <div><div class="greet">${esc(g.name)}</div><div class="sub" id="gdCount">${n} member${n === 1 ? '' : 's'} · up to ${g.memberCap || 25}</div></div>
     <div class="card invcard"><span class="label">Invite code</span><span class="invcode" id="gdCode">${esc(fmtCode(g.inviteCode))}</span><div class="fbhint" style="text-align:center;overflow-wrap:anywhere">${esc(inviteText(g.inviteCode))}</div>
-      <div class="row" style="margin-top:12px"><button class="btn sec" style="flex:1" id="gdCopy" data-act="gCopy" data-id="${esc(g.id)}">📋 Copy</button><button class="btn pri" style="flex:1" id="gdShare" data-act="gShare" data-id="${esc(g.id)}">↗ Share</button></div></div>
+      <div class="row" style="margin-top:12px"><button class="btn sec" style="flex:1" id="gdCopy" data-act="gCopy" data-id="${esc(g.id)}">📋 Copy</button><button class="btn pri" style="flex:1" id="gdShare" data-act="gShare" data-id="${esc(g.id)}">↗ Share</button></div>
+      <div class="sub" id="gdLockNote" style="font-size:12.5px;margin-top:10px;text-align:center">${g.isCreator ? 'Only people you approve can join.' : 'New people need the creator’s approval to join.'}</div>
+      ${g.isCreator ? (rcConfirm ? `<div class="erasebox" id="rcBox" role="alertdialog" aria-label="Confirm reset invite code" style="margin-top:10px;text-align:left"><b style="font-size:16px">Reset the invite code?</b><div class="sub" style="font-size:13px;margin:6px 0 12px">The current code stops working right away. Members stay in the group and requests already waiting stay too.</div><div style="display:grid;gap:8px"><button class="btn sec" id="rcCancel" data-act="rcCancel">Cancel</button><button class="btn danger" id="rcYes" data-act="rcYes" data-id="${esc(g.id)}" ${rcBusy ? 'disabled' : ''}>${rcBusy ? 'Resetting…' : 'Yes, reset code'}</button></div></div>` : `<button type="button" class="flink" id="rcBtn" data-act="rcAsk" style="display:block;margin:6px auto 0;padding:10px 8px">Reset invite code</button>`) : ''}</div>
+    ${g.isCreator ? `<div id="gdRequests"><div class="label" style="margin-bottom:6px">Join requests${pendingOfG(g) ? ` · ${pendingOfG(g)}` : ''}</div>${pendingOfG(g) ? `<div class="card rqcard" style="padding:12px 14px"><div class="rqlist">${rqRowsHTML(g)}</div></div>` : '<div class="card" style="padding:12px 16px"><div class="sub" style="font-size:13px">No one is waiting. Only people you approve can join.</div></div>'}</div>` : ''}
+    ${pinSectionHTML(g)}
     <div><div class="label" style="margin-bottom:6px">Members</div><div class="card" id="gdMembers" style="padding:6px 16px">${memHTML}</div>${privHTML()}</div>
     <div id="gdShared"><div class="label" style="margin-bottom:8px">Shared workouts</div>${sharedListHTML([g.id], 'Nothing shared yet. Open one of your workouts in the Program tab and tap Share to group.')}</div>
     <div class="erase" id="leaveSec">${leave}</div>
@@ -1549,7 +1927,7 @@ async function leaveGroup() {
   if (!r.ok && r.code !== 'not_a_member') { gdErr = apiMsg(r); render(); return; }
   SY.groups = SY.groups.filter(x => x.id !== g.id); if (SY.sel === g.id) SY.sel = 'me';
   Object.keys(SY.lb).forEach(k => { if (k.startsWith(g.id + '|')) delete SY.lb[k]; }); saveSync();
-  delete gdMem[g.id]; delete spMem[g.id]; Object.keys(lbMem).forEach(k => { if (k.startsWith(g.id + '|')) delete lbMem[k]; });
+  delete gdMem[g.id]; delete spMem[g.id]; delete SY.pinDismiss[g.id]; saveSync(); Object.keys(lbMem).forEach(k => { if (k.startsWith(g.id + '|')) delete lbMem[k]; });
   gdId = null; gdLeave = 0; view = 'home'; render(window.scrollTo(0, 0)); toast('Left ' + g.name);
 }
 function signOutGroups(leave) {
@@ -1559,14 +1937,15 @@ function signOutGroups(leave) {
 }
 const gdAuto = () => { const g = SY.groups.find(x => x.id === gdId); if (!g) return; const m = gdMem[g.id] = gdMem[g.id] || {}; if (!m.loading && (!m.tried || Date.now() - m.tried > 45000)) fetchGD(g.id); spAuto([g.id]); };
 function autoFetches() {
-  if (view === 'home' && curGroup()) lbAuto();
+  if (view === 'home' || view === 'group') creatorGroups().forEach(g => { if (pendingOfG(g) > 0 && (view === 'home' || g.id === gdId)) rqAuto(g.id); });
+  if (view === 'home' && curGroup()) { lbAuto(); pinAuto(curGroup().id); }
   else if (view === 'program' && !progDetail && SY.token && SY.groups.length) spAuto();
   else if (view === 'group') gdAuto();
 }
 /* pull to refresh (Home, group selected) */
 const ptr = { on: false, y0: 0, d: 0 };
 function ptrShow(d) { let el = $('#ptr'); if (!el) { el = document.createElement('div'); el.id = 'ptr'; el.className = 'ptr'; el.setAttribute('aria-hidden', 'true'); document.body.appendChild(el); } el.textContent = d > 90 ? '↻ Release to refresh' : '↓ Pull to refresh'; el.style.transform = `translate(-50%, ${d > 8 ? Math.min(d, 120) - 50 : -60}px)`; }
-document.addEventListener('touchstart', e => { if (view !== 'home' || !curGroup() || modal || window.scrollY > 0 || e.touches.length !== 1) { ptr.on = false; return; } ptr.on = true; ptr.y0 = e.touches[0].clientY; ptr.d = 0; }, { passive: true });
+document.addEventListener('touchstart', e => { if (view !== 'home' || !(curGroup() || (SY.requests || []).length || creatorGroups().length) || modal || window.scrollY > 0 || e.touches.length !== 1) { ptr.on = false; return; } ptr.on = true; ptr.y0 = e.touches[0].clientY; ptr.d = 0; }, { passive: true });
 document.addEventListener('touchmove', e => { if (!ptr.on) return; ptr.d = e.touches[0].clientY - ptr.y0; if (ptr.d > 8) ptrShow(ptr.d); }, { passive: true });
 document.addEventListener('touchend', () => { if (!ptr.on) return; const go = ptr.d > 90; ptr.on = false; ptr.d = 0; const el = $('#ptr'); if (el) el.remove(); if (go) lbRefresh(); }, { passive: true });
 
@@ -1575,14 +1954,15 @@ function homeView() {
   const u = unit(), pt = periodTotals(S.history), P = dashPeriod, resuming = !!S.session;
   const seg = [['today', 'Today'], ['week', 'This week'], ['all', 'All-time']].map(([k, l]) => `<button type="button" class="${P === k ? 'on' : ''}" data-act="dashP" data-p="${k}" aria-pressed="${P === k}">${l}</button>`).join('');
   return `<div class="screen" id="homeScreen">
-    <div class="hdr"><div class="brand">FOR<b>GE</b></div><button class="icon" data-act="settings" aria-label="Settings">⚙️</button></div>
+    <div class="hdr"><div class="brand">BETA <b>FIT</b></div><button class="icon" data-act="settings" aria-label="Settings">⚙️</button></div>
     ${scopeRowHTML(null)}
     ${resuming ? `<button type="button" class="resumebar" id="resumeBar" data-act="resume"><span class="pl">▶</span><span><b>Workout in progress</b><span>Tap to resume${S.session.pausedAt ? ' (paused)' : ''}</span></span></button>` : ''}
+    ${reqPendingHTML()}${rqHomeHTML()}
     <div class="dsel" id="dashSel" role="group" aria-label="Period">${seg}</div>
     ${P === 'all' ? dashAllHTML(pt, u) : dashHeroHTML(pt, u)}
     ${yourWeekHTML(pt, u)}
     ${streakRowHTML()}
-    ${SY.groups.length ? '' : groupCardHTML()}
+    ${SY.groups.length || (SY.requests || []).length ? '' : groupCardHTML()}
   </div>${navHTML()}`;
 }
 
@@ -1590,7 +1970,7 @@ function startView() {
   const p = S.program, day = dayOf(), multi = p.weeks.length > 1;
   const resuming = !!S.session;
   return `<div class="screen">
-    <div class="hdr"><div class="brand">FOR<b>GE</b></div><button class="icon" data-act="settings" aria-label="Settings">⚙️</button></div>
+    <div class="hdr"><div class="brand">BETA <b>FIT</b></div><button class="icon" data-act="settings" aria-label="Settings">⚙️</button></div>
     <div id="startHead"><div class="greet">${userName() ? 'Ready to lift, ' + esc(userName()) + '?' : 'Ready to lift?'}</div><div class="sub" style="margin-top:4px">${esc(new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }))} · ${esc(p.name)}</div></div>
     <div class="hero" id="todayCard">
       <div class="row wrap"><span class="label">Today's workout</span>${(() => { const t = (multi ? esc(curWeek().name) + ' · ' : '') + esc(day.name) + (day.dow ? ' · ' + esc(day.dow) : ''); return resuming ? `<span class="chip acc" id="dayChip">${t}</span>` : `<button type="button" class="chip acc daypill" id="changeDay" data-act="changeDay" aria-haspopup="dialog" aria-label="Change workout day: ${t}">${t}<span class="dd" aria-hidden="true">▾</span></button>`; })()}</div>
@@ -1601,6 +1981,7 @@ function startView() {
         <div class="stat"><b>~${estMin(day)}</b><span>MINUTES</span></div>
       </div>
       ${day.note ? `<div class="notice" style="margin-bottom:14px">${esc(day.note)}</div>` : ''}
+      ${musicRowHTML()}
       ${resuming ? `<button class="btn pri block" data-act="resume">▶ RESUME WORKOUT${S.session && S.session.pausedAt ? ' (paused)' : ''}</button><button class="btn block" style="color:var(--mut);min-height:44px;margin-top:6px" data-act="discard">Discard in-progress workout</button>`
         : `<button class="btn pri block" data-act="start">▶ START WORKOUT</button>`}
       <div style="margin-top:14px">${blocksPreview(day, homeExpanded ? 99 : 3)}${day.blocks.length > 3 ? `<button type="button" class="moreblk" data-act="toggleBlocks" aria-expanded="${homeExpanded}"><span class="n" style="width:26px;height:26px;border-radius:8px;background:var(--accsoft);color:var(--acc2);font-weight:800;font-size:12px;display:grid;place-items:center;flex:none">${homeExpanded ? '−' : '+'}</span><span class="t mut" style="flex:1">${homeExpanded ? 'Show fewer blocks' : `${day.blocks.length - 3} more block${day.blocks.length - 3 > 1 ? 's' : ''} (supersets &amp; circuits)`}</span><span class="mut">${homeExpanded ? '▴' : '▾'}</span></button>` : ''}</div>
@@ -1611,7 +1992,7 @@ function startView() {
 
 function statsView() {
   const h = S.history, u = unit(), st = streakInfo(h), ls = liftStats(h);
-  const head = `<div class="hdr"><div class="brand">FOR<b>GE</b></div>${st.total ? '<button class="btn sec" style="min-height:44px;font-size:14px" data-act="shareOpen" data-t="stats">↗ Share</button>' : ''}</div>
+  const head = `<div class="hdr"><div class="brand">BETA <b>FIT</b></div>${st.total ? '<button class="btn sec" style="min-height:44px;font-size:14px" data-act="shareOpen" data-t="stats">↗ Share</button>' : ''}</div>
     <div><div class="greet">Stats</div><div class="sub">Streak and big-3 lifts, computed on this device.</div></div>`;
   if (!st.total) return `<div class="screen">${head}
     <div class="card empty" style="padding:36px 18px"><div style="font-size:46px">🏆</div><b style="display:block;font-size:18px;color:var(--text);margin:8px 0 6px">Your stats start with workout #1</b><p>Finish a workout and your streak will show up here. Log bench, squat or deadlift with weights and you'll see estimated 1RMs and 30-day gains too.</p><button class="btn pri" style="margin-top:16px" data-act="nav" data-v="home">▶ Go to today's workout</button></div>
@@ -1655,8 +2036,8 @@ function cardSpec() {
 }
 function shareText(sp) {
   sp = sp || cardSpec();
-  if (sp.tpl === 'workout') { const h = sp.h; return `FORGE · ${sp.name}\n${h.dayName} — ${h.focus}\n${fmt(h.durationSec)} · ${h.setsDone}/${h.setsTotal} sets${sp.volKg ? ' · ' + fmtVol(sp.volKg, sp.u) + ' ' + sp.u + ' lifted' : ''}\nThis week: ${fmtVol(sp.weekKg, sp.u)} ${sp.u} · ${fmtReps(sp.weekReps)} reps${sp.prs.length ? '\n' + sp.prs.map(p => `NEW PR ${p.label}: ${fmtNum(p.w)}×${p.r} (e1RM ${p.e} ${sp.u}, +${p.gain})`).join('\n') : ''}`; }
-  return `FORGE · ${sp.name}\n🔥 ${sp.st.current}-day streak (longest ${sp.st.best}) · ${sp.st.total} workout days\nLifted: ${fmtVol(sp.weekKg, sp.u)} ${sp.u} this week · ${fmtVol(sp.allKg, sp.u)} ${sp.u} all-time\n${sp.lifts.map(l => `${l.label}: ${l.e != null ? l.e + ' ' + sp.u + ' e1RM' : '—'}${l.gk === 'gain' || l.gk === 'new' ? ' (' + (l.gk === 'new' ? 'new' : l.g + ' 30d') + ')' : ''}`).join('\n')}`;
+  if (sp.tpl === 'workout') { const h = sp.h; return `BETA FIT · ${sp.name}\n${h.dayName} — ${h.focus}\n${fmt(h.durationSec)} · ${h.setsDone}/${h.setsTotal} sets${sp.volKg ? ' · ' + fmtVol(sp.volKg, sp.u) + ' ' + sp.u + ' lifted' : ''}\nThis week: ${fmtVol(sp.weekKg, sp.u)} ${sp.u} · ${fmtReps(sp.weekReps)} reps${sp.prs.length ? '\n' + sp.prs.map(p => `NEW PR ${p.label}: ${fmtNum(p.w)}×${p.r} (e1RM ${p.e} ${sp.u}, +${p.gain})`).join('\n') : ''}`; }
+  return `BETA FIT · ${sp.name}\n🔥 ${sp.st.current}-day streak (longest ${sp.st.best}) · ${sp.st.total} workout days\nLifted: ${fmtVol(sp.weekKg, sp.u)} ${sp.u} this week · ${fmtVol(sp.allKg, sp.u)} ${sp.u} all-time\n${sp.lifts.map(l => `${l.label}: ${l.e != null ? l.e + ' ' + sp.u + ' e1RM' : '—'}${l.gk === 'gain' || l.gk === 'new' ? ' (' + (l.gk === 'new' ? 'new' : l.g + ' 30d') + ')' : ''}`).join('\n')}`;
 }
 function cRR(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
 function cT(c, s, x, y, size, wt, col, al, maxW) {
@@ -1678,7 +2059,7 @@ function drawCard(cv, sp) {
   let g = c.createRadialGradient(W, 0, 0, W, 0, 900); g.addColorStop(0, 'rgba(255,106,26,.40)'); g.addColorStop(1, 'rgba(255,106,26,0)'); c.fillStyle = g; c.fillRect(0, 0, W, H);
   g = c.createRadialGradient(0, H, 0, 0, H, 700); g.addColorStop(0, 'rgba(255,106,26,.16)'); g.addColorStop(1, 'rgba(255,106,26,0)'); c.fillStyle = g; c.fillRect(0, 0, W, H);
   c.fillStyle = '#ff6a1a'; c.fillRect(0, 0, W, 10);
-  const w1 = cT(c, 'FOR', 80, 120, 52, 900, '#f5f5f6'); cT(c, 'GE', 80 + w1 + 2, 120, 52, 900, '#ff6a1a');
+  const w1 = cT(c, 'BETA ', 80, 120, 52, 900, '#f5f5f6'); cT(c, 'FIT', 80 + w1 + 2, 120, 52, 900, '#ff6a1a');
   cT(c, sp.date.toUpperCase(), W - 80, 118, 26, 700, '#9a9aa5', 'right', 520);
   const panel = (x, y, w, h, hot) => { cRR(c, x, y, w, h, 36); c.fillStyle = hot ? '#1d1511' : '#17171b'; c.fill(); c.lineWidth = 3; c.strokeStyle = hot ? 'rgba(255,106,26,.55)' : '#2a2a31'; c.stroke(); };
   if (sp.tpl === 'stats') {
@@ -1731,11 +2112,11 @@ function drawCard(cv, sp) {
       if (!h.exercises.some(e => e.sets.some(x => x.w > 0 && x.u !== 's'))) cT(c, 'Workout logged. Consistency wins.', 124, 990, 38, 700, '#9a9aa5', 'left', 800);
     }
   }
-  cT(c, sp.tpl === 'stats' ? 'Est. 1RM (Epley) · best of sets of 1–10 reps' : 'Logged with FORGE', 80, 1292, 26, 700, '#6c6c76', 'left', 700);
+  cT(c, sp.tpl === 'stats' ? 'Est. 1RM (Epley) · best of sets of 1–10 reps' : 'Logged with BETA FIT', 80, 1292, 26, 700, '#6c6c76', 'left', 700);
   cT(c, 'pb3oh.github.io/forge-workout', W - 80, 1292, 26, 700, '#ff6a1a', 'right', 400);
 }
 function paintShare() { const cv = $('#shareCv'); if (cv) drawCard(cv, cardSpec()); }
-const shareFile = () => 'forge-' + (shareSt.tpl === 'workout' ? 'workout' : 'stats') + '-' + new Date().toISOString().slice(0, 10) + '.png';
+const shareFile = () => 'beta-fit-' + (shareSt.tpl === 'workout' ? 'workout' : 'stats') + '-' + new Date().toISOString().slice(0, 10) + '.png';
 function cardBlob() { const cv = document.createElement('canvas'); drawCard(cv, cardSpec()); return new Promise(r => cv.toBlob(r, 'image/png')); }
 function downloadBlob(blob, name) { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 800); }
 async function copyText(t) {
@@ -1747,7 +2128,7 @@ async function shareGo() {
   if (!blob) { toast('Could not make the image'); return; }
   const file = new File([blob], name, { type: 'image/png' });
   try {
-    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: 'FORGE', text }); return; }
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: 'BETA FIT', text }); return; }
   } catch (e) { if (e && e.name === 'AbortError') return; }
   downloadBlob(blob, name); const ok = await copyText(text); toast(ok ? 'Image saved · summary copied' : 'Image saved');
 }
@@ -1755,12 +2136,12 @@ async function shareGo() {
 function programFile() {
   const p = clone(S.program); delete p.source; delete p.ver;
   const slug = String(p.name || 'program').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'program';
-  return { name: 'forge-program-' + slug + '.json', json: JSON.stringify(p) };
+  return { name: 'beta-fit-program-' + slug + '.json', json: JSON.stringify(p) };
 }
 async function shareProgram() {
   const f = programFile(), blob = new Blob([f.json], { type: 'application/json' }), file = new File([blob], f.name, { type: 'application/json' });
   try {
-    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: S.program.name, text: 'FORGE program: ' + S.program.name + '. Import it on the Import tab.' }); return; }
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: S.program.name, text: 'BETA FIT program: ' + S.program.name + '. Import it on the Import tab.' }); return; }
   } catch (e) { if (e && e.name === 'AbortError') return; }
   downloadBlob(blob, f.name); toast('Program file saved - send it to a friend to import');
 }
@@ -1773,15 +2154,18 @@ function libraryHTML() {
       <button class="btn sec" style="min-height:40px;padding:0 14px;font-size:13px" data-act="libSwitch" data-id="${esc(e.id)}">Switch</button>
       <button class="icon" data-act="libDel" data-id="${esc(e.id)}" aria-label="Delete ${esc(e.name)}">✕</button></div></div>`;
   };
-  return `<div><div class="label">My workouts</div><div style="display:grid;gap:8px;grid-template-columns:minmax(0,1fr)">${S.library.map(card).join('')}</div>
+  // one-tap starter: shown whenever the built-in program isn't in My workouts (never added, or deleted), and as the empty state
+  const hasStarter = S.library.some(e => e.source === 'built-in' || (e.program && e.program.source === 'sample')), bp = BUILTIN_PROGRAM;
+  const starter = hasStarter ? '' : `<div class="card starter" id="starterCard"><span class="pi" aria-hidden="true">⚡</span><div class="mt"><b>Starter: ${esc(bp.name)}</b><small>8 weeks, 6 training days a week. Ready to go, one tap.</small></div><button type="button" class="btn sec" id="loadStarter" data-act="loadSample">⚡ Load ${esc(bp.name)}</button></div>`;
+  return `<div><div class="label">My workouts</div>${S.library.length ? `<div style="display:grid;gap:8px;grid-template-columns:minmax(0,1fr)">${S.library.map(card).join('')}</div>` : `<div class="empty" id="libEmpty"><div style="font-size:40px">📋</div><p style="margin-top:8px">No workouts yet.<br>Start with the built-in program or add your own.</p></div>`}
+    ${starter ? `<div style="margin-top:8px">${starter}</div>` : ''}
     <button class="btn sec block" style="margin-top:8px" data-act="nav" data-v="import">+ Add workout</button>
-    <div id="sharedSec" style="margin-top:22px"><div class="label" style="margin-bottom:8px">Shared with my groups</div>${SY.token && SY.groups.length ? sharedListHTML(SY.groups.map(g => g.id), 'Nothing shared yet. Open one of your workouts and tap Share to group.')
-      : `<div class="note" id="sharedNone" style="color:var(--mut);font-size:13px;line-height:1.45">Join a group to share your workouts with friends and add theirs here.</div><div class="row" style="margin-top:10px"><button class="btn sec" style="flex:1;min-height:46px;font-size:14px;padding:0 10px" data-act="gcreate">＋ Create group</button><button class="btn sec" style="flex:1;min-height:46px;font-size:14px;padding:0 10px" data-act="gjoin">Join with code</button></div>`}</div></div>`;
+    ${(() => { const h = SY.token && SY.groups.length ? sharedListHTML(SY.groups.map(g => g.id), '', true) : ''; return h ? `<div id="sharedSec" style="margin-top:22px"><div class="label" style="margin-bottom:8px">Shared with my groups</div>${h}</div>` : ''; })()}</div>`;
 }
 function programView() {
   if (progDetail) return programDetailView();
   return `<div class="screen">
-    <div class="hdr"><div class="brand">FOR<b>GE</b></div></div>
+    <div class="hdr"><div class="brand">BETA <b>FIT</b></div></div>
     ${libraryHTML()}
   </div>${navHTML()}`;
 }
@@ -1811,7 +2195,7 @@ function previewHTML(pr) {
   const { program, warnings } = pr, ds = allDays(program), multi = (program.weeks || []).length > 1;
   let h = '';
   if (warnings.length) h += `<div class="notice">${warnings.slice(0, 8).map(w => '• ' + esc(w)).join('<br>')}${warnings.length > 8 ? `<br>…and ${warnings.length - 8} more` : ''}</div>`;
-  if (!ds.length) return h + `<div class="notice err">Couldn't find any workout days. Try the format hints above, or load the built-in program.</div>`;
+  if (!ds.length) return h + `<div class="notice err">Couldn't find any workout days. Try the format hints above, or load the starter program below.</div>`;
   h += `<div class="notice ok">Created ${multi ? `<b>${program.weeks.length} weeks</b> · ` : ''}<b>${ds.length} day${ds.length > 1 ? 's' : ''}</b> · ${ds.reduce((n, d) => n + exCount(d), 0)} exercises · ${ds.reduce((n, d) => n + setCount(d), 0)} sets. Review, then save.</div>`;
   const dayCard = d => `<div class="card"><div class="row" style="justify-content:space-between"><b>${esc(d.name)} — ${esc(d.focus)}</b><span class="chip">${setCount(d)} sets</span></div>${blocksPreview(d)}</div>`;
   h += multi ? program.weeks.slice(0, 12).map(w => `<details class="card"><summary style="font-weight:700">${esc(w.name)} · ${w.days.length} days</summary><div style="display:grid;gap:10px;margin-top:10px">${w.days.map(dayCard).join('')}</div></details>`).join('') : ds.map(dayCard).join('');
@@ -1821,10 +2205,8 @@ function previewHTML(pr) {
 function importView() {
   const bp = BUILTIN_PROGRAM;
   return `<div class="screen">
-    <div class="hdr"><div class="brand">FOR<b>GE</b></div></div>
-    <div><div class="greet">Import a workout</div><div class="sub">Turn a plan into daily workouts with superset sequencing.</div></div>
-    <div class="notice"><b>Heads up:</b> this app runs entirely on your device, so PDFs and photos of programs aren't readable yet — AI import is coming. Today you can paste text or upload a .txt / .csv / .json file. <b>${esc(bp.name)}</b> (the PDF you shared) is already transcribed and built in — load it below. <button class="flink" data-act="feedback" data-from="import">Send feedback</button></div>
-    <button class="btn pri block" data-act="loadSample">⚡ Load ${esc(bp.name)}</button>
+    <div class="hdr"><div class="brand">BETA <b>FIT</b></div></div>
+    <div><div class="greet">Import a workout</div><div class="sub" id="importHint">Upload or paste a .txt, .csv or .json workout.</div></div>
     <label class="drop" id="dropZone"><input type="file" id="fileIn" accept=".txt,.csv,.json,.md,.tsv,.pdf,.png,.jpg,.jpeg,.heic,.heif,.webp,.gif,application/pdf,application/json,text/*,image/*"><span style="font-size:28px">📄</span><b>Upload or drop a file</b><small>${importFile ? 'Selected: ' + esc(importFile) : 'Works with txt · csv · json. PDFs &amp; photos: not readable yet.'}</small></label>
     ${importBlocked ? blockedHTML() : ''}
     ${importNote ? `<div class="notice err">${esc(importNote)}</div>` : ''}
@@ -1840,6 +2222,7 @@ function importView() {
       • JSON: <b>{"weeks":[{"name":"Week 1","days":[{"name","focus","blocks":[{"exercises":[{"name","sets":["10","10+10","20s","Failure"]}]}]}]}]}</b> — circuits: add <b>"kind":"cardio"</b> and <b>"rest":60</b> to a block. Flat <b>{"days":[…]}</b> also works.</div></details>
     <button class="btn pri block" data-act="parse">Create workout</button>
     ${previewHTML(parsed)}
+    <div class="card starterrow" id="starterRow"><div class="mt"><small>STARTER PROGRAM</small><b>${esc(bp.name)}</b></div><button type="button" class="btn sec" id="loadSampleBtn" data-act="loadSample" aria-label="Load ${esc(bp.name)}">Load</button></div>
   </div>${navHTML()}`;
 }
 const setStr = s => s.u === 's' ? `${s.r}s` : s.w ? `${s.w}×${s.r || '?'}` : `${s.r || '✓'}`;
@@ -1847,7 +2230,7 @@ function historyView() {
   const h = S.history;
   const vt = volumeTotals(h).all, totalSets = h.reduce((n, x) => n + x.setsDone, 0), u = unit();
   return `<div class="screen">
-    <div class="hdr"><div class="brand">FOR<b>GE</b></div></div>
+    <div class="hdr"><div class="brand">BETA <b>FIT</b></div></div>
     <div><div class="greet">History</div><div class="sub">Saved on this device.</div></div>
     ${h.length ? `<div class="tiles"><div class="tile"><b>${h.length}</b><span>Workouts</span></div><div class="tile"><b>${totalSets}</b><span>Sets done</span></div></div>` : ''}
     ${h.length ? h.map(x => `<div class="card ${openHist === x.id ? 'open' : ''}"><button class="dayhead" data-act="histToggle" data-id="${x.id}"><div class="dn">✓</div><div class="tx"><b>${esc(x.dayName)} — ${esc(x.focus)}</b><span>${x.week ? esc(x.week) + ' · ' : ''}${new Date(x.date).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })} · ${fmt(x.durationSec)} · ${x.setsDone}/${x.setsTotal} sets${entryTotals(x).volKg ? ' · ' + fmtVol(entryTotals(x).volKg, u) + ' ' + u : ''}</span></div><span class="caret">▶</span></button>
@@ -1865,7 +2248,10 @@ function progressHTML(s) {
   return `<div class="progwrap"><div class="bar"><i style="width:${pct}%"></i></div><div class="progtxt"><span>Step ${s.cur + 1} of ${s.steps.length}</span><span>${pct}% · ${s.steps.filter((x, i) => s.res[i] && s.res[i].st === 'done').length} sets done</span></div></div>`;
 }
 function chipsHTML() {
-  return `<div class="row wrap" style="padding:0 18px"><span class="chip music" title="Not built yet">♫ Spotify — coming soon</span><button class="chip btnchip" data-act="restSheet" aria-label="Change rest timer">⏱ Rest ${S.settings.rest ? S.settings.rest + 's' : 'off'} ▾</button></div>`;
+  const l = musicFor();
+  const mc = l ? `<button type="button" class="chip btnchip music on" id="musicChip" data-act="musicChip" aria-label="Open ${esc(l.name)} in Spotify">${spLogo(15)}<span class="nm">${esc(l.name)}</span> ↗</button>`
+    : `<button type="button" class="chip btnchip music" id="musicChip" data-act="musicChip" aria-label="Add a Spotify playlist">♫ Add playlist</button>`;
+  return `<div class="row wrap" style="padding:0 18px">${mc}<button class="chip btnchip" data-act="restSheet" aria-label="Change rest timer">⏱ Rest ${S.settings.rest ? S.settings.rest + 's' : 'off'} ▾</button></div>`;
 }
 function nextCard(s, idx, big) {
   const st = s.steps[idx];
@@ -1992,7 +2378,7 @@ function modalHTML() {
     return `<div class="overlay" data-act="closeModal"><div class="sheet" data-stop="1"><div class="grab"></div><div class="row" style="justify-content:space-between"><b style="font-size:20px">Send feedback</b><button class="icon" data-act="closeModal" aria-label="Close">✕</button></div>
       <div class="fbhint" style="margin-top:6px">Opens a GitHub issue. A copy is saved on this device. GitHub issues are public, so leave out anything private.</div>
       <div class="seg" style="margin-top:12px" role="group" aria-label="Type">${['Bug', 'Idea', 'Other'].map(t => `<button class="${d.type === t ? 'on' : ''}" data-act="fbType" data-t="${t}">${t === 'Bug' ? '🐞 ' : t === 'Idea' ? '💡 ' : '💬 '}${t}</button>`).join('')}</div>
-      <textarea class="fbta" id="fbText" maxlength="2000" style="margin-top:12px" placeholder="${d.type === 'Bug' ? 'What went wrong? What did you tap, and what did you expect?' : d.type === 'Idea' ? 'What would make FORGE better for you?' : 'Anything else…'}">${esc(d.text)}</textarea>
+      <textarea class="fbta" id="fbText" maxlength="2000" style="margin-top:12px" placeholder="${d.type === 'Bug' ? 'What went wrong? What did you tap, and what did you expect?' : d.type === 'Idea' ? 'What would make BETA FIT better for you?' : 'Anything else…'}">${esc(d.text)}</textarea>
       <input class="txt fb" id="fbContact" type="text" maxlength="80" autocomplete="off" autocapitalize="off" enterkeyhint="done" style="margin-top:10px" placeholder="Name or email (optional)" value="${esc(d.contact)}">
       <div class="fbhint" style="margin-top:6px">Contact is optional. If you send via GitHub it will be visible on the public issue. The message also includes the app build (${esc(BUILD)}) and your browser's user agent to help debug.</div>
       ${d.file ? `<div class="fbhint" style="margin-top:8px">📎 ${esc(d.file.name)} (${fmtSize(d.file.size)}) — a link can't carry files. After GitHub opens, drag the file into the issue.</div>` : ''}
@@ -2000,6 +2386,7 @@ function modalHTML() {
       ${d.status ? `<div class="fbstat" role="status">${esc(d.status)}</div>` : ''}
       </div></div>`;
   }
+  if (modal === 'music') return musicSheetHTML();
   if (modal === 'pickday') {
     const w = S.program.weeks[Math.min(cdWeek, S.program.weeks.length - 1)], multi = S.program.weeks.length > 1;
     return `<div class="overlay" data-act="closeModal"><div class="sheet" id="pickSheet" data-stop="1"><div class="grab"></div><div class="row" style="justify-content:space-between"><b style="font-size:20px">Change day</b><button class="icon" data-act="closeModal" aria-label="Close">✕</button></div>
@@ -2017,7 +2404,7 @@ function modalHTML() {
       <div class="sw" style="margin-top:14px"><span>Keep screen awake during workouts</span><div class="seg"><button class="${st.wake ? 'on' : ''}" data-act="toggleWake">${st.wake ? 'On' : 'Off'}</button></div></div>
       <div class="sub" id="wakeHelp" style="font-size:12.5px;margin-top:2px">Stops your phone from dimming or locking while a workout is running.</div>
       <div style="margin-top:18px"><div class="sub" style="margin-bottom:6px">Feedback</div><button class="btn sec block" data-act="feedback" data-from="settings">💬 Send feedback</button>${fbListHTML()}</div>
-      <div class="sub" id="buildLbl" style="text-align:center;margin-top:18px;font-size:12px">FORGE build ${esc(BUILD)}${updNew ? ' · <b style="color:var(--acc2)">update available</b>' : ''}</div>
+      <div class="sub" id="buildLbl" style="text-align:center;margin-top:18px;font-size:12px">BETA FIT build ${esc(BUILD)}${updNew ? ' · <b style="color:var(--acc2)">update available</b>' : ''}</div>
       <div class="erase" id="eraseSec">${eraseStep ? `<div class="erasebox" id="eraseBox" role="alertdialog" aria-label="Confirm erase"><b style="font-size:16px">Erase everything on this device?</b>
         <div class="sub" style="font-size:13px;margin:6px 0 12px">This deletes your workout history, PRs, name, settings and saved workouts (My workouts). It can't be undone.</div>
         ${SY.token ? `<label class="chk" id="eraseSyncRow"><input type="checkbox" id="eraseSync" ${eraseSyncOpt ? 'checked' : ''}><span>Also leave my groups and remove my group sign-in from this device. Totals already shared with a group stay there.</span></label>` : ''}
@@ -2059,14 +2446,21 @@ function render() {
   const fc = $('#fbContact'); if (fc) fc.addEventListener('input', () => { fbDraft.contact = fc.value; });
   const ni = $('#nameIn'); if (ni) { ni.addEventListener('input', () => { S.settings.name = ni.value.trim().slice(0, 24); save(); }); ni.addEventListener('change', syncSoon); }
   [['gmName', 'name'], ['gmCode', 'code'], ['gmDn', 'dn']].forEach(([id, k]) => { const el = $('#' + id); if (el) { el.addEventListener('input', () => { gm[k] = el.value; }); el.addEventListener('keydown', ev => { if (ev.key === 'Enter') { ev.preventDefault(); gmSubmit(); } }); } });
+  const mu1 = $('#muUrl'); if (mu1) {
+    mu1.addEventListener('input', () => { mu.url = mu1.value; musicRefresh(); });
+    mu1.addEventListener('paste', () => setTimeout(musicTidy, 0));
+    mu1.addEventListener('change', musicTidy);
+    mu1.addEventListener('keydown', ev => { if (ev.key === 'Enter') { ev.preventDefault(); musicTidy(); const p = parseSpotify(mu.url); if (p.ok && musicDirty(p, musicFor())) musicSave(); } });
+  }
+  const mu2 = $('#muName'); if (mu2) mu2.addEventListener('input', () => { mu.name = mu2.value; musicRefresh(); });
   const es = $('#eraseSync'); if (es) es.addEventListener('change', () => { eraseSyncOpt = es.checked; });
   if (modal === 'share') paintShare();
   syncBanner(); autoFetches();
   const ta = $('#importTA'); if (ta) ta.addEventListener('input', () => { importText = ta.value; });
   ['inW', 'inR'].forEach(id => { const el = $('#' + id); if (el) el.addEventListener('input', saveDraft); });
 }
-const FORGE_PROMPT = [
-  'Convert the workout program I am attaching/pasting (PDF, photo, or text) into FORGE program JSON.',
+const IMPORT_PROMPT = [
+  'Convert the workout program I am attaching/pasting (PDF, photo, or text) into BETA FIT program JSON.',
   'Reply with ONE valid JSON object only (no commentary), inside a single code block.',
   '',
   'FORMAT',
@@ -2096,7 +2490,7 @@ let blockedFile = null; // in-memory only: the last PDF/photo the user tried, so
 function blockedHTML() {
   const b = importBlocked;
   return `<div class="notice" id="blockedNote"><b>${b.kind === 'PDF' ? '📕' : '🖼️'} "${esc(b.name)}" can't be read yet.</b><br>
-    PDFs and photos of programs aren't readable in FORGE yet, regardless of size. AI import is coming. Until then you can have ChatGPT or Claude do the conversion: copy the prompt below, paste it into the chat together with your ${b.kind === 'PDF' ? 'PDF' : 'photo'}, then paste the JSON it replies with into the box underneath (or save it as a .json file and upload it here).
+    PDFs and photos of programs aren't readable in BETA FIT yet, regardless of size. AI import is coming. Until then you can have ChatGPT or Claude do the conversion: copy the prompt below, paste it into the chat together with your ${b.kind === 'PDF' ? 'PDF' : 'photo'}, then paste the JSON it replies with into the box underneath (or save it as a .json file and upload it here).
     <div class="nact"><button class="btn sec" data-act="copyPrompt">📋 Copy a prompt for ChatGPT/Claude</button><button class="btn ghost" data-act="sendFile">📨 Send us this file</button></div></div>`;
 }
 function handleFile(f) {
@@ -2109,7 +2503,7 @@ function handleFile(f) {
     render(); return;
   }
   if (!(TXT_RE.test(f.name) || type.startsWith('text/') || /json|csv/.test(type) || (!/\.[a-z0-9]{1,5}$/i.test(f.name) && !type))) {
-    importNote = `"${f.name}" isn't a file type FORGE can read. Use a .txt, .csv or .json file, or paste the text into the box below.`;
+    importNote = `"${f.name}" isn't a file type BETA FIT can read. Use a .txt, .csv or .json file, or paste the text into the box below.`;
     render(); return;
   }
   const rd = new FileReader();
@@ -2146,13 +2540,13 @@ const FB_REPO = 'https://github.com/pb3oh/forge-workout/issues/new';
 const FB_LABEL = { Bug: 'bug', Idea: 'enhancement', Other: 'feedback' };
 function fbText(withMeta = true) {
   const d = fbDraft; let t = d.text.trim();
-  if (withMeta) t += `\n\n---\nType: ${d.type}\nContact: ${d.contact.trim() || '(none given)'}\nApp: FORGE build ${BUILD}\nDevice: ${navigator.userAgent}\nDate: ${new Date().toISOString()}` + (d.file ? `\nFile I tried to import: ${d.file.name} (${d.file.type || 'unknown type'}, ${fmtSize(d.file.size)}) - not attached` : '');
-  return 'FORGE feedback - ' + d.type + '\n\n' + t;
+  if (withMeta) t += `\n\n---\nType: ${d.type}\nContact: ${d.contact.trim() || '(none given)'}\nApp: BETA FIT build ${BUILD}\nDevice: ${navigator.userAgent}\nDate: ${new Date().toISOString()}` + (d.file ? `\nFile I tried to import: ${d.file.name} (${d.file.type || 'unknown type'}, ${fmtSize(d.file.size)}) - not attached` : '');
+  return 'BETA FIT feedback - ' + d.type + '\n\n' + t;
 }
 function fbIssueURL() {
   const d = fbDraft, first = d.text.trim().split(/\r?\n/)[0];
   const title = `[${d.type}] ${first.length > 70 ? first.slice(0, 67) + '...' : first}`;
-  const mk = txt => `${txt}\n\n---\n**Type:** ${d.type}\n**Contact:** ${d.contact.trim() || '(none given)'}\n**App:** FORGE build ${BUILD}\n**Device:** ${navigator.userAgent}` + (d.file ? `\n**File I tried to import:** ${d.file.name} (${d.file.type || 'unknown type'}, ${fmtSize(d.file.size)}) - drag it into this issue to attach it` : '');
+  const mk = txt => `${txt}\n\n---\n**Type:** ${d.type}\n**Contact:** ${d.contact.trim() || '(none given)'}\n**App:** BETA FIT build ${BUILD}\n**Device:** ${navigator.userAgent}` + (d.file ? `\n**File I tried to import:** ${d.file.name} (${d.file.type || 'unknown type'}, ${fmtSize(d.file.size)}) - drag it into this issue to attach it` : '');
   let txt = d.text.trim(), url;
   const build = tx => `${FB_REPO}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(mk(tx))}&labels=${encodeURIComponent(FB_LABEL[d.type] || 'feedback')}`;
   url = build(txt);
@@ -2206,19 +2600,35 @@ function act(a, t) {
     case 'gSubmit': gmSubmit(); break;
     case 'gCopy': gmShare(true, d.id); break;
     case 'gShare': gmShare(false, d.id); break;
-    case 'gdetail': gdId = d.id || (curGroup() && curGroup().id) || null; gdLeave = 0; gdErr = ''; modal = null; if (gdId) { view = 'group'; } render(window.scrollTo(0, 0)); break;
+    case 'gdetail': gdId = d.id || (curGroup() && curGroup().id) || null; gdLeave = 0; rmConfirm = ''; rcConfirm = false; gdErr = ''; modal = null; if (gdId) { view = 'group'; } render(window.scrollTo(0, 0)); break;
     case 'gBack': view = 'home'; gdLeave = 0; gdErr = ''; render(window.scrollTo(0, 0)); break;
     case 'gdRetry': if (gdId) fetchGD(gdId); break;
     case 'gLeaveAsk': gdLeave = 1; gdErr = ''; render(); break;
     case 'gLeaveCancel': gdLeave = 0; gdErr = ''; render(); break;
     case 'gLeaveConfirm': leaveGroup(); break;
     case 'lbRefresh': lbRefresh(); break;
+    case 'rqApprove': rqAct(d.gid, d.uid, 'approve'); break;
+    case 'rqDecline': rqAct(d.gid, d.uid, 'decline'); break;
+    case 'rqRetry': fetchRQ(d.gid); break;
+    case 'reqCancel': reqCancel(d.gid); break;
+    case 'reqCheck': refreshGroups().then(ok => { const x = myReq(d.gid); if (ok && x && x.status === 'pending') toast('Still waiting for approval'); }); break;
+    case 'rmAsk': rmConfirm = d.uid; render(); break;
+    case 'rmCancel': rmConfirm = ''; render(); break;
+    case 'rmYes': removeMemberAct(gdId, d.uid); break;
+    case 'rcAsk': rcConfirm = true; render(); break;
+    case 'rcCancel': rcConfirm = false; render(); break;
+    case 'rcYes': rotateCodeAct(d.id || gdId); break;
     case 'lbRetry': { const g = curGroup(); if (g) fetchLB(g.id, dashPeriod, true); break; }
     case 'spRetry': SY.groups.forEach(g => { if (spMem[g.id] && spMem[g.id].err) fetchSP(g.id); }); break;
     case 'spAdd': spAdd(d.id); break;
+    case 'pinAdd': pinAdd(d.id); break;
+    case 'pinDismiss': { const p = pinOf(d.gid); if (p) { SY.pinDismiss[d.gid] = p.id; saveSync(); } render(); break; }
+    case 'pinPick': pk = { busy: '', msg: '' }; { const m = spMem[d.id]; if (!m || !m.loading) fetchSP(d.id); } modal = 'pinpick'; render(); break;
+    case 'pinSet': pinSet(d.gid, d.id); break;
+    case 'pinUnpin': pinSet(d.id, null); break;
     case 'shareGroup': sg = { busy: '', msg: '', done: {} }; modal = 'sharegrp'; render(); break;
     case 'sgPick': shareToGroup(d.id); break;
-    case 'nav': modal = null; eraseStep = 0; gdLeave = 0; view = d.v; if (d.v === 'program') { progDetail = false; openDay = null; } render(window.scrollTo(0, 0)); break;
+    case 'nav': modal = null; eraseStep = 0; gdLeave = 0; view = d.v; if (d.v === 'program') { progDetail = false; openDay = null; Object.keys(spMem).forEach(k => { if (spMem[k]) spMem[k].tried = 0; }); } render(window.scrollTo(0, 0)); break;
     case 'changeDay': cdWeek = Math.min(S.selWeek, S.program.weeks.length - 1); modal = 'pickday'; render(); break;
     case 'cdwk': { const n = cdWeek + +d.d; if (n >= 0 && n < S.program.weeks.length) { cdWeek = n; render(); } break; }
     case 'cdPick': S.selWeek = cdWeek; S.selDay = +d.i; libSyncActive(); save(); modal = null; render(); toast('Next workout: ' + (S.program.weeks.length > 1 ? curWeek().name + ' · ' : '') + dayOf().name); break;
@@ -2229,6 +2639,12 @@ function act(a, t) {
     case 'tstop': stopTimer(); break;
     case 'startAbs': startAbs(+d.i); break;
     case 'start': startWorkout(); break;
+    case 'musicSheet': musicOpenSheet(); break;
+    case 'musicChip': { const l = musicFor(); if (l) spOpenLink(l); else musicOpenSheet(); break; }
+    case 'muSave': musicSave(); break;
+    case 'muOpen': { const p = parseSpotify(mu.url); if (p.ok) spOpenLink(p); break; }
+    case 'muRemove': musicRemove(); break;
+    case 'muReset': musicResetAct(); break;
     case 'resume': view = 'active'; wake(true); render(window.scrollTo(0, 0)); break;
     case 'homeKeep': modal = null; view = 'home'; render(window.scrollTo(0, 0)); break;
     case 'discard': discard(); break;
@@ -2242,8 +2658,8 @@ function act(a, t) {
     case 'fbType': fbDraft.type = d.t; render(); break;
     case 'fbSend': fbSend(); break;
     case 'fbDel': S.feedback = (S.feedback || []).filter(x => x.id !== d.id); save(); render(); break;
-    case 'copyPrompt': copyText(FORGE_PROMPT).then(ok => toast(ok ? 'Prompt copied — paste it into ChatGPT or Claude' : 'Could not copy')); break;
-    case 'sendFile': { const b = importBlocked || {}; openFeedback('import', { type: 'Other', text: `I tried to import "${b.name || 'a file'}" (${b.kind || 'file'}) and FORGE can't read it yet. Here is my program so you can add support for it.`, file: blockedFile }); break; }
+    case 'copyPrompt': copyText(IMPORT_PROMPT).then(ok => toast(ok ? 'Prompt copied — paste it into ChatGPT or Claude' : 'Could not copy')); break;
+    case 'sendFile': { const b = importBlocked || {}; openFeedback('import', { type: 'Other', text: `I tried to import "${b.name || 'a file'}" (${b.kind || 'file'}) and BETA FIT can't read it yet. Here is my program so you can add support for it.`, file: blockedFile }); break; }
     case 'jump': jumpTo(+d.i); break;
     case 'finishNow': finish(); break;
     case 'restAdd': if (s && s.phase === 'rest') { s.restEnd += +d.n * 1000; s.restTotal = Math.max(s.restTotal, Math.ceil((s.restEnd - Date.now()) / 1000)); if (s.restEnd <= Date.now()) endRest(); else { save(); render(); } } break;
@@ -2328,7 +2744,7 @@ async function checkUpdate(force) {
     const r = await fetch(location.pathname + '?v=' + now, { cache: 'no-store' }); if (!r.ok) return;
     const m = /\bBUILD\s*=\s*'([^']+)'/.exec(await r.text());
     if (m && m[1] !== BUILD) { if (m[1] !== updNew) updDismissed = false; updNew = m[1]; } else updNew = null;
-    syncBanner(); const b = $('#buildLbl'); if (b) b.innerHTML = `FORGE build ${esc(BUILD)}${updNew ? ' · <b style="color:var(--acc2)">update available</b>' : ''}`;
+    syncBanner(); const b = $('#buildLbl'); if (b) b.innerHTML = `BETA FIT build ${esc(BUILD)}${updNew ? ' · <b style="color:var(--acc2)">update available</b>' : ''}`;
   } catch (e) {}
 }
 // only shown when no workout is in progress (never interrupts a session); appears again after the workout ends
@@ -2346,11 +2762,14 @@ setTimeout(() => checkUpdate(true), 800);
 (function () { try { const c = normCode(new URLSearchParams(location.search).get('join')); if (c) { if (c.length >= 4) pendingJoin = c; else cleanJoinUrl(); } } catch (e) {} })();
 window.addEventListener('online', () => { syncBackoff = 0; syncNow().catch(() => {}); setSyncStat(); if (view === 'home' && curGroup()) lbAuto(); });
 window.addEventListener('offline', () => setSyncStat('offline'));
-document.addEventListener('visibilitychange', () => { if (!document.hidden && SY.token) { syncNow().catch(() => {}); if (view === 'home' && curGroup()) lbAuto(); } });
+document.addEventListener('visibilitychange', () => { if (!document.hidden && SY.token) { refreshGroups().catch(() => {}); syncNow().catch(() => {}); if (view === 'home' && curGroup()) lbAuto(); } });
 setTimeout(async () => { if (SY.token) { await refreshGroups(); syncNow().catch(() => {}); } }, 300);
+// approval polling: while the pending state (or a creator's inbox) is on screen, check every 15s; also when the app comes back to the front
+window.__pollMs = 15000;
+(function pollLoop() { setTimeout(() => { if (SY.token && !document.hidden && !S.session && (view === 'home' || view === 'group') && ((SY.requests || []).length || creatorGroups().length)) refreshGroups().catch(() => {}); pollLoop(); }, window.__pollMs); })();
 render();
 // test hooks (harmless in production)
-window.__forge = { BUILD, getSync: () => SY, saveSync, syncNow, pendingEntries, syncEntry, lbGet, fetchLB, fetchGD, fetchSP, API_BASE, inviteText, shareLink, spMem, lbMem, periodTotals, ringModel, allTimeTrend, weekStartIdx, entryTotals, volumeTotals, weeklyVolume, fmtVol, programFile, shareProgram, shareText, canonicalLift, streakCalc, dayIdx, weekOf, liftStats, liftSetList, gainOf, detectPRs, streakInfo, checkUpdate, drawCard, cardSpec, parseText, parseAny, buildSteps, getState: () => S, BUILTIN_PROGRAM, builtin, estSec, repsMax };
+window.__forge = { BUILD, music: { parseSpotify, musicFor, normMusic, DEFAULT_MUSIC, isDefMusic, spOpenLink, cleanMusicName, SP_FALLBACK_MS, get prefHttps() { return muPreferHttps; } }, getSync: () => SY, saveSync, syncNow, pendingEntries, syncEntry, lbGet, fetchLB, fetchGD, fetchSP, API_BASE, inviteText, shareLink, spMem, lbMem, periodTotals, ringModel, allTimeTrend, weekStartIdx, entryTotals, volumeTotals, weeklyVolume, fmtVol, programFile, shareProgram, shareText, canonicalLift, streakCalc, dayIdx, weekOf, liftStats, liftSetList, gainOf, detectPRs, streakInfo, checkUpdate, drawCard, cardSpec, parseText, parseAny, buildSteps, getState: () => S, BUILTIN_PROGRAM, builtin, estSec, repsMax };
 </script>
 </body>
 </html>
