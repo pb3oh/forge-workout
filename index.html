@@ -460,6 +460,9 @@ html{overscroll-behavior-y:contain}
 .rqbadge{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;margin-left:6px;border-radius:99px;background:var(--acc);color:#111;font-size:11px;font-weight:900;line-height:1}
 .avstack{position:relative}.avstack .rqbadge{position:absolute;top:2px;right:-6px;margin:0}
 #rcBtn{background:none;border:0;color:var(--mut);font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer;min-height:44px}
+.ivrow{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.06)}.ivrow:first-child{border-top:0}.ivrow .mt{flex:1;min-width:0}.ivrow .mt b{display:block;font-size:15px;overflow-wrap:anywhere}.ivrow .mt small{color:var(--mut);font-size:12px}.ivrow .btn{min-height:44px;padding:0 12px;font-size:14px}.ivrow .chip{padding:5px 10px;font-size:12px}.ivrow .chip.used{color:var(--ok);border-color:rgba(60,200,120,.4)}
+.ivlink{display:block;font-size:13px;line-height:1.45;overflow-wrap:anywhere;user-select:all;-webkit-user-select:all;text-align:left}
+.bkbox{margin:8px 0;padding:12px;border-radius:12px;background:var(--card2);border:1px dashed var(--line)}.bkbox code{display:block;font-size:12.5px;overflow-wrap:anywhere;word-break:break-all;user-select:all;-webkit-user-select:all;color:var(--acc2)}
 .rmbtn{min-height:44px;padding:0 10px;color:var(--mut);font-size:13px;font-weight:700;background:none;border:0;cursor:pointer}.rmbox{margin:6px 0 10px}
 .pincard{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:10px;border-color:rgba(255,106,26,.5);background:linear-gradient(170deg,rgba(255,106,26,.14),var(--card) 70%)}
 .pincard .pi,.pinbox .pi{width:40px;height:40px;border-radius:12px;background:var(--accsoft);border:1px solid rgba(255,106,26,.4);display:grid;place-items:center;font-size:18px;flex:none}
@@ -498,7 +501,7 @@ html{overscroll-behavior-y:contain}
    The app was renamed FORGE -> BETA FIT; the storage keys 'forge.v1' / 'forge.sync.v1', the API host (forge-api) and the repo URL
    keep the old name on purpose: renaming them would orphan every existing install's data and links.
    ========================================================= */
-const BUILD = '2026.10.15-12'; // bump on every deploy; the in-app update banner compares this against the live file
+const BUILD = '2026.10.15-13'; // bump on every deploy; the in-app update banner compares this against the live file
 const LS = 'forge.v1';
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1404,8 +1407,8 @@ const saveSync = () => { try { localStorage.setItem(SYNC_LS, JSON.stringify(SY))
 const curGroup = () => SY.token && SY.sel !== 'me' ? SY.groups.find(g => g.id === SY.sel) || null : null;
 const normCode = c => String(c || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
 const fmtCode = c => String(c || '');
-async function api(method, path, body) {
-  const h = {}; if (SY.token) h.Authorization = 'Bearer ' + SY.token; if (body !== undefined) h['Content-Type'] = 'application/json';
+async function api(method, path, body, tokOverride) {
+  const h = {}; if (tokOverride || SY.token) h.Authorization = 'Bearer ' + (tokOverride || SY.token); if (body !== undefined) h['Content-Type'] = 'application/json';
   const ac = typeof AbortController === 'function' ? new AbortController() : null, to = setTimeout(() => { try { ac && ac.abort(); } catch (e) {} }, 20000);
   let r;
   try { r = await fetch(API_BASE + path, { method, headers: h, body: body !== undefined ? JSON.stringify(body) : undefined, cache: 'no-store', signal: ac ? ac.signal : undefined }); }
@@ -1414,12 +1417,12 @@ async function api(method, path, body) {
   let data = null; try { data = await r.json(); } catch (e) {}
   if (r.ok) return { ok: true, status: r.status, data: data || {} };
   const er = (data && data.error) || {};
-  if (r.status === 401 && SY.token && path !== '/register') authLost();
+  if (r.status === 401 && SY.token && !tokOverride && path !== '/register') authLost();
   return { ok: false, status: r.status, code: er.code || 'error', message: er.message || '', retryAfter: +r.headers.get('Retry-After') || 0 };
 }
 function apiMsg(r) {
   if (r.net) return "Can't reach BETA FIT groups. Check your connection and try again.";
-  return ({ invalid_code: "That code doesn't match a group. Check it and try again.", group_full: 'That group is full (25 members).', group_limit: "You're already in the maximum number of groups (20).", rate_limited: 'Too many tries. Wait a minute and try again.', validation_failed: r.message || 'Please check what you entered.', not_a_member: "You're not in that group anymore.", not_creator: 'Only the group creator can do that.', request_limit: 'You already have 5 requests waiting. Cancel one first.', requests_full: 'This group has too many open requests right now. Ask the creator to clear them.', request_not_found: 'That request is gone already.', member_not_found: 'That person is no longer in the group.', cannot_remove_self: "You can't remove yourself.", program_not_shared: 'Share that workout to the group first, then pin it.', program_limit: "You've reached the limit of shared workouts (50).", program_too_large: 'That workout is too big to share.', program_not_found: 'That shared workout is no longer available.', unauthorized: 'Your group sign-in expired. Set up groups again.' })[r.code] || 'Something went wrong. Please try again.';
+  return ({ invalid_code: "That code doesn't match a group. Check it and try again.", group_full: 'That group is full (25 members).', group_limit: "You're already in the maximum number of groups (20).", rate_limited: 'Too many tries. Wait a minute and try again.', validation_failed: r.message || 'Please check what you entered.', not_a_member: "You're not in that group anymore.", not_creator: 'Only the group creator can do that.', request_limit: 'You already have 5 requests waiting. Cancel one first.', requests_full: 'This group has too many open requests right now. Ask the creator to clear them.', request_not_found: 'That request is gone already.', member_not_found: 'That person is no longer in the group.', cannot_remove_self: "You can't remove yourself.", program_not_shared: 'Share that workout to the group first, then pin it.', program_limit: "You've reached the limit of shared workouts (50).", program_too_large: 'That workout is too big to share.', program_not_found: 'That shared workout is no longer available.', unauthorized: 'Your group sign-in expired. Set up groups again.', invite_used: 'This invite was already used — ask the group creator for a new one.', invite_expired: 'This invite has expired — ask the group creator for a new one.', invite_revoked: 'This invite was revoked — ask the group creator for a new one.', invite_not_found: "This invite link isn't valid — check that you opened the whole link, or ask the group creator for a new one.", invites_full: 'You already have 20 outstanding invites. Revoke one, or wait until friends use them.' })[r.code] || 'Something went wrong. Please try again.';
 }
 function authLost() { SY = Object.assign(freshSync(), { sent: {} }); saveSync(); lbMem = {}; gdMem = {}; spMem = {}; toast('Group sign-in expired. Create or join a group to reconnect.'); }
 // register once per device, on the first group action
@@ -1726,10 +1729,11 @@ let rs = { gid: '', status: '' }, jc = { gid: '', pid: '' }, gm = { step: '', na
 const shareLink = () => location.origin + location.pathname.replace(/index\.html$/, '');
 const inviteText = code => 'Join my BETA FIT group: ' + shareLink() + '?join=' + code;
 function openGm(step, extra) { gm = Object.assign({ step, name: '', code: '', dn: userName(), err: '', busy: false, group: null }, extra || {}); modal = 'grp'; render(); const el = $('#gmName') || $('#gmCode'); if (el && step !== 'deeplink') el.focus(); }
-function cleanJoinUrl() { try { const u = new URL(location.href); if (u.searchParams.has('join')) { u.searchParams.delete('join'); history.replaceState(null, '', u.pathname + (u.search || '') + u.hash); } } catch (e) {} }
+function cleanJoinUrl() { try { const u = new URL(location.href); if (u.searchParams.has('join') || u.searchParams.has('invite')) { u.searchParams.delete('join'); u.searchParams.delete('invite'); history.replaceState(null, '', u.pathname + (u.search || '') + u.hash); } } catch (e) {} }
 async function gmSubmit() {
   if (gm.busy) return;
   const step = gm.step;
+  if (step === 'ivjoin') return ivJoin();
   if (step === 'create' && !gm.name.trim()) { gm.err = 'Give your group a name.'; return render(); }
   const code = normCode(gm.code);
   if ((step === 'join' || step === 'deeplink') && code.length < 4) { gm.err = 'Enter the invite code your friend sent you.'; return render(); }
@@ -1760,6 +1764,113 @@ async function gmShare(copyOnly, gid) {
   if (!copyOnly && navigator.share) { try { await navigator.share({ title: 'BETA FIT group', text }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
   const ok = await copyText(text); toast(ok ? (copyOnly ? 'Invite copied' : 'Invite copied - paste it in a message') : 'Could not copy - select the code instead');
 }
+/* ---- one-time invite links (creator makes a link for one person; opening it joins without approval) ---- */
+const INVITE_RE = /^iv_[A-Za-z0-9_-]{22}$/, INVITE_FATAL = ['invite_used', 'invite_expired', 'invite_revoked', 'invite_not_found', 'group_full', 'group_limit'];
+let iv = { gid: '', label: '', busy: false, err: '', created: null }, ivMem = {}, pendingInvite = null;
+const ivLink = t => shareLink() + '?invite=' + t;
+const ivText = t => 'Join my BETA FIT group: ' + ivLink(t) + ' — one-time link, works for one person';
+const ivExplain = 'One-time links: each works for one person. Group codes need your approval.';
+function cleanInviteUrl() { cleanJoinUrl(); }
+async function fetchIV(gid) {
+  const m = ivMem[gid] = ivMem[gid] || {}; if (m.loading) return; m.loading = true; m.tried = Date.now(); m.err = null;
+  const r = await api('GET', `/groups/${encodeURIComponent(gid)}/invites`); m.loading = false;
+  if (r.ok) { m.list = r.data.invites || []; m.outstanding = r.data.outstanding || 0; } else m.err = r;
+  softRender();
+}
+function ivAuto(gid) { const m = ivMem[gid] = ivMem[gid] || {}; if (!m.loading && (!m.tried || Date.now() - m.tried > 20000)) fetchIV(gid); }
+function ivOpen(gid) { iv = { gid, label: '', busy: false, err: '', created: null }; modal = 'ivnew'; render(); const el = $('#ivLabel'); if (el) el.focus(); }
+async function ivCreate() {
+  if (iv.busy) return; iv.busy = true; iv.err = ''; render();
+  const label = iv.label.trim().slice(0, 40);
+  const r = await api('POST', `/groups/${encodeURIComponent(iv.gid)}/invites`, label ? { label } : {});
+  iv.busy = false;
+  if (!r.ok) { iv.err = apiMsg(r); return render(); }
+  iv.created = { token: r.data.token, id: r.data.inviteId, label: r.data.label, expiresAt: r.data.expiresAt };
+  (ivMem[iv.gid] = ivMem[iv.gid] || {}).tried = 0; fetchIV(iv.gid); render();
+}
+async function ivShare(copyOnly) {
+  if (!iv.created) return; const text = ivText(iv.created.token);
+  if (!copyOnly && navigator.share) { try { await navigator.share({ title: 'BETA FIT group', text }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+  const ok = await copyText(text); toast(ok ? (copyOnly ? 'Link copied' : 'Link copied - paste it in a message') : 'Could not copy - select the link instead');
+}
+async function ivRevoke(gid, id) {
+  const m = ivMem[gid] = ivMem[gid] || {}; m.busy = m.busy || {}; if (m.busy[id]) return; m.busy[id] = 1; render();
+  const r = await api('POST', `/groups/${encodeURIComponent(gid)}/invites/${encodeURIComponent(id)}/revoke`); delete m.busy[id];
+  if (!r.ok && r.code !== 'invite_not_found') { toast(apiMsg(r)); render(); return; }
+  m.tried = 0; await fetchIV(gid); render(); toast(r.ok ? 'Invite revoked' : 'That invite is already gone');
+}
+const ivWhen = ms => { const h = Math.max(0, Math.round((ms - Date.now()) / 3600000)); return h >= 48 ? Math.round(h / 24) + ' days' : h >= 1 ? h + (h === 1 ? ' hour' : ' hours') : 'under an hour'; };
+function ivListHTML(g) {
+  const m = ivMem[g.id] || {};
+  if (!m.list) return m.err ? `<div class="note" style="color:var(--bad)">Couldn't load invites. <button class="flink" data-act="ivRetry" data-id="${esc(g.id)}" style="color:inherit;text-decoration:underline;padding:6px 4px">Try again</button></div>` : '<div class="sk rw" aria-busy="true" style="height:48px"></div>';
+  if (!m.list.length) return '<div class="sub" id="ivEmpty" style="font-size:13px">No invites yet.</div>';
+  return m.list.slice(0, 15).map(i => {
+    const st = i.status, who = i.usedBy || 'someone', busy = m.busy && m.busy[i.inviteId];
+    const sub = st === 'unused' ? 'Unused · expires in ' + ivWhen(Date.parse(i.expiresAt)) : st === 'used' ? 'Used by ' + esc(who) + (i.usedAt ? ' · ' + esc(new Date(i.usedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })) : '') : st === 'expired' ? 'Expired · ask for a new one' : 'Revoked';
+    return `<div class="ivrow" data-iid="${esc(i.inviteId)}" data-status="${esc(st)}"><div class="mt"><b>${esc(i.label || 'Invite link')}</b><small>${sub}</small></div>${st === 'unused' ? `<button type="button" class="btn sec" data-act="ivRevoke" data-gid="${esc(g.id)}" data-id="${esc(i.inviteId)}" aria-label="Revoke invite${i.label ? ' for ' + esc(i.label) : ''}" ${busy ? 'disabled' : ''}>${busy ? '…' : 'Revoke'}</button>` : `<span class="chip ${st === 'used' ? 'used' : ''}">${st === 'used' ? '✓ Used' : st === 'expired' ? 'Expired' : 'Revoked'}</span>`}</div>`;
+  }).join('');
+}
+function inviteSectionHTML(g) {
+  return `<div id="gdInvites"><div class="label" style="margin-bottom:6px">Invite a friend</div><div class="card" style="padding:14px 16px"><div class="sub" id="ivExplain" style="font-size:13px;margin:0 0 12px">${esc(ivExplain)}</div>
+    <button type="button" class="btn pri block" id="ivNewBtn" data-act="ivNew" data-id="${esc(g.id)}">＋ Invite a friend</button><div id="ivList" style="margin-top:8px">${ivListHTML(g)}</div></div></div>`;
+}
+function openInviteLink() {
+  const t = pendingInvite; pendingInvite = null;
+  gm = { step: 'ivjoin', name: '', code: '', token: t.token, dn: userName(), err: t.bad ? apiMsg({ code: 'invite_not_found' }) : '', busy: false, group: null, fatal: !!t.bad }; modal = 'grp'; if (t.bad) cleanInviteUrl();
+}
+async function ivJoin() {
+  if (gm.busy) return; gm.busy = true; gm.err = ''; render();
+  if (navigator.onLine === false) { gm.busy = false; gm.err = "You're offline. Connect to the internet, then tap Join group again."; return render(); }
+  const id = await ensureIdentity(gm.dn);
+  if (!id.ok) { gm.busy = false; gm.err = id.message; return render(); }
+  const r = await api('POST', '/groups/join-invite', { token: gm.token });
+  gm.busy = false;
+  if (!r.ok) { gm.err = apiMsg(r); if (INVITE_FATAL.includes(r.code)) { gm.fatal = true; cleanInviteUrl(); } return render(); }
+  const g = r.data.group; upsertGroup(g); SY.sel = g.id; saveSync(); lbMem = {}; modal = null; cleanInviteUrl(); view = 'home';
+  if (!r.data.alreadyMember) { gdMem[g.id] = {}; await fetchGD(g.id, true); const pn = pinNeeded(g.id); if (pn) { jc = { gid: g.id, pid: pn.id }; modal = 'joined'; } }
+  toast(r.data.alreadyMember ? `You're already in ${g.name}` : `Joined ${g.name}`);
+  render(window.scrollTo(0, 0)); syncSoon(); refreshGroups();
+}
+
+/* ---- account restore: the backup code IS the deviceToken. iOS home-screen apps have their own storage, so re-adding the icon loses it. ---- */
+const BK_RE = /^fg_[A-Za-z0-9_-]{20,200}$/;
+let rsr = { step: '', token: '', code: '', name: '', userId: '', err: '', busy: false, from: '', net: false }, bkShow = false, pendingRestore = null;
+function cleanRestoreHash() { try { if (/restore=/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
+function openRestore(from) { rsr = { step: 'enter', token: '', code: '', name: '', userId: '', err: '', busy: false, from: from || '', net: false }; modal = 'restore'; render(); const el = $('#rsCode'); if (el) el.focus(); }
+function openRestoreLink() {
+  const t = pendingRestore; pendingRestore = null;
+  rsr = { step: t.bad ? 'bad' : 'link', token: t.token || '', code: '', name: '', userId: '', err: t.bad ? "This restore link isn't valid. Open Settings > Restore account and paste your backup code instead." : '', busy: !t.bad, from: 'link', net: false }; modal = 'restore';
+  if (!t.bad) probeRestore();
+}
+async function probeRestore() {
+  const tok = rsr.token; rsr.busy = true; rsr.err = ''; rsr.net = false;
+  const r = await api('GET', '/me', undefined, tok);
+  if (modal !== 'restore' || rsr.token !== tok) return;
+  rsr.busy = false;
+  if (!r.ok) { rsr.net = !!r.net; rsr.err = r.net ? apiMsg(r) : r.code === 'rate_limited' ? apiMsg(r) : "That backup code isn't valid. Copy it again from Settings > Backup code."; rsr.step = rsr.from === 'link' ? 'bad' : 'enter'; return render(); }
+  rsr.name = String(r.data.displayName || 'your account'); rsr.userId = r.data.userId || '';
+  if (SY.token === tok) { modal = null; cleanRestoreHash(); render(); toast(`Already signed in as ${rsr.name}`); return; }
+  if (rsr.from === 'link' || SY.token) { rsr.step = 'confirm'; return render(); }
+  applyRestore();
+}
+async function rsGo() {
+  if (rsr.busy) return; const tok = String(rsr.code || '').trim();
+  if (!BK_RE.test(tok)) { rsr.err = "That doesn't look like a backup code. It starts with fg_ and has no spaces."; return render(); }
+  rsr.token = tok; rsr.busy = true; rsr.err = ''; render(); probeRestore();
+}
+async function applyRestore() {
+  const tok = rsr.token, name = rsr.name, uid = rsr.userId;
+  SY = Object.assign(freshSync(), { token: tok, userId: uid, name }); saveSync(); // sent:{} -> every local workout is re-sent (idempotent upsert)
+  S.settings.name = name.slice(0, 24); save();
+  lbMem = {}; gdMem = {}; spMem = {}; ivMem = {}; Object.keys(rqMem).forEach(k => delete rqMem[k]); gdId = null; bkShow = false;
+  cleanRestoreHash(); modal = null; rsr = { step: '', token: '', code: '', name: '', userId: '', err: '', busy: false, from: '', net: false };
+  view = 'home'; render(window.scrollTo(0, 0));
+  await refreshGroups();
+  if (SY.groups.length) { SY.sel = SY.groups[0].id; saveSync(); lbMem = {}; }
+  render(window.scrollTo(0, 0)); syncSoon();
+  toast('Restored as ' + name);
+}
+const restoreLinkHTML = () => SY.token ? '' : '<button type="button" class="flink" id="gRestoreLink" data-act="restoreOpen" data-from="grp" style="display:block;margin:12px auto 0;padding:10px 8px;text-align:center">Already in a group? Restore</button>';
 function privHTML() { return '<div class="fbhint priv" id="gPriv">Group members see your name and your lifting totals.</div>'; }
 function identHTML() { return SY.token ? '' : `<label class="sheetlbl" for="gmDn">Your name in the group</label><input class="txt fb" id="gmDn" type="text" maxlength="24" autocomplete="given-name" enterkeyhint="go" placeholder="Name your friends will see" value="${esc(gm.dn)}">`; }
 function gmSheet(title, inner) { return `<div class="overlay" data-act="closeModal"><div class="sheet" id="gSheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="gTitle"><div class="grab"></div><div class="row" style="justify-content:space-between"><b id="gTitle" style="font-size:20px">${title}</b><button class="icon" data-act="closeModal" aria-label="Close">✕</button></div>${inner}</div></div>`; }
@@ -1768,17 +1879,51 @@ function groupModalHTML() {
     const b = gm.busy, err = gm.err ? `<div class="sherr" id="gErrMsg" role="alert">${esc(gm.err)}</div>` : '';
     if (gm.step === 'create') return gmSheet('Create a group', `<div class="sub" style="margin:6px 0 0;font-size:13px">Start a group, then invite friends with a code. Everyone's lifting adds up to one shared total. Only people you approve can join.</div>
       <label class="sheetlbl" for="gmName">Group name</label><input class="txt fb" id="gmName" type="text" maxlength="40" autocomplete="off" enterkeyhint="go" placeholder="e.g. Iron Crew" value="${esc(gm.name)}">${identHTML()}${privHTML()}${err}
-      <button class="btn pri block" id="gGo" style="margin-top:14px" data-act="gSubmit" ${b ? 'disabled' : ''}>${b ? 'Creating…' : 'Create group'}</button>`);
+      <button class="btn pri block" id="gGo" style="margin-top:14px" data-act="gSubmit" ${b ? 'disabled' : ''}>${b ? 'Creating…' : 'Create group'}</button>${restoreLinkHTML()}`);
     if (gm.step === 'join') return gmSheet('Join a group', `<div class="sub" style="margin:6px 0 0;font-size:13px">Type the invite code a friend shared with you. The group's creator has to approve you before you get in.</div>
       <label class="sheetlbl" for="gmCode">Invite code</label><input class="txt fb" id="gmCode" type="text" maxlength="12" autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="go" placeholder="K7MQ4XD" style="letter-spacing:.14em;font-weight:800;text-transform:uppercase" value="${esc(gm.code)}">${identHTML()}${privHTML()}${err}
-      <button class="btn pri block" id="gGo" style="margin-top:14px" data-act="gSubmit" ${b ? 'disabled' : ''}>${b ? 'Joining…' : 'Join group'}</button>`);
+      <button class="btn pri block" id="gGo" style="margin-top:14px" data-act="gSubmit" ${b ? 'disabled' : ''}>${b ? 'Joining…' : 'Join group'}</button><div class="fbhint" id="gJoinNote" style="margin-top:10px">Got a one-time link instead? Just open it. ${esc(ivExplain)}</div>${restoreLinkHTML()}`);
     if (gm.step === 'deeplink') return gmSheet('Join this group?', `<div class="sub" style="margin:6px 0 0;font-size:13px">You were invited to a BETA FIT group with code <b id="gDlCode" style="color:var(--text);letter-spacing:.1em">${esc(normCode(gm.code))}</b>. The creator has to approve you before you get in.</div>${identHTML()}${privHTML()}${err}
       <div style="display:grid;gap:8px;margin-top:14px"><button class="btn pri block" id="gGo" data-act="gSubmit" ${b ? 'disabled' : ''}>${b ? 'Joining…' : 'Join group'}</button><button class="btn sec block" data-act="closeModal">Not now</button></div>`);
-    if (gm.step === 'invite' && gm.group) return gmSheet('Invite friends', `<div class="sub" style="margin:6px 0 0;font-size:13px"><b style="color:var(--text)">${esc(gm.group.name)}</b> is ready. Share this code so friends can ask to join. Only people you approve can join.</div>
+    if (gm.step === 'ivjoin') {
+      if (gm.fatal) return gmSheet("Can't use this invite", `<div class="card reqcard declined" id="ivFatal" role="alert" style="margin-top:12px"><span class="pi" aria-hidden="true">✋</span><div class="mt"><b id="ivFatalMsg">${esc(gm.err)}</b></div></div>
+        <div style="display:grid;gap:8px;margin-top:14px"><button class="btn sec block" id="ivToCode" data-act="ivToCode">Use a group code instead</button><button class="btn pri block" id="ivClose" data-act="closeModal">Close</button></div>`);
+      return gmSheet('Join this group?', `<div class="sub" style="margin:6px 0 0;font-size:13px" id="ivJoinTxt">You were invited to a BETA FIT group with a one-time link. It works for one person, so once you join it can't be used again. No approval needed.</div>${identHTML()}${privHTML()}${err}
+        <div style="display:grid;gap:8px;margin-top:14px"><button class="btn pri block" id="gGo" data-act="gSubmit" ${b ? 'disabled' : ''}>${b ? 'Joining…' : 'Join group'}</button><button class="btn sec block" id="ivNotNow" data-act="closeModal">Not now</button></div>
+        <button type="button" class="flink" id="ivToCode" data-act="ivToCode" style="display:block;margin:10px auto 0;padding:10px 8px;text-align:center">Use a group code instead</button>${restoreLinkHTML()}`);
+    }
+    if (gm.step === 'invite' && gm.group) return gmSheet('Invite friends', `<div class="sub" style="margin:6px 0 0;font-size:13px"><b style="color:var(--text)">${esc(gm.group.name)}</b> is ready. Share this code so friends can ask to join. Only people you approve can join.</div><div class="fbhint" id="gInviteNote" style="margin-top:6px">${esc(ivExplain)}</div>
       <div class="card invcard" style="margin-top:12px;text-align:center"><span class="label">Invite code</span><span class="invcode" id="inviteCode">${esc(fmtCode(gm.group.inviteCode))}</span><div class="fbhint" id="inviteLink" style="overflow-wrap:anywhere">${esc(inviteText(gm.group.inviteCode))}</div></div>
       <div class="row" style="margin-top:12px"><button class="btn sec" style="flex:1" id="gCopy" data-act="gCopy">📋 Copy</button><button class="btn pri" style="flex:1" id="gShare" data-act="gShare">↗ Share</button></div>
+      <button class="btn sec block" id="gInvOne" style="margin-top:8px" data-act="ivNew" data-id="${esc(gm.group.id)}">＋ Invite a friend with a one-time link</button>
       <button class="btn sec block" style="margin-top:8px" data-act="closeModal">Done</button>`);
     return '';
+  }
+  if (modal === 'ivnew') {
+    const g = SY.groups.find(x => x.id === iv.gid), c = iv.created;
+    if (!g) return '';
+    if (!c) return gmSheet('Invite a friend', `<div class="sub" style="margin:6px 0 0;font-size:13px">Make a link that works for one person. They join <b style="color:var(--text)">${esc(g.name)}</b> straight away, no approval needed.</div>
+      <label class="sheetlbl" for="ivLabel">Friend's name (optional)</label><input class="txt fb" id="ivLabel" type="text" maxlength="40" autocomplete="off" enterkeyhint="go" placeholder="e.g. Sam" value="${esc(iv.label)}">
+      ${iv.err ? `<div class="sherr" id="ivErr" role="alert">${esc(iv.err)}</div>` : ''}<div class="fbhint" style="margin-top:8px">${esc(ivExplain)} Links expire after 3 days.</div>
+      <button class="btn pri block" id="ivGo" style="margin-top:14px" data-act="ivGo" ${iv.busy ? 'disabled' : ''}>${iv.busy ? 'Creating…' : 'Create link'}</button>`);
+    return gmSheet('Invite link ready', `<div class="sub" style="margin:6px 0 0;font-size:13px">${c.label ? 'For <b style="color:var(--text)">' + esc(c.label) + '</b>. ' : ''}Send it to one person. It stops working after they join, or in ${esc(ivWhen(Date.parse(c.expiresAt)))}.</div>
+      <div class="card invcard" style="margin-top:12px"><span class="label">One-time link</span><span class="ivlink" id="ivLinkOut" style="margin-top:8px">${esc(ivText(c.token))}</span></div>
+      <div class="fbhint" id="ivNote" style="margin-top:8px">Copy it now. For safety we can't show this link again; if you lose it, revoke it and make a new one.</div>
+      <div class="row" style="margin-top:12px"><button class="btn sec" style="flex:1" id="ivCopy" data-act="ivCopy">📋 Copy</button><button class="btn pri" style="flex:1" id="ivShare" data-act="ivShare">↗ Share</button></div>
+      <button class="btn sec block" id="ivDone" style="margin-top:8px" data-act="closeModal">Done</button>`);
+  }
+  if (modal === 'restore') {
+    const err = rsr.err ? `<div class="sherr" id="rsErr" role="alert">${esc(rsr.err)}</div>` : '', cur = SY.token ? esc(SY.name || userName() || 'this account') : '';
+    if (rsr.step === 'link') return gmSheet('Restore account', `<div class="sub" id="rsChecking" style="margin:10px 0 0;font-size:13px">Checking the restore link…</div><div class="sk rw" aria-busy="true" style="height:48px;margin-top:12px"></div>`);
+    if (rsr.step === 'confirm') return gmSheet('Restore account ' + esc(rsr.name) + '?', `<div class="sub" id="rsConfirmTxt" style="margin:8px 0 0;font-size:13px">This signs this device in as <b style="color:var(--text)">${esc(rsr.name)}</b> and brings back their groups and leaderboards. Your workout history on this device is kept and re-sent to the groups.</div>
+      ${SY.token ? `<div class="notice err" id="rsReplace" role="alert" style="margin-top:12px">This device is signed in as <b>${cur}</b>. Restoring replaces that group sign-in. If you haven't saved its backup code (Settings > Backup code), you won't be able to get back to it.</div>` : ''}
+      <div style="display:grid;gap:8px;margin-top:14px"><button class="btn pri block" id="rsYes" data-act="rsYes" ${rsr.busy ? 'disabled' : ''}>${rsr.busy ? 'Restoring…' : 'Restore'}</button><button class="btn sec block" id="rsNo" data-act="closeModal">Cancel</button></div>`);
+    if (rsr.step === 'bad') return gmSheet("Can't restore", `<div class="card reqcard declined" id="rsBad" role="alert" style="margin-top:12px"><span class="pi" aria-hidden="true">✋</span><div class="mt"><b>${esc(rsr.err)}</b></div></div>
+      <div style="display:grid;gap:8px;margin-top:14px">${rsr.net ? '<button class="btn pri block" id="rsRetry" data-act="rsRetry">Try again</button>' : ''}<button class="btn sec block" id="rsEnter" data-act="restoreOpen" data-from="link">Type a backup code instead</button><button class="btn ${rsr.net ? 'sec' : 'pri'} block" id="rsClose" data-act="closeModal">Close</button></div>`);
+    return gmSheet('Restore account', `<div class="sub" style="margin:6px 0 0;font-size:13px">Lost your groups after removing the app icon or switching phones? Paste the backup code from <b style="color:var(--text)">Settings › Backup code</b> to sign back in.</div>
+      ${SY.token ? `<div class="fbhint" id="rsHave" style="margin-top:8px">This device is signed in as <b>${cur}</b>. Restoring replaces it.</div>` : ''}
+      <label class="sheetlbl" for="rsCode">Backup code</label><input class="txt fb" id="rsCode" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="fg_…" style="font-size:14px" value="${esc(rsr.code)}">${err}
+      <button class="btn pri block" id="rsGo" style="margin-top:14px" data-act="rsGo" ${rsr.busy ? 'disabled' : ''}>${rsr.busy ? 'Checking…' : 'Restore'}</button>`);
   }
   if (modal === 'reqsent') {
     const x = myReq(rs.gid), nm = x ? x.name : 'the group', dec = rs.status === 'declined' || (x && x.status === 'declined');
@@ -1870,7 +2015,8 @@ function groupContribHTML(d, u) {
 }
 function inviteCardHTML(g) {
   return `<div class="card invcard" id="gInvite"><div class="label">Invite friends</div><b style="display:block;font-size:17px;margin-top:6px">It's just you here so far</b><div class="sub" style="font-size:13px;margin-top:2px">Share the code. Only people you approve can join. When friends lift, their weight adds to the group total.</div>
-    <span class="invcode" id="gCode">${esc(fmtCode(g.inviteCode))}</span><div class="row"><button class="btn sec" style="flex:1" data-act="gCopy" data-id="${esc(g.id)}">📋 Copy</button><button class="btn pri" style="flex:1" data-act="gShare" data-id="${esc(g.id)}">↗ Share</button></div></div>`;
+    <span class="invcode" id="gCode">${esc(fmtCode(g.inviteCode))}</span><div class="row"><button class="btn sec" style="flex:1" data-act="gCopy" data-id="${esc(g.id)}">📋 Copy</button><button class="btn pri" style="flex:1" data-act="gShare" data-id="${esc(g.id)}">↗ Share</button></div>
+    <button type="button" class="btn sec block" id="gInvOne" style="margin-top:8px" data-act="ivNew" data-id="${esc(g.id)}">＋ Invite a friend (one-time link)</button><div class="fbhint" style="margin-top:8px">${esc(ivExplain)}</div></div>`;
 }
 function groupBodyHTML(g, m, u) {
   const d = m.data;
@@ -1910,9 +2056,10 @@ function groupDetailView() {
   return `<div class="screen" id="groupDetail" data-gid="${esc(g.id)}">
     <div class="hdr" style="gap:8px"><button class="backbtn" id="gdBack" data-act="gBack" aria-label="Back to Home"><span>‹</span>Home</button></div>
     <div><div class="greet">${esc(g.name)}</div><div class="sub" id="gdCount">${n} member${n === 1 ? '' : 's'} · up to ${g.memberCap || 25}</div></div>
-    <div class="card invcard"><span class="label">Invite code</span><span class="invcode" id="gdCode">${esc(fmtCode(g.inviteCode))}</span><div class="fbhint" style="text-align:center;overflow-wrap:anywhere">${esc(inviteText(g.inviteCode))}</div>
+    ${g.isCreator ? inviteSectionHTML(g) : ''}
+    <div class="card invcard"><span class="label">${g.isCreator ? 'Group code · needs your approval' : 'Invite code'}</span><span class="invcode" id="gdCode">${esc(fmtCode(g.inviteCode))}</span><div class="fbhint" style="text-align:center;overflow-wrap:anywhere">${esc(inviteText(g.inviteCode))}</div>
       <div class="row" style="margin-top:12px"><button class="btn sec" style="flex:1" id="gdCopy" data-act="gCopy" data-id="${esc(g.id)}">📋 Copy</button><button class="btn pri" style="flex:1" id="gdShare" data-act="gShare" data-id="${esc(g.id)}">↗ Share</button></div>
-      <div class="sub" id="gdLockNote" style="font-size:12.5px;margin-top:10px;text-align:center">${g.isCreator ? 'Only people you approve can join.' : 'New people need the creator’s approval to join.'}</div>
+      <div class="sub" id="gdLockNote" style="font-size:12.5px;margin-top:10px;text-align:center">${g.isCreator ? 'Group codes need your approval. Only people you approve can join.' : 'New people need the creator’s approval to join.'}</div>
       ${g.isCreator ? (rcConfirm ? `<div class="erasebox" id="rcBox" role="alertdialog" aria-label="Confirm reset invite code" style="margin-top:10px;text-align:left"><b style="font-size:16px">Reset the invite code?</b><div class="sub" style="font-size:13px;margin:6px 0 12px">The current code stops working right away. Members stay in the group and requests already waiting stay too.</div><div style="display:grid;gap:8px"><button class="btn sec" id="rcCancel" data-act="rcCancel">Cancel</button><button class="btn danger" id="rcYes" data-act="rcYes" data-id="${esc(g.id)}" ${rcBusy ? 'disabled' : ''}>${rcBusy ? 'Resetting…' : 'Yes, reset code'}</button></div></div>` : `<button type="button" class="flink" id="rcBtn" data-act="rcAsk" style="display:block;margin:6px auto 0;padding:10px 8px">Reset invite code</button>`) : ''}</div>
     ${g.isCreator ? `<div id="gdRequests"><div class="label" style="margin-bottom:6px">Join requests${pendingOfG(g) ? ` · ${pendingOfG(g)}` : ''}</div>${pendingOfG(g) ? `<div class="card rqcard" style="padding:12px 14px"><div class="rqlist">${rqRowsHTML(g)}</div></div>` : '<div class="card" style="padding:12px 16px"><div class="sub" style="font-size:13px">No one is waiting. Only people you approve can join.</div></div>'}</div>` : ''}
     ${pinSectionHTML(g)}
@@ -1935,7 +2082,7 @@ function signOutGroups(leave) {
   if (leave && tok) ids.forEach(id => { try { fetch(API_BASE + '/groups/' + encodeURIComponent(id) + '/leave', { method: 'POST', headers: { Authorization: 'Bearer ' + tok }, keepalive: true }).catch(() => {}); } catch (e) {} });
   SY = freshSync(); try { localStorage.removeItem(SYNC_LS); } catch (e) {} lbMem = {}; gdMem = {}; spMem = {}; gdId = null;
 }
-const gdAuto = () => { const g = SY.groups.find(x => x.id === gdId); if (!g) return; const m = gdMem[g.id] = gdMem[g.id] || {}; if (!m.loading && (!m.tried || Date.now() - m.tried > 45000)) fetchGD(g.id); spAuto([g.id]); };
+const gdAuto = () => { const g = SY.groups.find(x => x.id === gdId); if (!g) return; const m = gdMem[g.id] = gdMem[g.id] || {}; if (!m.loading && (!m.tried || Date.now() - m.tried > 45000)) fetchGD(g.id); spAuto([g.id]); if (g.isCreator) ivAuto(g.id); };
 function autoFetches() {
   if (view === 'home' || view === 'group') creatorGroups().forEach(g => { if (pendingOfG(g) > 0 && (view === 'home' || g.id === gdId)) rqAuto(g.id); });
   if (view === 'home' && curGroup()) { lbAuto(); pinAuto(curGroup().id); }
@@ -2403,6 +2550,11 @@ function modalHTML() {
       <div style="margin-top:14px"><div class="sub" style="margin-bottom:6px">Units</div><div class="seg"><button class="${st.unit === 'lb' ? 'on' : ''}" data-act="setUnit" data-u="lb">lb</button><button class="${st.unit === 'kg' ? 'on' : ''}" data-act="setUnit" data-u="kg">kg</button></div></div>
       <div class="sw" style="margin-top:14px"><span>Keep screen awake during workouts</span><div class="seg"><button class="${st.wake ? 'on' : ''}" data-act="toggleWake">${st.wake ? 'On' : 'Off'}</button></div></div>
       <div class="sub" id="wakeHelp" style="font-size:12.5px;margin-top:2px">Stops your phone from dimming or locking while a workout is running.</div>
+      <div style="margin-top:18px" id="acctSec"><div class="sub" style="margin-bottom:6px">Backup code</div>
+        ${SY.token ? `${bkShow ? `<div class="bkbox" id="bkBox"><code id="bkCode">${esc(SY.token)}</code></div>` : ''}<div class="fbhint" id="bkWarn" style="margin:0 0 8px">Anyone with this code can act as you in your groups. Keep it private.</div>
+        <div class="row">${bkShow ? '<button class="btn sec" style="flex:1" id="bkCopy" data-act="bkCopy">📋 Copy</button><button class="btn sec" style="flex:1" id="bkHide" data-act="bkHide">Hide</button>' : '<button class="btn sec block" id="bkShowBtn" data-act="bkShow">🔑 Show backup code</button>'}</div>
+        <div class="fbhint" style="margin-top:6px">Save it somewhere safe. If you ever delete the app icon or switch phones, it brings your groups back.</div>` : '<div class="fbhint" id="bkNone">You get a backup code as soon as you create or join a group.</div>'}
+        <button class="btn sec block" id="restoreBtn" data-act="restoreOpen" data-from="settings" style="margin-top:10px">↺ Restore account</button></div>
       <div style="margin-top:18px"><div class="sub" style="margin-bottom:6px">Feedback</div><button class="btn sec block" data-act="feedback" data-from="settings">💬 Send feedback</button>${fbListHTML()}</div>
       <div class="sub" id="buildLbl" style="text-align:center;margin-top:18px;font-size:12px">BETA FIT build ${esc(BUILD)}${updNew ? ' · <b style="color:var(--acc2)">update available</b>' : ''}</div>
       <div class="erase" id="eraseSec">${eraseStep ? `<div class="erasebox" id="eraseBox" role="alertdialog" aria-label="Confirm erase"><b style="font-size:16px">Erase everything on this device?</b>
@@ -2423,7 +2575,9 @@ function fbListHTML() {
 /* ---------- Render ---------- */
 function openDeepLink() { gm = { step: 'deeplink', name: '', code: pendingJoin, dn: userName(), err: '', busy: false, group: null }; pendingJoin = null; modal = 'grp'; }
 function render() {
-  if (pendingJoin && !S.session && !modal && view === 'home') openDeepLink();
+  if (pendingRestore && !S.session && !modal && view === 'home') openRestoreLink();
+  else if (pendingInvite && !S.session && !modal && view === 'home') openInviteLink();
+  else if (pendingJoin && !S.session && !modal && view === 'home') openDeepLink();
   const app = $('#app'); const sy = window.scrollY; const oldSheet = $('.sheet'), sheetTop = oldSheet ? oldSheet.scrollTop : 0, sheetKey = oldSheet && app.dataset.modal;
   let html;
   if (view === 'active' && S.session) html = activeView();
@@ -2445,6 +2599,7 @@ function render() {
   const ft = $('#fbText'); if (ft) ft.addEventListener('input', () => { fbDraft.text = ft.value; });
   const fc = $('#fbContact'); if (fc) fc.addEventListener('input', () => { fbDraft.contact = fc.value; });
   const ni = $('#nameIn'); if (ni) { ni.addEventListener('input', () => { S.settings.name = ni.value.trim().slice(0, 24); save(); }); ni.addEventListener('change', syncSoon); }
+  [[iv, 'ivLabel', 'label', ivCreate], [rsr, 'rsCode', 'code', rsGo]].forEach(([o, id, k, fn]) => { const el = $('#' + id); if (el) { el.addEventListener('input', () => { o[k] = el.value; }); el.addEventListener('keydown', ev => { if (ev.key === 'Enter') { ev.preventDefault(); fn(); } }); } });
   [['gmName', 'name'], ['gmCode', 'code'], ['gmDn', 'dn']].forEach(([id, k]) => { const el = $('#' + id); if (el) { el.addEventListener('input', () => { gm[k] = el.value; }); el.addEventListener('keydown', ev => { if (ev.key === 'Enter') { ev.preventDefault(); gmSubmit(); } }); } });
   const mu1 = $('#muUrl'); if (mu1) {
     mu1.addEventListener('input', () => { mu.url = mu1.value; musicRefresh(); });
@@ -2597,6 +2752,20 @@ function act(a, t) {
     case 'gpick': SY.sel = d.id === 'me' ? 'me' : d.id; saveSync(); modal = null; view = 'home'; render(window.scrollTo(0, 0)); break;
     case 'gcreate': openGm('create'); break;
     case 'gjoin': openGm('join'); break;
+    case 'ivNew': ivOpen(d.id); break;
+    case 'ivGo': ivCreate(); break;
+    case 'ivCopy': ivShare(true); break;
+    case 'ivShare': ivShare(false); break;
+    case 'ivRevoke': ivRevoke(d.gid, d.id); break;
+    case 'ivRetry': fetchIV(d.id); break;
+    case 'ivToCode': cleanInviteUrl(); openGm('join'); break;
+    case 'restoreOpen': openRestore(d.from); break;
+    case 'rsGo': rsGo(); break;
+    case 'rsYes': if (!rsr.busy) { rsr.busy = true; render(); applyRestore(); } break;
+    case 'rsRetry': rsr.step = 'link'; rsr.busy = true; render(); probeRestore(); break;
+    case 'bkShow': bkShow = true; render(); break;
+    case 'bkHide': bkShow = false; render(); break;
+    case 'bkCopy': copyText(SY.token || '').then(ok => toast(ok ? 'Backup code copied' : 'Could not copy - select the code instead')); break;
     case 'gSubmit': gmSubmit(); break;
     case 'gCopy': gmShare(true, d.id); break;
     case 'gShare': gmShare(false, d.id); break;
@@ -2653,7 +2822,7 @@ function act(a, t) {
     case 'skip': skipStep(); break;
     case 'exit': modal = 'exit'; render(); break;
     case 'seq': modal = 'seq'; render(); break;
-    case 'closeModal': eraseStep = 0; if (modal === 'grp' && gm.step === 'deeplink') cleanJoinUrl(); if (modal === 'feedback') { if (fbDraft.id) fbReset(); modal = fbBack; fbBack = null; } else modal = null; render(); break;
+    case 'closeModal': eraseStep = 0; bkShow = false; if (modal === 'grp' && (gm.step === 'deeplink' || gm.step === 'ivjoin')) cleanJoinUrl(); if (modal === 'restore') cleanRestoreHash(); if (modal === 'feedback') { if (fbDraft.id) fbReset(); modal = fbBack; fbBack = null; } else modal = null; render(); break;
     case 'feedback': openFeedback(d.from); break;
     case 'fbType': fbDraft.type = d.t; render(); break;
     case 'fbSend': fbSend(); break;
@@ -2759,6 +2928,9 @@ function syncBanner() {
 document.addEventListener('visibilitychange', () => { if (!document.hidden) checkUpdate(); });
 setTimeout(() => checkUpdate(true), 800);
 /* ---------- Groups boot: deep link (?join=CODE), reconnect handlers, first sync ---------- */
+(function () { try { const t = (new URLSearchParams(location.search).get('invite') || '').trim(); if (t) pendingInvite = INVITE_RE.test(t) ? { token: t } : { token: '', bad: true }; } catch (e) {} })();
+// restore deep link uses the URL HASH (#restore=<backupCode>) so the code never reaches a server or log; it is removed from the URL as soon as it is answered
+(function () { try { const m = /^#restore=(.*)$/.exec(location.hash); if (m) { let t = ''; try { t = decodeURIComponent(m[1]).trim(); } catch (e) {} pendingRestore = BK_RE.test(t) ? { token: t } : { token: '', bad: true }; } } catch (e) {} })();
 (function () { try { const c = normCode(new URLSearchParams(location.search).get('join')); if (c) { if (c.length >= 4) pendingJoin = c; else cleanJoinUrl(); } } catch (e) {} })();
 window.addEventListener('online', () => { syncBackoff = 0; syncNow().catch(() => {}); setSyncStat(); if (view === 'home' && curGroup()) lbAuto(); });
 window.addEventListener('offline', () => setSyncStat('offline'));
@@ -2766,10 +2938,10 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden && SY
 setTimeout(async () => { if (SY.token) { await refreshGroups(); syncNow().catch(() => {}); } }, 300);
 // approval polling: while the pending state (or a creator's inbox) is on screen, check every 15s; also when the app comes back to the front
 window.__pollMs = 15000;
-(function pollLoop() { setTimeout(() => { if (SY.token && !document.hidden && !S.session && (view === 'home' || view === 'group') && ((SY.requests || []).length || creatorGroups().length)) refreshGroups().catch(() => {}); pollLoop(); }, window.__pollMs); })();
+(function pollLoop() { setTimeout(() => { if (SY.token && !document.hidden && !S.session && (view === 'home' || view === 'group') && ((SY.requests || []).length || creatorGroups().length)) refreshGroups().catch(() => {}); if (SY.token && view === 'group' && !modal && isCreatorOf(gdId)) ivAuto(gdId); pollLoop(); }, window.__pollMs); })();
 render();
 // test hooks (harmless in production)
-window.__forge = { BUILD, music: { parseSpotify, musicFor, normMusic, DEFAULT_MUSIC, isDefMusic, spOpenLink, cleanMusicName, SP_FALLBACK_MS, get prefHttps() { return muPreferHttps; } }, getSync: () => SY, saveSync, syncNow, pendingEntries, syncEntry, lbGet, fetchLB, fetchGD, fetchSP, API_BASE, inviteText, shareLink, spMem, lbMem, periodTotals, ringModel, allTimeTrend, weekStartIdx, entryTotals, volumeTotals, weeklyVolume, fmtVol, programFile, shareProgram, shareText, canonicalLift, streakCalc, dayIdx, weekOf, liftStats, liftSetList, gainOf, detectPRs, streakInfo, checkUpdate, drawCard, cardSpec, parseText, parseAny, buildSteps, getState: () => S, BUILTIN_PROGRAM, builtin, estSec, repsMax };
+window.__forge = { BUILD, music: { parseSpotify, musicFor, normMusic, DEFAULT_MUSIC, isDefMusic, spOpenLink, cleanMusicName, SP_FALLBACK_MS, get prefHttps() { return muPreferHttps; } }, getSync: () => SY, saveSync, syncNow, pendingEntries, syncEntry, lbGet, fetchLB, fetchGD, fetchSP, API_BASE, inviteText, shareLink, ivText, ivMem, spMem, lbMem, periodTotals, ringModel, allTimeTrend, weekStartIdx, entryTotals, volumeTotals, weeklyVolume, fmtVol, programFile, shareProgram, shareText, canonicalLift, streakCalc, dayIdx, weekOf, liftStats, liftSetList, gainOf, detectPRs, streakInfo, checkUpdate, drawCard, cardSpec, parseText, parseAny, buildSteps, getState: () => S, BUILTIN_PROGRAM, builtin, estSec, repsMax };
 </script>
 </body>
 </html>
