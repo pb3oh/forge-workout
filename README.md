@@ -12,4 +12,4 @@ Data is stored locally in your browser (localStorage); nothing is sent to a serv
 
 **Feedback:** Settings → Send feedback (also linked from Import). There is no backend: entries are saved locally (Settings → Your feedback) and can open a prefilled issue at https://github.com/pb3oh/forge-workout/issues/new (labels `bug`, `enhancement`, `feedback` — create them in the repo so they apply), or be copied/shared.
 
-**Deploying:** (current build `2026.10.15-12`) bump the `BUILD` constant near the top of the script in `index.html` on every release. Open copies compare it with the live file and show a "New version available — tap to reload" banner.
+**Deploying:** (current build `2026.10.15-14`) bump the `BUILD` constant near the top of the script in `index.html` **and** `VERSION` in `sw.js` (keep them identical) on every release. Deploy both files; `sw.js` caches the app shell for offline start (network-first for the page, so updates still arrive). Open copies compare it with the live file and show a "New version available — tap to reload" banner.

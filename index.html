@@ -15,7 +15,7 @@
 <style>
 :root{
   --bg:#0b0b0d; --bg2:#111114; --card:#17171b; --card2:#202026; --line:#2a2a31;
-  --text:#f5f5f6; --mut:#9a9aa5; --dim:#6c6c76;
+  --text:#f5f5f6; --mut:#9a9aa5; --dim:#8e8e9a;
   --acc:#ff6a1a; --acc2:#ff8f45; --accsoft:rgba(255,106,26,.14); --ok:#3ddc84; --warn:#ffcc4d; --bad:#ff5a5a;
   --r:20px;
 }
@@ -117,7 +117,7 @@ input.txt.fb{font-size:16px}
 .notice.err{background:rgba(255,90,90,.08);border-color:rgba(255,90,90,.4);color:#ffb3b3}
 .notice.ok{background:rgba(61,220,132,.08);border-color:rgba(61,220,132,.35);color:#a8f0c6}
 pre.ex{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:12px;line-height:1.5;color:var(--mut);overflow-x:auto;margin:8px 0 0;white-space:pre-wrap}
-details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;display:flex;align-items:center}
+details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:44px;display:flex;align-items:center}
 
 /* program/history */
 .dayhead{display:flex;align-items:center;gap:12px;width:100%;text-align:left}
@@ -155,11 +155,11 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
 .target .u{color:var(--mut);font-weight:700}
 .note{font-size:12.5px;color:var(--dim);margin-top:2px}
 .inputs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.field{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:8px 8px 10px;text-align:center}
+.field{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:8px 4px 10px;text-align:center}
 .field small{display:block;font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--mut);margin-bottom:2px}
-.field .st{display:flex;align-items:center;justify-content:space-between;gap:4px}
-.field .st button{width:44px;height:48px;border-radius:12px;background:var(--card2);font-size:22px;font-weight:700}
-.field input{width:100%;min-width:0;background:none;border:0;text-align:center;font-size:30px;font-weight:800;outline:none;font-variant-numeric:tabular-nums}
+.field .st{display:flex;align-items:center;justify-content:space-between;gap:2px}
+.field .st button{flex:none;width:44px;min-width:44px;height:48px;border-radius:12px;background:var(--card2);font-size:22px;font-weight:700}
+.field input{width:100%;min-width:0;min-height:44px;background:none;border:0;text-align:center;font-size:30px;font-weight:800;outline:none;font-variant-numeric:tabular-nums}
 .field input::placeholder{color:var(--dim)}
 .next{display:flex;gap:12px;align-items:center;background:var(--card);border-radius:18px}
 .next .n{width:42px;height:42px;border-radius:12px;background:var(--card2);display:grid;place-items:center;font-weight:900;color:var(--acc2);flex:none}
@@ -178,14 +178,15 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
 
 /* sheet */
 .clockrow{display:flex;align-items:center;justify-content:center;gap:10px}
-.pausebtn{width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:16px;color:var(--acc2);touch-action:manipulation;flex:none}
+.pausebtn{width:44px;height:44px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:16px;color:var(--acc2);touch-action:manipulation;flex:none}
 .pausebtn.on{background:var(--accsoft);border-color:rgba(255,106,26,.5)}
 .pausedov{position:fixed;inset:0;z-index:55;background:rgba(8,8,10,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;text-align:center}
 .pausedov .pi{font-size:54px;line-height:1}
 .pausedov h2{margin:0;font-size:30px;letter-spacing:.14em;font-weight:900}
 .pausedov .pc{font-size:44px;font-weight:800;font-variant-numeric:tabular-nums}
 .pausedov .btn{width:100%;max-width:320px}
-.chip.btnchip{touch-action:manipulation;cursor:pointer;color:var(--text)}
+.chip.btnchip{touch-action:manipulation;cursor:pointer;color:var(--text);min-height:44px;display:inline-flex;align-items:center}
+@media (max-width:370px){.field .st{flex-wrap:wrap;justify-content:center;gap:4px}.field .st input{order:-1;flex:1 0 100%}.field .st button{flex:1 1 44px}}
 .chip.btnchip:active{transform:scale(.96)}
 
 /* Music (Phase 0: Spotify links only, no login / no API) */
@@ -322,11 +323,11 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
 .resumebar{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:12px 14px;border-radius:18px;border:1px solid rgba(255,106,26,.55);background:linear-gradient(170deg,rgba(255,106,26,.22),rgba(255,106,26,.08));touch-action:manipulation}
 .resumebar .pl{width:38px;height:38px;border-radius:50%;background:linear-gradient(180deg,var(--acc2),var(--acc));color:#1a0a00;display:grid;place-items:center;font-size:15px;flex:none}
 .resumebar b{display:block;font-size:15.5px;color:var(--text)}.resumebar span{color:var(--mut);font-size:12.5px}
-.daypill{min-height:36px;padding:7px 12px;touch-action:manipulation;cursor:pointer;font-family:inherit}
+.daypill{min-height:44px;padding:7px 12px;touch-action:manipulation;cursor:pointer;font-family:inherit}
 .daypill:active{transform:scale(.96)}
 .daypill .dd{font-size:11px;margin-left:1px}
-.sublink{display:block;margin:6px auto 0;padding:10px 14px;min-height:40px;color:var(--mut);font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px;touch-action:manipulation}
-.proglink{display:block;margin:0 auto;padding:10px 14px;color:var(--mut);font-size:12px;text-align:center;touch-action:manipulation}
+.sublink{display:block;margin:6px auto 0;padding:10px 14px;min-height:44px;color:var(--mut);font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px;touch-action:manipulation}
+.proglink{display:block;margin:0 auto;padding:14px 14px;min-height:44px;color:var(--mut);font-size:12px;text-align:center;touch-action:manipulation}
 .proglink u{text-underline-offset:3px}
 /* program library / detail */
 .libc.on{padding:0}
@@ -347,7 +348,7 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
 /* stats / share / update banner */
 .nav button{min-width:0}
 .prb{display:inline-flex;align-items:center;padding:2px 7px;border-radius:7px;background:linear-gradient(180deg,var(--acc2),var(--acc));color:#1a0a00;font-size:10.5px;font-weight:900;letter-spacing:.08em;vertical-align:middle;margin-left:6px;line-height:1.4}
-.namelink{display:inline-block;margin-top:2px;padding:8px 0 4px;color:var(--acc2);font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px;touch-action:manipulation}
+.namelink{display:inline-flex;align-items:center;min-height:44px;min-width:44px;margin-top:2px;padding:0;color:var(--acc2);font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px;touch-action:manipulation}
 .seg.g2{display:grid;grid-template-columns:repeat(2,1fr)}
 .streakhero{position:relative;overflow:hidden;border-radius:26px;padding:20px;border:1px solid rgba(255,106,26,.35);background:radial-gradient(120% 90% at 100% 0%,rgba(255,106,26,.28),transparent 60%),linear-gradient(160deg,#1d1612,#141417 60%)}
 .bigstreak{display:flex;align-items:baseline;gap:10px;margin:6px 0 2px}
@@ -381,9 +382,12 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
 .prline em{font-style:normal;margin-left:auto;font-weight:800;color:var(--acc2);font-size:14px}
 .prline em i{font-style:normal;color:#7be8ab;font-size:12.5px;margin-left:4px}
 .updbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom) + 100px);width:min(94vw,400px);z-index:70;display:flex;align-items:center;gap:8px;padding:8px 8px 8px 14px;border-radius:16px;background:#fff;color:#111;box-shadow:0 10px 36px rgba(0,0,0,.55);font-size:13.5px;font-weight:700}
-.updbar .ut{flex:1;min-width:0;text-align:left;min-height:40px;font-weight:700;color:#111;touch-action:manipulation}
-.updbar .ub{min-height:40px;padding:0 14px;border-radius:12px;background:var(--acc);color:#1a0a00;font-weight:900;touch-action:manipulation}
-.updbar .ux{width:40px;height:40px;border-radius:12px;color:#666;font-size:16px;touch-action:manipulation}
+.storebar{position:sticky;top:calc(env(safe-area-inset-top) + 6px);margin:calc(env(safe-area-inset-top) + 6px) auto 0;width:min(94vw,440px);z-index:80;display:flex;align-items:center;gap:8px;padding:10px 10px 10px 14px;border-radius:16px;background:#7a1f1f;color:#fff;box-shadow:0 10px 36px rgba(0,0,0,.6);font-size:13px;line-height:1.35}
+.storebar span{flex:1;min-width:0}
+.storebar button{min-height:44px;min-width:44px;padding:0 12px;border-radius:12px;background:#fff;color:#111;font-weight:800;touch-action:manipulation}
+.updbar .ut{flex:1;min-width:0;text-align:left;min-height:44px;font-weight:700;color:#111;touch-action:manipulation}
+.updbar .ub{min-height:44px;padding:0 14px;border-radius:12px;background:var(--acc);color:#1a0a00;font-weight:900;touch-action:manipulation}
+.updbar .ux{width:44px;height:44px;border-radius:12px;color:#666;font-size:16px;touch-action:manipulation}
 #shareCv{width:72%;display:block;margin:12px auto 0;border-radius:14px;border:1px solid var(--line);background:#0b0b0d}
 /* groups (build 10) */
 html{overscroll-behavior-y:contain}
@@ -399,7 +403,7 @@ html{overscroll-behavior-y:contain}
 .avstack .av{margin-left:-7px}.avstack .av:first-child{margin-left:0}
 .av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:11.5px;font-weight:900;color:#1a0a00;border:2px solid var(--bg);box-sizing:border-box;flex:none}
 .av.lg{width:34px;height:34px;font-size:14px}
-.icon.sm{width:40px;height:40px;border-radius:12px;font-size:17px}
+.icon.sm{width:44px;height:44px;border-radius:12px;font-size:17px}
 .icon.spin{animation:gspin .8s linear infinite}
 @keyframes gspin{to{transform:rotate(360deg)}}
 .syncln{display:flex;align-items:center;gap:6px;margin-top:-6px;font-size:11.5px;color:var(--dim);font-weight:600;min-height:16px}
@@ -470,7 +474,7 @@ html{overscroll-behavior-y:contain}
 .pinbox .mt{padding-right:0}
 .pincard .mt b,.pinbox .mt b{font-size:15.5px;overflow-wrap:anywhere}.pincard .mt small,.pinbox .mt small{color:var(--mut);font-size:12.5px;line-height:1.35;overflow-wrap:anywhere}
 .pincard>.btn{flex:1 0 100%;min-height:46px;font-size:14px}
-.pincard .pindx{position:absolute;top:8px;right:8px;width:36px;height:36px;border-radius:12px;font-size:14px}
+.pincard .pindx{position:absolute;top:4px;right:4px;width:44px;height:44px;border-radius:12px;font-size:14px}
 .pinbox{border-color:rgba(255,106,26,.45)}
 .starterrow{display:flex;align-items:center;gap:12px;padding:12px 14px}
 .starterrow .mt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.starterrow small{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--mut)}.starterrow b{font-size:14.5px;overflow-wrap:anywhere}
@@ -501,11 +505,99 @@ html{overscroll-behavior-y:contain}
    The app was renamed FORGE -> BETA FIT; the storage keys 'forge.v1' / 'forge.sync.v1', the API host (forge-api) and the repo URL
    keep the old name on purpose: renaming them would orphan every existing install's data and links.
    ========================================================= */
-const BUILD = '2026.10.15-13'; // bump on every deploy; the in-app update banner compares this against the live file
+const BUILD = '2026.10.15-14'; // bump on every deploy; the in-app update banner compares this against the live file
 const LS = 'forge.v1';
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clone = o => JSON.parse(JSON.stringify(o));
+
+/* ---------- Sanitizers (-14) ----------
+   Everything that comes from storage, an imported file, a group-shared program or the server is rebuilt with strict types before the app touches it,
+   so a damaged / hostile value can never reach a template (XSS) or a loop (crash). Invalid pieces are dropped (counted in sanLoss) instead of throwing. */
+const isObj = o => !!o && typeof o === 'object' && !Array.isArray(o);
+let sanLoss = 0; // number of invalid pieces the current sanitising pass had to drop or replace
+const loss = () => { sanLoss++; return false; };
+function cp(s, n) { s = String(s); return s.length <= n ? s : Array.from(s).slice(0, n).join(''); } // cut on code points: never half an emoji
+function cStr(v, max, def) {
+  if (typeof v === 'number' && isFinite(v)) v = String(v);
+  if (typeof v !== 'string') return def === undefined ? '' : def;
+  return cp(v.replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, ''), max);
+}
+function cNum(v, def, lo, hi) {
+  if (typeof v === 'string' && /^\s*-?\d+(\.\d+)?\s*$/.test(v)) v = parseFloat(v);
+  if (typeof v !== 'number' || !isFinite(v)) return def;
+  return Math.min(hi, Math.max(lo, v));
+}
+const cNumL = (v, def, lo, hi) => { const n = cNum(v, def, lo, hi); if (n !== v) loss(); return n; }; // like cNum, but an out-of-range / unreadable value counts as data loss (so the original gets backed up)
+const cInt = (v, def, lo, hi) => { const n = cNum(v, NaN, lo, hi); return isNaN(n) ? def : Math.round(n); };
+const pickIf = (v, ok, def) => { if (ok(v)) return v; if (v !== undefined) loss(); return def; };
+function extras(src, known) { const out = {}; Object.keys(src).forEach(k => { if (k !== '__proto__' && k !== 'constructor' && k !== 'prototype' && !known.includes(k)) out[k] = src[k]; }); return out; }
+const D_MIN = 946684800000, D_MAX = 4102444800000; // 2000-01-01 .. 2100-01-01
+const KINDS = ['cardio', 'abs', 'circuit'];
+function cleanExercise(e, warn) {
+  if (!isObj(e)) return null;
+  const name = cStr(e.name, 200).trim(); if (!name) { warn('Skipped an exercise with no name'); return null; }
+  let sets = Array.isArray(e.sets) ? e.sets.slice(0, 1000).map(x => (typeof x === 'string' || (typeof x === 'number' && isFinite(x))) ? cp(normReps(x), 24) : '') : null;
+  if (!sets || !sets.length) { sets = ['10', '10', '10']; warn(`No sets/reps found for "${name}" - defaulted to 3 x 10`); }
+  return { name, muscle: cStr(e.muscle, 30).trim() || inferMuscle(name), sets, note: cStr(e.note, 2000) };
+}
+function cleanBlock(b, warn) {
+  if (!isObj(b) || !Array.isArray(b.exercises)) return null;
+  const exercises = b.exercises.slice(0, 1000).map(e => cleanExercise(e, warn)).filter(Boolean); if (!exercises.length) return null;
+  const out = { exercises };
+  if (KINDS.includes(b.kind)) out.kind = b.kind;
+  if (b.rest != null) { const r = cNum(b.rest, null, 0, 3600); if (r !== null) out.rest = Math.round(r); }
+  return out;
+}
+function cleanDay(d, i, warn) {
+  if (!isObj(d) || !Array.isArray(d.blocks)) return null;
+  const blocks = [];
+  d.blocks.slice(0, 5000).forEach(b => { const c = cleanBlock(b, warn); if (c) blocks.push(c); else warn(`${cStr(d.name, 60).trim() || 'Day ' + (i + 1)}: skipped an empty or unreadable exercise block`); });
+  if (!blocks.length) return null;
+  let focus = cStr(d.focus, 200).trim();
+  if (!focus) { const ms = []; blocks.forEach(b => b.exercises.forEach(e => { if (!ms.includes(e.muscle)) ms.push(e.muscle); })); focus = ms.slice(0, 3).join(' & '); }
+  return { name: cStr(d.name, 200).trim() || 'Day ' + (i + 1), focus, dow: cStr(d.dow, 12).trim(), blocks, note: cStr(d.note, 2000) };
+}
+// strict rebuild of a program. Returns null when it is not a program at all; weeks may be [] (nothing usable) - callers decide (loadProgram() rejects those).
+function cleanProgram(p, warn) {
+  warn = warn || (() => {});
+  if (!isObj(p)) return null;
+  const weeksIn = Array.isArray(p.weeks) ? p.weeks : Array.isArray(p.days) ? [{ n: 1, phase: 1, name: 'Week 1', days: p.days }] : null;
+  if (!weeksIn) return null;
+  const out = { name: cStr(p.name, 200).trim() || 'Workout' };
+  ['description', 'author'].forEach(k => { if (typeof p[k] === 'string') out[k] = cStr(p[k], 4000); });
+  if (typeof p.source === 'string') out.source = cStr(p.source, 20);
+  if (typeof p.ver === 'number' && isFinite(p.ver)) out.ver = p.ver; else if (typeof p.ver === 'string') out.ver = cStr(p.ver, 20);
+  if (isObj(p.defaults)) { const d = {}; const r = cNum(p.defaults.rest, null, 0, 600); if (r !== null) d.rest = Math.round(r); if (p.defaults.restMode === 'round' || p.defaults.restMode === 'set') d.restMode = p.defaults.restMode; out.defaults = d; }
+  if (Array.isArray(p.guide)) { const g = p.guide.filter(isObj).slice(0, 60).map(x => ({ t: cStr(x.t, 200), x: cStr(x.x, 4000) })); if (g.length) out.guide = g; }
+  if (Array.isArray(p.abs)) { const a = p.abs.slice(0, 200).map(x => { if (!isObj(x) || !Array.isArray(x.blocks)) return null; const blocks = x.blocks.map(b => cleanBlock(b, warn)).filter(Boolean); return blocks.length ? { name: cStr(x.name, 200).trim() || 'Ab circuit', blocks } : null; }).filter(Boolean); if (a.length) out.abs = a; }
+  out.weeks = [];
+  weeksIn.slice(0, 520).forEach((w, wi) => {
+    if (!isObj(w)) { warn('Skipped a week that could not be read'); return; }
+    const tag = weeksIn.length > 1 ? (cStr(w.name, 60).trim() || 'Week ' + (wi + 1)) + ' ' : '';
+    const days = [];
+    (Array.isArray(w.days) ? w.days : []).slice(0, 400).forEach((d, di) => {
+      const c = cleanDay(d, di, warn);
+      if (c) days.push(c); else warn(`${tag}${isObj(d) ? (cStr(d.name, 60).trim() || 'Day ' + (di + 1)) : 'Day ' + (di + 1)} had no exercises - skipped`);
+    });
+    if (days.length) out.weeks.push({ n: cInt(w.n, wi + 1, 1, 9999), phase: cInt(w.phase, Math.ceil((wi + 1) / 2), 1, 99), name: cStr(w.name, 120).trim() || 'Week ' + (wi + 1), days });
+  });
+  return out;
+}
+const loadProgram = p => { const c = cleanProgram(p); return c && c.weeks.length ? c : null; };
+// binary / non-text detection for imports (checked before any parsing)
+function looksBinary(t) {
+  const s = String(t || '').slice(0, 8192); if (!s) return false; if (s.indexOf('\u0000') >= 0) return true;
+  let bad = 0; for (let i = 0; i < s.length; i++) { const c = s.charCodeAt(i); if (c < 9 || (c > 13 && c < 32) || c === 0xFFFD) bad++; }
+  return bad / s.length > 0.02;
+}
+function sniffKind(buf) {
+  const b = new Uint8Array(buf || new ArrayBuffer(0)), is = (...a) => a.length <= b.length && a.every((v, i) => b[i] === v);
+  if (is(0x25, 0x50, 0x44, 0x46)) return 'PDF'; // %PDF
+  if (is(0x89, 0x50, 0x4e, 0x47) || is(0xff, 0xd8, 0xff) || is(0x47, 0x49, 0x46, 0x38) || (is(0x52, 0x49, 0x46, 0x46) && b[8] === 0x57 && b[9] === 0x45 && b[10] === 0x42 && b[11] === 0x50)) return 'photo';
+  if (is(0x50, 0x4b, 0x03, 0x04) || is(0x4d, 0x5a) || is(0x7f, 0x45, 0x4c, 0x46)) return 'binary';
+  return '';
+}
 
 /* ---------- Built-in program (hand-transcribed from the user's PDF; regenerate with tools/build_program.py) ---------- */
 /*BUILTIN_START*/const BUILTIN_PROGRAM = {"name":"The Lost Breed - 8 Week Shred","ver":2,"source":"sample","author":"The Lost Breed (thelostbreed.com)","description":"Transcribed from \"New Shred Program.pdf\": 8 weeks / 4 phases, 6 training days per week with supersets, progression & drop sets and post-workout cardio circuits.","defaults":{"rest":45,"restMode":"round"},"guide":[{"t":"The plan","x":"8 weeks, 4 phases of 2 weeks. Mon Shoulders, Tue Arms, Wed Legs, Thu Chest, Fri Back, Sat Abs & Cardio, Sun rest. Every strength day ends with a post-workout cardio circuit. Intensity rises each phase."},{"t":"Supersets","x":"Exercises in one group alternate A → B (→ C) → A → B… Rest when the whole round is finished; push yourself not to rest during the superset."},{"t":"Rest","x":"Keep rest just long enough to recover for the target reps: 30-45 seconds. Cardio circuits: 1 minute after each A-B-C set."},{"t":"Progression sets","x":"Reps go down as weight goes up: aim to add 5-10 lb every set. If you miss the reps, rest the weight a few seconds and finish the set. Some sets keep the same reps but still ask for more weight each set."},{"t":"Drop-sets","x":"After heavy sets, drop the weight about 10-15 lb and go to failure. \"Double drop-set\" = repeat that twice back to back. A \"→\" in the reps (e.g. 20→8) means one set made of two weights."},{"t":"Reps notation","x":"\"10+10\" = two parts back to back in one set (e.g. wide grip then close grip). \"20 s\" = timed set. FAIL = to failure. Pick weights that let you fail at the suggested rep range, never sacrifice form."},{"t":"HIIT days","x":"The PDF names Tuesday and Thursday as HIIT days but only lists the post-workout cardio circuits - no separate HIIT workout - so none is scheduled here."},{"t":"Abs","x":"Do abs at least 3 times a week after training. Day 6 is a full abs circuit; the Program tab also has the PDF's 10 ab circuits to tack on."},{"t":"Session length","x":"Each workout should take at least 1 - 1.5 hours."}],"abs":[{"name":"Ab circuit 1","blocks":[{"exercises":[{"name":"Sit Ups","sets":["20","20","20"],"note":"20 reps each, 3 total rounds."},{"name":"Leg Raises","sets":["20","20","20"],"note":""},{"name":"Crunches","sets":["20","20","20"],"note":""},{"name":"Reverse Crunches","sets":["20","20","20"],"note":""}],"kind":"abs"}]},{"name":"Ab circuit 2","blocks":[{"exercises":[{"name":"Bicycle Crunches","sets":["20","20","20"],"note":"20 reps each, 3 total rounds."},{"name":"Cross Crunch","sets":["20","20","20"],"note":""},{"name":"Elbow to Knee Crunches","sets":["20","20","20"],"note":""},{"name":"Side Crunches","sets":["20","20","20"],"note":""}],"kind":"abs"}]},{"name":"Ab circuit 3","blocks":[{"exercises":[{"name":"Leg Tucks","sets":["20","20","20"],"note":"20 reps each, 3 total rounds."},{"name":"Side Twists","sets":["20","20","20"],"note":""},{"name":"Alternating Ankle Touches","sets":["20","20","20"],"note":""},{"name":"Flutter Kicks","sets":["20","20","20"],"note":""}],"kind":"abs"}]},{"name":"Ab circuit 4","blocks":[{"exercises":[{"name":"Reverse Crunches","sets":["20","20","20"],"note":"20 reps each, 3 total rounds."},{"name":"Leg Raises","sets":["20","20","20"],"note":""},{"name":"Jackknife Crunches","sets":["20","20","20"],"note":""},{"name":"Straight Leg Hip Raises","sets":["20","20","20"],"note":""}],"kind":"abs"}]},{"name":"Ab circuit 5","blocks":[{"exercises":[{"name":"Leg Raises","sets":["20","20","20"],"note":"20 reps each, 3 total rounds."},{"name":"Toe Touches","sets":["20","20","20"],"note":""},{"name":"Side Twists","sets":["20","20","20"],"note":""},{"name":"Raised Knee Crunches","sets":["20","20","20"],"note":""}],"kind":"abs"}]},{"name":"Ab circuit 6","blocks":[{"exercises":[{"name":"Cross Crunches","sets":["20","20","20"],"note":"20 reps each, 3 total rounds."},{"name":"Leg Raises","sets":["20","20","20"],"note":""},{"name":"Crunches","sets":["20","20","20"],"note":""},{"name":"Straight Leg Hip Raises","sets":["20","20","20"],"note":""}],"kind":"abs"}]},{"name":"Ab circuit 7","blocks":[{"exercises":[{"name":"Bicycle Crunches","sets":["20","20","20"],"note":"20 reps each, 3 total rounds."},{"name":"Alternating Ankle Touches","sets":["20","20","20"],"note":""},{"name":"Bottoms Up","sets":["20","20","20"],"note":""},{"name":"Leg Tucks","sets":["20","20","20"],"note":""}],"kind":"abs"}]},{"name":"Ab circuit 8","blocks":[{"exercises":[{"name":"Spider Crawl","sets":["20","20","20"],"note":"20 reps each, 3 total rounds."},{"name":"Alternating Air Grabs","sets":["20","20","20"],"note":""},{"name":"Reverse Crunches","sets":["20","20","20"],"note":""},{"name":"Side Twists","sets":["20","20","20"],"note":""}],"kind":"abs"}]},{"name":"Ab circuit 9","blocks":[{"exercises":[{"name":"Crunches","sets":["20","20","20"],"note":"20 reps each, 3 total rounds."},{"name":"Raised Knee Crunches","sets":["20","20","20"],"note":""},{"name":"Frog Sit Ups","sets":["20","20","20"],"note":""},{"name":"Full Sit Ups","sets":["20","20","20"],"note":""}],"kind":"abs"}]},{"name":"Ab circuit 10","blocks":[{"exercises":[{"name":"Alternating Plank","sets":["20","20","20"],"note":"20 reps each, 3 total rounds."},{"name":"Scissor Kicks","sets":["20","20","20"],"note":""},{"name":"Reverse Crunches","sets":["20","20","20"],"note":""},{"name":"Mountain Climbers","sets":["20","20","20"],"note":""}],"kind":"abs"}]}],"weeks":[{"n":1,"phase":1,"name":"Week 1","days":[{"name":"Day 1","focus":"Shoulders","dow":"Mon","blocks":[{"exercises":[{"name":"Seated Dumbbell Press","sets":["20","20","20","20"],"note":""},{"name":"Dumbbell Lateral Raises","sets":["10-12","10-12","10-12","10-12"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Front Plate Raises","sets":["20","20","20","20"],"note":""},{"name":"Reverse Pec Deck","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Shoulder Press Machine","sets":["12-15","12-15","12-15","12-15"],"note":"Increase weight every set"},{"name":"Machine Lateral Raise","sets":["12-15","12-15","12-15","12-15"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Dumbbell Shrugs","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Jumping Jacks","sets":["20s","20s","20s"],"note":"Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."},{"name":"Jump Rope","sets":["20s","20s","20s"],"note":""},{"name":"Burpees","sets":["20s","20s","20s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 2","focus":"Arms","dow":"Tue","blocks":[{"exercises":[{"name":"Barbell Curls","sets":["20","20","20","20"],"note":""},{"name":"Skull Crushers","sets":["20","20","20","20"],"note":""},{"name":"Mountain Climbers","sets":["20s","20s","20s","20s"],"note":""}]},{"exercises":[{"name":"Dumbbell Curls","sets":["15","15","15","15"],"note":""},{"name":"Tricep Pushdowns","sets":["15","15","15","15"],"note":""},{"name":"Squat Jumps","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Preacher Curls","sets":["12","12","12","12"],"note":""},{"name":"Over-head Tricep Extension","sets":["12","12","12","12"],"note":""},{"name":"Run in Place","sets":["20s","20s","20s","20s"],"note":""}]},{"exercises":[{"name":"Hammer Curls","sets":["15","15","15","15"],"note":""},{"name":"Rope Pushdowns","sets":["15","15","15","15"],"note":""},{"name":"Bench Step-Ups","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Jumping Jacks","sets":["20s","20s","20s"],"note":"Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."},{"name":"Jump Rope","sets":["20s","20s","20s"],"note":""},{"name":"Burpees","sets":["20s","20s","20s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 3","focus":"Legs","dow":"Wed","blocks":[{"exercises":[{"name":"Leg Extensions","sets":["12-15","12-15","12-15","12-15","12-15"],"note":"Increase weight every set"},{"name":"Lying Hamstring Curls","sets":["12-15","12-15","12-15","12-15","12-15"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Leg Press","sets":["12-15","12-15","12-15","12-15"],"note":"Increase weight every set"},{"name":"Dumbbell Lunges","sets":["20","20","20","20"],"note":"20 steps total for lunges"}]},{"exercises":[{"name":"Hack Squat","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Single Leg Hamstring Curls","sets":["12","12","12","12"],"note":"Each leg"},{"name":"Seated Hamstring Curls","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Squats","sets":["10","10","10","10","10"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Jumping Jacks","sets":["20s","20s","20s"],"note":"Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."},{"name":"Jump Rope","sets":["20s","20s","20s"],"note":""},{"name":"Burpees","sets":["20s","20s","20s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 4","focus":"Chest","dow":"Thu","blocks":[{"exercises":[{"name":"Bench Press","sets":["10-12","10-12","10-12","10-12","10-12"],"note":"Increase weight every set"},{"name":"Mountain Climbers","sets":["20s","20s","20s","20s"],"note":""}]},{"exercises":[{"name":"Pec Deck","sets":["10-12","10-12","10-12","10-12"],"note":"Increase weight every set"},{"name":"Incline Dumbbell Press","sets":["10-12","10-12","10-12","10-12"],"note":"Increase weight every set"},{"name":"Squat Jumps","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Decline Chest Press Machine","sets":["12","12","12","12"],"note":""},{"name":"Cable Crossovers","sets":["12","12","12","12"],"note":""},{"name":"Run in Place","sets":["20s","20s","20s","20s"],"note":""}]},{"exercises":[{"name":"Incline Bench Press","sets":["10-12","10-12","10-12","10-12"],"note":""},{"name":"Bench Step-Ups","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Chest Press Machine","sets":["30","30","30","30"],"note":""},{"name":"Jumping Jacks","sets":["20s","20s","20s","20s"],"note":""}]},{"exercises":[{"name":"Jumping Jacks","sets":["20s","20s","20s"],"note":"Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."},{"name":"Jump Rope","sets":["20s","20s","20s"],"note":""},{"name":"Burpees","sets":["20s","20s","20s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 5","focus":"Back","dow":"Fri","blocks":[{"exercises":[{"name":"Wide Grip Pull-Ups","sets":["Failure","Failure","Failure","Failure"],"note":""}]},{"exercises":[{"name":"Bent Over Rows","sets":["12-15","12-15","12-15","12-15"],"note":"Increase weight every set"},{"name":"Reverse Grip Lat Pull Downs","sets":["12-15","12-15","12-15","12-15"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Seated Row Machine","sets":["10-12","10-12","10-12","10-12"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Wide Grip Lat Pull Downs","sets":["12-15","12-15","12-15","12-15"],"note":"Increase weight every set"},{"name":"Close Grip Cable Row","sets":["12-15","12-15","12-15","12-15"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Deadlifts","sets":["10-12","10-12","10-12","10-12"],"note":"Increase weight every set"},{"name":"Bodyweight Inverted Rows","sets":["10-12","10-12","10-12","10-12"],"note":""}]},{"exercises":[{"name":"Jumping Jacks","sets":["20s","20s","20s"],"note":"Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."},{"name":"Jump Rope","sets":["20s","20s","20s"],"note":""},{"name":"Burpees","sets":["20s","20s","20s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 6","focus":"Abs & Cardio","dow":"Sat","blocks":[{"exercises":[{"name":"Reverse Crunches","sets":["15","15","15"],"note":"Ab circuit: do each in order, then repeat. 3 total rounds."},{"name":"Lying Leg Raises","sets":["15","15","15"],"note":""},{"name":"Crunches","sets":["15","15","15"],"note":""}],"kind":"abs"},{"exercises":[{"name":"Jumping Jacks","sets":["20s","20s","20s","20s"],"note":"Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."},{"name":"Jump Rope","sets":["20s","20s","20s","20s"],"note":""},{"name":"Burpees","sets":["20s","20s","20s","20s"],"note":""}],"kind":"cardio","rest":60}],"note":""}]},{"n":2,"phase":1,"name":"Week 2","days":[{"name":"Day 1","focus":"Shoulders","dow":"Mon","blocks":[{"exercises":[{"name":"Barbell Military Press","sets":["10","10","10","10"],"note":"Increase weight every set"},{"name":"Dumbbell Front Raise","sets":["15","15","15","15","15"],"note":""}]},{"exercises":[{"name":"Dumbbell Lateral Raise","sets":["30","30","30","30"],"note":""}]},{"exercises":[{"name":"Barbell Shrugs","sets":["15","15","15","15","15"],"note":""},{"name":"Rear Dumbbell Flies","sets":["15","15","15","15","15"],"note":""}]},{"exercises":[{"name":"Seated Alternating Dumbbell Press","sets":["20+10","20+10","20+10"],"note":"20 reps alternating arms, then 10 reps with both arms = 1 set. 3 total sets."}]},{"exercises":[{"name":"Squat Jumps","sets":["20s","20s","20s"],"note":"Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."},{"name":"Mountain Climbers","sets":["20s","20s","20s"],"note":""},{"name":"Jump Rope","sets":["20s","20s","20s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 2","focus":"Arms","dow":"Tue","blocks":[{"exercises":[{"name":"Tricep Rope Extension","sets":["20","20","20","20"],"note":""},{"name":"Overhead Tricep Extension","sets":["20","20","20","20"],"note":""},{"name":"Jumping Jacks","sets":["20s","20s","20s","20s"],"note":""}]},{"exercises":[{"name":"Dumbbell Skull Crushers","sets":["15","15","15","15"],"note":""},{"name":"Bench Step-Ups","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Straight Bar Push Downs","sets":["15","15","15","15"],"note":""},{"name":"Dumbbell Kickbacks","sets":["15","15","15","15"],"note":""},{"name":"Mountain Climbers","sets":["20s","20s","20s","20s"],"note":""}]},{"exercises":[{"name":"Reverse EZ Bar Curls","sets":["15","15","15","15"],"note":""},{"name":"EZ Bar Curls","sets":["15","15","15","15"],"note":""},{"name":"Run in Place","sets":["20s","20s","20s","20s"],"note":""}]},{"exercises":[{"name":"Incline Dumbbell Curls","sets":["15","15","15","15"],"note":""},{"name":"Hammer Curls","sets":["15","15","15","15"],"note":""},{"name":"Squat Jumps","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Machine Preacher Curls","sets":["8","8","8","8"],"note":"Negatives: count 4 seconds on the way down, explode up from full extension."},{"name":"Burpees","sets":["12","12","12","12"],"note":""}]},{"exercises":[{"name":"Squat Jumps","sets":["20s","20s","20s"],"note":"Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."},{"name":"Mountain Climbers","sets":["20s","20s","20s"],"note":""},{"name":"Jump Rope","sets":["20s","20s","20s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 3","focus":"Legs","dow":"Wed","blocks":[{"exercises":[{"name":"Lying Hamstring Curls","sets":["20","20","20","20"],"note":""},{"name":"Seated Hamstring Curls","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Leg Extensions","sets":["40","35","30","25","20"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Stiff Leg Deadlifts","sets":["12","12","12","12"],"note":""},{"name":"Dumbbell Lunges","sets":["12","12","12","12"],"note":""}]},{"exercises":[{"name":"Leg Press","sets":["20","20","20","20","20"],"note":""}]},{"exercises":[{"name":"Squat Jumps","sets":["20s","20s","20s"],"note":"Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."},{"name":"Mountain Climbers","sets":["20s","20s","20s"],"note":""},{"name":"Jump Rope","sets":["20s","20s","20s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 4","focus":"Chest","dow":"Thu","blocks":[{"exercises":[{"name":"Incline Bench Press","sets":["10","10","10","10","10"],"note":""},{"name":"Jumping Jacks","sets":["20s","20s","20s","20s"],"note":""}]},{"exercises":[{"name":"Incline Dumbbell Press","sets":["10-12","10-12","10-12","10-12"],"note":"Increase weight every set"},{"name":"Close Grip Dumbbell Press","sets":["12","12","12","12"],"note":""},{"name":"Bench Step-Ups","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Flat Dumbbell Press","sets":["10-12","10-12","10-12","10-12"],"note":""},{"name":"Mountain Climbers","sets":["20s","20s","20s","20s"],"note":""}]},{"exercises":[{"name":"Incline Dumbbell Flies","sets":["12","12","12","12","12"],"note":""},{"name":"Push-Ups","sets":["Failure","Failure","Failure","Failure"],"note":""},{"name":"Run in Place","sets":["20s","20s","20s","20s"],"note":""}]},{"exercises":[{"name":"Decline Bench Press","sets":["10","10","10","10","10"],"note":""},{"name":"Squat Jumps","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Squat Jumps","sets":["20s","20s","20s"],"note":"Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."},{"name":"Mountain Climbers","sets":["20s","20s","20s"],"note":""},{"name":"Jump Rope","sets":["20s","20s","20s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 5","focus":"Back","dow":"Fri","blocks":[{"exercises":[{"name":"Pull Ups","sets":["Failure","Failure","Failure","Failure","Failure"],"note":""},{"name":"Bent Over Rows","sets":["10+10+10","10+10+10","10+10+10","10+10+10"],"note":"Wide grip 10, normal grip 10, reverse grip 10 = 1 set. 4 total sets."}]},{"exercises":[{"name":"T-Bar Row","sets":["10-12","10-12","10-12","10-12"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Dumbbell Row","sets":["15","15","15","15"],"note":""},{"name":"Back Extensions","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Close Grip Lat Pull Downs","sets":["12-15","12-15","12-15","12-15"],"note":"Increase weight every set"},{"name":"Wide Grip Cable Row","sets":["12-15","12-15","12-15","12-15"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Squat Jumps","sets":["20s","20s","20s"],"note":"Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."},{"name":"Mountain Climbers","sets":["20s","20s","20s"],"note":""},{"name":"Jump Rope","sets":["20s","20s","20s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 6","focus":"Abs & Cardio","dow":"Sat","blocks":[{"exercises":[{"name":"Lying Leg Raises","sets":["15","15","15"],"note":"Ab circuit: do each in order, then repeat. 3 total rounds."},{"name":"Flutter Kicks","sets":["15","15","15"],"note":""},{"name":"Leg Tucks","sets":["15","15","15"],"note":""}],"kind":"abs"},{"exercises":[{"name":"Squat Jumps","sets":["20s","20s","20s","20s"],"note":"Circuit: A → B → C = 1 set. 20 s each, 1 min rest after every set."},{"name":"Mountain Climbers","sets":["20s","20s","20s","20s"],"note":""},{"name":"Jump Rope","sets":["20s","20s","20s","20s"],"note":""}],"kind":"cardio","rest":60}],"note":""}]},{"n":3,"phase":2,"name":"Week 3","days":[{"name":"Day 1","focus":"Shoulders","dow":"Mon","blocks":[{"exercises":[{"name":"Standing Barbell Military Press","sets":["10+10","10+10","10+10","10+10"],"note":"10 normal reps, then 10 reps behind the neck = 1 set. 4 total sets."}]},{"exercises":[{"name":"Lateral Raise + Front Raise Ladder","sets":["Ladder","Ladder","Ladder"],"note":"1 rep lateral raise, 1 rep front raise, 2 lateral, 2 front... continue up to 5 reps each = 1 set. 3 total sets."}]},{"exercises":[{"name":"Shoulder Press Machine","sets":["10","10","10","10"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Rear Delt Flies","sets":["20","20","20","20"],"note":""},{"name":"Barbell Shrugs","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Burpees","sets":["25s","25s","25s"],"note":"Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."},{"name":"Medicine Ball Slams","sets":["25s","25s","25s"],"note":""},{"name":"Run in Place","sets":["25s","25s","25s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 2","focus":"Arms","dow":"Tue","blocks":[{"exercises":[{"name":"Tricep Rope Extension","sets":["20","20","20","20"],"note":""},{"name":"Rope Curls","sets":["20","20","20","20"],"note":""},{"name":"Medicine Ball Slams","sets":["15","15","15","15"],"note":"As hard as you can"}]},{"exercises":[{"name":"Straight Bar Tricep Extensions","sets":["20","20","20","20"],"note":""},{"name":"Lying Cable Curls","sets":["20","20","20","20"],"note":""},{"name":"Lunge Jumps","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Dumbbell Skull Crushers","sets":["20","20","20","20"],"note":""},{"name":"Alternating Dumbbell Curls","sets":["12","12","12","12"],"note":"Each arm"},{"name":"High Knees","sets":["25s","25s","25s","25s"],"note":""}]},{"exercises":[{"name":"Overhead Dumbbell Extension","sets":["12","12","12","12"],"note":""},{"name":"EZ Bar Curls","sets":["20","20","20","20"],"note":""},{"name":"Bench Step-Ups","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Burpees","sets":["25s","25s","25s"],"note":"Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."},{"name":"Medicine Ball Slams","sets":["25s","25s","25s"],"note":""},{"name":"Run in Place","sets":["25s","25s","25s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 3","focus":"Legs","dow":"Wed","blocks":[{"exercises":[{"name":"Leg Extensions","sets":["25","25","25","25"],"note":"Increase weight every set"},{"name":"Seated Hamstring Curls","sets":["25","25","25","25"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Squats","sets":["10","10","12","8","6","8"],"note":"Pause reps. Increase weight each set until your last set of 8."}]},{"exercises":[{"name":"Leg Press","sets":["15","15","15","15"],"note":"Increase weight every set"},{"name":"Lying Hamstring Curls","sets":["15","15","15","15"],"note":"Increase weight every set"},{"name":"Glute Machine","sets":["15","15","15","15"],"note":"Each leg"}]},{"exercises":[{"name":"Seated Calf Raise","sets":["40","40","40","40"],"note":""}]},{"exercises":[{"name":"Burpees","sets":["25s","25s","25s"],"note":"Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."},{"name":"Medicine Ball Slams","sets":["25s","25s","25s"],"note":""},{"name":"Run in Place","sets":["25s","25s","25s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 4","focus":"Chest","dow":"Thu","blocks":[{"exercises":[{"name":"Flat Dumbbell Press","sets":["20","15","12","10"],"note":"Increase weight every set"},{"name":"Medicine Ball Slams","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Incline Dumbbell Press","sets":["20","15","12","10"],"note":"Increase weight every set"},{"name":"Incline Dumbbell Flies","sets":["12","12","12","12"],"note":""},{"name":"Lunge Jumps","sets":["10","10","10","10"],"note":"Each leg"}]},{"exercises":[{"name":"Decline Chest Press Machine","sets":["10-12","10-12","10-12","10-12"],"note":"Increase weight every set"},{"name":"Push-Ups","sets":["Failure","Failure","Failure","Failure"],"note":""},{"name":"High Knees","sets":["25s","25s","25s","25s"],"note":""}]},{"exercises":[{"name":"Cable Flies","sets":["15","15","15","15"],"note":""},{"name":"Bench Step-Ups","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Burpees","sets":["25s","25s","25s"],"note":"Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."},{"name":"Medicine Ball Slams","sets":["25s","25s","25s"],"note":""},{"name":"Run in Place","sets":["25s","25s","25s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 5","focus":"Back","dow":"Fri","blocks":[{"exercises":[{"name":"Wide Grip Cable Row w/ Lat Pull Down Bar","sets":["10+10+10","10+10+10","10+10+10","10+10+10"],"note":"10 reps wide grip, 10 normal, 10 close = 1 set. 4 total sets."}]},{"exercises":[{"name":"Close Grip Lat Pull Down","sets":["12","12","12","12"],"note":""},{"name":"Wide Grip Lat Pull Down","sets":["12","12","12","12"],"note":""}]},{"exercises":[{"name":"Seated Row Machine","sets":["10+10","10+10","10+10","10+10"],"note":"10 reps close grip, 10 reps wide grip = 1 set. 4 total sets."}]},{"exercises":[{"name":"Dumbbell Seal Rows","sets":["12","12","12","12"],"note":""},{"name":"Wide Grip Pull-Ups","sets":["Failure","Failure","Failure","Failure"],"note":""}]},{"exercises":[{"name":"Burpees","sets":["25s","25s","25s"],"note":"Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."},{"name":"Medicine Ball Slams","sets":["25s","25s","25s"],"note":""},{"name":"Run in Place","sets":["25s","25s","25s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 6","focus":"Abs & Cardio","dow":"Sat","blocks":[{"exercises":[{"name":"Bottoms Up","sets":["20","20","20"],"note":"Ab circuit: do each in order, then repeat. 3 total rounds."},{"name":"Lying Leg Raises","sets":["20","20","20"],"note":""},{"name":"6 Inch Holds","sets":["30s","30s","30s"],"note":""}],"kind":"abs"},{"exercises":[{"name":"Burpees","sets":["25s","25s","25s","25s"],"note":"Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."},{"name":"Medicine Ball Slams","sets":["25s","25s","25s","25s"],"note":""},{"name":"Run in Place","sets":["25s","25s","25s","25s"],"note":""}],"kind":"cardio","rest":60}],"note":""}]},{"n":4,"phase":2,"name":"Week 4","days":[{"name":"Day 1","focus":"Shoulders","dow":"Mon","blocks":[{"exercises":[{"name":"Arnold Press","sets":["15","8","15","8","15"],"note":"Increase the weight when you get to 8 reps."}]},{"exercises":[{"name":"Straight Bar Cable Front Raise","sets":["15","15","15","15"],"note":""},{"name":"Cable Lateral Raises","sets":["15","15","15","15"],"note":"Each arm"}]},{"exercises":[{"name":"Barbell Upright Row","sets":["15","12","10","15"],"note":"Increase weight every set"},{"name":"Bent Over Rear Delt Cable Flies","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Dumbbell Shrugs","sets":["20","20","20","20","20"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Jump Rope","sets":["25s","25s","25s"],"note":"Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."},{"name":"Jumps in Place","sets":["25s","25s","25s"],"note":""},{"name":"Alternating Foot Taps","sets":["25s","25s","25s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 2","focus":"Arms","dow":"Tue","blocks":[{"exercises":[{"name":"Barbell Curl","sets":["15","8","15","8","15"],"note":"Increase the weight when you get to 8 reps."},{"name":"V-Bar Tricep Pushdowns","sets":["10-12","10-12","10-12","10-12","10-12"],"note":"Increase weight every set"},{"name":"Jump Rope","sets":["25s","25s","25s","25s","25s"],"note":""}]},{"exercises":[{"name":"Dumbbell Hammer Curls","sets":["40","40","40"],"note":"5 reps on one arm, switch arms for 5 more; repeat 4 times = 40 reps = 1 set. 3 total sets."},{"name":"Alternating Foot Taps","sets":["25s","25s","25s"],"note":""}]},{"exercises":[{"name":"Single Arm Dumbbell Tricep Extension","sets":["20+20","20+20","20+20"],"note":"20 normal reps, then 20 reps going outwards = 1 set. 3 total sets."},{"name":"Jumping Jacks","sets":["25s","25s","25s"],"note":""}]},{"exercises":[{"name":"EZ Bar Curl","sets":["15","15","15","15"],"note":""},{"name":"Reverse Grip EZ Bar Curl","sets":["15","15","15","15"],"note":""},{"name":"Lunge Jumps","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Straight Bar Cable Tricep Extension","sets":["15","15","15","15"],"note":""},{"name":"Reverse Grip Straight Bar Cable Tricep Extension","sets":["15","15","15","15"],"note":""},{"name":"Jumps in Place","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Jump Rope","sets":["25s","25s","25s"],"note":"Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."},{"name":"Jumps in Place","sets":["25s","25s","25s"],"note":""},{"name":"Alternating Foot Taps","sets":["25s","25s","25s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 3","focus":"Legs","dow":"Wed","blocks":[{"exercises":[{"name":"Lying Hamstring Curls","sets":["20","20","20","20"],"note":""},{"name":"Seated Hamstring Curls","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Leg Extensions","sets":["20","20","20","20"],"note":""},{"name":"Single Leg Press","sets":["15","15","15","15"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Box Squats","sets":["10","10","8","8","15"],"note":"Increase weight each set until your last set. Use a bench/box at 90 degrees, pause 2 seconds at the bottom of each rep, then explode up."}]},{"exercises":[{"name":"Stiff Leg Deadlifts","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Standing Calf Raise Machine","sets":["25","25","25","25","25"],"note":""}]},{"exercises":[{"name":"Jump Rope","sets":["25s","25s","25s"],"note":"Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."},{"name":"Jumps in Place","sets":["25s","25s","25s"],"note":""},{"name":"Alternating Foot Taps","sets":["25s","25s","25s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 4","focus":"Chest","dow":"Thu","blocks":[{"exercises":[{"name":"Incline Dumbbell Press","sets":["8","10","12","15","20"],"note":""},{"name":"Jump Rope","sets":["25s","25s","25s","25s","25s"],"note":""}]},{"exercises":[{"name":"Incline Chest Press Machine","sets":["20","10","20","10"],"note":"Increase the weight when you get to 10 reps."},{"name":"Alternating Foot Taps","sets":["25s","25s","25s","25s"],"note":""}]},{"exercises":[{"name":"Flat Bench Press","sets":["8","10","12","15"],"note":""},{"name":"Jumping Jacks","sets":["25s","25s","25s","25s"],"note":""}]},{"exercises":[{"name":"Pec Deck","sets":["25","25","25","25"],"note":""},{"name":"Cable Flies","sets":["25","25","25","25"],"note":""},{"name":"Lunge Jumps","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Chest Press Machine","sets":["20","20","20","20"],"note":""},{"name":"Jumps in Place","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Jump Rope","sets":["25s","25s","25s"],"note":"Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."},{"name":"Jumps in Place","sets":["25s","25s","25s"],"note":""},{"name":"Alternating Foot Taps","sets":["25s","25s","25s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 5","focus":"Back","dow":"Fri","blocks":[{"exercises":[{"name":"V-Bar Pull Downs","sets":["15","12","10","8","8"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Alternating Pull Ups w/ V-Bar","sets":["Failure","Failure","Failure","Failure"],"note":""}]},{"exercises":[{"name":"Wide Grip Seated Cable Row","sets":["15","8","15","8","15"],"note":""},{"name":"Close Grip Seated Cable Row","sets":["15","15","15","15","15"],"note":""}]},{"exercises":[{"name":"Single Arm Dumbbell Row","sets":["10","10","10"],"note":"10 reps on one arm, switch immediately to the other arm for 10, no breaks, switch back for 10... Repeat for 3 total sets."}]},{"exercises":[{"name":"Kneeling Straight Arm Pull Down","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Jump Rope","sets":["25s","25s","25s"],"note":"Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."},{"name":"Jumps in Place","sets":["25s","25s","25s"],"note":""},{"name":"Alternating Foot Taps","sets":["25s","25s","25s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 6","focus":"Abs & Cardio","dow":"Sat","blocks":[{"exercises":[{"name":"Reverse Crunches","sets":["20","20","20"],"note":"Ab circuit: do each in order, then repeat. 3 total rounds."},{"name":"Lying Leg Raises","sets":["20","20","20"],"note":""},{"name":"Crunches","sets":["20","20","20"],"note":""}],"kind":"abs"},{"exercises":[{"name":"Jump Rope","sets":["25s","25s","25s","25s"],"note":"Circuit: A → B → C = 1 set. 25 s each, 1 min rest after every set."},{"name":"Jumps in Place","sets":["25s","25s","25s","25s"],"note":""},{"name":"Alternating Foot Taps","sets":["25s","25s","25s","25s"],"note":""}],"kind":"cardio","rest":60}],"note":""}]},{"n":5,"phase":3,"name":"Week 5","days":[{"name":"Day 1","focus":"Shoulders","dow":"Mon","blocks":[{"exercises":[{"name":"Clean and Jerks","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Straight Raises w/ Chest on Incline Bench","sets":["15","15","15","15"],"note":""},{"name":"Dumbbell Lateral Raises (Full Extension)","sets":["15","15","15","15"],"note":"Start with dumbbells at your sides, lateral raise as normal but keep going all the way over your head."}]},{"exercises":[{"name":"Alternating Dumbbell Military Press","sets":["10","10","10","10"],"note":"1 rep on one arm, switch, 1 rep on the other... until 10 reps on each arm (20 total)."}]},{"exercises":[{"name":"Rear Delt Cable Flies","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Barbell Shrugs","sets":["10→10→10","10→10→10","10→10→10"],"note":"Drop-set: start heavy for 10, drop weight for 10, drop again for 10 = 1 set. 3 total sets."}]},{"exercises":[{"name":"Squat Jumps","sets":["30s","30s","30s"],"note":"Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."},{"name":"Treadmill Sprints","sets":["30s","30s","30s"],"note":"Sprint hard on the treadmill."},{"name":"Mountain Climbers","sets":["30s","30s","30s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 2","focus":"Arms","dow":"Tue","blocks":[{"exercises":[{"name":"Incline Dumbbell Curls","sets":["20→8","20→8","20→8","20→8"],"note":"Drop-set: 20 reps moderate weight, drop weight, 8 more reps = 1 set. 4 total sets."},{"name":"Incline Hammer Curls","sets":["12","12","12","12"],"note":""},{"name":"Burpees","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Spider Curls","sets":["15","12","10","15"],"note":"Increase weight each set until your last set."},{"name":"Machine Bicep Curls","sets":["20","20","20","20"],"note":""},{"name":"Squat Jumps","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Overhead Tricep Rope Extension","sets":["20","20","20","20"],"note":""},{"name":"Tricep Rope Extension","sets":["20","20","20","20"],"note":""},{"name":"Run in Place","sets":["30s","30s","30s","30s"],"note":""}]},{"exercises":[{"name":"EZ Bar Skull Crushers","sets":["15","12","10","8"],"note":""},{"name":"Overhead Dumbbell Press","sets":["12-15","12-15","12-15","12-15"],"note":""},{"name":"Bench Step-Ups","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Squat Jumps","sets":["30s","30s","30s"],"note":"Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."},{"name":"Treadmill Sprints","sets":["30s","30s","30s"],"note":"Sprint hard on the treadmill."},{"name":"Mountain Climbers","sets":["30s","30s","30s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 3","focus":"Legs","dow":"Wed","blocks":[{"exercises":[{"name":"Leg Extensions","sets":["20→10","20→10","20→10","20→10"],"note":"Drop-set: 20 reps moderate weight, drop weight, 10 more reps = 1 set. 4 total sets."},{"name":"Seated Hamstring Curls","sets":["20→10","20→10","20→10","20→10"],"note":"Same drop-set format as above (the PDF lists one reps cell for both)."}]},{"exercises":[{"name":"Squats","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Dumbbell Lunges","sets":["12","12","12","12"],"note":"Each leg"},{"name":"Lying Hamstring Curls","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Seated Calf Raise Machine","sets":["10+10+10","10+10+10","10+10+10"],"note":"10 reps feet pointed out, 10 pointed in, 10 normal = 1 set. 3 total sets."}]},{"exercises":[{"name":"Squat Jumps","sets":["30s","30s","30s"],"note":"Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."},{"name":"Treadmill Sprints","sets":["30s","30s","30s"],"note":"Sprint hard on the treadmill."},{"name":"Mountain Climbers","sets":["30s","30s","30s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 4","focus":"Chest","dow":"Thu","blocks":[{"exercises":[{"name":"Incline Bench Press","sets":["15","12","10","8","6"],"note":"Increase weight every set"},{"name":"Burpees","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Flat Bench Press","sets":["15","12","10","8","6"],"note":"Increase weight every set"},{"name":"Squat Jumps","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Incline Chest Press","sets":["12-15","12-15","12-15","12-15"],"note":""},{"name":"Decline Chest Press","sets":["12-15","12-15","12-15","12-15"],"note":""},{"name":"Run in Place","sets":["30s","30s","30s","30s"],"note":""}]},{"exercises":[{"name":"Incline Bench Cable Flies","sets":["20","20","20","20"],"note":""},{"name":"Incline Close Grip Dumbbell Press","sets":["12","12","12","12"],"note":""},{"name":"Bench Step-Ups","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Squat Jumps","sets":["30s","30s","30s"],"note":"Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."},{"name":"Treadmill Sprints","sets":["30s","30s","30s"],"note":"Sprint hard on the treadmill."},{"name":"Mountain Climbers","sets":["30s","30s","30s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 5","focus":"Back","dow":"Fri","blocks":[{"exercises":[{"name":"Bent Over Barbell Row","sets":["15","12","10","8","8"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Wide Grip Lat Pull Down","sets":["8→15","8→15","8→15","8→15"],"note":"Drop-set: heavy weight for 8 reps, drop weight, 15 reps = 1 set. 4 total sets."},{"name":"Seated Low Row Machine","sets":["8→15","8→15","8→15","8→15"],"note":"Same drop-set format as above (the PDF lists one reps cell for both)."}]},{"exercises":[{"name":"Seated Cable Rows w/ Rope","sets":["20","20","20","20"],"note":""},{"name":"Incline Barbell Row w/ Chest on Bench","sets":["12","12","12","12"],"note":""}]},{"exercises":[{"name":"Seated Close Grip Cable Row","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Squat Jumps","sets":["30s","30s","30s"],"note":"Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."},{"name":"Treadmill Sprints","sets":["30s","30s","30s"],"note":"Sprint hard on the treadmill."},{"name":"Mountain Climbers","sets":["30s","30s","30s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 6","focus":"Abs & Cardio","dow":"Sat","blocks":[{"exercises":[{"name":"Plate Twists","sets":["25","25","25"],"note":"Ab circuit: do each in order, then repeat. 3 total rounds."},{"name":"Straight Leg Hip Raises","sets":["25","25","25"],"note":""},{"name":"Sit-Ups","sets":["25","25","25"],"note":""}],"kind":"abs"},{"exercises":[{"name":"Squat Jumps","sets":["30s","30s","30s","30s"],"note":"Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."},{"name":"Treadmill Sprints","sets":["30s","30s","30s","30s"],"note":"Sprint hard on the treadmill."},{"name":"Mountain Climbers","sets":["30s","30s","30s","30s"],"note":""}],"kind":"cardio","rest":60}],"note":""}]},{"n":6,"phase":3,"name":"Week 6","days":[{"name":"Day 1","focus":"Shoulders","dow":"Mon","blocks":[{"exercises":[{"name":"Barbell Shrugs","sets":["30","30","30","30"],"note":""},{"name":"Rear Delt Flies on Incline Bench","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Seated Lateral Raise","sets":["20","20","20","20"],"note":""},{"name":"Front Plate Raise","sets":["20","20","20","20"],"note":""},{"name":"Car Drivers","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Seated Dumbbell Military Press","sets":["15","12","10","8"],"note":"Increase weight every set"},{"name":"Behind the Neck Shoulder Press","sets":["15","12","10","8"],"note":"Same format as above: increase weight every set."}]},{"exercises":[{"name":"Jumping Jacks","sets":["30s","30s","30s"],"note":"Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."},{"name":"Burpees","sets":["30s","30s","30s"],"note":""},{"name":"Jump Rope","sets":["30s","30s","30s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 2","focus":"Arms","dow":"Tue","blocks":[{"exercises":[{"name":"Dumbbell Skull Crushers","sets":["10-12","10-12","10-12","10-12"],"note":"Increase weight every set"},{"name":"Mountain Climbers","sets":["30s","30s","30s","30s"],"note":""}]},{"exercises":[{"name":"Incline Straight Bar Cable Tricep Extensions","sets":["15-20","15-20","15-20","15-20"],"note":""},{"name":"Tricep Rope Extensions","sets":["15-20","15-20","15-20","15-20"],"note":""},{"name":"Squat Jumps","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Cable Straight Bar Tricep Pushdowns","sets":["12","12","12","12"],"note":"Increase weight every set"},{"name":"Run in Place","sets":["30s","30s","30s","30s"],"note":""}]},{"exercises":[{"name":"EZ Bar Preacher Curl","sets":["12","12","12","12"],"note":"Each arm"},{"name":"Dumbbell Bicep Curl","sets":["12","12","12","12"],"note":""},{"name":"Bench Step-Ups","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"EZ Bar Curls","sets":["15","15","15","15"],"note":""},{"name":"Close Grip EZ Bar Curls","sets":["15","15","15","15"],"note":""},{"name":"Jumping Jacks","sets":["30s","30s","30s","30s"],"note":"PDF says \"4 x 30\" (no unit) - treated as 30 seconds."}]},{"exercises":[{"name":"Jumping Jacks","sets":["30s","30s","30s"],"note":"Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."},{"name":"Burpees","sets":["30s","30s","30s"],"note":""},{"name":"Jump Rope","sets":["30s","30s","30s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 3","focus":"Legs","dow":"Wed","blocks":[{"exercises":[{"name":"Leg Extensions","sets":["25","25","25","25"],"note":""},{"name":"Stiff Leg Deadlifts","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Leg Press","sets":["10+10+10","10+10+10","10+10+10"],"note":"10 reps close stance, 10 normal, 10 wide = 1 set. 3 total sets."}]},{"exercises":[{"name":"Squats","sets":["15","12","10","8","6"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Lying Hamstring Curls","sets":["20","20","20","20"],"note":""},{"name":"Seated Hamstring Curls","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Calf Raise on Leg Press","sets":["25","25","25","25"],"note":""}]},{"exercises":[{"name":"Jumping Jacks","sets":["30s","30s","30s"],"note":"Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."},{"name":"Burpees","sets":["30s","30s","30s"],"note":""},{"name":"Jump Rope","sets":["30s","30s","30s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 4","focus":"Chest","dow":"Thu","blocks":[{"exercises":[{"name":"Flat Bench Press","sets":["12","8","6","4","2","Burnout"],"note":"Increase weight each set until your last set. Burnout set: half reps to failure; on your last set do not let the bar touch your chest - lower slow and controlled, then explode up."},{"name":"Mountain Climbers","sets":["30s","30s","30s","30s"],"note":""}]},{"exercises":[{"name":"Incline Bench Press","sets":["12","10","8","6","Burnout"],"note":"Increase weight each set until your last set. Burnout set to failure: bring the bar down slow and controlled, then explode up."},{"name":"Squat Jumps","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Incline Cable Flies","sets":["7+7+7","7+7+7","7+7+7","7+7+7"],"note":"7 full reps, 7 half reps, 7 contracted reps (focus on the squeeze) = 1 set. 4 total sets."},{"name":"Incline Chest Press Machine","sets":["12","12","12","12"],"note":""},{"name":"Run in Place","sets":["30s","30s","30s","30s"],"note":""}]},{"exercises":[{"name":"Smith Machine Bench Press","sets":["15","15","15","15"],"note":""},{"name":"Jumping Jacks","sets":["30s","30s","30s","30s"],"note":""}]},{"exercises":[{"name":"Jumping Jacks","sets":["30s","30s","30s"],"note":"Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."},{"name":"Burpees","sets":["30s","30s","30s"],"note":""},{"name":"Jump Rope","sets":["30s","30s","30s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 5","focus":"Back","dow":"Fri","blocks":[{"exercises":[{"name":"Seated Row Machine","sets":["15","12","10","10","Drop"],"note":"Increase weight each set until your last set. Then a final drop-set until failure."},{"name":"Wide Grip Pull-Ups","sets":["Failure","Failure","Failure","Failure","Failure"],"note":""}]},{"exercises":[{"name":"Dumbbell Seal Rows","sets":["15","15","15","15"],"note":""},{"name":"High Row Machine","sets":["12","12","12","12"],"note":""}]},{"exercises":[{"name":"Wide Grip Seated Cable Row","sets":["12-15","12-15","12-15","12-15"],"note":"Increase weight every set"},{"name":"Kneeling Cable Lat Pull Down","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Jumping Jacks","sets":["30s","30s","30s"],"note":"Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."},{"name":"Burpees","sets":["30s","30s","30s"],"note":""},{"name":"Jump Rope","sets":["30s","30s","30s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 6","focus":"Abs & Cardio","dow":"Sat","blocks":[{"exercises":[{"name":"Reverse Crunches","sets":["25","25","25"],"note":"Ab circuit: do each in order, then repeat. 3 total rounds."},{"name":"Leg Raises","sets":["25","25","25"],"note":""},{"name":"6 Inch Holds","sets":["30s","30s","30s"],"note":""}],"kind":"abs"},{"exercises":[{"name":"Jumping Jacks","sets":["30s","30s","30s","30s"],"note":"Circuit: A → B → C = 1 set. 30 s each, 1 min rest after every set."},{"name":"Burpees","sets":["30s","30s","30s","30s"],"note":""},{"name":"Jump Rope","sets":["30s","30s","30s","30s"],"note":""}],"kind":"cardio","rest":60}],"note":""}]},{"n":7,"phase":4,"name":"Week 7","days":[{"name":"Day 1","focus":"Shoulders","dow":"Mon","blocks":[{"exercises":[{"name":"Seated Dumbbell Military Press","sets":["15","12","10","8","Drop"],"note":"Increase weight each set until your last set. Then a final drop-set until failure."},{"name":"Dumbbell Shrugs","sets":["15→15","15→15","15→15","15→15","15→15"],"note":"Drop-set: 15 reps heavy, drop weight, 15 more reps = 1 set. 5 total sets."}]},{"exercises":[{"name":"Straight Bar Front Raises w/ Chest on Incline Bench","sets":["15","15","15","15"],"note":""},{"name":"Rear Dumbbell Flies w/ Chest on Incline Bench","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Smith Machine Military Press","sets":["10-12","10-12","10-12","10-12"],"note":"Increase weight every set"},{"name":"Seated Dumbbell Lateral Raises","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Squat Jumps","sets":["35s","35s","35s"],"note":"Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."},{"name":"Mountain Climbers","sets":["35s","35s","35s"],"note":""},{"name":"Jump Rope","sets":["35s","35s","35s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 2","focus":"Arms","dow":"Tue","blocks":[{"exercises":[{"name":"Barbell Curl","sets":["20","20","20","20"],"note":""},{"name":"EZ Bar Skull Crushers","sets":["20","20","20","20"],"note":""},{"name":"Run in Place","sets":["35s","35s","35s","35s"],"note":""}]},{"exercises":[{"name":"Single Arm Preacher Curls","sets":["10→10","10→10","10→10","10→10"],"note":"Drop-set: 10 reps, drop weight, 10 more reps = 1 set. 4 total sets."},{"name":"Single Arm Tricep Extensions","sets":["10→10","10→10","10→10","10→10"],"note":"Drop-set: 10 reps, drop weight, 10 more reps = 1 set. 4 total sets."},{"name":"Jumping Jacks","sets":["35s","35s","35s","35s"],"note":""}]},{"exercises":[{"name":"EZ Bar Cable Curls","sets":["40","40","40"],"note":""},{"name":"V-Bar Tricep Pushdowns","sets":["40","40","40"],"note":""},{"name":"Mountain Climbers","sets":["35s","35s","35s"],"note":""}]},{"exercises":[{"name":"Dumbbell Curls","sets":["15","15","15","15"],"note":""},{"name":"Overhead Dumbbell Press","sets":["15","15","15","15"],"note":""},{"name":"Squat Jumps","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Squat Jumps","sets":["35s","35s","35s"],"note":"Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."},{"name":"Mountain Climbers","sets":["35s","35s","35s"],"note":""},{"name":"Jump Rope","sets":["35s","35s","35s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 3","focus":"Legs","dow":"Wed","blocks":[{"exercises":[{"name":"Leg Extensions","sets":["30","30","30","30"],"note":""}]},{"exercises":[{"name":"Squats","sets":["10+10","10+10","10+10","10+10","10+10"],"note":"10 reps normal stance, 10 reps close stance = 1 set. 5 total sets."}]},{"exercises":[{"name":"Stiff Leg Deadlifts","sets":["15","15","15","15"],"note":""},{"name":"Lying Hamstring Curls","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Smith Machine (Tap n Go) Squats","sets":["12","12","12","12"],"note":"Place a bench or box at 90 degrees underneath you, tap it, and explode back up."}]},{"exercises":[{"name":"Seated Hamstring Curl","sets":["20","20","20","20"],"note":""},{"name":"Calf Raise","sets":["20","20","20","20","20"],"note":""}]},{"exercises":[{"name":"Squat Jumps","sets":["35s","35s","35s"],"note":"Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."},{"name":"Mountain Climbers","sets":["35s","35s","35s"],"note":""},{"name":"Jump Rope","sets":["35s","35s","35s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 4","focus":"Chest","dow":"Thu","blocks":[{"exercises":[{"name":"Incline Dumbbell Press","sets":["12","10","8","6","15"],"note":"Increase weight each set until your last set"},{"name":"Flat Dumbbell Press","sets":["12","10","8","6","15"],"note":"Same format as above: increase weight each set until your last set."},{"name":"Run in Place","sets":["35s","35s","35s","35s"],"note":""}]},{"exercises":[{"name":"Decline Bench Press","sets":["12","10","8","6","15"],"note":"Increase weight each set until your last set"},{"name":"Jumping Jacks","sets":["35s","35s","35s","35s"],"note":""}]},{"exercises":[{"name":"Pec Deck","sets":["15","15","15","15"],"note":""},{"name":"Incline Chest Press Machine","sets":["15","15","15","15"],"note":""},{"name":"Mountain Climbers","sets":["35s","35s","35s","35s"],"note":""}]},{"exercises":[{"name":"Cable Flies","sets":["20","20","20","20"],"note":""},{"name":"Squat Jumps","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Squat Jumps","sets":["35s","35s","35s"],"note":"Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."},{"name":"Mountain Climbers","sets":["35s","35s","35s"],"note":""},{"name":"Jump Rope","sets":["35s","35s","35s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 5","focus":"Back","dow":"Fri","blocks":[{"exercises":[{"name":"Deadlifts","sets":["15","12","10","8","20"],"note":"Increase weight each set until your last set"}]},{"exercises":[{"name":"Single Arm Dumbbell Row","sets":["15","15","15","15"],"note":""},{"name":"Wide Grip Pull-Ups","sets":["Failure","Failure","Failure","Failure"],"note":""}]},{"exercises":[{"name":"T-Bar Row","sets":["10→10→10","10→10→10","10→10→10"],"note":"Drop-set: 10 heavy reps, drop weight for 10 moderate, drop again for 10 light = 1 set. 3 total sets."}]},{"exercises":[{"name":"V-Bar Lat Pull Down","sets":["12-15","12-15","12-15","12-15"],"note":""},{"name":"Behind the Neck Lat Pull Down","sets":["12-15","12-15","12-15","12-15"],"note":""}]},{"exercises":[{"name":"Squat Jumps","sets":["35s","35s","35s"],"note":"Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."},{"name":"Mountain Climbers","sets":["35s","35s","35s"],"note":""},{"name":"Jump Rope","sets":["35s","35s","35s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 6","focus":"Abs & Cardio","dow":"Sat","blocks":[{"exercises":[{"name":"Flutter Kicks","sets":["30","30","30"],"note":"Ab circuit: do each in order, then repeat. 3 total rounds."},{"name":"Reverse Crunches","sets":["30","30","30"],"note":""},{"name":"Leg Tucks","sets":["30","30","30"],"note":""}],"kind":"abs"},{"exercises":[{"name":"Squat Jumps","sets":["35s","35s","35s","35s"],"note":"Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."},{"name":"Mountain Climbers","sets":["35s","35s","35s","35s"],"note":""},{"name":"Jump Rope","sets":["35s","35s","35s","35s"],"note":""}],"kind":"cardio","rest":60}],"note":""}]},{"n":8,"phase":4,"name":"Week 8","days":[{"name":"Day 1","focus":"Shoulders","dow":"Mon","blocks":[{"exercises":[{"name":"Barbell Military Press","sets":["15","15","15","15"],"note":""},{"name":"Barbell Upright Row","sets":["15","15","15","15"],"note":""},{"name":"Lateral Raises","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Face Pulls","sets":["20","20","20","20"],"note":""},{"name":"Barbell Shrugs","sets":["20","20","20","20"],"note":""}]},{"exercises":[{"name":"Shoulder Press Machine","sets":["15","12","10","8","Drop"],"note":"Increase weight each set until your last set. Then a final drop-set until failure."}]},{"exercises":[{"name":"Burpees","sets":["35s","35s","35s"],"note":"Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."},{"name":"Treadmill Sprints","sets":["35s","35s","35s"],"note":"Sprint hard on the treadmill."},{"name":"Jumps in Place","sets":["35s","35s","35s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 2","focus":"Arms","dow":"Tue","blocks":[{"exercises":[{"name":"Dumbbell Hammer Curls","sets":["10→10","10→10","10→10","10→10"],"note":"Drop-set: 10 reps heavy, go lighter for 10 more = 1 set. 4 total sets."},{"name":"Incline Bench Cable EZ Bar Skull Crushers","sets":["20","20","20","20"],"note":""},{"name":"Burpees","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Incline Dumbbell Curls","sets":["25","25","25","25"],"note":""},{"name":"Dumbbell Skull Crushers","sets":["15","12","10","8"],"note":""},{"name":"Jumps in Place","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Straight Bar Cable Curls","sets":["20→10","20→10","20→10","20→10"],"note":"Drop-set: 20 reps moderate weight, go lighter for 10 more = 1 set. 4 total sets."},{"name":"Overhead Rope Tricep Extension","sets":["20","20","20","20"],"note":""},{"name":"Mountain Climbers","sets":["35s","35s","35s","35s"],"note":""}]},{"exercises":[{"name":"Tricep Rope Extension","sets":["20→10","20→10","20→10","20→10"],"note":"Drop-set: 20 reps moderate weight, go lighter for 10 more = 1 set. 4 total sets."},{"name":"High Pulley Cable Curls","sets":["20","20","20","20"],"note":""},{"name":"Jump Rope","sets":["35s","35s","35s","35s"],"note":"PDF says \"4x35\" (no unit) - treated as 35 seconds."}]},{"exercises":[{"name":"Burpees","sets":["35s","35s","35s"],"note":"Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."},{"name":"Treadmill Sprints","sets":["35s","35s","35s"],"note":"Sprint hard on the treadmill."},{"name":"Jumps in Place","sets":["35s","35s","35s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 3","focus":"Legs","dow":"Wed","blocks":[{"exercises":[{"name":"Leg Press","sets":["15+15+15","15+15+15","15+15+15"],"note":"15 reps normal stance, 15 wide, 15 close = 1 set. 3 total sets."}]},{"exercises":[{"name":"Smith Machine Vertical Leg Press","sets":["15","12","10","8"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Squats","sets":["15","12","10","8","10","12","15"],"note":"Increase weight each set until you reach 8 reps. Make sure you get to 90 degrees or lower."}]},{"exercises":[{"name":"Leg Extension","sets":["20+20","20+20","20+20","20+20"],"note":"20 reps normal, 20 reps close = 1 set. 4 total sets."},{"name":"Standing Single Leg Hamstring Curl","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Lying Hamstring Curl","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Burpees","sets":["35s","35s","35s"],"note":"Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."},{"name":"Treadmill Sprints","sets":["35s","35s","35s"],"note":"Sprint hard on the treadmill."},{"name":"Jumps in Place","sets":["35s","35s","35s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 4","focus":"Chest","dow":"Thu","blocks":[{"exercises":[{"name":"Flat Bench","sets":["12→6","12→6","12→6","12→6"],"note":"Get 12 reps, then go heavier and get 6 reps = 1 set. 4 total sets."},{"name":"Burpees","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Flat Dumbbell Bench","sets":["10→10→10","10→10→10","10→10→10"],"note":"Drop-set: 10 heavy reps, drop to moderate for 10, drop to lighter for 10 = 1 set. 3 total sets."},{"name":"Jumps in Place","sets":["15","15","15","15"],"note":""}]},{"exercises":[{"name":"Incline Dumbbell Bench","sets":["20","20","20","20"],"note":""},{"name":"Mountain Climbers","sets":["35s","35s","35s","35s"],"note":""}]},{"exercises":[{"name":"Incline Barbell","sets":["8","8","8","8","8","8"],"note":"Pause reps."},{"name":"Jump Rope","sets":["35s","35s","35s","35s"],"note":""}]},{"exercises":[{"name":"Cable Flies","sets":["7","7","7","7","7"],"note":""},{"name":"Decline Hammer Strength","sets":["15","12","10","8","6"],"note":"Increase weight every set"},{"name":"Alternating Foot Taps","sets":["35s","35s","35s","35s"],"note":""}]},{"exercises":[{"name":"Burpees","sets":["35s","35s","35s"],"note":"Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."},{"name":"Treadmill Sprints","sets":["35s","35s","35s"],"note":"Sprint hard on the treadmill."},{"name":"Jumps in Place","sets":["35s","35s","35s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 5","focus":"Back","dow":"Fri","blocks":[{"exercises":[{"name":"Lat Pull Down","sets":["12","10","8","6","Drop","Drop","Drop"],"note":"Right after your set of 6, perform 3 drop sets to failure (7 sets in total)."}]},{"exercises":[{"name":"T Bar Row","sets":["12","12","8","8","6"],"note":"Increase weight every set"}]},{"exercises":[{"name":"Dumbbell Row","sets":["15","15","15","15"],"note":""},{"name":"Single Arm Front Pull Down","sets":["15","15","15","15"],"note":"Each arm. Focus on the squeeze; let your arm extend all the way to the top."}]},{"exercises":[{"name":"Cable Row","sets":["20","8","20","8","20"],"note":""},{"name":"Seated Rope Pull","sets":["15","15","15","15","15"],"note":"Sit on the floor with the rope attachment and squeeze your back on each rep."}]},{"exercises":[{"name":"Burpees","sets":["35s","35s","35s"],"note":"Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."},{"name":"Treadmill Sprints","sets":["35s","35s","35s"],"note":"Sprint hard on the treadmill."},{"name":"Jumps in Place","sets":["35s","35s","35s"],"note":""}],"kind":"cardio","rest":60}],"note":""},{"name":"Day 6","focus":"Abs & Cardio","dow":"Sat","blocks":[{"exercises":[{"name":"Sit-Ups","sets":["30","30","30"],"note":"Ab circuit: do each in order, then repeat. 3 total rounds."},{"name":"Side Twists","sets":["30","30","30"],"note":""},{"name":"Leg Raises","sets":["30","30","30"],"note":""}],"kind":"abs"},{"exercises":[{"name":"Burpees","sets":["35s","35s","35s","35s"],"note":"Circuit: A → B → C = 1 set. 35 s each, 1 min rest after every set."},{"name":"Treadmill Sprints","sets":["35s","35s","35s","35s"],"note":"Sprint hard on the treadmill."},{"name":"Jumps in Place","sets":["35s","35s","35s","35s"],"note":""}],"kind":"cardio","rest":60}],"note":""}]}]};/*BUILTIN_END*/
@@ -564,20 +656,20 @@ function splitSchemes(s) { return s.split(/\s+\/\s+|\s*\|\s*|\s*;\s*/).map(x => 
 
 function parseText(text) {
   const warnings = [], days = [];
-  let cur = null, joinNext = false, weekNo = 1, sawWeek = false;
+  let cur = null, joinNext = false, weekNo = 1, sawWeek = false, structured = false; // structured: saw a Day/Week heading or a real reps scheme
   const ensureDay = () => { if (!cur) { cur = { name: 'Day ' + (days.length + 1), focus: '', blocks: [], note: '', _w: weekNo }; days.push(cur); } return cur; };
   for (const raw of text.split(/\r?\n/)) {
     let line = raw.replace(/\t/g, ' ').replace(/^\s*(?:[-*•]|\d+[.)])\s+/, '').trim();
     if (!line) continue;
     if (/^note\s*:/i.test(line)) { ensureDay().note = line.replace(/^note\s*:/i, '').trim(); continue; }
     const wm = line.match(/^(?:#+\s*)?week\s*(\d+)\b(?!\s*day)[\s\-–—:,|]*(?:phase\s*\d+)?\s*$/i);
-    if (wm) { weekNo = +wm[1]; sawWeek = true; cur = null; joinNext = false; continue; }
+    if (wm) { weekNo = +wm[1]; sawWeek = true; structured = true; cur = null; joinNext = false; continue; }
     const dm = line.match(DAYRE);
     if (dm) {
       let dname = dm[1].replace(/\s+/g, ' ');
       const wd = dname.match(/^week\s*(\d+)\s*day\s*(\d+)$/i); if (wd) { weekNo = +wd[1]; sawWeek = true; dname = 'Day ' + wd[2]; }
       cur = { name: titleCase(dname), focus: dm[2] ? titleCase(dm[2].replace(/[\s\-–—:.|]+$/, '')) : '', blocks: [], note: '', _w: weekNo };
-      days.push(cur); joinNext = false; continue;
+      days.push(cur); joinNext = false; structured = true; continue;
     }
     if (/^(super\s*-?set|ss)\s*:?$/i.test(line)) { joinNext = true; continue; }
     const day = ensureDay();
@@ -587,7 +679,7 @@ function parseText(text) {
       const pend = blk ? blk.exercises.filter(e => e.sets === null) : [];
       const segs = splitSchemes(line);
       if (!pend.length) { warnings.push(`Reps line "${line.slice(0, 40)}" had no exercise to attach to`); continue; }
-      segs.forEach((sg, i) => { const ps = parseScheme(sg); const e = pend[Math.min(i, pend.length - 1)]; if (ps && e && e.sets === null) { e.sets = ps.sets; e.note = ps.note; } });
+      segs.forEach((sg, i) => { const ps = parseScheme(sg); const e = pend[Math.min(i, pend.length - 1)]; if (ps && e && e.sets === null) { e.sets = ps.sets; e.note = ps.note; structured = true; } });
       continue;
     }
     if (!day.focus && !day.blocks.length && !/\d/.test(line) && FOCUS_WORDS.test(line)) { day.focus = titleCase(line); continue; }
@@ -603,7 +695,7 @@ function parseText(text) {
         if (m) { const idx = p.indexOf(m[1], m.index); name = p.slice(0, idx); sch = p.slice(idx); }
       }
       name = name.replace(/[\s\-–—@:|]+$/, '').trim();
-      if (!name) return;
+      if (!name || !/[\p{L}\p{Extended_Pictographic}]/u.test(name)) return; // no letters at all = not an exercise name
       exs.push({ name: titleCase(name), muscle: inferMuscle(name), sets: null, note: '' });
       if (sch && sch.trim()) schemeStrs.push(sch);
     });
@@ -611,6 +703,7 @@ function parseText(text) {
     const flat = [];
     schemeStrs.forEach(ss => splitSchemes(ss).forEach(sg => { const ps = parseScheme(sg); if (ps) flat.push(ps); else warnings.push(`Couldn't read reps "${sg.slice(0, 30)}" for ${exs[0].name}`); }));
     if (flat.length) {
+      structured = true;
       if (flat.length !== exs.length && flat.length !== 1) warnings.push(`"${exs.map(e => e.name).join(' + ')}": ${exs.length} exercises but ${flat.length} rep schemes - reused the last one`);
       exs.forEach((e, i) => { const ps = flat.length === 1 ? flat[0] : flat[Math.min(i, flat.length - 1)]; e.sets = ps.sets.slice(); e.note = ps.note; });
     }
@@ -618,6 +711,7 @@ function parseText(text) {
     else day.blocks.push({ exercises: exs });
     joinNext = false;
   }
+  if (!structured && days.length) { days.length = 0; warnings.push('This doesn\'t look like a workout: no "Day 1" headings and no reps like 3x10 were found.'); }
   if (sawWeek) return finalizeProgram({ name: 'Imported program', weeks: groupWeeks(days) }, warnings);
   days.forEach(d => delete d._w);
   return finalizeProgram({ name: 'Imported program', days }, warnings);
@@ -627,27 +721,10 @@ function groupWeeks(days) {
   return Object.keys(g).map(Number).sort((a, b) => a - b).map(k => ({ n: k, phase: Math.ceil(k / 2), name: 'Week ' + k, days: g[k] }));
 }
 function finalizeProgram(prog, warnings) {
-  if (!prog.weeks) { prog.weeks = [{ n: 1, phase: 1, name: 'Week 1', days: prog.days || [] }]; }
-  delete prog.days;
-  prog.weeks.forEach(w => {
-    const tag = prog.weeks.length > 1 ? w.name + ' ' : '';
-    w.days = w.days.filter(d => {
-      if (!d.blocks.length) { warnings.push(`${tag}${d.name} had no exercises - skipped`); return false; }
-      return true;
-    });
-  });
-  prog.weeks = prog.weeks.filter(w => w.days.length);
-  allDays(prog).forEach(d => {
-    d.blocks.forEach(b => b.exercises.forEach(e => {
-      if (!e.sets || !e.sets.length) { e.sets = ['10', '10', '10']; warnings.push(`No sets/reps found for "${e.name}" - defaulted to 3 x 10`); }
-      if (!e.muscle) e.muscle = inferMuscle(e.name);
-      e.note = e.note || '';
-    }));
-    if (!d.focus) { const ms = []; d.blocks.forEach(b => b.exercises.forEach(e => { if (!ms.includes(e.muscle)) ms.push(e.muscle); })); d.focus = ms.slice(0, 3).join(' & '); }
-    d.note = d.note || '';
-  });
-  if (!prog.weeks.length) warnings.push('No workout days found.');
-  return { program: prog, warnings };
+  // the strict rebuild drops empty blocks / days / weeks, nameless exercises and anything that is not plain text or numbers (see cleanProgram)
+  const p = cleanProgram(prog, m => warnings.push(m)) || { name: cStr(prog && prog.name, 200) || 'Imported program', weeks: [] };
+  if (!p.weeks.length) warnings.push('No workout days found.');
+  return { program: p, warnings };
 }
 const allDays = p => (p.weeks || []).flatMap(w => w.days);
 function parseCSVLine(line, delim) {
@@ -687,30 +764,37 @@ function parseCSV(text) {
 }
 function parseJSONProgram(text) {
   const warnings = []; let o;
-  try { o = JSON.parse(text); } catch (e) { return { program: { name: 'x', weeks: [] }, warnings: ['That doesn\'t look like valid JSON: ' + e.message] }; }
+  const bad = msg => ({ program: { name: 'x', weeks: [] }, warnings: [msg] });
+  try { o = JSON.parse(text); } catch (e) { return bad('That doesn\'t look like valid JSON: ' + e.message); }
+  if (!isObj(o) && !Array.isArray(o)) return bad('That JSON isn\'t a workout program (expected an object with "weeks" or "days", or a list of days).');
+  const arr = v => Array.isArray(v) ? v : [];
   const toSets = e => {
-    if (Array.isArray(e.sets)) return e.sets.map(normReps);
-    if (Array.isArray(e.reps)) return e.reps.map(normReps);
-    const n = parseInt(e.sets, 10) || 3; return Array(Math.min(n, 30)).fill(e.reps != null ? normReps(e.reps) : '10');
+    const norm = x => (typeof x === 'string' || (typeof x === 'number' && isFinite(x))) ? normReps(x) : '';
+    if (Array.isArray(e.sets)) return e.sets.map(norm);
+    if (Array.isArray(e.reps)) return e.reps.map(norm);
+    let n = parseInt(e.sets, 10); if (!(n >= 1)) n = 3; // negative / zero / non-numeric set counts -> 3; huge ones are capped at 30
+    return Array(Math.min(n, 30)).fill(e.reps != null && typeof e.reps !== 'object' ? normReps(e.reps) : '10');
   };
-  const mk = e => ({ name: String(e.name || e.exercise || 'Exercise'), muscle: e.muscle || inferMuscle(String(e.name || e.exercise || '')), sets: toSets(e), note: e.note || '' });
-  const mkBlock = b => { const out = { exercises: (b.exercises || b).map(mk) }; if (b.kind) out.kind = b.kind; if (b.rest != null) out.rest = +b.rest; return out; };
+  const mk = e => { if (!isObj(e)) return null; const nm = e.name != null ? e.name : e.exercise; return { name: nm, muscle: e.muscle, sets: toSets(e), note: e.note }; };
+  const mkBlock = b => { const exs = Array.isArray(b) ? b : isObj(b) && Array.isArray(b.exercises) ? b.exercises : null; if (!exs) return null; const out = { exercises: exs.map(mk).filter(Boolean) }; if (isObj(b)) { if (b.kind) out.kind = b.kind; if (b.rest != null) out.rest = +b.rest; } return out; };
   const mkDay = (d, i) => {
+    if (!isObj(d)) return null;
     let blocks = [];
-    if (d.blocks) blocks = d.blocks.map(mkBlock);
-    else if (d.exercises) blocks = d.exercises.map(e => Array.isArray(e) ? { exercises: e.map(mk) } : { exercises: [mk(e)] });
+    if (Array.isArray(d.blocks)) blocks = d.blocks.map(mkBlock).filter(Boolean);
+    else if (Array.isArray(d.exercises)) blocks = d.exercises.map(e => Array.isArray(e) ? { exercises: e.map(mk).filter(Boolean) } : { exercises: [mk(e)].filter(Boolean) });
     return { name: d.name || d.day || ('Day ' + (i + 1)), focus: d.focus || d.title || '', dow: d.dow || '', blocks, note: d.note || '' };
   };
-  const prog = { name: o.name || 'Imported (JSON)' };
-  ['description', 'author', 'ver', 'source', 'defaults', 'guide'].forEach(k => { if (!Array.isArray(o) && o[k] != null) prog[k] = o[k]; });
-  if (!Array.isArray(o) && Array.isArray(o.abs)) prog.abs = o.abs.map(a => ({ name: a.name, blocks: (a.blocks || []).map(mkBlock) }));
-  if (!Array.isArray(o) && Array.isArray(o.weeks)) prog.weeks = o.weeks.map((w, wi) => ({ n: w.n || wi + 1, phase: w.phase || Math.ceil((wi + 1) / 2), name: w.name || 'Week ' + (wi + 1), days: (w.days || []).map(mkDay) }));
-  else { const daysIn = Array.isArray(o) ? o : (o.days || (o.program && o.program.days) || []); prog.days = daysIn.map(mkDay); }
+  const prog = { name: (isObj(o) && o.name) || 'Imported (JSON)' };
+  ['description', 'author', 'ver', 'source', 'defaults', 'guide'].forEach(k => { if (isObj(o) && o[k] != null) prog[k] = o[k]; });
+  if (isObj(o) && Array.isArray(o.abs)) prog.abs = o.abs.map(a => isObj(a) ? { name: a.name, blocks: arr(a.blocks).map(mkBlock).filter(Boolean) } : null).filter(Boolean);
+  if (isObj(o) && Array.isArray(o.weeks)) prog.weeks = o.weeks.map((w, wi) => isObj(w) ? { n: w.n || wi + 1, phase: w.phase, name: w.name, days: arr(w.days).map(mkDay).filter(Boolean) } : null).filter(Boolean);
+  else { const daysIn = Array.isArray(o) ? o : (Array.isArray(o.days) ? o.days : (isObj(o.program) && Array.isArray(o.program.days) ? o.program.days : [])); prog.days = daysIn.map(mkDay).filter(Boolean); }
   return finalizeProgram(prog, warnings);
 }
 function parseAny(text) {
   const t = text.trim();
   if (!t) return { program: { name: '', days: [] }, warnings: ['Nothing to create yet - paste some text or upload a file first.'] };
+  if (looksBinary(t)) return { program: { name: '', weeks: [] }, warnings: ['That doesn\'t look like a text file (it seems to be binary data), so nothing was imported.'] };
   if (/^[\[{]/.test(t)) return parseJSONProgram(t);
   const first = t.split(/\r?\n/)[0];
   if (/(,|\t)/.test(first) && /exercise/i.test(first)) return parseCSV(t);
@@ -886,41 +970,164 @@ function freshState() {
   const p = builtin(), d = p.defaults || {}, e = libEntry(p, 'built-in');
   return { program: p, library: [e], activeId: e.id, selWeek: 0, selDay: 0, settings: { rest: d.rest != null ? d.rest : 45, restMode: d.restMode || 'round', unit: 'lb', wake: true, name: '' }, last: {}, history: [], session: null, lastSummaryId: null, feedback: [], music: normMusic(null) };
 }
-function load() {
+/* ---- loading: never blank the app, never silently discard. The stored JSON is rebuilt piece by piece (normState); whenever anything unreadable had to be
+   dropped, the ORIGINAL text is first copied to 'forge.v1.corrupt' (the previous copy moves to '.corrupt.prev'), so nothing is ever lost for good. ---- */
+const KNOWN_TOP = ['program', 'library', 'activeId', 'selWeek', 'selDay', 'settings', 'last', 'history', 'session', 'lastSummaryId', 'feedback', 'music'];
+let bootNote = ''; // shown once as a toast after the first render
+function backupRaw(key, raw) {
   try {
-    const o = JSON.parse(localStorage.getItem(LS));
-    const okProg = p => p && (p.weeks || p.days);
-    const normProg = p => { if (!p.weeks) { p.weeks = [{ n: 1, phase: 1, name: 'Week 1', days: p.days }]; delete p.days; } return p; };
-    if (o && (okProg(o.program) || (Array.isArray(o.library) && o.library.some(e => e && okProg(e.program))))) {
-      // library: older saves have none, so wrap the current program as the first entry
-      let lib = Array.isArray(o.library) ? o.library.filter(e => e && e.id && okProg(e.program)) : [];
-      if (okProg(o.program)) {
-        normProg(o.program);
-        if (o.program.source === 'sample' && o.program.ver !== BUILTIN_PROGRAM.ver) { o.program = builtin(); o.selDay = 0; o.selWeek = 0; }
-      }
-      if (!lib.length) { lib = [libEntry(o.program, o.program.source === 'sample' ? 'built-in' : 'imported', o.selWeek, o.selDay)]; o.activeId = lib[0].id; }
-      lib.forEach(e => {
-        normProg(e.program); e.name = e.name || e.program.name || 'Workout'; e.addedAt = e.addedAt || Date.now(); e.source = e.source || 'imported';
-        if (e.program.source === 'sample' && e.program.ver !== BUILTIN_PROGRAM.ver) { e.program = builtin(); e.name = e.program.name; e.selWeek = 0; e.selDay = 0; }
-      });
-      o.library = lib;
-      let act = lib.find(e => e.id === o.activeId);
-      if (!act) { act = lib[0]; o.activeId = act.id; o.selWeek = act.selWeek || 0; o.selDay = act.selDay || 0; }
-      // S.program is authoritative for the active entry; keep them the same object
-      if (okProg(o.program) && progHash(o.program) !== progHash(act.program)) { act.program = o.program; act.name = o.program.name || act.name; }
-      o.program = act.program;
-      o.selWeek = Math.min(o.selWeek || 0, o.program.weeks.length - 1); o.selDay = o.selDay || 0;
-      act.selWeek = o.selWeek; act.selDay = o.selDay;
-      lib.forEach(e => { e.selWeek = Math.min(e.selWeek || 0, e.program.weeks.length - 1); e.selDay = e.selDay || 0; });
-      if (!Array.isArray(o.feedback)) o.feedback = [];
-      o.music = normMusic(o.music, o.activeId); // older saves: collapse per-day/per-program links into the single link (none saved = default)
-      return o;
+    if (raw == null || !String(raw).trim()) return true;
+    const k = key + '.corrupt', prev = localStorage.getItem(k); if (prev === raw) return true;
+    if (prev != null) { try { localStorage.setItem(k + '.prev', prev); } catch (e) {} }
+    localStorage.setItem(k, raw); return true;
+  } catch (e) { window.__rawBackup = raw; return false; }
+}
+function cleanLibEntry(e, seen) {
+  if (!isObj(e)) return null;
+  const p = loadProgram(e.program); if (!p) return null;
+  let id = cStr(e.id, 40).trim() || newLibId(); while (seen.has(id)) id += '_'; seen.add(id);
+  const out = { id, name: cStr(e.name, 200).trim() || p.name || 'Workout', program: p, addedAt: cNum(e.addedAt, Date.now(), 0, D_MAX), source: ['built-in', 'imported', 'shared'].includes(e.source) ? e.source : 'imported', selWeek: cInt(e.selWeek, 0, 0, 9999), selDay: cInt(e.selDay, 0, 0, 9999) };
+  if (typeof e.sharedId === 'string') out.sharedId = cStr(e.sharedId, 64);
+  if (typeof e.sharedBy === 'string') out.sharedBy = cStr(e.sharedBy, 60);
+  return out;
+}
+function cleanHist(h, seen) {
+  if (!isObj(h)) return null;
+  let date = h.date; if (typeof date === 'string') date = /^\d{10,14}$/.test(date.trim()) ? +date : Date.parse(date);
+  const dateOk = typeof date === 'number' && isFinite(date) && date > D_MIN && date < D_MAX;
+  const exIn = Array.isArray(h.exercises) ? h.exercises : [];
+  if (!dateOk) { // keep the workout (its sets are real) but pin it to a date we can trust, or to 1970 when there is none - never to "today"
+    if (!exIn.some(isObj)) return null;
+    const m = /^h(\d{12,14})$/.exec(String(h.id)); date = m && +m[1] > D_MIN && +m[1] < D_MAX ? +m[1] : 0; loss();
+  }
+  let id = cStr(h.id, 40).trim() || 'h' + date; while (seen.has(id)) id += '_'; seen.add(id);
+  const exercises = exIn.slice(0, 500).map(e => {
+    if (!isObj(e)) return null;
+    const sets = (Array.isArray(e.sets) ? e.sets : []).slice(0, 1000).map(s => isObj(s) ? { w: cNumL(s.w, 0, 0, 5000), r: cNumL(s.r, 0, 0, 10000), u: s.u === 's' ? 's' : '' } : null).filter(Boolean);
+    return { name: cStr(e.name, 200).trim() || 'Exercise', muscle: cStr(e.muscle, 30).trim() || 'Full body', sets };
+  }).filter(Boolean);
+  const out = { id, date, dayName: cStr(h.dayName, 200).trim() || 'Workout', week: cStr(h.week, 120), focus: cStr(h.focus, 200), program: cStr(h.program, 200), durationSec: cNum(h.durationSec, 0, 0, 604800), setsDone: cInt(h.setsDone, 0, 0, 100000), setsTotal: cInt(h.setsTotal, 0, 0, 100000), volume: cNum(h.volume, 0, 0, 1e9), unit: h.unit === 'kg' ? 'kg' : 'lb', exercises };
+  if (Array.isArray(h.prs)) { const prs = h.prs.filter(x => isObj(x) && typeof x.lift === 'string' && isFinite(+x.w) && isFinite(+x.r) && isFinite(+x.e) && isFinite(+x.prev)).slice(0, 10).map(x => ({ lift: cStr(x.lift, 20), label: cStr(x.label, 60) || cStr(x.lift, 20), w: cNum(x.w, 0, 0, 5000), r: cNum(x.r, 0, 0, 10000), u: x.u === 'kg' ? 'kg' : 'lb', e: cNum(x.e, 0, 0, 1e5), prev: cNum(x.prev, 0, 0, 1e5) })); if (prs.length) out.prs = prs; }
+  return out;
+}
+function cleanSession(s) {
+  if (!isObj(s)) return null;
+  const day = cleanDay(s.day, 0, () => {}); if (!day) return null;
+  if (!Array.isArray(s.steps) || !s.steps.length || s.steps.length > 20000) return null;
+  const steps = [];
+  for (const t of s.steps) {
+    if (!isObj(t) || !Number.isInteger(t.bi) || !Number.isInteger(t.ei) || !Number.isInteger(t.si)) return null;
+    const b = day.blocks[t.bi], ex = b && b.exercises[t.ei]; if (!ex || t.si < 0 || t.si >= ex.sets.length) return null;
+    steps.push({ bi: t.bi, ei: t.ei, si: t.si, round: Number.isInteger(t.round) ? t.round : t.si });
+  }
+  if (!Number.isInteger(s.cur) || s.cur < 0 || s.cur >= steps.length) return null;
+  const res = {};
+  if (isObj(s.res)) Object.keys(s.res).forEach(k => {
+    const i = /^\d+$/.test(k) ? +k : -1, r = s.res[k]; if (i < 0 || i >= steps.length || !isObj(r)) return loss();
+    const o = { w: typeof r.w === 'number' && isFinite(r.w) ? cNum(r.w, '', 0, 5000) : '', r: typeof r.r === 'number' && isFinite(r.r) ? cNum(r.r, '', 0, 10000) : '' };
+    if (r.st === 'done' || r.st === 'skipped') o.st = r.st;
+    if (typeof r.t === 'number' && isFinite(r.t)) o.t = r.t;
+    if (r.u === 's') o.u = 's';
+    res[i] = o;
+  });
+  let phase = s.phase === 'rest' ? 'rest' : 'work', restTotal = cNum(s.restTotal, 0, 0, 3600), restEnd = cNum(s.restEnd, 0, 0, D_MAX);
+  if (phase === 'rest' && !(restTotal > 0 && restEnd > 0)) { restTotal = 1; restEnd = Date.now(); } // unreadable rest: let it end right away
+  const tm = isObj(s.tmr) && [s.tmr.i, s.tmr.start, s.tmr.end].every(v => typeof v === 'number' && isFinite(v)) ? { i: s.tmr.i, start: s.tmr.start, end: s.tmr.end } : null;
+  return { dayIdx: cInt(s.dayIdx, 0, -1, 9999), weekIdx: cInt(s.weekIdx, 0, 0, 9999), weekName: cStr(s.weekName, 120), day, steps, res, cur: s.cur, phase, restEnd, restTotal, startedAt: cNum(s.startedAt, Date.now(), D_MIN, D_MAX), pausedAt: cNum(s.pausedAt, 0, 0, D_MAX), pausedMs: cNum(s.pausedMs, 0, 0, 1e10), tmr: tm };
+}
+function normState(o) {
+  const f = freshState(), st = {}, dflt = f.settings;
+  // settings
+  const so = isObj(o.settings) ? o.settings : (o.settings !== undefined && loss(), {});
+  st.settings = Object.assign(extras(so, ['rest', 'restMode', 'unit', 'wake', 'name']), {
+    rest: pickIf(so.rest, v => Number.isInteger(v) && v >= 0 && v <= 600, dflt.rest),
+    restMode: pickIf(so.restMode, v => v === 'round' || v === 'set', dflt.restMode),
+    unit: pickIf(so.unit, v => v === 'lb' || v === 'kg', 'lb'),
+    wake: pickIf(so.wake, v => typeof v === 'boolean', true),
+    name: cStr(so.name, 24)
+  });
+  // programs: S.program is authoritative for the active library entry (older saves / tests store it at the top level)
+  const seenLib = new Set(); let lib = [];
+  if (Array.isArray(o.library)) o.library.forEach(e => { const c = cleanLibEntry(e, seenLib); if (c) lib.push(c); else loss(); }); else if (o.library !== undefined) loss();
+  let topP = loadProgram(o.program); if (o.program != null && !topP) loss();
+  if (topP && topP.source === 'sample' && topP.ver !== BUILTIN_PROGRAM.ver) { topP = builtin(); o.selDay = 0; o.selWeek = 0; }
+  let activeId = o.activeId;
+  if (!lib.length && topP) { const e0 = libEntry(topP, topP.source === 'sample' ? 'built-in' : 'imported', cInt(o.selWeek, 0, 0, 9999), cInt(o.selDay, 0, 0, 9999)); lib = [e0]; activeId = e0.id; }
+  if (!lib.length) { lib = f.library; activeId = lib[0].id; o.selWeek = 0; o.selDay = 0; }
+  lib.forEach(e => { if (e.program.source === 'sample' && e.program.ver !== BUILTIN_PROGRAM.ver) { e.program = builtin(); e.name = e.program.name; e.selWeek = 0; e.selDay = 0; } });
+  let act = lib.find(e => e.id === activeId);
+  if (!act) { act = lib[0]; o.selWeek = act.selWeek; o.selDay = act.selDay; if (activeId !== undefined) loss(); }
+  else if (topP && progHash(topP) !== progHash(act.program)) { act.program = topP; act.name = topP.name || act.name; }
+  st.library = lib; st.activeId = act.id; st.program = act.program;
+  const nW = st.program.weeks.length;
+  st.selWeek = cInt(o.selWeek, 0, 0, nW - 1);
+  const dayOk = (w, d) => Number.isInteger(d) && d >= 0 && d < st.program.weeks[w].days.length;
+  st.selDay = dayOk(st.selWeek, o.selDay) ? o.selDay : 0;
+  act.selWeek = st.selWeek; act.selDay = st.selDay;
+  lib.forEach(e => { e.selWeek = Math.min(e.selWeek, e.program.weeks.length - 1); if (e.selDay >= e.program.weeks[e.selWeek].days.length) e.selDay = 0; });
+  // last used weights
+  st.last = {};
+  if (isObj(o.last)) Object.keys(o.last).forEach(k => { const v = o.last[k]; if (k !== '__proto__' && k !== 'constructor' && k !== 'prototype' && isObj(v) && isFinite(+v.w) && isFinite(+v.r)) st.last[k] = { w: cNum(+v.w, 0, 0, 5000), r: cNum(+v.r, 0, 0, 10000) }; else loss(); }); else if (o.last !== undefined) loss();
+  // history: keeps every entry that still has a trustworthy date or real sets
+  const seen = new Set(); st.history = [];
+  if (Array.isArray(o.history)) o.history.forEach(h => { const c = cleanHist(h, seen); if (c) st.history.push(c); else loss(); }); else if (o.history !== undefined) loss();
+  // an in-progress workout is only restored when every step still points at a real set
+  st.session = null;
+  if (o.session != null) { const c = cleanSession(o.session); if (c) st.session = c; else { loss(); bootNote = 'An unreadable in-progress workout was closed. Your history is safe.'; } }
+  st.lastSummaryId = typeof o.lastSummaryId === 'string' ? cStr(o.lastSummaryId, 40) : null;
+  st.feedback = [];
+  if (Array.isArray(o.feedback)) o.feedback.forEach(x => { if (isObj(x) && typeof x.text === 'string') st.feedback.push({ id: cStr(x.id, 40) || 'fb' + Date.now().toString(36), ts: cNum(x.ts, 0, 0, D_MAX), type: ['Bug', 'Idea', 'Other'].includes(x.type) ? x.type : 'Other', text: cStr(x.text, 2000), contact: cStr(x.contact, 80), build: cStr(x.build, 40), ua: cStr(x.ua, 400), via: (Array.isArray(x.via) ? x.via : []).filter(v => typeof v === 'string').slice(0, 5).map(v => cStr(v, 12)) }); else loss(); }); else if (o.feedback !== undefined) loss();
+  st.feedback = st.feedback.slice(0, 50);
+  st.music = normMusic(o.music, st.activeId);
+  return Object.assign(extras(o, KNOWN_TOP), st);
+}
+const RESCUE_LS = 'forge.rescue.v1';
+function loadState() {
+  let raw = null; try { raw = localStorage.getItem(LS); } catch (e) {}
+  let st = null;
+  if (raw != null) {
+    let o, ok = true; try { o = JSON.parse(raw); } catch (e) { ok = false; }
+    sanLoss = 0;
+    if (ok && isObj(o)) { try { st = normState(o); } catch (e) { st = null; sanLoss++; } } else sanLoss++;
+    if (sanLoss > 0 && raw.trim()) { const kept = backupRaw(LS, raw); bootNote = bootNote || (st ? 'Some saved data was unreadable and was left out. A copy of the original was kept.' : 'Your saved data was unreadable, so BETA FIT started fresh. A copy of the original was kept.') + (kept ? '' : ' (Storage is full, so the copy could not be kept.)'); }
+  }
+  if (!st) st = freshState();
+  // a finished workout that could not be written last time (storage full) was parked under another key: merge it back in
+  try {
+    const r = JSON.parse(localStorage.getItem(RESCUE_LS) || 'null');
+    if (r && Array.isArray(r.history)) {
+      const have = new Set(st.history.map(h => h.id)), seenR = new Set(have); let n = 0;
+      r.history.slice().reverse().forEach(h => { const c = cleanHist(h, seenR); if (c && !have.has(c.id) && seenR.has(c.id)) { st.history.unshift(c); have.add(c.id); n++; } });
+      if (n) bootNote = bootNote || `Recovered ${n} workout${n > 1 ? 's' : ''} that could not be saved earlier (storage was full).`;
+      st.history.sort((a, b) => 0); // order kept (newest first as stored)
+      st.__rescued = true;
     }
   } catch (e) {}
-  return freshState();
+  return st;
 }
-let S = load();
-const save = () => { try { localStorage.setItem(LS, JSON.stringify(S)); } catch (e) {} };
+let S = loadState();
+let storeFull = false;
+// save() returns true when the state is on disk. On "storage full" it frees the (re-downloadable) leaderboard cache, retries, and otherwise parks the newest
+// workouts under a tiny rescue key and raises a persistent banner with an Export button - a finished workout is never lost silently.
+function save() {
+  let json; try { json = JSON.stringify(S, function (k, v) { return this === S && k === 'program' ? undefined : v; }); } catch (e) { return false; } // 'program' is the same object as the active library entry: written once
+  try { localStorage.setItem(LS, json); if (storeFull) { storeFull = false; try { localStorage.removeItem(RESCUE_LS); } catch (e) {} syncStoreBar(); } return true; } catch (e) {}
+  try { if (typeof SY === 'object' && SY && Object.keys(SY.lb || {}).length) { SY.lb = {}; saveSync(); localStorage.setItem(LS, json); storeFull = false; syncStoreBar(); return true; } } catch (e) {}
+  storeFull = true;
+  try { localStorage.setItem(RESCUE_LS, JSON.stringify({ ts: Date.now(), history: (S.history || []).slice(0, 5) })); } catch (e) {}
+  syncStoreBar(); return false;
+}
+function exportBackup() {
+  const data = { app: 'BETA FIT', build: BUILD, exportedAt: new Date().toISOString(), settings: S.settings, history: S.history, last: S.last, library: S.library.map(e => ({ name: e.name, program: e.program })) };
+  downloadBlob(new Blob([JSON.stringify(data)], { type: 'application/json' }), 'beta-fit-backup-' + new Date().toISOString().slice(0, 10) + '.json');
+}
+function syncStoreBar() {
+  let el = $('#storeBar'); if (!storeFull) { if (el) el.remove(); return; }
+  if (el || !document.body) return;
+  el = document.createElement('div'); el.id = 'storeBar'; el.className = 'storebar'; el.setAttribute('role', 'alert');
+  el.innerHTML = '<span><b>Storage is full</b> - your latest workout could NOT be saved on this device. Export a backup now, then free some space (Settings &gt; Erase, or clear other site data).</span><button type="button" data-act="exportBackup">Export</button><button type="button" data-act="dismissStore" aria-label="Dismiss">✕</button>';
+  const app = $('#app'); if (app && app.parentNode) app.parentNode.insertBefore(el, app); else document.body.appendChild(el); // in the page flow (not floating) so it never covers a button
+}
 
 /* ---------- Program library (S.library = saved workouts; S.program is the active one) ---------- */
 const libActive = () => S.library.find(e => e.id === S.activeId) || null;
@@ -1154,14 +1361,14 @@ let view = S.session ? 'active' : 'home', modal = null, openDay = null, openHist
 let importText = '', importFile = '', importNote = null, importBlocked = null, parsed = null;
 let fbDraft = { type: 'Idea', text: '', contact: '', id: null, file: null, status: '' }, fbBack = null;
 let lastSummaryEl = null;
-let wakeLock = null, homeExpanded = false;
-function toast(msg) {
+let wakeLock = null, homeExpanded = false, tapLock = 0;
+function toast(msg, ms) {
   const el = document.createElement('div'); el.className = 'toast'; el.textContent = msg;
-  $('#toastHost').appendChild(el); setTimeout(() => el.remove(), 2400);
+  const host = $('#toastHost'); if (!host) return; host.appendChild(el); setTimeout(() => el.remove(), ms || 2400);
 }
 async function wake(on) {
   try {
-    if (on && S.settings.wake && 'wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen');
+    if (on && S.settings.wake && 'wakeLock' in navigator) { if (wakeLock && wakeLock.released === false) return; wakeLock = await navigator.wakeLock.request('screen'); }
     else if (!on && wakeLock) { await wakeLock.release(); wakeLock = null; }
   } catch (e) {}
 }
@@ -1186,6 +1393,7 @@ function setRestLive(n) {
   render(); toast(n ? 'Rest set to ' + n + 's' : 'Rest timer off');
 }
 function startSession(day, dayIdx) {
+  if (!day || !buildSteps(day).length) { toast('This workout has no exercises to do.'); return; }
   S.session = { dayIdx, weekIdx: S.selWeek, weekName: curWeek().name, day, steps: buildSteps(day), res: {}, cur: 0, phase: 'work', restEnd: 0, restTotal: 0, startedAt: Date.now(), pausedAt: 0, pausedMs: 0, tmr: null };
   view = 'active'; modal = null; save(); wake(true); render(window.scrollTo(0, 0));
 }
@@ -1219,18 +1427,43 @@ function draft(i) {
   const tgt = stepEx(s, st).sets[st.si];
   return { w: r.w != null ? r.w : prefillW(i), r: r.r != null ? r.r : repsMax(tgt), st: r.st };
 }
-function readInputs() {
-  const w = $('#inW'), r = $('#inR');
-  return { w: w ? (parseFloat(w.value) || 0) : 0, r: r ? (parseFloat(r.value) || 0) : 0 };
+const NUM_RE = /^(\d{1,6}(\.\d*)?|\.\d+)$/, MAX_REPS = 1000;
+const maxW = () => unit() === 'kg' ? 1000 : 2000; // heaviest single entry we accept (world-record territory x2)
+// one field -> { v, err }: empty = 0; negatives, exponents (1e3), letters and absurd sizes are rejected, never silently turned into something else
+function readField(el, max, label, unitTxt) {
+  if (!el) return { v: 0, err: '' };
+  const t = String(el.value).trim().replace(',', '.');
+  let err = '', v = 0;
+  if (t !== '') {
+    if (!NUM_RE.test(t) || !isFinite(parseFloat(t))) err = `${label} must be a plain number, like 62.5`;
+    else { v = parseFloat(t); if (v > max) { err = `${label} can't be more than ${max}${unitTxt}`; v = 0; } }
+  }
+  el.setAttribute('aria-invalid', err ? 'true' : 'false');
+  return { v, err };
 }
+function readInputs() {
+  const w = readField($('#inW'), maxW(), 'Weight', ' ' + unit()), r = readField($('#inR'), MAX_REPS, 'Reps', '');
+  return { w: w.v, r: r.v, err: w.err || r.err };
+}
+// the draft only stores what the lifter typed: a value that is just the automatic pre-fill stays automatic, so editing an earlier set (via Back) still flows into later ones
 function saveDraft() {
   const s = S.session; if (!s || s.phase !== 'work' || (!$('#inW') && !$('#inR'))) return;
-  const v = readInputs(), old = s.res[s.cur] || {}; s.res[s.cur] = { ...old, w: v.w || '', r: v.r || '' }; save();
+  const v = readInputs(); if (v.err) return;
+  const i = s.cur, old = s.res[i] || {}, st = s.steps[i], tgt = stepEx(s, st).sets[st.si];
+  const o = { ...old }; delete o.w; delete o.r;
+  const same = (val, pre) => (val || 0) === (parseFloat(pre) || 0);
+  if (old.st === 'done') { o.w = v.w || ''; o.r = v.r || ''; }
+  else {
+    if ($('#inW') && !same(v.w, prefillW(i))) o.w = v.w || '';
+    if ($('#inR') && !same(v.r, repsMax(tgt))) o.r = v.r || '';
+  }
+  s.res[i] = o; save();
 }
 function completeSet() {
   const s = S.session; if (!s || s.pausedAt) return; const i = s.cur, st = s.steps[i], ex = stepEx(s, st);
   const secs = timedSecs(ex.sets[st.si]);
   const v = secs ? { w: 0, r: secs } : readInputs();
+  if (v.err) { toast(v.err); const bad = $('#inW[aria-invalid="true"]') || $('#inR[aria-invalid="true"]'); if (bad) bad.focus(); return; }
   s.tmr = null;
   s.res[i] = { w: v.w || '', r: v.r || '', st: 'done', t: Date.now(), u: secs ? 's' : '' };
   if (v.w > 0) S.last[ex.name] = { w: v.w, r: v.r };
@@ -1274,7 +1507,8 @@ function finish() {
       else { S.selWeek = Math.min((s.weekIdx || 0) + 1, S.program.weeks.length - 1); S.selDay = 0; }
     }
   } else { view = 'home'; toast('Workout discarded - no sets logged'); }
-  S.session = null; modal = null; save(); wake(false); if (done > 0) syncSoon(); render(window.scrollTo(0, 0));
+  S.session = null; modal = null; const saved = save(); wake(false); if (done > 0) syncSoon(); render(window.scrollTo(0, 0));
+  if (!saved && done > 0) toast('Storage is full - this workout is NOT saved yet. Tap Export in the red bar.', 7000);
 }
 function discard() { const from = view; S.session = null; modal = null; view = from === 'start' ? 'start' : 'home'; save(); wake(false); render(); }
 
@@ -1292,7 +1526,7 @@ function summarizeReps(sets) {
   return sets.map(shortRep).join('-');
 }
 const weekBar = (idx, act) => { const w = S.program.weeks[idx], n = S.program.weeks.length;
-  return `<div class="weekbar"><button class="icon" data-act="${act}" data-d="-1" aria-label="Previous week" ${idx === 0 ? 'disabled style="opacity:.35"' : ''}>‹</button><div class="wkt"><b>${esc(w.name)} of ${n}</b><span>Phase ${w.phase || 1} of ${phaseCount(S.program)}</span></div><button class="icon" data-act="${act}" data-d="1" aria-label="Next week" ${idx === n - 1 ? 'disabled style="opacity:.35"' : ''}>›</button></div>`; };
+  return `<div class="weekbar"><button class="icon" data-act="${act}" data-d="-1" aria-label="Previous week" ${idx === 0 ? 'disabled style="opacity:.35"' : ''}>‹</button><div class="wkt"><b>${esc(w.name)} of ${n}</b><span>Phase ${esc(w.phase || 1)} of ${esc(phaseCount(S.program))}</span></div><button class="icon" data-act="${act}" data-d="1" aria-label="Next week" ${idx === n - 1 ? 'disabled style="opacity:.35"' : ''}>›</button></div>`; };
 function volStripHTML(card) {
   const u = unit(), v = volumeTotals(S.history);
   const tile = (k, l) => `<div><small>${l}</small><b>${fmtVol(v[k].volKg, u)}<i>${u}</i></b><em>${fmtReps(v[k].reps)} reps</em></div>`;
@@ -1401,9 +1635,92 @@ function streakRowHTML() {
    feedback issues, share cards or program files. All weights are sent in kg; display converts at render time. */
 const API_BASE = 'https://forge-api.philnb331.workers.dev/v1', SYNC_LS = 'forge.sync.v1';
 const freshSync = () => ({ token: '', userId: '', name: '', groups: [], sel: 'me', sent: {}, lb: {}, progIds: {}, pinDismiss: {}, requests: [], rejected: 0, lastSync: 0 });
-function loadSync() { try { const o = JSON.parse(localStorage.getItem(SYNC_LS)); if (o && typeof o === 'object' && !Array.isArray(o)) { const f = Object.assign(freshSync(), o); if (!Array.isArray(f.groups)) f.groups = []; if (!Array.isArray(f.requests)) f.requests = []; if (!f.pinDismiss || typeof f.pinDismiss !== 'object' || Array.isArray(f.pinDismiss)) f.pinDismiss = {}; return f; } } catch (e) {} return freshSync(); }
+const prim = (o, max) => { const out = {}; Object.keys(o).forEach(k => { if (k === '__proto__' || k === 'constructor' || k === 'prototype') return; const v = o[k]; if (typeof v === 'string') out[k] = cStr(v, max || 300); else if (typeof v === 'number' && isFinite(v)) out[k] = v; else if (typeof v === 'boolean') out[k] = v; }); return out; }; // primitives only
+function cleanGroup(g) {
+  if (!isObj(g) || typeof g.id !== 'string' || !g.id.trim()) return null;
+  const o = prim(g); o.id = cStr(g.id, 64); o.name = cStr(g.name, 60); o.isCreator = g.isCreator === true;
+  if (g.memberCount !== undefined) o.memberCount = cInt(g.memberCount, 1, 0, 9999);
+  if (g.memberCap !== undefined) o.memberCap = cInt(g.memberCap, 25, 1, 9999);
+  if (g.pendingCount !== undefined) o.pendingCount = cInt(g.pendingCount, 0, 0, 9999);
+  if (g.inviteCode !== undefined) o.inviteCode = cStr(g.inviteCode, 24);
+  return o;
+}
+function cleanReq(x) {
+  if (!isObj(x) || typeof x.id !== 'string' || !x.id.trim()) return null;
+  const o = prim(x); o.id = cStr(x.id, 64); o.name = cStr(x.name, 60); o.status = cStr(x.status, 20); if (x.memberCount !== undefined) o.memberCount = cInt(x.memberCount, 1, 0, 9999);
+  return o;
+}
+function cleanPerson(x, key) { // { userId|inviteId, displayName, ... }
+  if (!isObj(x) || typeof x[key] !== 'string' || !x[key].trim()) return null;
+  const o = prim(x); o[key] = cStr(x[key], 64); if (x.displayName !== undefined || key === 'userId') o.displayName = cStr(x.displayName, 60); if (key === 'userId') o.isYou = x.isYou === true; return o;
+}
+function cleanList(arr, fn) { const out = []; for (const x of arr) { const c = fn(x); if (!c) return null; out.push(c); } return out; }
+const numLB = v => cNum(v, 0, 0, 1e13);
+function normLB(d) {
+  if (!isObj(d) || !isObj(d.total) || !Array.isArray(d.members)) return null;
+  const members = cleanList(d.members, m => { const o = cleanPerson(m, 'userId'); if (!o) return null; ['volumeKg', 'reps', 'previousVolumeKg', 'last30VolumeKg', 'prior30VolumeKg'].forEach(k => { o[k] = numLB(m[k]); }); o.rank = cInt(m.rank, 0, 0, 9999); o.share = cNum(m.share, 0, 0, 1); return o; });
+  if (!members) return null;
+  const out = prim(d); out.members = members;
+  out.total = Object.assign(prim(d.total), { volumeKg: numLB(d.total.volumeKg), reps: numLB(d.total.reps), workouts: numLB(d.total.workouts), members: numLB(d.total.members) });
+  const bt = x => isObj(x) && isObj(x.total) ? { total: { volumeKg: numLB(x.total.volumeKg) } } : undefined, b = isObj(d.baseline) ? d.baseline : {};
+  delete out.baseline; if (isObj(d.baseline)) { out.baseline = {}; const p = bt(b.previous), c = bt(b.current); if (p) out.baseline.previous = p; if (c) out.baseline.current = c; }
+  delete out.range; if (isObj(d.range)) out.range = { start: cStr(d.range.start, 40), end: cStr(d.range.end, 40) };
+  return out;
+}
+function normGD(d) {
+  if (!isObj(d) || !Array.isArray(d.members)) return null;
+  const members = cleanList(d.members, m => cleanPerson(m, 'userId')); if (!members) return null;
+  const out = prim(d); out.members = members;
+  if (d.group !== undefined) { const g = cleanGroup(d.group); if (!g) return null; out.group = g; }
+  delete out.pinnedProgram; if (isObj(d.pinnedProgram) && typeof d.pinnedProgram.id === 'string') { const p = prim(d.pinnedProgram); p.id = cStr(d.pinnedProgram.id, 64); p.name = cStr(d.pinnedProgram.name, 200); out.pinnedProgram = p; } else out.pinnedProgram = null;
+  return out;
+}
+// what a 2xx reply must look like per endpoint. Anything else (captive-portal HTML, '{}', '[]', wrong types) is treated as "no usable answer": the caller keeps its last good data.
+function apiShape(method, path, d) {
+  try {
+    if (!isObj(d)) return null;
+    const p = path.split('?')[0];
+    if (method === 'GET') {
+      if (p === '/groups') { if (!Array.isArray(d.groups) || !Array.isArray(d.requests)) return null; const gs = cleanList(d.groups, cleanGroup), rq = cleanList(d.requests, cleanReq); return gs && rq ? Object.assign(prim(d), { groups: gs, requests: rq }) : null; }
+      if (/^\/groups\/[^/]+\/leaderboard$/.test(p)) return normLB(d);
+      if (/^\/groups\/[^/]+\/programs$/.test(p)) { if (!Array.isArray(d.programs)) return null; const l = cleanList(d.programs, x => { if (!isObj(x) || typeof x.id !== 'string') return null; const o = prim(x); o.id = cStr(x.id, 64); o.name = cStr(x.name, 200); o.sharedAt = cStr(x.sharedAt, 40); o.owner = isObj(x.owner) ? Object.assign(prim(x.owner), { displayName: cStr(x.owner.displayName, 60), isYou: x.owner.isYou === true }) : {}; return o; }); return l ? { programs: l } : null; }
+      if (/^\/groups\/[^/]+\/requests$/.test(p)) { if (!Array.isArray(d.requests)) return null; const l = cleanList(d.requests, x => cleanPerson(x, 'userId')); return l ? { requests: l } : null; }
+      if (/^\/groups\/[^/]+\/invites$/.test(p)) { if (!Array.isArray(d.invites)) return null; const l = cleanList(d.invites, x => cleanPerson(x, 'inviteId')); return l ? Object.assign(prim(d), { invites: l }) : null; }
+      if (/^\/groups\/[^/]+$/.test(p)) return normGD(d);
+      return d;
+    }
+    if (p === '/register') return typeof d.deviceToken === 'string' && d.deviceToken && typeof d.userId === 'string' && d.userId ? d : null;
+    if (p === '/groups' || p === '/groups/join' || p === '/groups/join-invite' || /\/rotate-code$/.test(p)) { const g = cleanGroup(d.group); return g ? Object.assign({}, d, { group: g }) : null; }
+    if (p === '/workouts/sync') return d.rejected === undefined || Array.isArray(d.rejected) ? d : null;
+    if (/\/pin$/.test(p)) return d.pinnedProgram == null || isObj(d.pinnedProgram) ? d : null;
+    if (p === '/programs' || /\/invites$/.test(p)) return typeof d.id === 'string' || typeof d.inviteId === 'string' ? d : null;
+    return d;
+  } catch (e) { return null; }
+}
+function loadSync() {
+  let raw = null; try { raw = localStorage.getItem(SYNC_LS); } catch (e) {}
+  if (raw == null) return freshSync();
+  let o, ok = true; try { o = JSON.parse(raw); } catch (e) { ok = false; }
+  if (!ok || !isObj(o)) { if (raw.trim()) { backupRaw(SYNC_LS, raw); bootNote = bootNote || 'Your group sign-in data was unreadable. A copy was kept (it contains your backup code).'; } return freshSync(); }
+  let lossN = 0; const bad = () => { lossN++; return false; };
+  const f = Object.assign(freshSync(), extras(o, []));
+  f.token = typeof o.token === 'string' ? cStr(o.token, 300) : (o.token !== undefined && bad(), '');
+  f.userId = typeof o.userId === 'string' ? cStr(o.userId, 64) : (o.userId !== undefined && bad(), '');
+  f.name = typeof o.name === 'string' ? cStr(o.name, 60) : '';
+  f.groups = []; if (Array.isArray(o.groups)) o.groups.forEach(g => { const c = cleanGroup(g); if (c) f.groups.push(c); else bad(); }); else if (o.groups !== undefined) bad();
+  f.requests = []; if (Array.isArray(o.requests)) o.requests.forEach(r => { const c = cleanReq(r); if (c) f.requests.push(c); else bad(); }); else if (o.requests !== undefined) bad();
+  f.sel = typeof o.sel === 'string' && /^[A-Za-z0-9_-]{1,64}$/.test(o.sel) ? o.sel : 'me'; // an id not in the list is fine: refreshGroups() resets it to 'me' when the server does not know it
+  const rec = v => isObj(v) ? extras(v, []) : (v !== undefined && bad(), {});
+  f.sent = {}; if (isObj(o.sent)) Object.keys(o.sent).forEach(k => { if (k !== '__proto__' && (typeof o.sent[k] === 'string' || typeof o.sent[k] === 'number')) f.sent[k] = o.sent[k]; }); else if (o.sent !== undefined) bad();
+  f.progIds = {}; const pi = rec(o.progIds); Object.keys(pi).forEach(k => { if (typeof pi[k] === 'string') f.progIds[k] = cStr(pi[k], 64); });
+  f.pinDismiss = rec(o.pinDismiss);
+  f.lb = {}; if (isObj(o.lb)) Object.keys(o.lb).forEach(k => { const c = o.lb[k], d = isObj(c) ? normLB(c.data) : null; if (d && typeof c.at === 'number' && isFinite(c.at) && k !== '__proto__') f.lb[k] = { data: d, at: c.at }; }); // a cache: dropping a bad entry is fine
+  f.rejected = cInt(o.rejected, 0, 0, 1e9); f.lastSync = cNum(o.lastSync, 0, 0, D_MAX);
+  if (lossN && raw.trim()) { backupRaw(SYNC_LS, raw); bootNote = bootNote || 'Some group sign-in data was unreadable and was left out. A copy was kept.'; }
+  return f;
+}
 let SY = loadSync();
-const saveSync = () => { try { localStorage.setItem(SYNC_LS, JSON.stringify(SY)); } catch (e) {} };
+const saveSync = () => { try { localStorage.setItem(SYNC_LS, JSON.stringify(SY)); return true; } catch (e) { storeFull = true; syncStoreBar(); return false; } };
 const curGroup = () => SY.token && SY.sel !== 'me' ? SY.groups.find(g => g.id === SY.sel) || null : null;
 const normCode = c => String(c || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
 const fmtCode = c => String(c || '');
@@ -1415,7 +1732,12 @@ async function api(method, path, body, tokOverride) {
   catch (e) { clearTimeout(to); return { ok: false, net: true, status: 0, code: 'network' }; }
   clearTimeout(to);
   let data = null; try { data = await r.json(); } catch (e) {}
-  if (r.ok) return { ok: true, status: r.status, data: data || {} };
+  if (r.ok) {
+    if (r.status === 204 && data == null) data = {};
+    const shaped = apiShape(method, path, data);
+    if (shaped === null) return { ok: false, net: true, status: r.status, code: 'bad_response' }; // 200 with a body we can't use (captive portal, proxy page, server bug): same as being offline
+    return { ok: true, status: r.status, data: shaped };
+  }
   const er = (data && data.error) || {};
   if (r.status === 401 && SY.token && !tokOverride && path !== '/register') authLost();
   return { ok: false, status: r.status, code: er.code || 'error', message: er.message || '', retryAfter: +r.headers.get('Retry-After') || 0 };
@@ -1473,7 +1795,7 @@ function syncEntry(h) {
 const syncSig = e => hashStr([e.finishedAt, e.volumeKg, e.reps, e.sets, e.durationSec].join('|'));
 function pendingEntries() {
   const out = [];
-  for (const h of S.history || []) { if (!h || !h.id || !isFinite(+h.date)) continue; const e = syncEntry(h); if (SY.sent[e.id] !== syncSig(e)) out.push(e); }
+  for (const h of S.history || []) { if (!h || !h.id || !(+h.date > D_MIN)) continue; const e = syncEntry(h); if (SY.sent[e.id] !== syncSig(e)) out.push(e); }
   return out;
 }
 let syncing = false, syncAgain = false, syncTimer = 0, syncBackoff = 0, syncState = 'ok';
@@ -1600,7 +1922,8 @@ async function spAdd(pid) {
   let pr; try { pr = parseJSONProgram(JSON.stringify(r.data.program)); } catch (e) { pr = null; }
   if (!pr || !allDays(pr.program).length) { toast("That workout couldn't be read."); return; }
   const p = pr.program; p.name = String(r.data.name || p.name || 'Shared workout').slice(0, 80); delete p.ver; p.source = 'shared';
-  libSyncActive(); const e = libEntry(p, 'shared'); e.sharedId = pid; e.sharedBy = (r.data.owner && r.data.owner.displayName) || ''; S.library.push(e); save();
+  libSyncActive(); const e = libEntry(p, 'shared'); e.sharedId = pid; e.sharedBy = cStr(r.data.owner && r.data.owner.displayName, 60); S.library.push(e);
+  if (!save()) { S.library.pop(); toast('Storage is full - that workout was NOT added.', 6000); return; }
   softRender(); toast('Added to My workouts');
 }
 // share the active workout to a group: upload once (cached by content hash), then link it to the group
@@ -2002,7 +2325,7 @@ function groupAllHTML(d, u) {
 function groupRowsHTML(d, u) {
   const top = Math.max(0, ...d.members.map(m => m.volumeKg || 0));
   return `<div class="mrs" id="gRows" role="list" aria-label="Group ranking">${d.members.map((m, i) => { const z = !(m.volumeKg > 0);
-    return `<div class="mr ${m.isYou ? 'me' : ''} ${i === 0 && !z ? 'first' : ''} ${z ? 'zero' : ''}" role="listitem" data-uid="${esc(m.userId)}" data-kg="${m.volumeKg}"><div class="rk">${m.rank}</div>${avHTML(m.userId, m.displayName)}<div style="min-width:0"><div class="l1"><div class="nm"><span class="nn">${esc(m.displayName)}</span>${m.isYou ? '<span class="you">YOU</span>' : ''}<span class="rp">${fmtReps(m.reps || 0)} reps</span></div><div class="v">${z ? `0<small>${u} · not yet</small>` : `${fmtVol(m.volumeKg, u)}<small>${u} · ${Math.round((m.share || 0) * 100)}%</small>`}</div></div><div class="mbar"><i style="width:${z || !top ? 0 : Math.max(2, Math.round(m.volumeKg / top * 100))}%"></i></div></div></div>`; }).join('')}</div>`;
+    return `<div class="mr ${m.isYou ? 'me' : ''} ${i === 0 && !z ? 'first' : ''} ${z ? 'zero' : ''}" role="listitem" data-uid="${esc(m.userId)}" data-kg="${esc(m.volumeKg)}"><div class="rk">${m.rank}</div>${avHTML(m.userId, m.displayName)}<div style="min-width:0"><div class="l1"><div class="nm"><span class="nn">${esc(m.displayName)}</span>${m.isYou ? '<span class="you">YOU</span>' : ''}<span class="rp">${fmtReps(m.reps || 0)} reps</span></div><div class="v">${z ? `0<small>${u} · not yet</small>` : `${fmtVol(m.volumeKg, u)}<small>${u} · ${Math.round((m.share || 0) * 100)}%</small>`}</div></div><div class="mbar"><i style="width:${z || !top ? 0 : Math.max(2, Math.round(m.volumeKg / top * 100))}%"></i></div></div></div>`; }).join('')}</div>`;
 }
 function groupContribHTML(d, u) {
   const me = d.members.find(m => m.isYou); if (!me) return '';
@@ -2216,7 +2539,7 @@ function drawCard(cv, sp) {
     [['THIS WEEK', sp.weekKg, sp.weekReps, 124], ['ALL-TIME', sp.allKg, sp.allReps, 560]].forEach(([lb, kg, rp, x]) => {
       cT(c, lb, x, 398, 24, 800, '#9a9aa5');
       const t = fmtVol(kg, sp.u), nw = cT(c, t, x, 464, 70, 900, '#ff8f45', 'left', 290); cT(c, sp.u, x + nw + 10, 464, 30, 800, '#9a9aa5');
-      cT(c, fmtReps(rp) + ' reps', x, 500, 22, 700, '#6c6c76');
+      cT(c, fmtReps(rp) + ' reps', x, 500, 22, 700, '#8e8e9a');
     });
     panel(80, 536, 920, 210, true);
     cFlame(c, 165, 630, 44);
@@ -2226,7 +2549,7 @@ function drawCard(cv, sp) {
     sp.lifts.forEach((l, i) => {
       const y = 764 + i * 166; panel(80, y, 920, 150, false);
       cT(c, l.label.toUpperCase(), 124, y + 60, 34, 900, '#f5f5f6', 'left', 380);
-      cT(c, 'EST. 1RM', 124, y + 106, 24, 700, '#6c6c76');
+      cT(c, 'EST. 1RM', 124, y + 106, 24, 700, '#8e8e9a');
       if (l.e == null) { cT(c, '—', 956, y + 106, 86, 900, '#3a3a42', 'right'); return; }
       const uw = cT(c, sp.u, 956, y + 102, 36, 800, '#9a9aa5', 'right');
       cT(c, fmtNum(l.e), 956 - uw - 12, y + 108, 96, 900, '#ff8f45', 'right', 330);
@@ -2241,7 +2564,7 @@ function drawCard(cv, sp) {
     cT(c, h.focus || h.dayName, 80, 270, 92, 900, '#f5f5f6', 'left', W - 160);
     cT(c, (h.week ? h.week + ' · ' : '') + h.dayName + ' · ' + sp.name, 80, 328, 32, 700, '#ff6a1a', 'left', W - 160);
     const tiles = [[fmt(h.durationSec), 'TOTAL TIME'], [h.setsDone + '/' + h.setsTotal, 'SETS'], [sp.volKg ? fmtVol(sp.volKg, sp.u) : '—', 'VOLUME (' + sp.u.toUpperCase() + ')'], [String(h.exercises.length), 'EXERCISES']];
-    tiles.forEach((t, i) => { const x = 80 + (i % 2) * 470, y = 390 + Math.floor(i / 2) * 210; panel(x, y, 450, 190, false); cT(c, t[0], x + 40, y + 98, 84, 900, '#ff8f45', 'left', 370); cT(c, t[1], x + 40, y + 142, 26, 800, '#9a9aa5'); if (i === 2) cT(c, 'Week: ' + fmtVol(sp.weekKg, sp.u) + ' ' + sp.u, x + 40, y + 174, 24, 700, '#6c6c76', 'left', 370); });
+    tiles.forEach((t, i) => { const x = 80 + (i % 2) * 470, y = 390 + Math.floor(i / 2) * 210; panel(x, y, 450, 190, false); cT(c, t[0], x + 40, y + 98, 84, 900, '#ff8f45', 'left', 370); cT(c, t[1], x + 40, y + 142, 26, 800, '#9a9aa5'); if (i === 2) cT(c, 'Week: ' + fmtVol(sp.weekKg, sp.u) + ' ' + sp.u, x + 40, y + 174, 24, 700, '#8e8e9a', 'left', 370); });
     if (sp.prs.length) {
       const ph = 120 + sp.prs.length * 110; panel(80, 830, 920, ph, true);
       cRR(c, 124, 870, 120, 50, 14); c.fillStyle = '#ff8f45'; c.fill(); cT(c, 'NEW PR', 184, 905, 28, 900, '#1a0a00', 'center');
@@ -2259,7 +2582,7 @@ function drawCard(cv, sp) {
       if (!h.exercises.some(e => e.sets.some(x => x.w > 0 && x.u !== 's'))) cT(c, 'Workout logged. Consistency wins.', 124, 990, 38, 700, '#9a9aa5', 'left', 800);
     }
   }
-  cT(c, sp.tpl === 'stats' ? 'Est. 1RM (Epley) · best of sets of 1–10 reps' : 'Logged with BETA FIT', 80, 1292, 26, 700, '#6c6c76', 'left', 700);
+  cT(c, sp.tpl === 'stats' ? 'Est. 1RM (Epley) · best of sets of 1–10 reps' : 'Logged with BETA FIT', 80, 1292, 26, 700, '#8e8e9a', 'left', 700);
   cT(c, 'pb3oh.github.io/forge-workout', W - 80, 1292, 26, 700, '#ff6a1a', 'right', 400);
 }
 function paintShare() { const cv = $('#shareCv'); if (cv) drawCard(cv, cardSpec()); }
@@ -2298,7 +2621,7 @@ function libraryHTML() {
     const meta = `${wk} week${wk > 1 ? 's' : ''} × ${wk ? e.program.weeks[0].days.length : 0} days · ${ds.length} sessions` + (e.source === 'shared' && e.sharedBy ? ' · from ' + esc(e.sharedBy) : '');
     if (act) return `<div class="card libc on" data-lib="${esc(e.id)}"><button class="libopen" id="openProg" data-act="progOpen" aria-label="Open ${esc(e.name)} details"><div style="flex:1;min-width:0"><b class="libn">${esc(e.name)}</b><div class="sub" style="font-size:12.5px">${meta}</div></div><span class="chip acc libact">Active</span><span class="chev" aria-hidden="true">›</span></button></div>`;
     return `<div class="card libc" data-lib="${esc(e.id)}"><div class="row" style="gap:10px;align-items:center"><div style="flex:1;min-width:0"><b class="libn">${esc(e.name)}</b><div class="sub" style="font-size:12.5px">${meta}</div></div>
-      <button class="btn sec" style="min-height:40px;padding:0 14px;font-size:13px" data-act="libSwitch" data-id="${esc(e.id)}">Switch</button>
+      <button class="btn sec" style="min-height:44px;padding:0 14px;font-size:13px" data-act="libSwitch" data-id="${esc(e.id)}">Switch</button>
       <button class="icon" data-act="libDel" data-id="${esc(e.id)}" aria-label="Delete ${esc(e.name)}">✕</button></div></div>`;
   };
   // one-tap starter: shown whenever the built-in program isn't in My workouts (never added, or deleted), and as the empty state
@@ -2321,7 +2644,7 @@ function programDetailView() {
   progWeek = Math.min(progWeek, p.weeks.length - 1);
   const w = p.weeks[progWeek], multi = p.weeks.length > 1, one = S.library.length < 2;
   return `<div class="screen" id="progDetail">
-    <div class="hdr" style="gap:8px"><button class="backbtn" id="progBack" data-act="progBack" aria-label="Back to My workouts"><span>‹</span>My workouts</button><button class="btn sec" id="shareProg" style="min-height:40px;padding:0 14px;font-size:13.5px" data-act="shareProg">↗ Share program</button></div>
+    <div class="hdr" style="gap:8px"><button class="backbtn" id="progBack" data-act="progBack" aria-label="Back to My workouts"><span>‹</span>My workouts</button><button class="btn sec" id="shareProg" style="min-height:44px;padding:0 14px;font-size:13.5px" data-act="shareProg">↗ Share program</button></div>
     <div><div class="greet">${esc(p.name)}</div><div class="sub">${p.weeks.length} week${multi ? 's' : ''} · ${allDays(p).length} days · ${allDays(p).reduce((n, d) => n + exCount(d), 0)} exercises. Tap a day to see its supersets or set it as your next workout.</div></div>
     <button class="btn sec block" id="shareGroupBtn" style="min-height:48px;font-size:14.5px" data-act="shareGroup">👥 Share to group</button>
     ${multi ? weekBar(progWeek, 'pwk') : ''}
@@ -2380,7 +2703,7 @@ function historyView() {
     <div class="hdr"><div class="brand">BETA <b>FIT</b></div></div>
     <div><div class="greet">History</div><div class="sub">Saved on this device.</div></div>
     ${h.length ? `<div class="tiles"><div class="tile"><b>${h.length}</b><span>Workouts</span></div><div class="tile"><b>${totalSets}</b><span>Sets done</span></div></div>` : ''}
-    ${h.length ? h.map(x => `<div class="card ${openHist === x.id ? 'open' : ''}"><button class="dayhead" data-act="histToggle" data-id="${x.id}"><div class="dn">✓</div><div class="tx"><b>${esc(x.dayName)} — ${esc(x.focus)}</b><span>${x.week ? esc(x.week) + ' · ' : ''}${new Date(x.date).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })} · ${fmt(x.durationSec)} · ${x.setsDone}/${x.setsTotal} sets${entryTotals(x).volKg ? ' · ' + fmtVol(entryTotals(x).volKg, u) + ' ' + u : ''}</span></div><span class="caret">▶</span></button>
+    ${h.length ? h.map(x => `<div class="card ${openHist === x.id ? 'open' : ''}"><button class="dayhead" data-act="histToggle" data-id="${esc(x.id)}"><div class="dn">✓</div><div class="tx"><b>${esc(x.dayName)} — ${esc(x.focus)}</b><span>${x.week ? esc(x.week) + ' · ' : ''}${new Date(x.date).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })} · ${fmt(x.durationSec)} · ${x.setsDone}/${x.setsTotal} sets${entryTotals(x).volKg ? ' · ' + fmtVol(entryTotals(x).volKg, u) + ' ' + u : ''}</span></div><span class="caret">▶</span></button>
       ${openHist === x.id ? `<div style="margin-top:10px">${x.exercises.map(e => `<div class="exrow"><b>${esc(e.name)}</b><div>${e.sets.map(setStr).join(' · ')}</div></div>`).join('')}</div>` : ''}</div>`).join('')
       : `<div class="empty"><div style="font-size:44px">🏋️</div><p style="margin-top:8px">No workouts yet.<br>Finish one and it'll show up here.</p></div>`}
     ${h.length && vt.volKg ? `<div class="sub" id="lifeVol" style="text-align:center">Lifetime volume: ${fmtVol(vt.volKg, u)} ${u} · ${fmtReps(vt.reps)} reps</div>` : ''}
@@ -2482,7 +2805,7 @@ function summaryView() {
     <div class="card"><div class="label" style="margin-bottom:6px">Sets logged</div>${h.exercises.map(e => `<div class="exrow"><b>${esc(e.name)}</b>${h.prs && h.prs.some(p => p.lift === canonicalLift(e.name)) ? '<span class="prb">PR</span>' : ''}<div>${e.sets.map(setStr).join(' · ')}</div></div>`).join('')}</div>
     <div class="note" style="text-align:center">Saved to history. Next up: ${S.program.weeks.length > 1 ? esc(curWeek().name) + ' · ' : ''}${esc(dayOf().name)} — ${esc(dayOf().focus)}</div>
     <button class="btn pri block" data-act="doneSummary">Done</button>
-    <button class="btn ghost block" data-act="shareOpen" data-t="workout" data-id="${h.id}">↗ Share workout</button>
+    <button class="btn ghost block" data-act="shareOpen" data-t="workout" data-id="${esc(h.id)}">↗ Share workout</button>
     <button class="btn sec block" data-act="nav" data-v="history">View history</button>
   </div>`;
 }
@@ -2574,7 +2897,25 @@ function fbListHTML() {
 
 /* ---------- Render ---------- */
 function openDeepLink() { gm = { step: 'deeplink', name: '', code: pendingJoin, dn: userName(), err: '', busy: false, group: null }; pendingJoin = null; modal = 'grp'; }
+// a render that throws must never leave a blank screen: close a damaged workout (a copy is kept), fall back to Home, and as a last resort show a recovery card
+let renderBusy = false, lastModal = null, lastTrig = '';
 function render() {
+  try { return renderInner(); } catch (err) { try { console.error(err); } catch (e) {} return renderRecover(err); }
+}
+function renderRecover(err) {
+  if (renderBusy) return; renderBusy = true;
+  try {
+    if (S.session) { try { localStorage.setItem('forge.v1.session.corrupt', JSON.stringify(S.session)); } catch (e) {} S.session = null; save(); wake(false); toast('That workout could not be shown and was closed. A copy was kept.', 6000); }
+    modal = null; view = 'home'; lbMem = {}; gdMem = {}; spMem = {}; ivMem = {};
+    try { renderInner(); } catch (e2) { try { SY.sel = 'me'; } catch (e) {} renderInner(); }
+  } catch (e3) {
+    const app = $('#app');
+    if (app) app.innerHTML = `<div class="screen"><div class="card" role="alert" style="margin-top:40px"><b style="font-size:20px">Something went wrong</b><div class="sub" style="margin:8px 0 14px">BETA FIT couldn't show this screen. Your workout history is safe on this device.</div><button class="btn pri block" data-act="reloadApp">Reload</button></div></div>`;
+  } finally { renderBusy = false; }
+}
+function renderInner() {
+  const prevModal = lastModal, prevActive = document.activeElement;
+  if (modal && modal !== prevModal && prevActive && prevActive.closest) { const ta = prevActive.closest('[data-act]'); lastTrig = ta ? `[data-act="${ta.dataset.act}"]` : ''; }
   if (pendingRestore && !S.session && !modal && view === 'home') openRestoreLink();
   else if (pendingInvite && !S.session && !modal && view === 'home') openInviteLink();
   else if (pendingJoin && !S.session && !modal && view === 'home') openDeepLink();
@@ -2591,6 +2932,17 @@ function render() {
   else html = homeView();
   app.innerHTML = html + (view === 'active' && S.session ? pausedHTML() : '') + modalHTML();
   app.dataset.modal = modal || '';
+  // every sheet is a dialog with a name; Close buttons get one too
+  app.querySelectorAll('.sheet').forEach(sh => {
+    if (!sh.getAttribute('role')) sh.setAttribute('role', 'dialog');
+    if (!sh.hasAttribute('aria-modal')) sh.setAttribute('aria-modal', 'true');
+    if (!sh.getAttribute('aria-label') && !sh.getAttribute('aria-labelledby')) { const hd = sh.querySelector('b'); sh.setAttribute('aria-label', (hd && hd.textContent.trim()) || 'Dialog'); }
+    if (!sh.hasAttribute('tabindex')) sh.setAttribute('tabindex', '-1');
+  });
+  app.querySelectorAll('.sheet button.icon[data-act="closeModal"]').forEach(b => { if (!b.getAttribute('aria-label')) b.setAttribute('aria-label', 'Close'); });
+  if (modal && modal !== prevModal) { const sh = $('.sheet'); if (sh) { try { sh.focus({ preventScroll: true }); } catch (e) {} } }
+  else if (!modal && prevModal && lastTrig) { const tr = $(lastTrig); if (tr) { try { tr.focus({ preventScroll: true }); } catch (e) {} } lastTrig = ''; }
+  lastModal = modal || null;
   if (modal && modal === sheetKey && modal !== 'seq') { const sh = $('.sheet'); if (sh) sh.scrollTop = sheetTop; }
   if (modal === 'settings' && eraseStep) { const eb = $('#eraseBox'); if (eb) eb.scrollIntoView({ block: 'nearest' }); }
   if (modal === 'seq') { const c = $('.seqrow.cur'); if (c) { const sh = $('#sheet'); sh.scrollTop = Math.max(0, c.offsetTop - sh.clientHeight / 2); } }
@@ -2614,6 +2966,18 @@ function render() {
   const ta = $('#importTA'); if (ta) ta.addEventListener('input', () => { importText = ta.value; });
   ['inW', 'inR'].forEach(id => { const el = $('#' + id); if (el) el.addEventListener('input', saveDraft); });
 }
+// Escape closes the open sheet; Tab stays inside it
+document.addEventListener('keydown', e => {
+  if (!modal) return;
+  if (e.key === 'Escape') { e.preventDefault(); act('closeModal', document.body); return; }
+  if (e.key !== 'Tab') return;
+  const sh = $('.sheet'); if (!sh) return;
+  const f = Array.from(sh.querySelectorAll('button,a[href],input,textarea,select,[tabindex]')).filter(x => !x.disabled && x !== sh && x.tabIndex >= 0 && (x.offsetWidth || x.offsetHeight));
+  if (!f.length) { e.preventDefault(); sh.focus(); return; }
+  const first = f[0], last = f[f.length - 1], a = document.activeElement;
+  if (e.shiftKey && (a === first || a === sh || !sh.contains(a))) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && (a === last || !sh.contains(a))) { e.preventDefault(); first.focus(); }
+});
 const IMPORT_PROMPT = [
   'Convert the workout program I am attaching/pasting (PDF, photo, or text) into BETA FIT program JSON.',
   'Reply with ONE valid JSON object only (no commentary), inside a single code block.',
@@ -2661,10 +3025,24 @@ function handleFile(f) {
     importNote = `"${f.name}" isn't a file type BETA FIT can read. Use a .txt, .csv or .json file, or paste the text into the box below.`;
     render(); return;
   }
-  const rd = new FileReader();
-  rd.onload = () => { importText = String(rd.result || ''); parsed = parseAny(importText); render(); toast('File loaded'); };
-  rd.onerror = () => { importNote = 'Could not read that file.'; render(); };
-  rd.readAsText(f);
+  // look at the first bytes: a PDF / photo / archive renamed to .txt or .json is still not a workout
+  const hd = new FileReader();
+  hd.onerror = () => { importNote = 'Could not read that file.'; render(); };
+  hd.onload = () => {
+    const kind = sniffKind(hd.result);
+    if (kind === 'PDF' || kind === 'photo') { importBlocked = { name: f.name, kind, size: f.size, type }; blockedFile = f; render(); return; }
+    if (kind) { importNote = `"${f.name}" isn't a text file BETA FIT can read. Use a .txt, .csv or .json file, or paste the text into the box below.`; render(); return; }
+    const rd = new FileReader();
+    rd.onload = () => { importText = String(rd.result || ''); runParse(); render(); if (!importNote) toast('File loaded'); };
+    rd.onerror = () => { importNote = 'Could not read that file.'; render(); };
+    rd.readAsText(f);
+  };
+  hd.readAsArrayBuffer(f.slice(0, 16));
+}
+// parsing must never throw into the UI: any failure becomes a visible message
+function runParse() {
+  importNote = null;
+  try { parsed = parseAny(importText); } catch (e) { parsed = null; importNote = "Couldn't read this file as a workout. Check that it is a .txt, .csv or .json workout, or paste the text into the box."; }
 }
 function onFile(e) { const f = e.target.files[0]; handleFile(f); try { e.target.value = ''; } catch (x) {} }
 
@@ -2698,14 +3076,16 @@ function fbText(withMeta = true) {
   if (withMeta) t += `\n\n---\nType: ${d.type}\nContact: ${d.contact.trim() || '(none given)'}\nApp: BETA FIT build ${BUILD}\nDevice: ${navigator.userAgent}\nDate: ${new Date().toISOString()}` + (d.file ? `\nFile I tried to import: ${d.file.name} (${d.file.type || 'unknown type'}, ${fmtSize(d.file.size)}) - not attached` : '');
   return 'BETA FIT feedback - ' + d.type + '\n\n' + t;
 }
+const wf = s => Array.from(String(s == null ? '' : s)).map(c => c.length === 1 && /[\ud800-\udfff]/.test(c) ? '\ufffd' : c).join(''); // lone surrogates (a pair cut in half) would make encodeURIComponent throw
 function fbIssueURL() {
-  const d = fbDraft, first = d.text.trim().split(/\r?\n/)[0];
-  const title = `[${d.type}] ${first.length > 70 ? first.slice(0, 67) + '...' : first}`;
-  const mk = txt => `${txt}\n\n---\n**Type:** ${d.type}\n**Contact:** ${d.contact.trim() || '(none given)'}\n**App:** BETA FIT build ${BUILD}\n**Device:** ${navigator.userAgent}` + (d.file ? `\n**File I tried to import:** ${d.file.name} (${d.file.type || 'unknown type'}, ${fmtSize(d.file.size)}) - drag it into this issue to attach it` : '');
-  let txt = d.text.trim(), url;
+  const d = fbDraft, text = wf(d.text.trim()), first = Array.from(text.split(/\r?\n/)[0]);
+  const title = `[${d.type}] ${first.length > 70 ? first.slice(0, 67).join('') + '...' : first.join('')}`;
+  const mk = txt => `${txt}\n\n---\n**Type:** ${d.type}\n**Contact:** ${wf(d.contact).trim() || '(none given)'}\n**App:** BETA FIT build ${BUILD}\n**Device:** ${wf(navigator.userAgent)}` + (d.file ? `\n**File I tried to import:** ${wf(d.file.name)} (${wf(d.file.type) || 'unknown type'}, ${fmtSize(d.file.size)}) - drag it into this issue to attach it` : '');
   const build = tx => `${FB_REPO}?title=${encodeURIComponent(title)}&body=${encodeURIComponent(mk(tx))}&labels=${encodeURIComponent(FB_LABEL[d.type] || 'feedback')}`;
-  url = build(txt);
-  while (url.length > 7500 && txt.length > 100) { txt = txt.slice(0, Math.floor(txt.length * 0.8)); url = build(txt + ' ...(shortened - full text was copied/saved in the app)'); }
+  const NOTE = ' ...(shortened - full text was copied/saved in the app)';
+  let cps = Array.from(text), url = build(text);
+  while (url.length > 7500 && cps.length > 100) { cps = cps.slice(0, Math.floor(cps.length * 0.8)); url = build(cps.join('') + NOTE); } // cut on code points: never inside an emoji
+  if (url.length > 7500) url = build('(text too long for a link - full text was copied/saved in the app)');
   return url;
 }
 function fbSave(via) {
@@ -2817,9 +3197,9 @@ function act(a, t) {
     case 'resume': view = 'active'; wake(true); render(window.scrollTo(0, 0)); break;
     case 'homeKeep': modal = null; view = 'home'; render(window.scrollTo(0, 0)); break;
     case 'discard': discard(); break;
-    case 'complete': completeSet(); break;
+    case 'complete': if (Date.now() < tapLock) break; tapLock = Date.now() + 350; completeSet(); break; // a double-tap must never log two sets
     case 'back': backStep(); break;
-    case 'skip': skipStep(); break;
+    case 'skip': if (s && s.phase === 'rest' && Date.now() < tapLock) break; skipStep(); break; // 2nd tap of a double-tap lands on 'Skip rest' at the same spot: ignore it
     case 'exit': modal = 'exit'; render(); break;
     case 'seq': modal = 'seq'; render(); break;
     case 'closeModal': eraseStep = 0; bkShow = false; if (modal === 'grp' && (gm.step === 'deeplink' || gm.step === 'ivjoin')) cleanJoinUrl(); if (modal === 'restore') cleanRestoreHash(); if (modal === 'feedback') { if (fbDraft.id) fbReset(); modal = fbBack; fbBack = null; } else modal = null; render(); break;
@@ -2834,7 +3214,8 @@ function act(a, t) {
     case 'restAdd': if (s && s.phase === 'rest') { s.restEnd += +d.n * 1000; s.restTotal = Math.max(s.restTotal, Math.ceil((s.restEnd - Date.now()) / 1000)); if (s.restEnd <= Date.now()) endRest(); else { save(); render(); } } break;
     case 'wstep': case 'rstep': {
       const el = $(a === 'wstep' ? '#inW' : '#inR'); if (!el) break;
-      let v = (parseFloat(el.value) || 0) + parseFloat(d.d); if (v < 0) v = 0;
+      const cur = NUM_RE.test(String(el.value).trim()) ? parseFloat(el.value) : 0, mx = a === 'wstep' ? maxW() : MAX_REPS;
+      let v = cur + parseFloat(d.d); if (v < 0) v = 0; if (v > mx) v = mx;
       el.value = Math.round(v * 100) / 100 || ''; saveDraft(); break;
     }
     case 'settings': modal = 'settings'; eraseStep = 0; render(); break;
@@ -2846,6 +3227,8 @@ function act(a, t) {
     case 'shareSave': cardBlob().then(b => { if (b) { downloadBlob(b, shareFile()); toast('Image saved'); } }); break;
     case 'shareCopy': copyText(shareText()).then(ok => toast(ok ? 'Summary copied' : 'Could not copy')); break;
     case 'reloadApp': location.reload(); break;
+    case 'exportBackup': exportBackup(); break;
+    case 'dismissStore': { const el = $('#storeBar'); if (el) el.remove(); break; }
     case 'dismissUpd': updDismissed = true; syncBanner(); break;
     case 'setRest': S.settings.rest = +d.n; save(); render(); break;
     case 'setMode': S.settings.restMode = d.m; save(); render(); break;
@@ -2858,7 +3241,7 @@ function act(a, t) {
     case 'doDay': S.selWeek = progWeek == null ? S.selWeek : progWeek; S.selDay = +d.i; libSyncActive(); save(); view = 'start'; progDetail = false; openDay = null; render(window.scrollTo(0, 0)); toast('Next workout: ' + (S.program.weeks.length > 1 ? curWeek().name + ' · ' : '') + dayOf().name); break;
     case 'histToggle': openHist = openHist === d.id ? null : d.id; render(); break;
     case 'doneSummary': view = 'home'; render(window.scrollTo(0, 0)); break;
-    case 'parse': { const ta = $('#importTA'); if (ta) importText = ta.value; parsed = parseAny(importText); importNote = null; importBlocked = null; blockedFile = null; render(); break; }
+    case 'parse': { const ta = $('#importTA'); if (ta) importText = ta.value; importBlocked = null; blockedFile = null; runParse(); render(); break; }
     case 'loadSample': {
       const p = builtin(), d = p.defaults || {}, r = libAdd(p, 'built-in');
       if (S.session) { save(); view = 'program'; render(window.scrollTo(0, 0)); toast(r.added ? 'Saved to My workouts. Finish or end the current workout to switch.' : 'Finish or end the current workout first.'); break; }
@@ -2867,8 +3250,9 @@ function act(a, t) {
     }
     case 'useParsed': {
       if (!parsed || !allDays(parsed.program).length) break;
-      const nm = ($('#progName') || {}).value; const p = parsed.program; p.name = (nm || p.name || 'My program').trim(); p.source = 'import';
-      const r = libAdd(p, 'imported'); parsed = null;
+      const nm = ($('#progName') || {}).value; const p = parsed.program; p.name = cp((nm || p.name || 'My program').trim(), 200); p.source = 'import';
+      const before = S.library.length, r = libAdd(p, 'imported'); parsed = null;
+      if (!save()) { if (r.added) S.library = S.library.slice(0, before); toast('Storage is full - the program was NOT saved. Free some space (Settings > Erase) and try again.', 6000); render(); break; }
       if (S.session) { save(); view = 'program'; render(window.scrollTo(0, 0)); toast('Saved to My workouts. Finish or end the current workout to switch.'); break; }
       libActivate(r.entry); save(); view = 'start'; render(window.scrollTo(0, 0)); toast(r.added ? 'Program saved' : 'Already in My workouts - selected'); break;
     }
@@ -2903,7 +3287,7 @@ setInterval(() => {
     if (u) u.textContent = now < tm.start ? 'get ready' : 'seconds left — go!';
   }
 }, 250);
-document.addEventListener('visibilitychange', () => { if (!document.hidden && S.session && S.session.phase === 'work') wake(true); });
+document.addEventListener('visibilitychange', () => { if (!document.hidden && S.session && !S.session.pausedAt) wake(true); });
 
 /* ---------- In-app update check (static hosting: compare the BUILD constant in the live file) ---------- */
 let updNew = null, updDismissed = false, updLast = 0;
@@ -2927,10 +3311,12 @@ function syncBanner() {
 }
 document.addEventListener('visibilitychange', () => { if (!document.hidden) checkUpdate(); });
 setTimeout(() => checkUpdate(true), 800);
+// offline start: sw.js caches the app shell. updateViaCache:'none' keeps sw.js itself fresh, and it never touches the '?v=' request checkUpdate() makes, so the update banner still fires.
+if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) window.addEventListener('load', () => { try { navigator.serviceWorker.register('sw.js', { scope: './', updateViaCache: 'none' }).catch(() => {}); } catch (e) {} });
 /* ---------- Groups boot: deep link (?join=CODE), reconnect handlers, first sync ---------- */
 (function () { try { const t = (new URLSearchParams(location.search).get('invite') || '').trim(); if (t) pendingInvite = INVITE_RE.test(t) ? { token: t } : { token: '', bad: true }; } catch (e) {} })();
-// restore deep link uses the URL HASH (#restore=<backupCode>) so the code never reaches a server or log; it is removed from the URL as soon as it is answered
-(function () { try { const m = /^#restore=(.*)$/.exec(location.hash); if (m) { let t = ''; try { t = decodeURIComponent(m[1]).trim(); } catch (e) {} pendingRestore = BK_RE.test(t) ? { token: t } : { token: '', bad: true }; } } catch (e) {} })();
+// restore deep link uses the URL HASH (#restore=<backupCode>) so the code never reaches a server or log; it is removed from the URL the moment it has been read
+(function () { try { const m = /^#restore=(.*)$/.exec(location.hash); if (m) { let t = ''; try { t = decodeURIComponent(m[1]).trim(); } catch (e) {} pendingRestore = BK_RE.test(t) ? { token: t } : { token: '', bad: true }; cleanRestoreHash(); } } catch (e) {} })(); // the code lives in memory only from here on: it never stays in the address bar / history while the confirm sheet is open
 (function () { try { const c = normCode(new URLSearchParams(location.search).get('join')); if (c) { if (c.length >= 4) pendingJoin = c; else cleanJoinUrl(); } } catch (e) {} })();
 window.addEventListener('online', () => { syncBackoff = 0; syncNow().catch(() => {}); setSyncStat(); if (view === 'home' && curGroup()) lbAuto(); });
 window.addEventListener('offline', () => setSyncStat('offline'));
@@ -2940,6 +3326,10 @@ setTimeout(async () => { if (SY.token) { await refreshGroups(); syncNow().catch(
 window.__pollMs = 15000;
 (function pollLoop() { setTimeout(() => { if (SY.token && !document.hidden && !S.session && (view === 'home' || view === 'group') && ((SY.requests || []).length || creatorGroups().length)) refreshGroups().catch(() => {}); if (SY.token && view === 'group' && !modal && isCreatorOf(gdId)) ivAuto(gdId); pollLoop(); }, window.__pollMs); })();
 render();
+if (S.__rescued) { delete S.__rescued; if (save()) { try { localStorage.removeItem(RESCUE_LS); } catch (e) {} } } // a workout parked by a full-storage save is now part of the saved history
+syncStoreBar();
+if (S.session && !S.session.pausedAt) wake(true); // a workout was running when the page reloaded: ask for the screen lock again
+if (bootNote) { const n = bootNote; bootNote = ''; setTimeout(() => toast(n, 8000), 400); }
 // test hooks (harmless in production)
 window.__forge = { BUILD, music: { parseSpotify, musicFor, normMusic, DEFAULT_MUSIC, isDefMusic, spOpenLink, cleanMusicName, SP_FALLBACK_MS, get prefHttps() { return muPreferHttps; } }, getSync: () => SY, saveSync, syncNow, pendingEntries, syncEntry, lbGet, fetchLB, fetchGD, fetchSP, API_BASE, inviteText, shareLink, ivText, ivMem, spMem, lbMem, periodTotals, ringModel, allTimeTrend, weekStartIdx, entryTotals, volumeTotals, weeklyVolume, fmtVol, programFile, shareProgram, shareText, canonicalLift, streakCalc, dayIdx, weekOf, liftStats, liftSetList, gainOf, detectPRs, streakInfo, checkUpdate, drawCard, cardSpec, parseText, parseAny, buildSteps, getState: () => S, BUILTIN_PROGRAM, builtin, estSec, repsMax };
 </script>
