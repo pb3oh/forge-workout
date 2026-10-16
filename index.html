@@ -79,8 +79,9 @@ h1,h2,h3,p{margin:0}
 
 /* nav */
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;box-sizing:border-box;z-index:20;display:grid;grid-template-columns:repeat(5,1fr);background:rgba(11,11,13,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:6px 6px calc(env(safe-area-inset-bottom) + 6px)}
-.nav button{min-height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--dim);font-size:11px;font-weight:700;letter-spacing:.04em}
-.nav button i{font-style:normal;font-size:20px;line-height:1}
+.nav button{min-height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--dim);font-size:10.5px;font-weight:700;letter-spacing:.03em}
+.nav button i{font-style:normal;display:block;height:24px;line-height:0}
+.nav button i svg{display:block}
 .nav button.on{color:var(--acc)}
 .nav button.navstart{position:relative;justify-content:flex-end;color:var(--acc);padding-bottom:3px}
 .nav .navstart .sc{position:absolute;left:50%;top:-30px;transform:translateX(-50%);width:62px;height:62px;border-radius:50%;display:grid;place-items:center;color:#1a0a00;background:linear-gradient(180deg,var(--acc2),var(--acc));border:4px solid var(--bg);box-shadow:0 0 0 2px rgba(255,106,26,.55),0 8px 24px rgba(255,106,26,.5);transition:transform .12s}
@@ -338,6 +339,10 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:44px;di
 .nxt{display:inline-block;padding:1px 7px;border-radius:7px;background:var(--accsoft);border:1px solid rgba(255,106,26,.4);color:var(--acc2)!important;font-size:10px!important;font-weight:800;letter-spacing:.08em;margin-left:6px;vertical-align:middle}
 .erase{margin-top:30px;padding-top:18px;border-top:1px solid var(--line)}
 .erase .go{width:100%;min-height:44px;border-radius:14px;color:var(--bad);font-weight:700;font-size:14px;border:1px solid rgba(255,90,90,.3)}
+
+.erase.rst .go{color:var(--acc2);border-color:rgba(255,106,26,.4)}
+.erase.rst+.erase{margin-top:14px;padding-top:0;border-top:0}
+.rstbox{border-color:rgba(255,106,26,.5);background:rgba(255,106,26,.08)}
 .erasebox{border:1px solid rgba(255,90,90,.45);background:rgba(255,90,90,.08);border-radius:16px;padding:14px}
 .volcard .volstrip{background:transparent;border:0;margin-top:8px;padding:0}
 .volcard .volstrip b{font-size:26px;color:var(--acc2)}
@@ -432,11 +437,11 @@ html{overscroll-behavior-y:contain}
 .callout .h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .callout .h b{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);font-weight:900}
 .callout .h span{color:var(--mut);font-size:11px;font-weight:600}
-.callout .g{display:grid;grid-template-columns:1.15fr .8fr .6fr 1fr;gap:6px}
-.callout .g>div{background:rgba(0,0,0,.28);border-radius:12px;padding:7px 8px;min-width:0}
-.callout .g small{display:block;font-size:9.5px;letter-spacing:.07em;font-weight:800;color:var(--mut);text-transform:uppercase;white-space:nowrap}
-.callout .g b{display:block;font-size:17px;font-weight:900;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
-.callout .g b i{font-style:normal;font-size:10px;color:var(--mut);font-weight:700;margin-left:2px}
+.callout .g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.callout .g>div{background:rgba(0,0,0,.28);border-radius:12px;padding:9px 11px 10px;min-width:0}
+.callout .g small{display:block;font-size:11px;line-height:1.2;letter-spacing:.06em;font-weight:800;color:var(--mut);text-transform:uppercase;white-space:nowrap}
+.callout .g b{display:flex;align-items:baseline;flex-wrap:wrap;column-gap:4px;font-size:clamp(20px,6.4vw,26px);line-height:1.15;font-weight:900;margin-top:3px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.callout .g b i{font-style:normal;font-size:12px;color:var(--mut);font-weight:700}
 .callout .g b.up{color:var(--ok)}.callout .g b.dn{color:var(--mut)}
 .tbars{display:grid;gap:7px;margin:12px 0 2px;text-align:left}
 .tbars .tb{display:grid;grid-template-columns:70px minmax(0,1fr) auto;align-items:center;gap:8px;font-size:11.5px;color:var(--mut);font-weight:700}
@@ -505,7 +510,7 @@ html{overscroll-behavior-y:contain}
    The app was renamed FORGE -> BETA FIT; the storage keys 'forge.v1' / 'forge.sync.v1', the API host (forge-api) and the repo URL
    keep the old name on purpose: renaming them would orphan every existing install's data and links.
    ========================================================= */
-const BUILD = '2026.10.15-14'; // bump on every deploy; the in-app update banner compares this against the live file
+const BUILD = '2026.10.15-15'; // bump on every deploy; the in-app update banner compares this against the live file
 const LS = 'forge.v1';
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1357,7 +1362,7 @@ function detectPRs(prevHistory, entry) {
 }
 const dShort = ts => new Date(ts).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 const userName = () => String((S.settings && S.settings.name) || '').trim();
-let view = S.session ? 'active' : 'home', modal = null, openDay = null, openHist = null, progWeek = null, progDetail = false, cdWeek = 0, eraseStep = 0;
+let view = S.session ? 'active' : 'home', modal = null, openDay = null, openHist = null, progWeek = null, progDetail = false, cdWeek = 0, eraseStep = 0, resetStep = 0, resetBusy = false, resetErr = '';
 let importText = '', importFile = '', importNote = null, importBlocked = null, parsed = null;
 let fbDraft = { type: 'Idea', text: '', contact: '', id: null, file: null, status: '' }, fbBack = null;
 let lastSummaryEl = null;
@@ -1513,9 +1518,17 @@ function finish() {
 function discard() { const from = view; S.session = null; modal = null; view = from === 'start' ? 'start' : 'home'; save(); wake(false); render(); }
 
 /* ---------- Views ---------- */
+/* thin-stroke line icons for the bottom nav (currentColor: orange when active, muted grey otherwise; decorative, the label names the button) */
+const navIco = p => `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${p}</svg>`;
+const NAV_ICO = {
+  home: navIco('<path d="M3 11l9-7.5L21 11v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'),
+  program: navIco('<rect x="5" y="4" width="14" height="17" rx="2.5"/><path d="M9 4.5h6M8.8 11h6.4M8.8 15h4.4"/>'),
+  history: navIco('<path d="M3.5 3.5v17h17"/><path d="M7.5 15l3.8-4 3 3 5-6.5"/>'),
+  stats: navIco('<path d="M8 4h8v5.5a4 4 0 0 1-8 0zM8 6H4.5v1.2A3 3 0 0 0 8 10M16 6h3.5v1.2A3 3 0 0 1 16 10M12 13.5V17M8.5 20.5h7M10 17h4"/>')
+};
 function navHTML() {
-  const rs = !!S.session, cv = view === 'group' ? 'home' : view, tab = ([v, i, l]) => `<button class="${cv === v ? 'on' : ''}" data-act="nav" data-v="${v}"${cv === v ? ' aria-current="page"' : ''}><i>${i}</i>${l}</button>`;
-  return `<nav class="nav">${tab(['home', '🏠', 'Home'])}${tab(['program', '📋', 'Program'])}<button class="navstart ${view === 'start' ? 'on' : ''}" id="navStart" data-act="nav" data-v="start" aria-label="${rs ? 'Resume workout' : 'Start workout'}"${view === 'start' ? ' aria-current="page"' : ''}><span class="sc">${rs ? PLAYICO : DUMBBELL}</span><span class="sl">${rs ? 'Resume' : 'Start'}</span></button>${tab(['history', '📈', 'History'])}${tab(['stats', '🏆', 'Stats'])}</nav>`;
+  const rs = !!S.session, cv = view === 'group' ? 'home' : view, tab = ([v, l]) => `<button class="${cv === v ? 'on' : ''}" data-act="nav" data-v="${v}"${cv === v ? ' aria-current="page"' : ''}><i aria-hidden="true">${NAV_ICO[v]}</i>${l}</button>`;
+  return `<nav class="nav">${tab(['home', 'Home'])}${tab(['program', 'Program'])}<button class="navstart ${view === 'start' ? 'on' : ''}" id="navStart" data-act="nav" data-v="start" aria-label="${rs ? 'Resume workout' : 'Start workout'}"${view === 'start' ? ' aria-current="page"' : ''}><span class="sc">${rs ? PLAYICO : DUMBBELL}</span><span class="sl">${rs ? 'Resume' : 'Start'}</span></button>${tab(['history', 'History'])}${tab(['stats', 'Stats'])}</nav>`;
 }
 function blocksPreview(day, limit) {
   return day.blocks.slice(0, limit || 99).map((b, bi) => `<div class="blk"><div class="n">${bi + 1}</div><div class="t">${b.kind === 'cardio' || b.kind === 'abs' ? `<div><b style="font-weight:600">${b.kind === 'cardio' ? 'Cardio circuit' : 'Ab circuit'}</b></div>` : ''}${b.exercises.map((e, ei) => `<div><b style="font-weight:600">${b.exercises.length > 1 ? String.fromCharCode(65 + ei) + ' · ' : ''}${esc(e.name)}</b> <small>${e.sets.length}× ${esc(summarizeReps(e.sets))}</small></div>`).join('')}</div></div>`).join('');
@@ -1691,6 +1704,7 @@ function apiShape(method, path, d) {
     }
     if (p === '/register') return typeof d.deviceToken === 'string' && d.deviceToken && typeof d.userId === 'string' && d.userId ? d : null;
     if (p === '/groups' || p === '/groups/join' || p === '/groups/join-invite' || /\/rotate-code$/.test(p)) { const g = cleanGroup(d.group); return g ? Object.assign({}, d, { group: g }) : null; }
+    if (p === '/workouts/reset') return d.reset === true ? d : null;
     if (p === '/workouts/sync') return d.rejected === undefined || Array.isArray(d.rejected) ? d : null;
     if (/\/pin$/.test(p)) return d.pinnedProgram == null || isObj(d.pinnedProgram) ? d : null;
     if (p === '/programs' || /\/invites$/.test(p)) return typeof d.id === 'string' || typeof d.inviteId === 'string' ? d : null;
@@ -1809,7 +1823,7 @@ function syncStatHTML() {
 }
 function setSyncStat(s) { if (s) syncState = s; const el = $('#syncStat'); if (el) el.outerHTML = syncStatHTML(); }
 async function syncNow() {
-  if (!SY.token || !SY.groups.length) return;
+  if (!SY.token || !SY.groups.length || resetBusy) return;
   if (syncing) { syncAgain = true; return; }
   clearTimeout(syncTimer);
   if (navigator.onLine === false) { setSyncStat('offline'); return; }
@@ -2400,6 +2414,34 @@ async function leaveGroup() {
   delete gdMem[g.id]; delete spMem[g.id]; delete SY.pinDismiss[g.id]; saveSync(); Object.keys(lbMem).forEach(k => { if (k.startsWith(g.id + '|')) delete lbMem[k]; });
   gdId = null; gdLeave = 0; view = 'home'; render(window.scrollTo(0, 0)); toast('Left ' + g.name);
 }
+/* Reset my stats: clears ONLY this device's history + derived stats (S.history, lastSummaryId, sync bookkeeping) and this user's shared workouts on the server
+   (POST /workouts/reset), so group totals drop. Programs, library, settings, groups and the sync identity are kept. Server first: if it can't be reached nothing is
+   changed (so local and group totals never disagree). With history empty there is nothing pending, so no old workout is re-sent afterwards. */
+async function resetStats() {
+  if (resetStep !== 1 || resetBusy) return;
+  resetBusy = true; resetErr = ''; render();
+  let fail = '';
+  try {
+    if (SY.token) {
+      for (let i = 0; syncing && i < 150; i++) await new Promise(res => setTimeout(res, 200)); // let an in-flight upload finish first, never race it
+      const r = await api('POST', '/workouts/reset');
+      if (!r.ok) fail = r.net ? "Can't reach BETA FIT groups, so nothing was reset. Check your connection and try again." : r.status === 401 ? 'Your group sign-in expired, so nothing was reset. Restore your account (Settings) and try again.' : 'Nothing was reset. ' + apiMsg(r);
+    }
+    if (!fail) {
+      S.history = []; S.lastSummaryId = null; openHist = null;
+      const saved = save();
+      try { localStorage.removeItem(RESCUE_LS); } catch (e) {}
+      if (SY.token) { SY.sent = {}; SY.lb = {}; SY.rejected = 0; saveSync(); }
+      lbMem = {}; gdMem = {};
+      resetBusy = false; resetStep = 0; resetErr = ''; modal = null; if (view !== 'active') view = 'home';
+      render(window.scrollTo(0, 0));
+      toast(saved ? 'Stats reset. Programs and groups are untouched.' : 'Stats reset, but storage is full - free some space so it sticks.', saved ? 2800 : 6000);
+      return;
+    }
+  } catch (e) { fail = 'Something went wrong, so nothing was reset. Please try again.'; }
+  resetBusy = false; resetErr = fail; render();
+  if (modal === 'settings') { const eb = $('#resetErr'); if (eb) eb.scrollIntoView({ block: 'nearest' }); }
+}
 function signOutGroups(leave) {
   const tok = SY.token, ids = SY.groups.map(g => g.id);
   if (leave && tok) ids.forEach(id => { try { fetch(API_BASE + '/groups/' + encodeURIComponent(id) + '/leave', { method: 'POST', headers: { Authorization: 'Bearer ' + tok }, keepalive: true }).catch(() => {}); } catch (e) {} });
@@ -2880,6 +2922,11 @@ function modalHTML() {
         <button class="btn sec block" id="restoreBtn" data-act="restoreOpen" data-from="settings" style="margin-top:10px">↺ Restore account</button></div>
       <div style="margin-top:18px"><div class="sub" style="margin-bottom:6px">Feedback</div><button class="btn sec block" data-act="feedback" data-from="settings">💬 Send feedback</button>${fbListHTML()}</div>
       <div class="sub" id="buildLbl" style="text-align:center;margin-top:18px;font-size:12px">BETA FIT build ${esc(BUILD)}${updNew ? ' · <b style="color:var(--acc2)">update available</b>' : ''}</div>
+      <div class="erase rst" id="resetSec">${resetStep ? `<div class="erasebox rstbox" id="resetBox" role="alertdialog" aria-label="Confirm reset my stats"><b style="font-size:16px">Reset your stats?</b>
+        <div class="sub" id="resetCopy" style="font-size:13px;margin:6px 0 12px">${SY.token ? 'Clears your workout history and your totals in your groups. Programs and groups stay.' : 'Clears your workout history and your totals on this device. Programs stay.'}</div>
+        ${resetErr ? `<div class="sherr" id="resetErr" role="alert" style="margin:0 0 12px">${esc(resetErr)}</div>` : ''}
+        <div style="display:grid;gap:8px"><button class="btn sec" id="resetCancel" data-act="resetCancel" ${resetBusy ? 'disabled' : ''}>Cancel, keep my stats</button><button class="btn danger" id="resetConfirm" data-act="resetConfirm" ${resetBusy ? 'disabled' : ''}>${resetBusy ? 'Resetting…' : resetErr ? 'Try again' : 'Yes, reset my stats'}</button></div></div>`
+        : `<button class="go" id="resetBtn" data-act="resetAsk">↺ Reset my stats</button><div class="fbhint" style="margin-top:6px;text-align:center">Start your totals over. Programs, groups and settings stay.</div>`}</div>
       <div class="erase" id="eraseSec">${eraseStep ? `<div class="erasebox" id="eraseBox" role="alertdialog" aria-label="Confirm erase"><b style="font-size:16px">Erase everything on this device?</b>
         <div class="sub" style="font-size:13px;margin:6px 0 12px">This deletes your workout history, PRs, name, settings and saved workouts (My workouts). It can't be undone.</div>
         ${SY.token ? `<label class="chk" id="eraseSyncRow"><input type="checkbox" id="eraseSync" ${eraseSyncOpt ? 'checked' : ''}><span>Also leave my groups and remove my group sign-in from this device. Totals already shared with a group stay there.</span></label>` : ''}
@@ -2945,6 +2992,7 @@ function renderInner() {
   lastModal = modal || null;
   if (modal && modal === sheetKey && modal !== 'seq') { const sh = $('.sheet'); if (sh) sh.scrollTop = sheetTop; }
   if (modal === 'settings' && eraseStep) { const eb = $('#eraseBox'); if (eb) eb.scrollIntoView({ block: 'nearest' }); }
+  if (modal === 'settings' && resetStep) { const rb = $('#resetBox'); if (rb) rb.scrollIntoView({ block: 'nearest' }); }
   if (modal === 'seq') { const c = $('.seqrow.cur'); if (c) { const sh = $('#sheet'); sh.scrollTop = Math.max(0, c.offsetTop - sh.clientHeight / 2); } }
   const fi = $('#fileIn'); if (fi) fi.addEventListener('change', onFile);
   bindDrop();
@@ -3177,7 +3225,7 @@ function act(a, t) {
     case 'pinUnpin': pinSet(d.id, null); break;
     case 'shareGroup': sg = { busy: '', msg: '', done: {} }; modal = 'sharegrp'; render(); break;
     case 'sgPick': shareToGroup(d.id); break;
-    case 'nav': modal = null; eraseStep = 0; gdLeave = 0; view = d.v; if (d.v === 'program') { progDetail = false; openDay = null; Object.keys(spMem).forEach(k => { if (spMem[k]) spMem[k].tried = 0; }); } render(window.scrollTo(0, 0)); break;
+    case 'nav': modal = null; eraseStep = 0; if (!resetBusy) { resetStep = 0; resetErr = ''; } gdLeave = 0; view = d.v; if (d.v === 'program') { progDetail = false; openDay = null; Object.keys(spMem).forEach(k => { if (spMem[k]) spMem[k].tried = 0; }); } render(window.scrollTo(0, 0)); break;
     case 'changeDay': cdWeek = Math.min(S.selWeek, S.program.weeks.length - 1); modal = 'pickday'; render(); break;
     case 'cdwk': { const n = cdWeek + +d.d; if (n >= 0 && n < S.program.weeks.length) { cdWeek = n; render(); } break; }
     case 'cdPick': S.selWeek = cdWeek; S.selDay = +d.i; libSyncActive(); save(); modal = null; render(); toast('Next workout: ' + (S.program.weeks.length > 1 ? curWeek().name + ' · ' : '') + dayOf().name); break;
@@ -3202,7 +3250,7 @@ function act(a, t) {
     case 'skip': if (s && s.phase === 'rest' && Date.now() < tapLock) break; skipStep(); break; // 2nd tap of a double-tap lands on 'Skip rest' at the same spot: ignore it
     case 'exit': modal = 'exit'; render(); break;
     case 'seq': modal = 'seq'; render(); break;
-    case 'closeModal': eraseStep = 0; bkShow = false; if (modal === 'grp' && (gm.step === 'deeplink' || gm.step === 'ivjoin')) cleanJoinUrl(); if (modal === 'restore') cleanRestoreHash(); if (modal === 'feedback') { if (fbDraft.id) fbReset(); modal = fbBack; fbBack = null; } else modal = null; render(); break;
+    case 'closeModal': eraseStep = 0; if (!resetBusy) { resetStep = 0; resetErr = ''; } bkShow = false; if (modal === 'grp' && (gm.step === 'deeplink' || gm.step === 'ivjoin')) cleanJoinUrl(); if (modal === 'restore') cleanRestoreHash(); if (modal === 'feedback') { if (fbDraft.id) fbReset(); modal = fbBack; fbBack = null; } else modal = null; render(); break;
     case 'feedback': openFeedback(d.from); break;
     case 'fbType': fbDraft.type = d.t; render(); break;
     case 'fbSend': fbSend(); break;
@@ -3218,7 +3266,7 @@ function act(a, t) {
       let v = cur + parseFloat(d.d); if (v < 0) v = 0; if (v > mx) v = mx;
       el.value = Math.round(v * 100) / 100 || ''; saveDraft(); break;
     }
-    case 'settings': modal = 'settings'; eraseStep = 0; render(); break;
+    case 'settings': modal = 'settings'; eraseStep = 0; resetStep = 0; resetErr = ''; render(); break;
     case 'editName': modal = 'settings'; render(); { const ni = $('#nameIn'); if (ni) { ni.focus(); ni.select(); } } break;
     case 'shareOpen': shareSt = { tpl: d.t === 'workout' ? 'workout' : 'stats', id: d.id || null }; modal = 'share'; render(); break;
     case 'shareTpl': if (d.t === 'workout' && !S.history.length) break; shareSt.tpl = d.t; if (d.t === 'workout' && !shareSt.id) shareSt.id = S.history[0].id; render(); break;
@@ -3234,7 +3282,10 @@ function act(a, t) {
     case 'setMode': S.settings.restMode = d.m; save(); render(); break;
     case 'setUnit': S.settings.unit = d.u; save(); render(); break;
     case 'toggleWake': S.settings.wake = !S.settings.wake; save(); render(); break;
-    case 'eraseAsk': eraseStep = 1; render(); break;
+    case 'eraseAsk': eraseStep = 1; resetStep = 0; resetErr = ''; render(); break;
+    case 'resetAsk': resetStep = 1; resetErr = ''; eraseStep = 0; render(); break;
+    case 'resetCancel': if (resetBusy) break; resetStep = 0; resetErr = ''; render(); break;
+    case 'resetConfirm': resetStats(); break;
     case 'eraseCancel': eraseStep = 0; render(); break;
     case 'eraseConfirm': if (eraseStep !== 1) break; eraseStep = 0; if (SY.token) { if (eraseSyncOpt) signOutGroups(true); else { SY.sent = {}; SY.lb = {}; saveSync(); lbMem = {}; } } eraseSyncOpt = true; localStorage.removeItem(LS); S = freshState(); progWeek = null; openDay = null; progDetail = false; homeExpanded = false; view = 'home'; modal = null; parsed = null; importText = ''; render(window.scrollTo(0, 0)); toast('All data erased'); break;
     case 'openDay': openDay = openDay === +d.i ? null : +d.i; render(); break;
