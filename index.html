@@ -264,13 +264,12 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
 .srow .fl{font-size:24px;line-height:1}
 .srow .tx{flex:1;min-width:0}.srow .tx b{display:block;font-size:16px}.srow .tx span{color:var(--mut);font-size:12.5px}
 .srow .chev{color:var(--dim);font-size:22px}
-.grpcard{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;padding:18px 14px 16px;border-radius:var(--r);border:1.5px dashed rgba(255,106,26,.28);background:rgba(255,255,255,.015);text-align:center;opacity:.72;touch-action:manipulation}
+.grpcard{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;padding:18px 14px 16px;border-radius:var(--r);border:1.5px dashed rgba(255,106,26,.45);background:rgba(255,255,255,.02);text-align:center}
 .grpcard .gi{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,106,26,.45);display:grid;place-items:center;font-size:20px}
 .grpcard b{font-size:17px}
 .grpcard small{color:var(--mut);font-size:13px;line-height:1.4;max-width:280px}
 .grpcard .gb{display:flex;gap:10px;width:100%;margin-top:6px}
-.grpcard .gb span{flex:1;min-height:44px;border-radius:14px;display:grid;place-items:center;font-weight:800;font-size:14px;border:1px solid rgba(255,106,26,.4);color:var(--acc2)}
-.grpcard .gb span:first-child{background:rgba(255,106,26,.28);color:#ffd9bf;border-color:transparent}
+.grpcard .gb .btn{flex:1;min-height:48px;font-size:14px;padding:0 10px;border-radius:14px}
 .dall{border-radius:var(--r);padding:16px 14px 14px;border:1px solid var(--line);background:linear-gradient(170deg,rgba(255,106,26,.12),var(--card) 60%);text-align:center}
 .dall .cap{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--mut);text-transform:uppercase}
 .dall .big{display:block;margin-top:6px;font-size:56px;font-weight:900;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -351,6 +350,82 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
 .updbar .ub{min-height:40px;padding:0 14px;border-radius:12px;background:var(--acc);color:#1a0a00;font-weight:900;touch-action:manipulation}
 .updbar .ux{width:40px;height:40px;border-radius:12px;color:#666;font-size:16px;touch-action:manipulation}
 #shareCv{width:72%;display:block;margin:12px auto 0;border-radius:14px;border:1px solid var(--line);background:#0b0b0d}
+/* groups (build 10) */
+html{overscroll-behavior-y:contain}
+.scoperow{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px}
+.scoperow .scl{min-width:0;flex:1 1 auto}
+.gpill{display:inline-flex;align-items:center;gap:8px;min-height:44px;max-width:100%;padding:0 12px 0 8px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-weight:800;font-size:14px;touch-action:manipulation;flex:0 1 auto;min-width:0}
+.gpill .gi{width:26px;height:26px;border-radius:8px;background:linear-gradient(180deg,var(--acc2),var(--acc));display:grid;place-items:center;color:#1a0a00;font-size:13px;flex:none}
+.gpill .gn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.gpill small{color:var(--mut);font-weight:700;font-size:11.5px;flex:none}
+.gpill u{text-decoration:none;color:var(--mut);font-size:11px;flex:none}
+.scoperow .gr2{display:flex;align-items:center;gap:4px;flex:none}
+.avstack{display:flex;align-items:center;min-height:44px;padding:0 4px;touch-action:manipulation}
+.avstack .av{margin-left:-7px}.avstack .av:first-child{margin-left:0}
+.av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:11.5px;font-weight:900;color:#1a0a00;border:2px solid var(--bg);box-sizing:border-box;flex:none}
+.av.lg{width:34px;height:34px;font-size:14px}
+.icon.sm{width:40px;height:40px;border-radius:12px;font-size:17px}
+.icon.spin{animation:gspin .8s linear infinite}
+@keyframes gspin{to{transform:rotate(360deg)}}
+.syncln{display:flex;align-items:center;gap:6px;margin-top:-6px;font-size:11.5px;color:var(--dim);font-weight:600;min-height:16px}
+.syncstat{display:inline-flex;align-items:center;gap:5px;font-weight:700;color:var(--mut)}
+.syncstat i{width:7px;height:7px;border-radius:50%;background:var(--ok);display:inline-block}
+.syncstat.off{color:var(--warn)}.syncstat.off i{background:var(--warn)}
+.syncstat.ing i{background:var(--acc2);animation:gpulse 1s ease-in-out infinite}
+@keyframes gpulse{50%{opacity:.25}}
+.dring.gr{width:208px;height:208px}
+.mrs{display:flex;flex-direction:column;gap:4px}
+.mr{display:grid;grid-template-columns:16px 28px minmax(0,1fr);align-items:center;gap:9px;padding:6px 9px;border-radius:14px;border:1px solid transparent}
+.mr.me{background:var(--accsoft);border-color:rgba(255,106,26,.55)}
+.mr .rk{font-size:13px;font-weight:900;color:var(--mut);text-align:center}.mr.me .rk,.mr.first .rk{color:var(--acc2)}
+.mr .av{width:28px;height:28px}
+.mr .l1{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:14px;font-weight:700;white-space:nowrap}
+.mr .nm{display:flex;align-items:baseline;gap:6px;min-width:0;flex:0 1 auto}
+.mr .nn{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.mr .rp{color:var(--dim);font-size:10.5px;font-weight:600;flex:none}
+.mr .l1 .v{font-weight:800;font-variant-numeric:tabular-nums;font-size:13.5px;flex:none}
+.mr .l1 .v small{color:var(--mut);font-size:11px;font-weight:700;margin-left:4px}
+.mr.zero .v{color:var(--dim)}
+.you{display:inline-block;padding:1px 7px;border-radius:99px;background:var(--acc);color:#1a0a00;font-size:10px;font-weight:900;letter-spacing:.05em;flex:none}
+.mbar{height:5px;border-radius:3px;background:rgba(255,255,255,.08);margin-top:5px;overflow:hidden}
+.mbar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--acc),var(--acc2))}
+.callout{border-radius:20px;padding:12px 14px;background:linear-gradient(135deg,rgba(255,106,26,.28),rgba(255,106,26,.08));border:1px solid rgba(255,106,26,.6);box-shadow:0 6px 24px rgba(255,106,26,.12)}
+.callout .h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.callout .h b{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);font-weight:900}
+.callout .h span{color:var(--mut);font-size:11px;font-weight:600}
+.callout .g{display:grid;grid-template-columns:1.15fr .8fr .6fr 1fr;gap:6px}
+.callout .g>div{background:rgba(0,0,0,.28);border-radius:12px;padding:7px 8px;min-width:0}
+.callout .g small{display:block;font-size:9.5px;letter-spacing:.07em;font-weight:800;color:var(--mut);text-transform:uppercase;white-space:nowrap}
+.callout .g b{display:block;font-size:17px;font-weight:900;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.callout .g b i{font-style:normal;font-size:10px;color:var(--mut);font-weight:700;margin-left:2px}
+.callout .g b.up{color:var(--ok)}.callout .g b.dn{color:var(--mut)}
+.tbars{display:grid;gap:7px;margin:12px 0 2px;text-align:left}
+.tbars .tb{display:grid;grid-template-columns:70px minmax(0,1fr) auto;align-items:center;gap:8px;font-size:11.5px;color:var(--mut);font-weight:700}
+.tbars .tb em{display:block;height:9px;border-radius:5px;background:rgba(255,255,255,.08);overflow:hidden;font-style:normal}
+.tbars .tb em i{display:block;height:100%;border-radius:5px;background:var(--card2);border-right:0}
+.tbars .tb.now em i{background:linear-gradient(90deg,var(--acc),var(--acc2))}
+.tbars .tb b{color:var(--text);font-variant-numeric:tabular-nums;font-size:12px}
+.sk{background:linear-gradient(90deg,var(--card) 25%,var(--card2) 50%,var(--card) 75%);background-size:200% 100%;animation:gshim 1.3s linear infinite;border-radius:14px}
+@keyframes gshim{to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.sk,.icon.spin,.syncstat.ing i{animation:none}}
+.sk.rg{width:208px;height:208px;border-radius:50%;margin:2px auto 0}
+.sk.pl{height:46px;border-radius:999px}.sk.rw{height:42px}.sk.cl{height:92px;border-radius:20px}
+.invcard{border-color:rgba(255,106,26,.45);background:linear-gradient(170deg,rgba(255,106,26,.14),var(--card) 70%)}
+.invcode{display:block;text-align:center;font-size:34px;font-weight:900;letter-spacing:.18em;margin:10px 0 4px;color:var(--acc2);font-variant-numeric:tabular-nums;user-select:all;-webkit-user-select:all;padding-left:.18em}
+.chk{display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.4;margin:0 0 12px;color:var(--text);min-height:44px;cursor:pointer}
+.chk input{width:22px;height:22px;flex:none;accent-color:var(--acc);margin:1px 0 0}
+.mem{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid rgba(255,255,255,.06)}
+.mem:first-child{border-top:0}
+.mem .mt{flex:1;min-width:0}.mem .mt b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mem .mt small{color:var(--mut);font-size:12px}
+.spc{display:flex;align-items:center;gap:10px}
+.spc .mt{flex:1;min-width:0}.spc .mt b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.spc .mt small{color:var(--mut);font-size:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.gselrow{display:flex;align-items:center;gap:8px}
+.gselrow .seqrow{flex:1;min-width:0}
+.gselrow .dt{flex:none;min-height:44px;padding:0 12px;border-radius:12px;font-size:12.5px;font-weight:700;color:var(--acc2);border:1px solid var(--line)}
+.ptr{position:fixed;top:0;left:50%;transform:translate(-50%,-60px);z-index:80;background:#fff;color:#111;border-radius:99px;padding:8px 16px;font-size:13px;font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,.4);pointer-events:none;transition:transform .12s}
+.fbhint.priv{margin:10px 0 0}
+.sherr{margin-top:10px;font-size:13px;line-height:1.45;color:#ffb3b3;background:rgba(255,90,90,.08);border:1px solid rgba(255,90,90,.4);border-radius:12px;padding:10px 12px}
+.sheetlbl{display:block;margin:12px 0 6px;color:var(--mut);font-size:14px}
 </style>
 </head>
 <body>
@@ -363,7 +438,7 @@ details summary{cursor:pointer;font-weight:700;font-size:14px;min-height:36px;di
    FORGE — single-file workout tracker prototype
    State lives in localStorage ("forge.v1"). No build step.
    ========================================================= */
-const BUILD = '2026.10.15-9'; // bump on every deploy; the in-app update banner compares this against the live file
+const BUILD = '2026.10.15-10'; // bump on every deploy; the in-app update banner compares this against the live file
 const LS = 'forge.v1';
 const $ = (s, r = document) => r.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -976,13 +1051,13 @@ function finish() {
       else { S.selWeek = Math.min((s.weekIdx || 0) + 1, S.program.weeks.length - 1); S.selDay = 0; }
     }
   } else { view = 'home'; toast('Workout discarded - no sets logged'); }
-  S.session = null; modal = null; save(); wake(false); render(window.scrollTo(0, 0));
+  S.session = null; modal = null; save(); wake(false); if (done > 0) syncSoon(); render(window.scrollTo(0, 0));
 }
 function discard() { const from = view; S.session = null; modal = null; view = from === 'start' ? 'start' : 'home'; save(); wake(false); render(); }
 
 /* ---------- Views ---------- */
 function navHTML() {
-  const rs = !!S.session, tab = ([v, i, l]) => `<button class="${view === v ? 'on' : ''}" data-act="nav" data-v="${v}"${view === v ? ' aria-current="page"' : ''}><i>${i}</i>${l}</button>`;
+  const rs = !!S.session, cv = view === 'group' ? 'home' : view, tab = ([v, i, l]) => `<button class="${cv === v ? 'on' : ''}" data-act="nav" data-v="${v}"${cv === v ? ' aria-current="page"' : ''}><i>${i}</i>${l}</button>`;
   return `<nav class="nav">${tab(['home', '🏠', 'Home'])}${tab(['program', '📋', 'Program'])}<button class="navstart ${view === 'start' ? 'on' : ''}" id="navStart" data-act="nav" data-v="start" aria-label="${rs ? 'Resume workout' : 'Start workout'}"${view === 'start' ? ' aria-current="page"' : ''}><span class="sc">${rs ? PLAYICO : DUMBBELL}</span><span class="sl">${rs ? 'Resume' : 'Start'}</span></button>${tab(['history', '📈', 'History'])}${tab(['stats', '🏆', 'Stats'])}</nav>`;
 }
 function blocksPreview(day, limit) {
@@ -1098,18 +1173,416 @@ function streakRowHTML() {
   const st = streakInfo(S.history); if (!st.total) return '';
   return `<button type="button" class="srow" id="streakRow" data-act="nav" data-v="stats"><span class="fl">🔥</span><span class="tx"><b>${st.current > 0 ? st.current + '-day streak' : 'No active streak'}</b><span>${st.current > 0 ? 'Best ' + st.best + ' · ' : 'Best ' + st.best + ' · start a new one today · '}${st.total} workout day${st.total === 1 ? '' : 's'}</span></span><span class="chev">›</span></button>`;
 }
+/* ---------- Groups & sync (backend: forge-api; see forge-backend/README.md) ----------
+   Identity (deviceToken, userId) lives ONLY under localStorage 'forge.sync.v1' (SY), never inside S / 'forge.v1', so it can't reach
+   feedback issues, share cards or program files. All weights are sent in kg; display converts at render time. */
+const API_BASE = 'https://forge-api.philnb331.workers.dev/v1', SYNC_LS = 'forge.sync.v1';
+const freshSync = () => ({ token: '', userId: '', name: '', groups: [], sel: 'me', sent: {}, lb: {}, progIds: {}, rejected: 0, lastSync: 0 });
+function loadSync() { try { const o = JSON.parse(localStorage.getItem(SYNC_LS)); if (o && typeof o === 'object' && !Array.isArray(o)) { const f = Object.assign(freshSync(), o); if (!Array.isArray(f.groups)) f.groups = []; return f; } } catch (e) {} return freshSync(); }
+let SY = loadSync();
+const saveSync = () => { try { localStorage.setItem(SYNC_LS, JSON.stringify(SY)); } catch (e) {} };
+const curGroup = () => SY.token && SY.sel !== 'me' ? SY.groups.find(g => g.id === SY.sel) || null : null;
+const normCode = c => String(c || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
+const fmtCode = c => String(c || '');
+async function api(method, path, body) {
+  const h = {}; if (SY.token) h.Authorization = 'Bearer ' + SY.token; if (body !== undefined) h['Content-Type'] = 'application/json';
+  const ac = typeof AbortController === 'function' ? new AbortController() : null, to = setTimeout(() => { try { ac && ac.abort(); } catch (e) {} }, 20000);
+  let r;
+  try { r = await fetch(API_BASE + path, { method, headers: h, body: body !== undefined ? JSON.stringify(body) : undefined, cache: 'no-store', signal: ac ? ac.signal : undefined }); }
+  catch (e) { clearTimeout(to); return { ok: false, net: true, status: 0, code: 'network' }; }
+  clearTimeout(to);
+  let data = null; try { data = await r.json(); } catch (e) {}
+  if (r.ok) return { ok: true, status: r.status, data: data || {} };
+  const er = (data && data.error) || {};
+  if (r.status === 401 && SY.token && path !== '/register') authLost();
+  return { ok: false, status: r.status, code: er.code || 'error', message: er.message || '', retryAfter: +r.headers.get('Retry-After') || 0 };
+}
+function apiMsg(r) {
+  if (r.net) return "Can't reach FORGE groups. Check your connection and try again.";
+  return ({ invalid_code: "That code doesn't match a group. Check it and try again.", group_full: 'That group is full (25 members).', group_limit: "You're already in the maximum number of groups (20).", rate_limited: 'Too many tries. Wait a minute and try again.', validation_failed: r.message || 'Please check what you entered.', not_a_member: "You're not in that group anymore.", program_limit: "You've reached the limit of shared workouts (50).", program_too_large: 'That workout is too big to share.', program_not_found: 'That shared workout is no longer available.', unauthorized: 'Your group sign-in expired. Set up groups again.' })[r.code] || 'Something went wrong. Please try again.';
+}
+function authLost() { SY = Object.assign(freshSync(), { sent: {} }); saveSync(); lbMem = {}; gdMem = {}; spMem = {}; toast('Group sign-in expired. Create or join a group to reconnect.'); }
+// register once per device, on the first group action
+async function ensureIdentity(name) {
+  if (SY.token) return { ok: true };
+  name = String(name || '').trim().slice(0, 24);
+  if (!name) return { ok: false, message: 'Enter the name your friends will see.' };
+  const r = await api('POST', '/register', { displayName: name });
+  if (!r.ok) return { ok: false, message: apiMsg(r) };
+  SY.token = r.data.deviceToken; SY.userId = r.data.userId; SY.name = r.data.displayName || name; saveSync();
+  if (userName() !== name) { S.settings.name = name; save(); }
+  return { ok: true };
+}
+function upsertGroup(g) { if (!g || !g.id) return; const i = SY.groups.findIndex(x => x.id === g.id); if (i >= 0) SY.groups[i] = Object.assign(SY.groups[i], g); else SY.groups.push(g); saveSync(); }
+async function refreshGroups() {
+  if (!SY.token) return false;
+  const r = await api('GET', '/groups'); if (!r.ok) return false;
+  SY.groups = Array.isArray(r.data.groups) ? r.data.groups : [];
+  if (SY.sel !== 'me' && !SY.groups.some(g => g.id === SY.sel)) SY.sel = 'me';
+  saveSync(); softRender(); return true;
+}
+let dirtyRender = false;
+// re-render after async work without stealing focus from an open sheet and without losing scroll position
+function softRender() {
+  if (modal) { dirtyRender = true; return; }
+  if (view === 'home' || view === 'group' || view === 'program') { const y = window.scrollY; render(); window.scrollTo(0, y); }
+}
+
+/* ---- workout sync: idempotent upsert keyed by (user, history entry id); pending = entries whose signature isn't recorded in SY.sent ---- */
+function syncEntry(h) {
+  const t = entryTotals(h); let sets = +h.setsDone; if (!(sets >= 0)) sets = (h.exercises || []).reduce((n, e) => n + (e.sets || []).length, 0);
+  return { id: String(h.id), finishedAt: new Date(h.date).toISOString(), volumeKg: Math.round(t.volKg * 1000) / 1000, reps: Math.round(t.reps), sets: Math.max(0, Math.round(sets) || 0), durationSec: Math.max(0, Math.round(+h.durationSec || 0)) };
+}
+const syncSig = e => hashStr([e.finishedAt, e.volumeKg, e.reps, e.sets, e.durationSec].join('|'));
+function pendingEntries() {
+  const out = [];
+  for (const h of S.history || []) { if (!h || !h.id || !isFinite(+h.date)) continue; const e = syncEntry(h); if (SY.sent[e.id] !== syncSig(e)) out.push(e); }
+  return out;
+}
+let syncing = false, syncAgain = false, syncTimer = 0, syncBackoff = 0, syncState = 'ok';
+function syncStatHTML() {
+  const pend = SY.token && SY.groups.length ? pendingEntries().length : 0, off = navigator.onLine === false;
+  let cls = '', txt = 'Synced';
+  if (syncState === 'syncing' && !off) { cls = 'ing'; txt = 'Syncing…'; }
+  else if (pend > 0 && (off || syncState === 'offline')) { cls = 'off'; txt = 'Offline - will sync'; }
+  else if (pend > 0) { cls = 'ing'; txt = 'Syncing…'; }
+  return `<span id="syncStat" class="syncstat ${cls}" role="status" aria-live="polite" data-pending="${pend}"><i aria-hidden="true"></i>${txt}</span>`;
+}
+function setSyncStat(s) { if (s) syncState = s; const el = $('#syncStat'); if (el) el.outerHTML = syncStatHTML(); }
+async function syncNow() {
+  if (!SY.token || !SY.groups.length) return;
+  if (syncing) { syncAgain = true; return; }
+  clearTimeout(syncTimer);
+  if (navigator.onLine === false) { setSyncStat('offline'); return; }
+  syncing = true; let sent = 0;
+  try {
+    const pend = pendingEntries();
+    if (!pend.length && !(userName() && SY.name !== userName())) { setSyncStat('ok'); return; }
+    setSyncStat('syncing');
+    if (userName() && SY.name !== userName()) { const r = await api('POST', '/me', { displayName: userName() }); if (r.ok) { SY.name = userName(); saveSync(); } else if (r.net) return failSync(r); }
+    for (let i = 0; i < pend.length; i += 2000) {
+      const batch = pend.slice(i, i + 2000), r = await api('POST', '/workouts/sync', { entries: batch });
+      if (!r.ok && !(r.status === 400 || r.status === 413)) return failSync(r);
+      if (r.ok) SY.rejected = (SY.rejected || 0) + ((r.data.rejected || []).length); // rejected rows are final (e.g. volume too high): ignored quietly, never re-sent
+      batch.forEach(e => { SY.sent[e.id] = syncSig(e); }); sent += batch.length; saveSync();
+    }
+    syncBackoff = 0; SY.lastSync = Date.now(); saveSync(); setSyncStat('ok');
+    if (sent) { Object.values(lbMem).forEach(m => { m.stale = true; }); if (view === 'home' && curGroup()) lbAuto(); }
+  } finally { syncing = false; if (syncAgain) { syncAgain = false; syncNow(); } }
+}
+function failSync(r) {
+  setSyncStat('offline');
+  const wait = r.retryAfter ? r.retryAfter * 1000 : Math.min(300000, 15000 * Math.pow(2, syncBackoff++));
+  clearTimeout(syncTimer); syncTimer = setTimeout(syncNow, wait);
+}
+const syncSoon = () => { if (SY.token && SY.groups.length) setTimeout(() => { syncNow().catch(() => {}); }, 30); };
+
+/* ---- leaderboard (stale-while-revalidate: instant paint from memory / localStorage, then refetch) ---- */
+let lbMem = {}, gdMem = {}, spMem = {};
+const lbKey = (gid, p) => gid + '|' + p;
+const apiPeriod = p => p === 'all' ? 'alltime' : p;
+function lbFresh(d) { try { if (!d || !d.total) return false; if (d.period === 'alltime' || !d.range) return true; const n = Date.now(); return Date.parse(d.range.start) <= n && n < Date.parse(d.range.end); } catch (e) { return false; } }
+function lbGet(gid, p) {
+  const k = lbKey(gid, p), m = lbMem[k] = lbMem[k] || {};
+  if (!m.data) { const c = SY.lb[k]; if (c && lbFresh(c.data)) { m.data = c.data; m.at = c.at; m.stale = true; } }
+  return m;
+}
+async function fetchLB(gid, p, force) {
+  const m = lbGet(gid, p); if (m.loading) return; m.loading = true; m.tried = Date.now(); m.err = null;
+  if (!m.data) softRender(); else { const b = $('#lbRefresh'); if (b) b.classList.add('spin'); }
+  const r = await api('GET', `/groups/${encodeURIComponent(gid)}/leaderboard?period=${apiPeriod(p)}&tzOffsetMinutes=${-new Date().getTimezoneOffset()}`);
+  m.loading = false;
+  if (r.ok) {
+    m.data = r.data; m.at = Date.now(); m.stale = false; m.err = null; SY.lb[lbKey(gid, p)] = { data: r.data, at: m.at };
+    const ks = Object.keys(SY.lb); if (ks.length > 9) ks.sort((a, b) => SY.lb[a].at - SY.lb[b].at).slice(0, ks.length - 9).forEach(k => delete SY.lb[k]);
+    saveSync();
+  } else {
+    m.err = r;
+    if (r.code === 'not_a_member') refreshGroups();
+  }
+  const b = $('#lbRefresh'); if (b) b.classList.remove('spin');
+  softRender();
+}
+function lbAuto(force) {
+  const g = curGroup(); if (!g) return; const m = lbGet(g.id, dashPeriod); if (m.loading) return;
+  const age = Date.now() - (m.tried || 0);
+  if (force || !m.tried || (m.stale && age > 1500) || age > 45000) fetchLB(g.id, dashPeriod, force);
+}
+function lbRefresh() { const g = curGroup(); if (!g) return; fetchLB(g.id, dashPeriod, true); refreshGroups(); syncNow().catch(() => {}); }
+
+/* ---- shared programs ---- */
+async function fetchSP(gid) {
+  const m = spMem[gid] = spMem[gid] || {}; if (m.loading) return; m.loading = true; m.tried = Date.now(); m.err = null;
+  if (!m.list) softRender();
+  const r = await api('GET', `/groups/${encodeURIComponent(gid)}/programs`);
+  m.loading = false;
+  if (r.ok) { m.list = r.data.programs || []; m.at = Date.now(); } else m.err = r;
+  softRender();
+}
+function spAuto(gids) { (gids || SY.groups.map(g => g.id)).forEach(gid => { const m = spMem[gid] = spMem[gid] || {}; if (!m.loading && (!m.tried || Date.now() - m.tried > 45000)) fetchSP(gid); }); }
+async function fetchGD(gid) {
+  const m = gdMem[gid] = gdMem[gid] || {}; if (m.loading) return; m.loading = true; m.tried = Date.now(); m.err = null;
+  if (!m.data) softRender();
+  const r = await api('GET', `/groups/${encodeURIComponent(gid)}?tzOffsetMinutes=${-new Date().getTimezoneOffset()}`);
+  m.loading = false;
+  if (r.ok) { m.data = r.data; if (r.data.group) upsertGroup(r.data.group); } else { m.err = r; if (r.code === 'not_a_member') refreshGroups(); }
+  softRender();
+}
+// every program shared to the given groups, de-duplicated by id: [{ id, name, owner, sharedAt, groups: [names] }]
+function sharedPrograms(gids) {
+  const map = new Map();
+  gids.forEach(gid => { const g = SY.groups.find(x => x.id === gid), m = spMem[gid]; if (!m || !m.list || !g) return;
+    m.list.forEach(p => { const e = map.get(p.id) || { id: p.id, name: p.name, owner: p.owner || {}, sharedAt: p.sharedAt, groups: [] }; e.groups.push(g.name); map.set(p.id, e); }); });
+  return [...map.values()].sort((a, b) => String(b.sharedAt).localeCompare(String(a.sharedAt)));
+}
+const spLoading = gids => gids.some(g => spMem[g] && spMem[g].loading && !spMem[g].list);
+const spError = gids => gids.some(g => spMem[g] && spMem[g].err && !spMem[g].list);
+const hasShared = id => S.library.some(e => e.sharedId === id);
+function sharedListHTML(gids, emptyMsg) {
+  if (!gids.length) return '';
+  const list = sharedPrograms(gids);
+  if (!list.length) {
+    if (spLoading(gids) || gids.some(g => !spMem[g] || !spMem[g].tried)) return `<div class="card sk rw" id="spSkel" aria-busy="true" aria-label="Loading shared workouts" style="height:64px"></div>`;
+    if (spError(gids)) return `<div class="notice err" id="spErr" role="alert">Couldn't load shared workouts.<div class="nact"><button class="btn sec" data-act="spRetry">Try again</button></div></div>`;
+    return `<div class="note" id="spEmpty" style="color:var(--mut)">${emptyMsg}</div>`;
+  }
+  return `<div style="display:grid;gap:8px;grid-template-columns:minmax(0,1fr)" id="spList">${list.map(p => {
+    const mine = !!p.owner.isYou, added = hasShared(p.id);
+    return `<div class="card spc" data-sp="${esc(p.id)}"><div class="mt"><b>${esc(p.name)}</b><small>${mine ? 'Shared by you' : 'by ' + esc(p.owner.displayName || 'a friend')} · ${esc(p.groups.join(', '))}</small></div>
+      ${mine ? '<span class="chip">Yours</span>' : added ? '<span class="chip acc" data-added="1">✓ Added</span>' : `<button class="btn sec" style="min-height:44px;padding:0 14px;font-size:13px" data-act="spAdd" data-id="${esc(p.id)}">Add to my workouts</button>`}</div>`; }).join('')}</div>`;
+}
+const spBusy = new Set();
+async function spAdd(pid) {
+  if (hasShared(pid)) { toast('Already in My workouts'); return; }
+  if (spBusy.has(pid)) return; spBusy.add(pid);
+  const r = await api('GET', '/programs/' + encodeURIComponent(pid)); spBusy.delete(pid);
+  if (!r.ok) { toast(apiMsg(r)); return; }
+  let pr; try { pr = parseJSONProgram(JSON.stringify(r.data.program)); } catch (e) { pr = null; }
+  if (!pr || !allDays(pr.program).length) { toast("That workout couldn't be read."); return; }
+  const p = pr.program; p.name = String(r.data.name || p.name || 'Shared workout').slice(0, 80); delete p.ver; p.source = 'shared';
+  libSyncActive(); const e = libEntry(p, 'shared'); e.sharedId = pid; e.sharedBy = (r.data.owner && r.data.owner.displayName) || ''; S.library.push(e); save();
+  softRender(); toast('Added to My workouts');
+}
+// share the active workout to a group: upload once (cached by content hash), then link it to the group
+let sg = { busy: '', msg: '', done: {} };
+async function shareToGroup(gid) {
+  const g = SY.groups.find(x => x.id === gid); if (!g || sg.busy) return;
+  sg.busy = gid; sg.msg = ''; render();
+  const f = programFile(), prog = JSON.parse(f.json), hk = progHash(S.program);
+  const upload = async () => { const r = await api('POST', '/programs', { name: String(S.program.name || 'Workout').slice(0, 80), program: prog }); if (r.ok) { SY.progIds[hk] = r.data.id; saveSync(); } return r; };
+  let pid = SY.progIds[hk], r;
+  if (!pid) { r = await upload(); if (!r.ok) { sg.busy = ''; sg.msg = apiMsg(r); render(); return; } pid = r.data.id; }
+  r = await api('POST', `/groups/${encodeURIComponent(gid)}/programs/${encodeURIComponent(pid)}`);
+  if (!r.ok && r.code === 'program_not_found') { delete SY.progIds[hk]; r = await upload(); if (r.ok) { pid = r.data.id; r = await api('POST', `/groups/${encodeURIComponent(gid)}/programs/${encodeURIComponent(pid)}`); } }
+  sg.busy = '';
+  if (!r.ok) { sg.msg = apiMsg(r); render(); return; }
+  sg.done[gid] = true; sg.msg = ''; spMem[gid] = Object.assign(spMem[gid] || {}, { tried: 0 }); fetchSP(gid); render(); toast('Shared to ' + g.name);
+}
+
+/* ---- group sheets: create / join / deep link / invite ---- */
+let gm = { step: '', name: '', code: '', dn: '', err: '', busy: false, group: null }, gdId = null, gdLeave = 0, gdErr = '', pendingJoin = null, eraseSyncOpt = true;
+const shareLink = () => location.origin + location.pathname.replace(/index\.html$/, '');
+const inviteText = code => 'Join my FORGE group: ' + shareLink() + '?join=' + code;
+function openGm(step, extra) { gm = Object.assign({ step, name: '', code: '', dn: userName(), err: '', busy: false, group: null }, extra || {}); modal = 'grp'; render(); const el = $('#gmName') || $('#gmCode'); if (el && step !== 'deeplink') el.focus(); }
+function cleanJoinUrl() { try { const u = new URL(location.href); if (u.searchParams.has('join')) { u.searchParams.delete('join'); history.replaceState(null, '', u.pathname + (u.search || '') + u.hash); } } catch (e) {} }
+async function gmSubmit() {
+  if (gm.busy) return;
+  const step = gm.step;
+  if (step === 'create' && !gm.name.trim()) { gm.err = 'Give your group a name.'; return render(); }
+  const code = normCode(gm.code);
+  if ((step === 'join' || step === 'deeplink') && code.length < 4) { gm.err = 'Enter the invite code your friend sent you.'; return render(); }
+  gm.busy = true; gm.err = ''; render();
+  const id = await ensureIdentity(gm.dn);
+  if (!id.ok) { gm.busy = false; gm.err = id.message; return render(); }
+  const r = step === 'create' ? await api('POST', '/groups', { name: gm.name.trim().slice(0, 40) }) : await api('POST', '/groups/join', { code });
+  gm.busy = false;
+  if (!r.ok) { gm.err = apiMsg(r); return render(); }
+  const g = r.data.group; upsertGroup(g); SY.sel = g.id; saveSync(); lbMem = {};
+  if (step === 'create') { gm.step = 'invite'; gm.group = g; }
+  else { modal = null; if (step === 'deeplink') cleanJoinUrl(); view = 'home'; toast(r.data.alreadyMember ? `You're already in ${g.name}` : `Joined ${g.name}`); }
+  render(window.scrollTo(0, 0)); syncSoon(); refreshGroups();
+}
+async function gmShare(copyOnly, gid) {
+  const g = (gid && SY.groups.find(x => x.id === gid)) || gm.group || curGroup() || SY.groups.find(x => x.id === gdId); if (!g) return;
+  const text = inviteText(g.inviteCode);
+  if (!copyOnly && navigator.share) { try { await navigator.share({ title: 'FORGE group', text }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+  const ok = await copyText(text); toast(ok ? (copyOnly ? 'Invite copied' : 'Invite copied - paste it in a message') : 'Could not copy - select the code instead');
+}
+function privHTML() { return '<div class="fbhint priv" id="gPriv">Group members see your name and your lifting totals.</div>'; }
+function identHTML() { return SY.token ? '' : `<label class="sheetlbl" for="gmDn">Your name in the group</label><input class="txt fb" id="gmDn" type="text" maxlength="24" autocomplete="given-name" enterkeyhint="go" placeholder="Name your friends will see" value="${esc(gm.dn)}">`; }
+function gmSheet(title, inner) { return `<div class="overlay" data-act="closeModal"><div class="sheet" id="gSheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="gTitle"><div class="grab"></div><div class="row" style="justify-content:space-between"><b id="gTitle" style="font-size:20px">${title}</b><button class="icon" data-act="closeModal" aria-label="Close">✕</button></div>${inner}</div></div>`; }
+function groupModalHTML() {
+  if (modal === 'grp') {
+    const b = gm.busy, err = gm.err ? `<div class="sherr" id="gErrMsg" role="alert">${esc(gm.err)}</div>` : '';
+    if (gm.step === 'create') return gmSheet('Create a group', `<div class="sub" style="margin:6px 0 0;font-size:13px">Start a group, then invite friends with a code. Everyone's lifting adds up to one shared total.</div>
+      <label class="sheetlbl" for="gmName">Group name</label><input class="txt fb" id="gmName" type="text" maxlength="40" autocomplete="off" enterkeyhint="go" placeholder="e.g. Iron Crew" value="${esc(gm.name)}">${identHTML()}${privHTML()}${err}
+      <button class="btn pri block" id="gGo" style="margin-top:14px" data-act="gSubmit" ${b ? 'disabled' : ''}>${b ? 'Creating…' : 'Create group'}</button>`);
+    if (gm.step === 'join') return gmSheet('Join a group', `<div class="sub" style="margin:6px 0 0;font-size:13px">Type the invite code a friend shared with you.</div>
+      <label class="sheetlbl" for="gmCode">Invite code</label><input class="txt fb" id="gmCode" type="text" maxlength="12" autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="go" placeholder="K7MQ4XD" style="letter-spacing:.14em;font-weight:800;text-transform:uppercase" value="${esc(gm.code)}">${identHTML()}${privHTML()}${err}
+      <button class="btn pri block" id="gGo" style="margin-top:14px" data-act="gSubmit" ${b ? 'disabled' : ''}>${b ? 'Joining…' : 'Join group'}</button>`);
+    if (gm.step === 'deeplink') return gmSheet('Join this group?', `<div class="sub" style="margin:6px 0 0;font-size:13px">You were invited to a FORGE group with code <b id="gDlCode" style="color:var(--text);letter-spacing:.1em">${esc(normCode(gm.code))}</b>.</div>${identHTML()}${privHTML()}${err}
+      <div style="display:grid;gap:8px;margin-top:14px"><button class="btn pri block" id="gGo" data-act="gSubmit" ${b ? 'disabled' : ''}>${b ? 'Joining…' : 'Join group'}</button><button class="btn sec block" data-act="closeModal">Not now</button></div>`);
+    if (gm.step === 'invite' && gm.group) return gmSheet('Invite friends', `<div class="sub" style="margin:6px 0 0;font-size:13px"><b style="color:var(--text)">${esc(gm.group.name)}</b> is ready. Share this code so friends can join.</div>
+      <div class="card invcard" style="margin-top:12px;text-align:center"><span class="label">Invite code</span><span class="invcode" id="inviteCode">${esc(fmtCode(gm.group.inviteCode))}</span><div class="fbhint" id="inviteLink" style="overflow-wrap:anywhere">${esc(inviteText(gm.group.inviteCode))}</div></div>
+      <div class="row" style="margin-top:12px"><button class="btn sec" style="flex:1" id="gCopy" data-act="gCopy">📋 Copy</button><button class="btn pri" style="flex:1" id="gShare" data-act="gShare">↗ Share</button></div>
+      <button class="btn sec block" style="margin-top:8px" data-act="closeModal">Done</button>`);
+    return '';
+  }
+  if (modal === 'gsel') {
+    const row = (id, ico, nm, sub, sel) => `<div class="gselrow"><button class="seqrow ${sel ? 'cur' : ''}" data-act="gpick" data-id="${esc(id)}" aria-pressed="${sel}"><span class="ix" style="width:auto;font-size:18px">${ico}</span><span class="nm">${esc(nm)}<small>${esc(sub)}</small></span><span class="stt" style="width:auto">${sel ? '✓' : ''}</span></button>${id !== 'me' ? `<button class="dt" data-act="gdetail" data-id="${esc(id)}" aria-label="Details for ${esc(nm)}">Details</button>` : ''}</div>`;
+    return `<div class="overlay" data-act="closeModal"><div class="sheet" id="gselSheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="gTitle"><div class="grab"></div><div class="row" style="justify-content:space-between"><b id="gTitle" style="font-size:20px">Show on Home</b><button class="icon" data-act="closeModal" aria-label="Close">✕</button></div>
+      <div style="display:grid;gap:6px;margin-top:12px">${row('me', '👤', 'Just me', 'Your own totals', SY.sel === 'me' || !curGroup())}${SY.groups.map(g => row(g.id, '🏋', g.name, `${g.memberCount || 1} member${(g.memberCount || 1) === 1 ? '' : 's'}`, curGroup() && curGroup().id === g.id)).join('')}</div>
+      <div class="row" style="margin-top:14px"><button class="btn pri" style="flex:1;font-size:14px;padding:0 10px" data-act="gcreate">＋ Create group</button><button class="btn ghost" style="flex:1;font-size:14px;padding:0 10px" data-act="gjoin">Join with code</button></div></div></div>`;
+  }
+  if (modal === 'sharegrp') {
+    const none = !SY.token || !SY.groups.length;
+    return `<div class="overlay" data-act="closeModal"><div class="sheet" id="sgSheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="gTitle"><div class="grab"></div><div class="row" style="justify-content:space-between"><b id="gTitle" style="font-size:20px">Share to group</b><button class="icon" data-act="closeModal" aria-label="Close">✕</button></div>
+      <div class="sub" style="margin:6px 0 12px;font-size:13px">${none ? 'Join or create a group first, then you can share workouts with it.' : `Members of the group you pick can add <b style="color:var(--text)">${esc(S.program.name)}</b> to their workouts. The file never includes your history.`}</div>
+      ${none ? `<div class="row"><button class="btn pri" style="flex:1;font-size:14px;padding:0 10px" data-act="gcreate">＋ Create group</button><button class="btn ghost" style="flex:1;font-size:14px;padding:0 10px" data-act="gjoin">Join with code</button></div>`
+        : `<div style="display:grid;gap:8px">${SY.groups.map(g => `<button class="seqrow" data-act="sgPick" data-id="${esc(g.id)}" ${sg.busy ? 'disabled' : ''}><span class="ix" style="width:auto;font-size:18px">🏋</span><span class="nm">${esc(g.name)}<small>${g.memberCount || 1} member${(g.memberCount || 1) === 1 ? '' : 's'}</small></span><span class="stt" style="width:auto;font-size:12.5px;font-weight:800;color:${sg.done[g.id] ? 'var(--ok)' : 'var(--acc2)'}">${sg.busy === g.id ? 'Sharing…' : sg.done[g.id] ? '✓ Shared' : 'Share'}</span></button>`).join('')}</div>`}
+      ${sg.msg ? `<div class="sherr" role="alert">${esc(sg.msg)}</div>` : ''}</div></div>`;
+  }
+  return '';
+}
+
+/* ---- group Home: ring = the GROUP's total vs last period's group total; ranked rows; "Your contribution" ---- */
+const AVC = ['#ffc971', '#ff6a1a', '#d68a3c', '#c98b5e', '#ffb070', '#e0a050', '#b86a2a', '#f2c9a0'];
+const avColor = id => AVC[parseInt(hashStr(String(id)), 36) % AVC.length];
+const initial = n => (Array.from(String(n || '?').trim())[0] || '?').toUpperCase();
+const pctTxt = (cur, prev) => prev > 0 ? Math.round((cur - prev) / prev * 100) : null;
+function avHTML(uid, name, big) { return `<span class="av${big ? ' lg' : ''}" style="background:${avColor(uid)}" aria-hidden="true">${esc(initial(name))}</span>`; }
+function scopeRowHTML(g, d) {
+  if (!g) return `<div class="scoperow"><div class="scl"><div class="greet">${userName() ? 'Hey ' + esc(userName()) + ' 👋' : 'Hey there 👋'}</div>${userName() ? '' : '<button class="namelink" data-act="editName">Add your name</button>'}</div>
+    <button type="button" class="gpill" id="gSel" data-act="gsel" aria-haspopup="dialog" aria-label="Showing just you. Change group"><span class="gi" aria-hidden="true">👤</span><span class="gn">Me</span><u aria-hidden="true">▾</u></button></div>`;
+  const mem = d && d.members ? d.members.slice(0, 3) : [], n = (d && d.total && d.total.members) || g.memberCount || 1;
+  return `<div class="scoperow" id="scopeRow"><div class="scl"><button type="button" class="gpill" id="gSel" data-act="gsel" aria-haspopup="dialog" aria-label="Group: ${esc(g.name)}, ${n} member${n === 1 ? '' : 's'}. Change group"><span class="gi" aria-hidden="true">🏋</span><span class="gn">${esc(g.name)}</span><small>· ${n}</small><u aria-hidden="true">▾</u></button></div>
+    <div class="gr2"><button type="button" class="avstack" id="gAvs" data-act="gdetail" data-id="${esc(g.id)}" aria-label="Group details and members">${mem.map(m => avHTML(m.userId, m.displayName)).join('')}</button><button type="button" class="icon sm" id="lbRefresh" data-act="lbRefresh" aria-label="Refresh leaderboard">↻</button></div></div>
+  <div class="syncln" id="syncLn">${syncStatHTML()}${d && d.now ? `<span id="lbUpd">· Updated ${esc(new Date(d.now).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }))}</span>` : ''}</div>`;
+}
+function groupHeroHTML(d, u) {
+  const P = dashPeriod, tot = d.total.volumeKg, b = d.baseline || {}, pv = b.previous && b.previous.total ? b.previous.total.volumeKg || 0 : 0;
+  const m = ringModel(tot, pv), dn = dayName(false), dl = dayName(true), lbl = P === 'today' ? 'last ' + dn : 'last week', gl = P === 'today' ? 'last ' + dl : "last week's total";
+  const f = fmtVol(tot, u), diff = fmtVol(m.diffKg, u) === '0' ? '1' : fmtVol(m.diffKg, u);
+  let pill, goal = '';
+  if (!m.hasPrior) pill = `<div class="dpill pace" id="gPill" data-state="noprior">${P === 'today' ? `Set the pace — nothing logged last ${dn} to beat` : tot > 0 ? "Set the pace — this week becomes your group's first benchmark" : "Set the pace — your group's first week"}</div>`;
+  else {
+    if (m.beaten) pill = `<div class="dpill beat" id="gPill" data-state="beaten">🏆 <span>Beat ${lbl} by <b>${diff} ${u}</b></span></div>`;
+    else if (tot === pv) pill = `<div class="dpill" id="gPill" data-state="tied">⚑ <span>Matched ${lbl} — one more rep to beat it</span></div>`;
+    else pill = `<div class="dpill" id="gPill" data-state="progress">⚑ <span><b>${diff} ${u}</b> to beat ${lbl}</span></div>`;
+    goal = `<div class="dgoal" id="gGoal">Goal · ${gl} <b>${fmtVol(pv, u)} ${u}</b></div>`;
+  }
+  return `<div class="dring gr" id="gHero" data-period="${P}">${dashRingSVG(m)}<div class="dctr"><b id="gNum" class="${bigCls(f)}">${f}</b><span class="u" id="gUnit">${u} · group</span>${m.hasPrior ? `<span class="pc" id="gPct"><b>${m.pct}%</b> of ${lbl}</span>` : ''}</div></div>${pill}${goal}`;
+}
+function groupAllHTML(d, u) {
+  const b = d.baseline || {}, cur = b.current && b.current.total ? b.current.total.volumeKg || 0 : 0, prv = b.previous && b.previous.total ? b.previous.total.volumeKg || 0 : 0;
+  const f = fmtVol(d.total.volumeKg, u), ch = pctTxt(cur, prv), mx = Math.max(cur, prv, 1);
+  const chTxt = ch === null ? (cur > 0 ? 'New' : '—') : (ch >= 0 ? '▲ ' : '▼ ') + Math.abs(ch) + '%', chCls = ch === null ? (cur > 0 ? 'nw' : '') : ch > 0 ? 'up' : ch < 0 ? 'dn' : '';
+  return `<div class="dall" id="gAll" data-period="all"><div class="cap">Group lifetime · cumulative</div><b class="big ${bigCls(f)}" id="gNum">${f}</b><span class="un" id="gUnit">${u} · group <i>· ${fmtReps(d.total.workouts || 0)} workouts</i></span>
+    <div class="tbars" aria-hidden="true"><div class="tb"><span>Prior 30 days</span><em><i style="width:${Math.round(prv / mx * 100)}%"></i></em><b>${fmtVol(prv, u)}</b></div><div class="tb now"><span>Last 30 days</span><em><i style="width:${Math.round(cur / mx * 100)}%"></i></em><b>${fmtVol(cur, u)}</b></div></div>
+    <div class="d30" id="gTrendStats"><div><small>Last 30 days</small><b id="g30last">${fmtVol(cur, u)}</b></div><div><small>Prior 30 days</small><b id="g30prior">${fmtVol(prv, u)}</b></div><div><small>Change</small><b class="${chCls}" id="g30chg">${chTxt}</b></div></div></div>`;
+}
+function groupRowsHTML(d, u) {
+  const top = Math.max(0, ...d.members.map(m => m.volumeKg || 0));
+  return `<div class="mrs" id="gRows" role="list" aria-label="Group ranking">${d.members.map((m, i) => { const z = !(m.volumeKg > 0);
+    return `<div class="mr ${m.isYou ? 'me' : ''} ${i === 0 && !z ? 'first' : ''} ${z ? 'zero' : ''}" role="listitem" data-uid="${esc(m.userId)}" data-kg="${m.volumeKg}"><div class="rk">${m.rank}</div>${avHTML(m.userId, m.displayName)}<div style="min-width:0"><div class="l1"><div class="nm"><span class="nn">${esc(m.displayName)}</span>${m.isYou ? '<span class="you">YOU</span>' : ''}<span class="rp">${fmtReps(m.reps || 0)} reps</span></div><div class="v">${z ? `0<small>${u} · not yet</small>` : `${fmtVol(m.volumeKg, u)}<small>${u} · ${Math.round((m.share || 0) * 100)}%</small>`}</div></div><div class="mbar"><i style="width:${z || !top ? 0 : Math.max(2, Math.round(m.volumeKg / top * 100))}%"></i></div></div></div>`; }).join('')}</div>`;
+}
+function groupContribHTML(d, u) {
+  const me = d.members.find(m => m.isYou); if (!me) return '';
+  const P = dashPeriod, n = d.members.length, dn = dayName(false);
+  let l4, v4, c4 = '';
+  if (P === 'all') { const ch = pctTxt(me.last30VolumeKg || 0, me.prior30VolumeKg || 0); l4 = '30d vs prior'; if (ch === null) v4 = (me.last30VolumeKg || 0) > 0 ? 'New' : '—'; else { v4 = (ch >= 0 ? '▲ ' : '▼ ') + Math.abs(ch) + '%'; c4 = ch > 0 ? 'up' : 'dn'; } }
+  else { const pv = me.previousVolumeKg || 0, ch = pctTxt(me.volumeKg, pv); if (pv > 0 && ch > 0) { l4 = P === 'today' ? 'vs last ' + dn : 'vs last wk'; v4 = '▲ ' + ch + '%'; c4 = 'up'; } else { l4 = P === 'today' ? 'Last ' + dn : 'Last wk'; v4 = pv > 0 ? `${fmtVol(pv, u)}<i>${u}</i>` : '—'; } }
+  return `<div class="callout" id="gContrib"><div class="h"><b>Your contribution</b><span id="gcReps">${fmtReps(me.reps || 0)} reps</span></div>
+    <div class="g"><div><small>Lifted</small><b id="gcLifted">${fmtVol(me.volumeKg, u)}<i>${u}</i></b></div><div><small>% of group</small><b id="gcShare">${Math.round((me.share || 0) * 100)}%</b></div><div><small>Rank</small><b id="gcRank">#${me.rank}<i>of ${n}</i></b></div><div><small>${l4}</small><b class="${c4}" id="gc4">${v4}</b></div></div></div>`;
+}
+function inviteCardHTML(g) {
+  return `<div class="card invcard" id="gInvite"><div class="label">Invite friends</div><b style="display:block;font-size:17px;margin-top:6px">It's just you here so far</b><div class="sub" style="font-size:13px;margin-top:2px">Share the code. When friends lift, their weight adds to the group total.</div>
+    <span class="invcode" id="gCode">${esc(fmtCode(g.inviteCode))}</span><div class="row"><button class="btn sec" style="flex:1" data-act="gCopy" data-id="${esc(g.id)}">📋 Copy</button><button class="btn pri" style="flex:1" data-act="gShare" data-id="${esc(g.id)}">↗ Share</button></div></div>`;
+}
+function groupBodyHTML(g, m, u) {
+  const d = m.data;
+  if (!d) {
+    if (m.err) return `<div class="notice err" id="gErr" role="alert"><b>Couldn't load the leaderboard.</b><br>${m.err.net || navigator.onLine === false ? "You may be offline. " : ''}Check your connection and try again.<div class="nact"><button class="btn sec" id="lbRetry" data-act="lbRetry">Try again</button></div></div>`;
+    return `<div id="gSkel" aria-busy="true" aria-label="Loading leaderboard" style="display:grid;gap:14px"><div class="sk rg"></div><div class="sk pl"></div>${'<div class="sk rw"></div>'.repeat(3)}<div class="sk cl"></div></div>`;
+  }
+  const err = m.err ? `<div class="notice err" id="gErr" role="alert" style="font-size:12.5px;padding:9px 12px">Couldn't refresh just now. Showing the last update. <button class="flink" data-act="lbRetry" style="color:inherit;font-weight:800;text-decoration:underline;padding:6px 4px">Try again</button></div>` : '';
+  const solo = (d.members || []).length <= 1;
+  return `${err}${dashPeriod === 'all' ? groupAllHTML(d, u) : groupHeroHTML(d, u)}${groupRowsHTML(d, u)}${solo ? inviteCardHTML(g) : groupContribHTML(d, u)}`;
+}
+function groupHomeHTML(g) {
+  const u = unit(), P = dashPeriod, m = lbGet(g.id, P), resuming = !!S.session;
+  const seg = [['today', 'Today'], ['week', 'This week'], ['all', 'All-time']].map(([k, l]) => `<button type="button" class="${P === k ? 'on' : ''}" data-act="dashP" data-p="${k}" aria-pressed="${P === k}">${l}</button>`).join('');
+  return `<div class="screen" id="homeScreen" data-mode="group" data-gid="${esc(g.id)}">
+    <div class="hdr"><div class="brand">FOR<b>GE</b></div><button class="icon" data-act="settings" aria-label="Settings">⚙️</button></div>
+    ${scopeRowHTML(g, m.data)}
+    ${resuming ? `<button type="button" class="resumebar" id="resumeBar" data-act="resume"><span class="pl">▶</span><span><b>Workout in progress</b><span>Tap to resume${S.session.pausedAt ? ' (paused)' : ''}</span></span></button>` : ''}
+    <div class="dsel" id="dashSel" role="group" aria-label="Period">${seg}</div>
+    ${groupBodyHTML(g, m, u)}
+  </div>${navHTML()}`;
+}
+function groupCardHTML() {
+  return `<div class="grpcard" id="groupCard"><span class="gi" aria-hidden="true">👥</span><b>Join or create a group</b><small>Lift with friends and see how each person adds to your group total.</small><span class="gb"><button type="button" class="btn pri" data-act="gcreate">＋ Create group</button><button type="button" class="btn ghost" data-act="gjoin">Join with code</button></span></div>`;
+}
+
+/* ---- group detail: members, invite code, shared workouts, leave ---- */
+function groupDetailView() {
+  const g = SY.groups.find(x => x.id === gdId); if (!g) { view = 'home'; return homeView(); }
+  const m = gdMem[g.id] || {}, d = m.data, mem = d && d.members ? d.members : [], n = (d && d.group && d.group.memberCount) || g.memberCount || mem.length || 1;
+  const memHTML = mem.length ? mem.map(x => `<div class="mem" data-uid="${esc(x.userId)}">${avHTML(x.userId, x.displayName, true)}<div class="mt"><b>${esc(x.displayName)}${x.isYou ? ' <span class="you">YOU</span>' : ''}</b><small>Joined ${esc(new Date(x.joinedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }))}</small></div></div>`).join('')
+    : m.err ? `<div class="notice err" role="alert">Couldn't load members.<div class="nact"><button class="btn sec" data-act="gdRetry">Try again</button></div></div>` : '<div class="sk rw" aria-busy="true" style="height:56px"></div>';
+  const leave = gdLeave ? `<div class="erasebox" id="leaveBox" role="alertdialog" aria-label="Confirm leave group"><b style="font-size:16px">Leave ${esc(g.name)}?</b><div class="sub" style="font-size:13px;margin:6px 0 12px">You'll stop seeing this group's leaderboard and shared workouts. Your own workouts stay yours${n <= 1 ? ', and since you are the only member the group will be deleted' : ''}.</div>${gdErr ? `<div class="sherr" role="alert" style="margin:0 0 10px">${esc(gdErr)}</div>` : ''}
+      <div style="display:grid;gap:8px"><button class="btn sec" id="leaveCancel" data-act="gLeaveCancel">Cancel, stay in the group</button><button class="btn danger" id="leaveConfirm" data-act="gLeaveConfirm">Yes, leave group</button></div></div>`
+    : `<button class="go" id="leaveBtn" data-act="gLeaveAsk">Leave group</button>`;
+  return `<div class="screen" id="groupDetail" data-gid="${esc(g.id)}">
+    <div class="hdr" style="gap:8px"><button class="backbtn" id="gdBack" data-act="gBack" aria-label="Back to Home"><span>‹</span>Home</button></div>
+    <div><div class="greet">${esc(g.name)}</div><div class="sub" id="gdCount">${n} member${n === 1 ? '' : 's'} · up to ${g.memberCap || 25}</div></div>
+    <div class="card invcard"><span class="label">Invite code</span><span class="invcode" id="gdCode">${esc(fmtCode(g.inviteCode))}</span><div class="fbhint" style="text-align:center;overflow-wrap:anywhere">${esc(inviteText(g.inviteCode))}</div>
+      <div class="row" style="margin-top:12px"><button class="btn sec" style="flex:1" id="gdCopy" data-act="gCopy" data-id="${esc(g.id)}">📋 Copy</button><button class="btn pri" style="flex:1" id="gdShare" data-act="gShare" data-id="${esc(g.id)}">↗ Share</button></div></div>
+    <div><div class="label" style="margin-bottom:6px">Members</div><div class="card" id="gdMembers" style="padding:6px 16px">${memHTML}</div>${privHTML()}</div>
+    <div id="gdShared"><div class="label" style="margin-bottom:8px">Shared workouts</div>${sharedListHTML([g.id], 'Nothing shared yet. Open one of your workouts in the Program tab and tap Share to group.')}</div>
+    <div class="erase" id="leaveSec">${leave}</div>
+  </div>${navHTML()}`;
+}
+async function leaveGroup() {
+  const g = SY.groups.find(x => x.id === gdId); if (!g) return; gdErr = '';
+  const r = await api('POST', `/groups/${encodeURIComponent(g.id)}/leave`);
+  if (!r.ok && r.code !== 'not_a_member') { gdErr = apiMsg(r); render(); return; }
+  SY.groups = SY.groups.filter(x => x.id !== g.id); if (SY.sel === g.id) SY.sel = 'me';
+  Object.keys(SY.lb).forEach(k => { if (k.startsWith(g.id + '|')) delete SY.lb[k]; }); saveSync();
+  delete gdMem[g.id]; delete spMem[g.id]; Object.keys(lbMem).forEach(k => { if (k.startsWith(g.id + '|')) delete lbMem[k]; });
+  gdId = null; gdLeave = 0; view = 'home'; render(window.scrollTo(0, 0)); toast('Left ' + g.name);
+}
+function signOutGroups(leave) {
+  const tok = SY.token, ids = SY.groups.map(g => g.id);
+  if (leave && tok) ids.forEach(id => { try { fetch(API_BASE + '/groups/' + encodeURIComponent(id) + '/leave', { method: 'POST', headers: { Authorization: 'Bearer ' + tok }, keepalive: true }).catch(() => {}); } catch (e) {} });
+  SY = freshSync(); try { localStorage.removeItem(SYNC_LS); } catch (e) {} lbMem = {}; gdMem = {}; spMem = {}; gdId = null;
+}
+const gdAuto = () => { const g = SY.groups.find(x => x.id === gdId); if (!g) return; const m = gdMem[g.id] = gdMem[g.id] || {}; if (!m.loading && (!m.tried || Date.now() - m.tried > 45000)) fetchGD(g.id); spAuto([g.id]); };
+function autoFetches() {
+  if (view === 'home' && curGroup()) lbAuto();
+  else if (view === 'program' && !progDetail && SY.token && SY.groups.length) spAuto();
+  else if (view === 'group') gdAuto();
+}
+/* pull to refresh (Home, group selected) */
+const ptr = { on: false, y0: 0, d: 0 };
+function ptrShow(d) { let el = $('#ptr'); if (!el) { el = document.createElement('div'); el.id = 'ptr'; el.className = 'ptr'; el.setAttribute('aria-hidden', 'true'); document.body.appendChild(el); } el.textContent = d > 90 ? '↻ Release to refresh' : '↓ Pull to refresh'; el.style.transform = `translate(-50%, ${d > 8 ? Math.min(d, 120) - 50 : -60}px)`; }
+document.addEventListener('touchstart', e => { if (view !== 'home' || !curGroup() || modal || window.scrollY > 0 || e.touches.length !== 1) { ptr.on = false; return; } ptr.on = true; ptr.y0 = e.touches[0].clientY; ptr.d = 0; }, { passive: true });
+document.addEventListener('touchmove', e => { if (!ptr.on) return; ptr.d = e.touches[0].clientY - ptr.y0; if (ptr.d > 8) ptrShow(ptr.d); }, { passive: true });
+document.addEventListener('touchend', () => { if (!ptr.on) return; const go = ptr.d > 90; ptr.on = false; ptr.d = 0; const el = $('#ptr'); if (el) el.remove(); if (go) lbRefresh(); }, { passive: true });
+
 function homeView() {
+  const g = curGroup(); if (g) return groupHomeHTML(g);
   const u = unit(), pt = periodTotals(S.history), P = dashPeriod, resuming = !!S.session;
   const seg = [['today', 'Today'], ['week', 'This week'], ['all', 'All-time']].map(([k, l]) => `<button type="button" class="${P === k ? 'on' : ''}" data-act="dashP" data-p="${k}" aria-pressed="${P === k}">${l}</button>`).join('');
   return `<div class="screen" id="homeScreen">
     <div class="hdr"><div class="brand">FOR<b>GE</b></div><button class="icon" data-act="settings" aria-label="Settings">⚙️</button></div>
-    <div><div class="greet">${userName() ? 'Hey ' + esc(userName()) + ' 👋' : 'Hey there 👋'}</div>${userName() ? '' : '<button class="namelink" data-act="editName">Add your name</button>'}</div>
+    ${scopeRowHTML(null)}
     ${resuming ? `<button type="button" class="resumebar" id="resumeBar" data-act="resume"><span class="pl">▶</span><span><b>Workout in progress</b><span>Tap to resume${S.session.pausedAt ? ' (paused)' : ''}</span></span></button>` : ''}
     <div class="dsel" id="dashSel" role="group" aria-label="Period">${seg}</div>
     ${P === 'all' ? dashAllHTML(pt, u) : dashHeroHTML(pt, u)}
     ${yourWeekHTML(pt, u)}
     ${streakRowHTML()}
-    <button type="button" class="grpcard" id="groupCard" data-act="groupsSoon"><span class="gi">👥</span><b>Join or create a group</b><small>Lift with friends and see how each person adds to your group total.</small><span class="gb"><span>＋ Create group</span><span>Join with code</span></span></button>
+    ${SY.groups.length ? '' : groupCardHTML()}
   </div>${navHTML()}`;
 }
 
@@ -1294,7 +1767,7 @@ async function shareProgram() {
 function libraryHTML() {
   const card = e => {
     const act = e.id === S.activeId, ds = allDays(e.program), wk = e.program.weeks.length;
-    const meta = `${wk} week${wk > 1 ? 's' : ''} × ${wk ? e.program.weeks[0].days.length : 0} days · ${ds.length} sessions`;
+    const meta = `${wk} week${wk > 1 ? 's' : ''} × ${wk ? e.program.weeks[0].days.length : 0} days · ${ds.length} sessions` + (e.source === 'shared' && e.sharedBy ? ' · from ' + esc(e.sharedBy) : '');
     if (act) return `<div class="card libc on" data-lib="${esc(e.id)}"><button class="libopen" id="openProg" data-act="progOpen" aria-label="Open ${esc(e.name)} details"><div style="flex:1;min-width:0"><b class="libn">${esc(e.name)}</b><div class="sub" style="font-size:12.5px">${meta}</div></div><span class="chip acc libact">Active</span><span class="chev" aria-hidden="true">›</span></button></div>`;
     return `<div class="card libc" data-lib="${esc(e.id)}"><div class="row" style="gap:10px;align-items:center"><div style="flex:1;min-width:0"><b class="libn">${esc(e.name)}</b><div class="sub" style="font-size:12.5px">${meta}</div></div>
       <button class="btn sec" style="min-height:40px;padding:0 14px;font-size:13px" data-act="libSwitch" data-id="${esc(e.id)}">Switch</button>
@@ -1302,7 +1775,8 @@ function libraryHTML() {
   };
   return `<div><div class="label">My workouts</div><div style="display:grid;gap:8px;grid-template-columns:minmax(0,1fr)">${S.library.map(card).join('')}</div>
     <button class="btn sec block" style="margin-top:8px" data-act="nav" data-v="import">+ Add workout</button>
-    <div class="note" style="text-align:center;margin-top:8px;color:var(--mut)">Workouts shared by friends will show up here.</div></div>`;
+    <div id="sharedSec" style="margin-top:22px"><div class="label" style="margin-bottom:8px">Shared with my groups</div>${SY.token && SY.groups.length ? sharedListHTML(SY.groups.map(g => g.id), 'Nothing shared yet. Open one of your workouts and tap Share to group.')
+      : `<div class="note" id="sharedNone" style="color:var(--mut);font-size:13px;line-height:1.45">Join a group to share your workouts with friends and add theirs here.</div><div class="row" style="margin-top:10px"><button class="btn sec" style="flex:1;min-height:46px;font-size:14px;padding:0 10px" data-act="gcreate">＋ Create group</button><button class="btn sec" style="flex:1;min-height:46px;font-size:14px;padding:0 10px" data-act="gjoin">Join with code</button></div>`}</div></div>`;
 }
 function programView() {
   if (progDetail) return programDetailView();
@@ -1318,6 +1792,7 @@ function programDetailView() {
   return `<div class="screen" id="progDetail">
     <div class="hdr" style="gap:8px"><button class="backbtn" id="progBack" data-act="progBack" aria-label="Back to My workouts"><span>‹</span>My workouts</button><button class="btn sec" id="shareProg" style="min-height:40px;padding:0 14px;font-size:13.5px" data-act="shareProg">↗ Share program</button></div>
     <div><div class="greet">${esc(p.name)}</div><div class="sub">${p.weeks.length} week${multi ? 's' : ''} · ${allDays(p).length} days · ${allDays(p).reduce((n, d) => n + exCount(d), 0)} exercises. Tap a day to see its supersets or set it as your next workout.</div></div>
+    <button class="btn sec block" id="shareGroupBtn" style="min-height:48px;font-size:14.5px" data-act="shareGroup">👥 Share to group</button>
     ${multi ? weekBar(progWeek, 'pwk') : ''}
     ${w.days.map((d, i) => { const isNext = progWeek === S.selWeek && i === S.selDay; return `<div class="card ${openDay === i ? 'open' : ''}">
       <button class="dayhead" data-act="openDay" data-i="${i}"><div class="dn">${i + 1}</div><div class="tx"><b>${esc(d.name)} — ${esc(d.focus)}${isNext ? '<span class="nxt">NEXT</span>' : ''}</b><span>${exCount(d)} exercises · ${setCount(d)} sets · ~${estMin(d)} min</span></div><span class="caret">▶</span></button>
@@ -1485,6 +1960,7 @@ function pausedHTML() {
 }
 function modalHTML() {
   if (!modal) return '';
+  const gh = groupModalHTML(); if (gh) return gh;
   const s = S.session;
   if (modal === 'rest') {
     return `<div class="overlay" data-act="closeModal"><div class="sheet" id="restSheet" data-stop="1"><div class="grab"></div><div class="row" style="justify-content:space-between"><b style="font-size:20px">Rest timer</b><button class="icon" data-act="closeModal">✕</button></div>
@@ -1534,7 +2010,7 @@ function modalHTML() {
   if (modal === 'settings') {
     const st = S.settings;
     return `<div class="overlay" data-act="closeModal"><div class="sheet" data-stop="1"><div class="grab"></div><div class="row" style="justify-content:space-between"><b style="font-size:20px">Settings</b><button class="icon" data-act="closeModal">✕</button></div>
-      <div style="margin-top:14px"><div class="sub" style="margin-bottom:6px">Your name</div><input class="txt" id="nameIn" type="text" maxlength="24" autocomplete="given-name" enterkeyhint="done" placeholder="Shown on Home and your share card" value="${esc(userName())}"></div>
+      <div style="margin-top:14px"><div class="sub" style="margin-bottom:6px">Your name</div><input class="txt" id="nameIn" type="text" maxlength="24" autocomplete="given-name" enterkeyhint="done" placeholder="Shown on Home and your share card" value="${esc(userName())}">${SY.token ? '<div class="fbhint" style="margin-top:6px">This is also the name your groups see.</div>' : ''}</div>
       <div style="margin-top:14px"><div class="sub" style="margin-bottom:6px">Rest timer</div><div class="seg">${[0, 30, 45, 60, 90, 120].map(n => `<button class="${st.rest === n ? 'on' : ''}" data-act="setRest" data-n="${n}">${n ? n + 's' : 'Off'}</button>`).join('')}</div></div>
       <div style="margin-top:14px"><div class="sub" style="margin-bottom:6px">Rest happens…</div><div class="seg"><button class="${st.restMode === 'set' ? 'on' : ''}" data-act="setMode" data-m="set">After every set</button><button class="${st.restMode === 'round' ? 'on' : ''}" data-act="setMode" data-m="round">After each superset round</button></div></div>
       <div style="margin-top:14px"><div class="sub" style="margin-bottom:6px">Units</div><div class="seg"><button class="${st.unit === 'lb' ? 'on' : ''}" data-act="setUnit" data-u="lb">lb</button><button class="${st.unit === 'kg' ? 'on' : ''}" data-act="setUnit" data-u="kg">kg</button></div></div>
@@ -1544,6 +2020,7 @@ function modalHTML() {
       <div class="sub" id="buildLbl" style="text-align:center;margin-top:18px;font-size:12px">FORGE build ${esc(BUILD)}${updNew ? ' · <b style="color:var(--acc2)">update available</b>' : ''}</div>
       <div class="erase" id="eraseSec">${eraseStep ? `<div class="erasebox" id="eraseBox" role="alertdialog" aria-label="Confirm erase"><b style="font-size:16px">Erase everything on this device?</b>
         <div class="sub" style="font-size:13px;margin:6px 0 12px">This deletes your workout history, PRs, name, settings and saved workouts (My workouts). It can't be undone.</div>
+        ${SY.token ? `<label class="chk" id="eraseSyncRow"><input type="checkbox" id="eraseSync" ${eraseSyncOpt ? 'checked' : ''}><span>Also leave my groups and remove my group sign-in from this device. Totals already shared with a group stay there.</span></label>` : ''}
         <div style="display:grid;gap:8px"><button class="btn sec" id="eraseCancel" data-act="eraseCancel">Cancel, keep my data</button><button class="btn danger" id="eraseConfirm" data-act="eraseConfirm">Yes, erase everything</button></div></div>`
         : `<button class="go" id="eraseBtn" data-act="eraseAsk">Erase all data on this device</button>`}</div></div></div>`;
   }
@@ -1557,12 +2034,15 @@ function fbListHTML() {
 }
 
 /* ---------- Render ---------- */
+function openDeepLink() { gm = { step: 'deeplink', name: '', code: pendingJoin, dn: userName(), err: '', busy: false, group: null }; pendingJoin = null; modal = 'grp'; }
 function render() {
+  if (pendingJoin && !S.session && !modal && view === 'home') openDeepLink();
   const app = $('#app'); const sy = window.scrollY; const oldSheet = $('.sheet'), sheetTop = oldSheet ? oldSheet.scrollTop : 0, sheetKey = oldSheet && app.dataset.modal;
   let html;
   if (view === 'active' && S.session) html = activeView();
   else if (view === 'summary') html = summaryView();
   else if (view === 'program') html = programView();
+  else if (view === 'group') html = groupDetailView();
   else if (view === 'import') html = importView();
   else if (view === 'history') html = historyView();
   else if (view === 'stats') html = statsView();
@@ -1577,9 +2057,11 @@ function render() {
   bindDrop();
   const ft = $('#fbText'); if (ft) ft.addEventListener('input', () => { fbDraft.text = ft.value; });
   const fc = $('#fbContact'); if (fc) fc.addEventListener('input', () => { fbDraft.contact = fc.value; });
-  const ni = $('#nameIn'); if (ni) ni.addEventListener('input', () => { S.settings.name = ni.value.trim().slice(0, 24); save(); });
+  const ni = $('#nameIn'); if (ni) { ni.addEventListener('input', () => { S.settings.name = ni.value.trim().slice(0, 24); save(); }); ni.addEventListener('change', syncSoon); }
+  [['gmName', 'name'], ['gmCode', 'code'], ['gmDn', 'dn']].forEach(([id, k]) => { const el = $('#' + id); if (el) { el.addEventListener('input', () => { gm[k] = el.value; }); el.addEventListener('keydown', ev => { if (ev.key === 'Enter') { ev.preventDefault(); gmSubmit(); } }); } });
+  const es = $('#eraseSync'); if (es) es.addEventListener('change', () => { eraseSyncOpt = es.checked; });
   if (modal === 'share') paintShare();
-  syncBanner();
+  syncBanner(); autoFetches();
   const ta = $('#importTA'); if (ta) ta.addEventListener('input', () => { importText = ta.value; });
   ['inW', 'inR'].forEach(id => { const el = $('#' + id); if (el) el.addEventListener('input', saveDraft); });
 }
@@ -1717,8 +2199,26 @@ function act(a, t) {
     case 'setRestW': setRestLive(+d.n); break;
     case 'toggleBlocks': homeExpanded = !homeExpanded; render(); break;
     case 'dashP': dashPeriod = d.p; render(); break;
-    case 'groupsSoon': toast('Groups are coming soon'); break;
-    case 'nav': modal = null; eraseStep = 0; view = d.v; if (d.v === 'program') { progDetail = false; openDay = null; } render(window.scrollTo(0, 0)); break;
+    case 'gsel': modal = 'gsel'; render(); break;
+    case 'gpick': SY.sel = d.id === 'me' ? 'me' : d.id; saveSync(); modal = null; view = 'home'; render(window.scrollTo(0, 0)); break;
+    case 'gcreate': openGm('create'); break;
+    case 'gjoin': openGm('join'); break;
+    case 'gSubmit': gmSubmit(); break;
+    case 'gCopy': gmShare(true, d.id); break;
+    case 'gShare': gmShare(false, d.id); break;
+    case 'gdetail': gdId = d.id || (curGroup() && curGroup().id) || null; gdLeave = 0; gdErr = ''; modal = null; if (gdId) { view = 'group'; } render(window.scrollTo(0, 0)); break;
+    case 'gBack': view = 'home'; gdLeave = 0; gdErr = ''; render(window.scrollTo(0, 0)); break;
+    case 'gdRetry': if (gdId) fetchGD(gdId); break;
+    case 'gLeaveAsk': gdLeave = 1; gdErr = ''; render(); break;
+    case 'gLeaveCancel': gdLeave = 0; gdErr = ''; render(); break;
+    case 'gLeaveConfirm': leaveGroup(); break;
+    case 'lbRefresh': lbRefresh(); break;
+    case 'lbRetry': { const g = curGroup(); if (g) fetchLB(g.id, dashPeriod, true); break; }
+    case 'spRetry': SY.groups.forEach(g => { if (spMem[g.id] && spMem[g.id].err) fetchSP(g.id); }); break;
+    case 'spAdd': spAdd(d.id); break;
+    case 'shareGroup': sg = { busy: '', msg: '', done: {} }; modal = 'sharegrp'; render(); break;
+    case 'sgPick': shareToGroup(d.id); break;
+    case 'nav': modal = null; eraseStep = 0; gdLeave = 0; view = d.v; if (d.v === 'program') { progDetail = false; openDay = null; } render(window.scrollTo(0, 0)); break;
     case 'changeDay': cdWeek = Math.min(S.selWeek, S.program.weeks.length - 1); modal = 'pickday'; render(); break;
     case 'cdwk': { const n = cdWeek + +d.d; if (n >= 0 && n < S.program.weeks.length) { cdWeek = n; render(); } break; }
     case 'cdPick': S.selWeek = cdWeek; S.selDay = +d.i; libSyncActive(); save(); modal = null; render(); toast('Next workout: ' + (S.program.weeks.length > 1 ? curWeek().name + ' · ' : '') + dayOf().name); break;
@@ -1737,7 +2237,7 @@ function act(a, t) {
     case 'skip': skipStep(); break;
     case 'exit': modal = 'exit'; render(); break;
     case 'seq': modal = 'seq'; render(); break;
-    case 'closeModal': eraseStep = 0; if (modal === 'feedback') { if (fbDraft.id) fbReset(); modal = fbBack; fbBack = null; } else modal = null; render(); break;
+    case 'closeModal': eraseStep = 0; if (modal === 'grp' && gm.step === 'deeplink') cleanJoinUrl(); if (modal === 'feedback') { if (fbDraft.id) fbReset(); modal = fbBack; fbBack = null; } else modal = null; render(); break;
     case 'feedback': openFeedback(d.from); break;
     case 'fbType': fbDraft.type = d.t; render(); break;
     case 'fbSend': fbSend(); break;
@@ -1768,7 +2268,7 @@ function act(a, t) {
     case 'toggleWake': S.settings.wake = !S.settings.wake; save(); render(); break;
     case 'eraseAsk': eraseStep = 1; render(); break;
     case 'eraseCancel': eraseStep = 0; render(); break;
-    case 'eraseConfirm': if (eraseStep !== 1) break; eraseStep = 0; localStorage.removeItem(LS); S = freshState(); progWeek = null; openDay = null; progDetail = false; homeExpanded = false; view = 'home'; modal = null; parsed = null; importText = ''; render(window.scrollTo(0, 0)); toast('All data erased'); break;
+    case 'eraseConfirm': if (eraseStep !== 1) break; eraseStep = 0; if (SY.token) { if (eraseSyncOpt) signOutGroups(true); else { SY.sent = {}; SY.lb = {}; saveSync(); lbMem = {}; } } eraseSyncOpt = true; localStorage.removeItem(LS); S = freshState(); progWeek = null; openDay = null; progDetail = false; homeExpanded = false; view = 'home'; modal = null; parsed = null; importText = ''; render(window.scrollTo(0, 0)); toast('All data erased'); break;
     case 'openDay': openDay = openDay === +d.i ? null : +d.i; render(); break;
     case 'doDay': S.selWeek = progWeek == null ? S.selWeek : progWeek; S.selDay = +d.i; libSyncActive(); save(); view = 'start'; progDetail = false; openDay = null; render(window.scrollTo(0, 0)); toast('Next workout: ' + (S.program.weeks.length > 1 ? curWeek().name + ' · ' : '') + dayOf().name); break;
     case 'histToggle': openHist = openHist === d.id ? null : d.id; render(); break;
@@ -1842,9 +2342,15 @@ function syncBanner() {
 }
 document.addEventListener('visibilitychange', () => { if (!document.hidden) checkUpdate(); });
 setTimeout(() => checkUpdate(true), 800);
+/* ---------- Groups boot: deep link (?join=CODE), reconnect handlers, first sync ---------- */
+(function () { try { const c = normCode(new URLSearchParams(location.search).get('join')); if (c) { if (c.length >= 4) pendingJoin = c; else cleanJoinUrl(); } } catch (e) {} })();
+window.addEventListener('online', () => { syncBackoff = 0; syncNow().catch(() => {}); setSyncStat(); if (view === 'home' && curGroup()) lbAuto(); });
+window.addEventListener('offline', () => setSyncStat('offline'));
+document.addEventListener('visibilitychange', () => { if (!document.hidden && SY.token) { syncNow().catch(() => {}); if (view === 'home' && curGroup()) lbAuto(); } });
+setTimeout(async () => { if (SY.token) { await refreshGroups(); syncNow().catch(() => {}); } }, 300);
 render();
 // test hooks (harmless in production)
-window.__forge = { BUILD, periodTotals, ringModel, allTimeTrend, weekStartIdx, entryTotals, volumeTotals, weeklyVolume, fmtVol, programFile, shareProgram, shareText, canonicalLift, streakCalc, dayIdx, weekOf, liftStats, liftSetList, gainOf, detectPRs, streakInfo, checkUpdate, drawCard, cardSpec, parseText, parseAny, buildSteps, getState: () => S, BUILTIN_PROGRAM, builtin, estSec, repsMax };
+window.__forge = { BUILD, getSync: () => SY, saveSync, syncNow, pendingEntries, syncEntry, lbGet, fetchLB, fetchGD, fetchSP, API_BASE, inviteText, shareLink, spMem, lbMem, periodTotals, ringModel, allTimeTrend, weekStartIdx, entryTotals, volumeTotals, weeklyVolume, fmtVol, programFile, shareProgram, shareText, canonicalLift, streakCalc, dayIdx, weekOf, liftStats, liftSetList, gainOf, detectPRs, streakInfo, checkUpdate, drawCard, cardSpec, parseText, parseAny, buildSteps, getState: () => S, BUILTIN_PROGRAM, builtin, estSec, repsMax };
 </script>
 </body>
 </html>
