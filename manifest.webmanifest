@@ -1,6 +1,6 @@
 {
-  "name": "FORGE — Workout Tracker",
-  "short_name": "FORGE",
+  "name": "BETA FIT — Workout Tracker",
+  "short_name": "BETA FIT",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
