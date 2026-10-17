@@ -5,7 +5,7 @@
    - It never answers requests that carry a query string (the in-app update check fetches 'index.html?v=<time>' with no-store) nor any
      cross-origin request (the groups API), so the "New version available" banner and all API calls behave exactly as without it.
    Keep VERSION equal to BUILD in index.html (the regression test checks it). */
-const VERSION = '2026.10.15-16';
+const VERSION = '2026.10.15-17';
 const CACHE = 'betafit-shell-' + VERSION;
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-180.png', 'icon-192.png', 'icon-512.png'];
 const NAV_TIMEOUT_MS = 3500;
